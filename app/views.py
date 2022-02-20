@@ -4,18 +4,19 @@ from datetime import datetime
 
 @app.route("/")
 def test():
-    return render_template("base.html")
+    return redirect("/home")
+    #return render_template("base.html")
 
 # TODO: replace return statements with actual templates
 
-@app.route("/register/")
+@app.route("/home/register/")
 def register():
-    return 'registration page'
+    return render_template("register.html")
 
-@app.route("/login/")
+@app.route("/home/login/")
 def signin():
-    return 'login page'
+    return render_template("login.html")
 
 @app.route("/home/")
 def home():
-    return 'home page'
+    return render_template("base.html")
