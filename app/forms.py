@@ -15,11 +15,11 @@ class Registration(FlaskForm):
         username = StringField('Enter username', validators=[DataRequired(), Length(max=60)])
         email = StringField('Enter email', validators=[DataRequired(), Length(max=60)])
         password_1 = PasswordField('Enter password', validators=[DataRequired(), Length(max=60)])
-        password_2 = PasswordField('Confirm password', validators=[DataRequired(), Length(max=60), EqualTo('password1', message='Passwords must match!')])
+        password_2 = PasswordField('Confirm password', validators=[DataRequired(), Length(max=60), EqualTo('password_1', message='Passwords must match!')])
         submit = SubmitField('Submit')
 
-        #function that validates email adress upon registration
-        #todo: write unit tests for function
+        # function that validates email adress upon registration
+        # todo: write unit tests for function
         def validateEmail(self, email):     
             user_object = models.User.query.filter_by(email=email.data).first()
             if user_object: #if user is already registered don't allow them to register again

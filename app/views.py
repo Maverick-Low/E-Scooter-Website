@@ -1,3 +1,4 @@
+from encodings import utf_8
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session
 from datetime import datetime
@@ -10,7 +11,7 @@ from .forms import Registration, Login
 
 @app.route("/add_test")
 def add_test():
-    user_obj = models.User(username="Kevin", email="kedsfsv@gmail.com", password="#''##aS@D~A@SD'#'as#ra4$$£$AES~d#asd")
+    user_obj = models.User(username="Krzysztof", email="krzysz@gmail.com", password="exampleuserp[lacement")
     db.session.add(user_obj)
     db.session.commit()
     return redirect(url_for("dashboard"))
@@ -52,7 +53,7 @@ def login():
             session["email"] = user_obj.email
             session["admin"] = user_obj.admin
             flash("Welcome " + user_obj.username + "!")
-            return redirect(url_for("dashboard.html"))
+            return redirect(url_for("dashboard"))
         else:
             flash("Incorrect password!")
             return render_template('login.html', form=form)
@@ -71,10 +72,11 @@ def register():
     elif request.method == "POST":
         if form.validate_on_submit():
             hashed_password = bcrypt.generate_password_hash(form.password_1.data).decode('utf-8')
-            user_obj = models.User(username=form.username.data, email=form.email.data, password=encrypted_password)
+            user_obj = models.User(username=form.username.data, email=form.email.data, password=hashed_password, admin=False)
             session["email"] = form.email.data
             db.session.add(user_obj)
             db.session.commit()
+            return render_template('Dashboard.html')
         else:
             flash('Failed to submit registration form!')
             return render_template('register.html', form=form)
