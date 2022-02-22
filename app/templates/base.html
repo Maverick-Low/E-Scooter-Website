@@ -10,8 +10,11 @@
     
     <!-- linking custom stylesheet -->
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
-
+    {% if title %}
+    <title>{{title}}</title>
+    {% else %}
     <title>Home page</title>
+    {% endif %}
   </head>
   <body>
     <!-- <h1>Welcome to the page!</h1> -->

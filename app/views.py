@@ -61,7 +61,7 @@ def login():
 
 @app.route("/register", methods = ["GET", "POST"])
 def register():
-    # Prevent user who is already registered and logged in from registering agai
+    # Prevent user who is already registered and logged in from registering again
     if "email" in session:
         return redirect(url_for("dashboard"))
 
@@ -94,7 +94,7 @@ def logout():
     
 @app.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+    return render_template("dashboard.html", title='Dashboard')
 
 
 
