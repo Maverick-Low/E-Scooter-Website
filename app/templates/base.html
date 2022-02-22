@@ -16,7 +16,9 @@
     {% else %}
     <title>Home page</title>
     {% endif %}
+
   </head>
+  <!-- Navigation Bar -->
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
@@ -30,13 +32,36 @@
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-              <a class="nav-item nav-link" href="/">Login</a>
-              <a class="nav-item nav-link" href="/register">Register</a>
+              {% if session.get("email") %}
+                <a class="nav-item nav-link" href="/logout">Logout</a>
+              {% else %}
+                <a class="nav-item nav-link" href="/">Login</a>
+                <a class="nav-item nav-link" href="/register">Register</a>
+              {% endif %}
             </div>
           </div>
         </div>
       </nav>
     </header>
+    <!-- End of Navigation Bar -->
+    <div>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <!-- <div class=flashes> -->
+        {% for message in messages %}
+        <div class="alerts"></div>
+          <div class="alert alert-primary" role="alert">
+            {{ message }}
+          </div>
+          
+        </div>
+        {% endfor %}
+        <!-- </div> -->
+      {% endif %}
+    {% endwith %}
+    <br>
+    
+    </div>
     
     <!-- <h1>Welcome to the page!</h1> -->
     <!-- <button><a href= login>Log in </a></button>
