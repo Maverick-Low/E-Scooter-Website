@@ -98,7 +98,10 @@ def logout():
 def dashboard():
     return render_template("dashboard.html", title='Dashboard')
 
-
+#solved bug where chrome automatically adds an extra '/' at the end of the url
+@app.route("/register/")
+def reRoute():
+    return redirect("/register")
 
 
 """
@@ -114,16 +117,3 @@ return redirect (url_for("login"))
 
 """
 
-# # TODO: replace return statements with actual templates
-
-# @app.route("/home/register/")
-# def register():
-#     return render_template("register.html")
-
-# @app.route("/home/login/")
-# def signin():
-#     return render_template("login.html")
-
-# @app.route("/home/")
-# def home():
-#     return render_template("base.html")
