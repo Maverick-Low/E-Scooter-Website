@@ -167,7 +167,9 @@ def remove_available(location):
 def payment(location):
     form = Payment()
     if request.method == "GET":
-        return render_template("payment.html", form=form)
+        # In order to display the location that user is reserving scooter from on payment screen
+        locations = ['Trinity Centre','Train Station','Merrion Centre','LRI Hospital','UoL Edge Sports Centre']
+        return render_template("payment.html", form=form, location = locations[location - 1])
     elif request.method == "POST":
         if form.validate_on_submit():
             flash("Transaction confirmed!")
