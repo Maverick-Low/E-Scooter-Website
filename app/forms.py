@@ -99,4 +99,11 @@ class Payment(FlaskForm):
             if char in excluded_chars:
                 raise ValidationError(
                     f"Character {char} is not allowed in username.")
+    
+    
+    def validate_expiry_date(self, expiry_date):
+          if (datetime.today() - expiry_date.data).days > 0:
+            raise ValidationError('Expiry date is not valid')
+
+    
                     

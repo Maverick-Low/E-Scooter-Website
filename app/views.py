@@ -95,7 +95,7 @@ def register():
         else:
             flash('Failed to submit registration form!')
             return render_template('register.html', form=form)
-        
+
 
 @app.route("/logout")
 def logout():
@@ -175,6 +175,8 @@ def payment(location):
         else:
                 flash('Card payment not accepted')
                 return render_template('payment.html', form=form)
+
+
 
 """
 logout code:

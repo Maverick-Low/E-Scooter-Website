@@ -5,36 +5,43 @@
     <title>Payment</title>
   </head>
   <body>
-
-    <h1>Payment!</h1>
-
-    <div class="form-wrapper">
-      <form method="POST" class="form">
-        {{ form.hidden_tag() }}
-        
-        <fieldset class="form-field">
-          {{ form.name.label(class = "form-label")}}
-          {{ form.name}}
-        </fieldset>
-
-        <fieldset class="form-field">
-          {{ form.card_number.label(class = "form-label")}}
-          {{ form.card_number}}
-        </fieldset>
-
-        <fieldset class="form-field">
-          {{ form.expiry_date.label(class = "form-label")}}
-          {{ form.expiry_date}}
-        </fieldset>
-
-        <fieldset class="form-field">
-          {{ form.cvv.label(class = "form-label")}}
-          {{ form.cvv}}
-        </fieldset>
-
-        {{ form.submit (class = "btn btn-primary") }}
-
-      </form>
+    <div class = 'container'>
+      <div class = 'row'>
+        <div class = 'col'>
+          <h1> Booking a scooter from "location"</h1>
+        </div>
+        <div class = 'col'>
+          <h1>Payment!</h1>
+          <div class="form-wrapper">
+            <form method="POST" class="form">
+              {{ form.hidden_tag() }}
+              
+              <fieldset class="form-field">
+                {{ form.name.label(class = "form-label")}}
+                {{ form.name}}
+              </fieldset>
+      
+              <fieldset class="form-field">
+                {{ form.card_number.label(class = "form-label")}}
+                {{ form.card_number}}
+              </fieldset>
+      
+              <fieldset class="form-field">
+                {{ form.expiry_date.label(class = "form-label")}}
+                {{ form.expiry_date}}
+              </fieldset>
+      
+              <fieldset class="form-field">
+                {{ form.cvv.label(class = "form-label")}}
+                {{ form.cvv}}
+              </fieldset>
+      
+              {{ form.submit (class = "btn btn-primary") }}
+      
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 
