@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+
+<head>
+    <title>Hire Scooter</title>
+</head>
+<body>
+    <h1>Hire Scooter!</h1>
+
+
+    {%if not scooters %}
+    <h3> No scooters available </h3>
+    {% endif %}
+
+
+    <!-- Location 1 -->
+    <h1> Scooters Available at Trinity Centre</h1>
+    {% if  counts[0] == 0 %}
+    <h2> No available scooters at this location currently </h2>
+    {% else %}
+    <h2> Available Scooters: {{counts[0]}} </h2>
+    <button type="button" class="btn btn-primary"><a href="/remove_available/1">Hire Now</a></button>
+    {% endif %}
+    <br> </br>
+
+    <!-- Location 2 -->
+    <h1> Scooters Available at Train Station</h1>
+    {% if  counts[1] == 0 %}
+    <h2> No available scooters at this location currently </h2>
+    {% else %}
+    <h2> Available Scooters: {{counts[1]}} </h2>
+    <button type="button" class="btn btn-primary"><a href="/remove_available/2">Hire Now</a></button>
+    {% endif %}
+    <br> </br>
+
+    <!-- Location 3 -->
+    <h1> Scooters Available at Merrion Centre</h1>
+    {% if  counts[2] == 0 %}
+    <h2> No available scooters at this location currently </h2>
+    {% else %}
+    <h2> Available Scooters: {{counts[2]}} </h2>
+    <button type="button" class="btn btn-primary"><a href="/remove_available/3">Hire Now</a></button>
+    {% endif %}
+    <br> </br>
+
+    <!-- Location 4 -->
+    <h1> Scooters Available at LRI Hospital</h1>
+    {% if  counts[3] == 0 %}
+    <h2> No available scooters at this location currently </h2>
+    {% else %}
+    <h2> Available Scooters: {{counts[3]}} </h2>
+    <button type="button" class="btn btn-primary" ><a href="/remove_available/4">Hire Now</a></button>
+    {% endif %}
+    <br> </br>
+
+
+    <!-- Location 5 -->
+    <h1> Scooters Available at UoL Edge Sports Centre</h1>
+    {% if  counts[4] == 0 %}
+    <h2> No available scooters at this location currently </h2>
+    {% else %}
+    <h2> Available Scooters: {{counts[4]}} </h2>
+    <button type="button" class="btn btn-primary" ><a href="/remove_available/5">Hire Now</a></button>
+    {% endif %}
+
+
+</body>
+
+{% endblock content %}
