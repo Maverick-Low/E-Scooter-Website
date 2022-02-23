@@ -146,6 +146,8 @@ def hire_scooter():
                 counts[4] += 1
         return render_template('hire_scooter.html', scooters = Scooters, counts = counts)
 
+
+
 @app.route('/remove_available/<int:location>')
 def remove_available(location):
     """
@@ -161,15 +163,15 @@ def remove_available(location):
 
 
 
-@app.route("/payment", methods = ["GET", "POST"])
-def payment():
+@app.route("/payment/<int:location>", methods = ["GET", "POST"])
+def payment(location):
     form = Payment()
     if request.method == "GET":
         return render_template("payment.html", form=form)
     elif request.method == "POST":
         if form.validate_on_submit():
             flash("Transaction confirmed!")
-            return redirect(url_for("dashboard"))
+            return redirect("/remove_available/"+str(location))
         else:
                 flash('Card payment not accepted')
                 return render_template('payment.html', form=form)
