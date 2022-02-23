@@ -2,7 +2,7 @@ from encodings import utf_8
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session
 from datetime import datetime
-from .forms import Registration, Login
+from .forms import Registration, Login, Payment
 
 @app.route("/add_test")
 def add_test():

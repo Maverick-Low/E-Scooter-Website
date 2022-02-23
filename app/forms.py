@@ -2,7 +2,6 @@ from audioop import reverse
 from unicodedata import name
 from venv import CORE_VENV_DEPS
 from wsgiref.validate import validator
-from app.test import luhns
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, DateField, IntegerField, SubmitField
 from wtforms.validators import EqualTo, DataRequired, ValidationError, Length, Email
