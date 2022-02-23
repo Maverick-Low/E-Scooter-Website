@@ -4,11 +4,6 @@ from flask import render_template, request, url_for, redirect, flash, session
 from datetime import datetime
 from .forms import Registration, Login
 
-
-
-
-
-
 @app.route("/add_test")
 def add_test():
     user_obj = models.User(username="Krzysztof", email="krzysz@gmail.com", password="exampleuserp[lacement")
@@ -102,6 +97,24 @@ def dashboard():
 @app.route("/register/")
 def reRoute():
     return redirect("/register")
+
+@app.route("/payment", methods = ["GET", "POST"])
+def payment():
+    form = Payment()
+    if request.method == "GET":
+        return render_template("payment.html", form=form)
+    elif request.method == "POST":
+        if form.validate_on_submit():
+            flash("Transaction confirmed!")
+            return redirect(url_for("dashboard"))
+        else:
+                flash('Card payment not accepted')
+                return render_template('payment.html', form=form)
+
+
+
+
+        
 
 
 """
