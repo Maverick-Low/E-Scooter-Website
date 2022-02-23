@@ -115,12 +115,13 @@ def dashboard():
     
     return render_template("dashboard.html", title='Dashboard')
 
-<<<<<<< HEAD
 #solved bug where chrome automatically adds an extra '/' at the end of the url
 @app.route("/register/")
 def reRoute():
     return redirect("/register")
-=======
+
+
+    
 @app.route("/hire_scooter")
 def hire_scooter():
     # guest accounts unable to hire right now.
@@ -157,7 +158,6 @@ def remove_available(location):
     db.session.commit()
     flash(f'Scooter has been successfuly hired')
     return redirect(url_for('dashboard'))
->>>>>>> Sprint-1-Hire-scooter
 
 
 """
