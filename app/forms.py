@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, DateField, IntegerField, SubmitField, EmailField
+from wtforms import PasswordField, StringField, DateTimeField, IntegerField, SubmitField, EmailField
 from wtforms.validators import EqualTo, DataRequired, ValidationError, Length, Email
 from app import models
 import re
+from datetime import date, datetime
 
 
 class Login(FlaskForm):
@@ -52,4 +53,50 @@ class Registration(FlaskForm):
             password_regex = re.compile('[^0-9a-zA-Z]+')
             if not password_regex.search(password_1): 
                 raise ValidationError('Password should have at least one special symbol!')
+    
+    
+    
+class Payment(FlaskForm):
+    #function that checks if the expiry date is in the future
+    # def validateCVV():
+    #     if not (len(self.cvv) == 3 or self.cvv == 4):
+    #         raise ValidationError('CVV is invalid')    
+
+    def luhns(card_number):
+        
+        #check if card number is numeric
+        if not card_number.isnumeric():
+            return -1
+        else: 
+            card_number = int(card_number)
+
+        digits = [int(x) for x in str(card_number)]
+        odd_digits = digits[-1::-2]
+        even_digits = digits[-2::-2]
+        checksum = 0
+        checksum += sum(odd_digits)
+        for d in even_digits:
+            checksum += sum(int(x) for x in str(d*2))
+        return checksum % 10
+
+
+      #todo: add code that determines type of credit card
+    def validateCardNumber():
+        if luhns(self.card_number) != 0:
+            raise ValidationError('Card number is invalid')
+
+
+    
+    name = StringField('Enter name', validators=[DataRequired(message = "Enter your name please"), Length(max=60)])
+    card_number = StringField('Enter card number', validators=[DataRequired(), Length(min=14, max=20)])
+    cvv = StringField('Enter cvv', validators=[DataRequired() , Length(min=3, max=4)])
+    expiry_date = DateTimeField('Enter expiry date (mm/YYYY)', validators=[DataRequired()], format='%m/%Y')
+    submit = SubmitField('Submit')
+
+    def validate_name(self, name):
+        excluded_chars = "*?!'^+%&/()=}][{$#£"
+        for char in self.name.data:
+            if char in excluded_chars:
+                raise ValidationError(
+                    f"Character {char} is not allowed in username.")
                     
