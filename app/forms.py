@@ -19,7 +19,7 @@ class Registration(FlaskForm):
         submit = SubmitField('Submit')
 
         # function that validates email adress upon registration
-        # todo: write unit tests for function
+        # todo: write unit tests for functions
         def validateEmail(self, email):     
             user_object = models.User.query.filter_by(email=email.data).first()
             if user_object: #if user is already registered don't allow them to register again

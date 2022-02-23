@@ -12,7 +12,7 @@ class User(db.Model):
     password = db.Column(db.String(60), nullable=False)
 
 
-#Table for scooters
+#Table for scooter
 class Scooter(db.Model):
     __tablename__ = 'scooters'
     id = db.Column(db.Integer, primary_key=True)
