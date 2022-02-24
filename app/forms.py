@@ -1,7 +1,7 @@
 from tokenize import String
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, DateTimeField, IntegerField, SubmitField, EmailField
-from wtforms.validators import EqualTo, DataRequired, ValidationError, Length, Email
+from wtforms import PasswordField, StringField, DateTimeField, IntegerField, SubmitField, EmailField, SelectField
+from wtforms.validators import EqualTo, DataRequired, ValidationError, Length, Email 
 from app import models
 import re
 from datetime import date, datetime
@@ -99,8 +99,15 @@ class Payment(FlaskForm):
     address_line_1 = StringField('Address line 1', validators=[DataRequired(), Length(max=60)])
     address_line_2 = StringField('Address line 2', validators=[DataRequired(), Length(max=60)])
     city = StringField('City', validators=[DataRequired(), Length(max=60)])
-    postcode = StringField('postcode', validators=[DataRequired(), Length(min=6, max=7)])
-
+    postcode = StringField('Postcode', validators=[DataRequired(), Length(min=6, max=7)])
+    
+    #hardcoded to start with united_kingdom
+    #todo: use location services
+    country_list = [("United Kingdom")]
+    for c in pycountry.countries:
+        country_list.append(c.name)
+    
+    country = SelectField('Select country', choices = country_list)
 
     def validate_name(self, name):
         excluded_chars = "*?!'^+%&/()=}][{$#£"
