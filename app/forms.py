@@ -10,7 +10,7 @@ import re
 from datetime import date, datetime
 import pycountry
 
-
+# 
 class Login(FlaskForm):
     email = StringField('Enter email', validators=[DataRequired(), Length(max=60)])
     password = PasswordField('Enter password', validators=[DataRequired(), Length(max=60)])
