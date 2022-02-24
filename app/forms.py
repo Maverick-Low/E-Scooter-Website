@@ -99,10 +99,22 @@ class Payment(FlaskForm):
             if char in excluded_chars:
                 raise ValidationError(f"Character {char} is not allowed in name.")
     
-    
     def validate_expiry_date(self, expiry_date):
         if (datetime.today() - expiry_date.data).days > 0:
             raise ValidationError('Expiry date is not valid')
+
+    def validate_card_number(self, card_number):
+        chars = "1234567890"
+        for char in self.card_number.data:
+            if not char in chars:
+                raise ValidationError(f"Character {char} is not allowed in card number.")
+    
+    def validate_cvv(self, cvv):
+        chars = "1234567890"
+        for char in self.cvv.data:
+            if not char in chars:
+                raise ValidationError(f"Character {char} is not allowed in cvv.")
+
 
     # def luhns(card_number):
     # #check if card number is numeric
