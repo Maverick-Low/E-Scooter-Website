@@ -10,16 +10,26 @@ from .forms import Registration, Login, Payment
 
 @app.route("/add_test")
 def add_test():
-    user_obj = models.Scooter(in_use = False, LocationID = 2)
-    user_obj1 = models.Scooter(in_use = False, LocationID = 3)
-    user_obj2 = models.Scooter(in_use = False, LocationID = 4)
-    user_obj3 = models.Scooter(in_use = False, LocationID = 5)
-    user_obj4 = models.Scooter(in_use = False, LocationID = 1)
-    db.session.add(user_obj)
-    db.session.add(user_obj1)
-    db.session.add(user_obj2)
-    db.session.add(user_obj3)
-    db.session.add(user_obj4)
+    # location2 = models.Location()
+    # location3 = models.Location()
+    # location4 = models.Location()
+    # location5 = models.Location()
+    # user_obj = models.Scooter(in_use = False, LocationID = 2)
+    # user_obj1 = models.Scooter(in_use = False, LocationID = 3)
+    # user_obj2 = models.Scooter(in_use = False, LocationID = 4)
+    # user_obj3 = models.Scooter(in_use = False, LocationID = 5)
+    # user_obj4 = models.Scooter(in_use = False, LocationID = 1)
+    # db.session.add(user_obj)
+    # db.session.add(user_obj1)
+    # db.session.add(user_obj2)
+    # db.session.add(user_obj3)
+    # db.session.add(user_obj4)
+    # db.session.add(location2)
+    # db.session.add(location3)
+    # db.session.add(location4)
+    # db.session.add(location5)
+    admin_obj = models.User.query.filter_by(email="admin@admin.com").first()
+    admin_obj.admin = True
     db.session.commit()
     return redirect(url_for("dashboard"))
 
@@ -70,6 +80,8 @@ def login():
             session["email"] = user_obj.email
             session["admin"] = user_obj.admin
             flash("Welcome " + user_obj.username + "!")
+            # if user_obj.admin == True:
+            #     return redirect("/admin")
             return redirect(url_for("dashboard"))
         else:
             flash("Incorrect password!")
@@ -114,14 +126,21 @@ def logout():
     
 @app.route("/dashboard")
 def dashboard():
-    user = models.User.query.filter_by(email = session['email']).first()
-    orders = models.Booking.query.filter_by(UserID = user.id).all()
-    active_id = []
-    current_date = datetime.now()
-    for o in orders:
-        if (current_date < (o.expiry)):
-            active_id.append(o.id)
-    return render_template("dashboard.html", title='Dashboard', orders=orders, active= active_id)
+    if session.get('admin') != 0:
+        return redirect("/admin")
+    else:
+        
+        user = models.User.query.filter_by(email = session['email']).first()
+        orders = models.Booking.query.filter_by(UserID = user.id).all()
+        active_id = []
+        current_date = datetime.now()
+        for o in orders:
+            if (current_date < (o.expiry)):
+                active_id.append(o.id)
+        return render_template("dashboard.html", title='Dashboard', orders=orders, active= active_id)
+     
+        
+    
 
 #solved bug where chrome automatically adds an extra '/' at the end of the url
 @app.route("/register/")
@@ -129,9 +148,41 @@ def reRoute():
     return redirect("/register")
 
 
-    
+@app.route("/admin")
+def admin_dash():
+    if session.get('admin') != 0:
+        return render_template("admin_dashboard.html")
+    else:
+        return redirect(url_for("dashboard"))
+
+@app.route("/admin/bookings")
+def admin_bookings():
+    if session.get('admin') == 0:
+        return redirect("/dashboard")
+    else:
+        return render_template("bookings.html")
+
+@app.route("/admin/statistics")
+def admin_stats():
+    if session.get('admin') == 0:
+        return redirect("/dashboard")
+    else:
+        return render_template("statistics.html")
+
+@app.route("/admin/configure")
+def admin_config():
+    if session.get('admin') == 0:
+        return redirect("/dashboard")
+    else:
+        return render_template("configure.html")
+
+
 @app.route("/hire_scooter")
 def hire_scooter():
+    #admin redirected to admin dashboard
+    if session.get('admin') != 0:
+        return redirect("/admin")
+
     # guest accounts unable to hire right now.
     if session.get('email') == None:
         flash('You must sign in to hire a scooter!')
@@ -158,6 +209,9 @@ def hire_scooter():
 
 @app.route('/remove_available/<string:location>')
 def remove_available(location):
+    #admin redirected to admin dashboard
+    if session.get('admin') != 0:
+        return redirect("/admin")
     """
     param[0] = locationID
     param[1] = Price
@@ -179,6 +233,9 @@ def remove_available(location):
 
 @app.route("/payment/<int:location>", methods = ["GET", "POST"])
 def payment(location):
+    #admin redirected to admin dashboard
+    if session.get('admin') != 0:
+        return redirect("/admin")
     form = Payment()
     if request.method == "GET":
         # In order to display the location that user is reserving scooter from on payment screen

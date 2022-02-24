@@ -28,21 +28,33 @@
               <fieldset class="form-field">
                 {{ form.name.label(class = "form-label")}}
                 {{ form.name}}
+                {% for error in form.name.errors %}
+                  <li class='error-message'>{{ error }}</li>
+                {% endfor %}
               </fieldset>
       
               <fieldset class="form-field">
                 {{ form.card_number.label(class = "form-label")}}
                 {{ form.card_number}}
+                {% for error in form.card_number.errors %}
+                  <li class='error-message'>{{ error }}</li>
+                {% endfor %}
               </fieldset>
       
               <fieldset class="form-field">
                 {{ form.expiry_date.label(class = "form-label")}}
                 {{ form.expiry_date}}
+                {% for error in form.expiry_date.errors %}
+                  <li class='error-message'>{{ error }}</li>
+                {% endfor %}
               </fieldset>
       
               <fieldset class="form-field">
                 {{ form.cvv.label(class = "form-label")}}
                 {{ form.cvv}}
+                {% for error in form.cvv.errors %}
+                  <li class='error-message'>{{ error }}</li>
+                {% endfor %}
               </fieldset>
 
               <br>
@@ -84,5 +96,5 @@
     </div>
   </body>
 
-
+<!--  -->
 {% endblock content %}
