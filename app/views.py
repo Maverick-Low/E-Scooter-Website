@@ -114,8 +114,9 @@ def logout():
     
 @app.route("/dashboard")
 def dashboard():
-    
-    return render_template("dashboard.html", title='Dashboard')
+    user = models.User.query.filter_by(email = session['email']).first()
+    orders = models.Booking.query.filter_by(UserID = user.id).all()
+    return render_template("dashboard.html", title='Dashboard', orders=orders)
 
 #solved bug where chrome automatically adds an extra '/' at the end of the url
 @app.route("/register/")
