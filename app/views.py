@@ -116,7 +116,12 @@ def logout():
 def dashboard():
     user = models.User.query.filter_by(email = session['email']).first()
     orders = models.Booking.query.filter_by(UserID = user.id).all()
-    return render_template("dashboard.html", title='Dashboard', orders=orders)
+    active_id = []
+    current_date = datetime.now()
+    for o in orders:
+        if (current_date < (o.expiry)):
+            active_id.append(o.id)
+    return render_template("dashboard.html", title='Dashboard', orders=orders, active= active_id)
 
 #solved bug where chrome automatically adds an extra '/' at the end of the url
 @app.route("/register/")

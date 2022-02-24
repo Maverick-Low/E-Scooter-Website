@@ -7,16 +7,37 @@
 <body>
     <h1>Dashboard!</h1>
 
+    <h3>Active Orders</h3>
+    
 
+    
+
+    {% if not active %}
+        <p>You have no active orders</p>
+    {% endif %}
+
+    {% for elem in orders %}
+        {% if elem.id  in active %}
+            <br> </br>
+            <p>Order Number: {{elem.id}}</p>
+            <p>Hours: {{elem.numHours}}</p>
+            <p>Price: £{{elem.price}}</p>
+            <p>Date: {{elem.date.day}}-{{elem.date.month}}-{{elem.date.year}} {{elem.date.hour}}:{{elem.date.minute}}</p>
+        <p>Expiry Date: {{elem.expiry.day}}-{{elem.expiry.month}}-{{elem.expiry.year}} {{elem.expiry.hour}}:{{elem.expiry.minute}}</p>
+        {% endif %}
+    {% endfor %}
+    
     <h3>Order History</h3>
     {% for elem in orders %}
-    <br> </br>
-    <p>Order Number: {{elem.id}}</p>
-    <p>Hours: {{elem.numHours}}</p>
-    <p>Price: {{elem.price}}</p>
-    <p>Date: {{elem.date.day}}-{{elem.date.month}}-{{elem.date.year}} {{elem.date.hour}}:{{elem.date.minute}}</p>
-    <p>Expiry Date: {{elem.expiry.day}}-{{elem.expiry.month}}-{{elem.expiry.year}} {{elem.expiry.hour}}:{{elem.expiry.minute}}</p>
-    {% endfor %}
+        {% if elem.id not in active %}
+            <p>Order Number: {{elem.id}}</p>
+            <p>Hours: {{elem.numHours}}</p>
+            <p>Price: £{{elem.price}}</p>
+            <p>Date: {{elem.date.day}}-{{elem.date.month}}-{{elem.date.year}} {{elem.date.hour}}:{{elem.date.minute}}</p>
+            <p>Expiry Date: {{elem.expiry.day}}-{{elem.expiry.month}}-{{elem.expiry.year}} {{elem.expiry.hour}}:{{elem.expiry.minute}}</p>
+            <br> </br>
+        {% endif %}
+    {% endfor %} 
     
 
 
