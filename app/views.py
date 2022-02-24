@@ -70,8 +70,8 @@ def login():
             session["email"] = user_obj.email
             session["admin"] = user_obj.admin
             flash("Welcome " + user_obj.username + "!")
-            if user_obj.admin == True:
-                return redirect("/admin")
+            # if user_obj.admin == True:
+            #     return redirect("/admin")
             return redirect(url_for("dashboard"))
         else:
             flash("Incorrect password!")
@@ -116,8 +116,12 @@ def logout():
     
 @app.route("/dashboard")
 def dashboard():
+    if session.get('admin') != 0:
+        return redirect("/admin")
+    else:
+        return render_template("dashboard.html", title='Dashboard') 
+        
     
-    return render_template("dashboard.html", title='Dashboard')
 
 #solved bug where chrome automatically adds an extra '/' at the end of the url
 @app.route("/register/")
@@ -128,12 +132,38 @@ def reRoute():
 @app.route("/admin")
 def admin_dash():
     if session.get('admin') != 0:
-        return "admin dashboard!"
+        return render_template("admin_dashboard.html")
     else:
         return redirect(url_for("dashboard"))
 
+@app.route("/admin/bookings")
+def admin_bookings():
+    if session.get('admin') == 0:
+        return redirect("/dashboard")
+    else:
+        return render_template("bookings.html")
+
+@app.route("/admin/statistics")
+def admin_stats():
+    if session.get('admin') == 0:
+        return redirect("/dashboard")
+    else:
+        return render_template("statistics.html")
+
+@app.route("/admin/configure")
+def admin_config():
+    if session.get('admin') == 0:
+        return redirect("/dashboard")
+    else:
+        return render_template("configure.html")
+
+
 @app.route("/hire_scooter")
 def hire_scooter():
+    #admin redirected to admin dashboard
+    if session.get('admin') != 0:
+        return redirect("/admin")
+
     # guest accounts unable to hire right now.
     if session.get('email') == None:
         flash('You must sign in to hire a scooter!')
@@ -160,6 +190,9 @@ def hire_scooter():
 
 @app.route('/remove_available/<int:location>')
 def remove_available(location):
+    #admin redirected to admin dashboard
+    if session.get('admin') != 0:
+        return redirect("/admin")
     """
     Remember to save scooter id in order table somewhere
     in order to free correct scooter.
@@ -175,6 +208,9 @@ def remove_available(location):
 
 @app.route("/payment/<int:location>", methods = ["GET", "POST"])
 def payment(location):
+    #admin redirected to admin dashboard
+    if session.get('admin') != 0:
+        return redirect("/admin")
     form = Payment()
     if request.method == "GET":
         # In order to display the location that user is reserving scooter from on payment screen
