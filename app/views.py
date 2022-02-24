@@ -236,12 +236,13 @@ def remove_available(location):
 @app.route("/payment/<int:location>", methods = ["GET", "POST"])
 def payment(location):
     #admin redirected to admin dashboard
+    locations = ['Trinity Centre','Train Station','Merrion Centre','LRI Hospital','UoL Edge Sports Centre']
     if session.get('admin') != 0:
         return redirect("/admin")
     form = Payment()
     if request.method == "GET":
         # In order to display the location that user is reserving scooter from on payment screen
-        locations = ['Trinity Centre','Train Station','Merrion Centre','LRI Hospital','UoL Edge Sports Centre']
+        
         return render_template("payment.html", form=form, location = locations[location - 1])
     elif request.method == "POST":
         if form.validate_on_submit():
@@ -250,7 +251,7 @@ def payment(location):
             return redirect("/remove_available/"+str(location)+'$' + str(arr[0]) + '$' + str(arr[1]))
         else:
             flash('Card payment not accepted')
-            return render_template('payment.html', form=form)
+            return render_template('payment.html', form=form, location = locations[location - 1])
 
 @app.route("/cancel_booking/<int:bookingID>")
 def cancel_booking(bookingID):
