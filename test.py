@@ -4,6 +4,8 @@ from flask import request, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from app import app, db, models
 
+# merge check
+
 class FlaskTestCase(unittest.TestCase):
     def setUp(self):
         app.config.from_object('config')
