@@ -10,24 +10,26 @@ from .forms import Registration, Login, Payment
 
 @app.route("/add_test")
 def add_test():
-    location2 = models.Location()
-    location3 = models.Location()
-    location4 = models.Location()
-    location5 = models.Location()
-    user_obj = models.Scooter(in_use = False, LocationID = 2)
-    user_obj1 = models.Scooter(in_use = False, LocationID = 3)
-    user_obj2 = models.Scooter(in_use = False, LocationID = 4)
-    user_obj3 = models.Scooter(in_use = False, LocationID = 5)
-    user_obj4 = models.Scooter(in_use = False, LocationID = 1)
-    db.session.add(user_obj)
-    db.session.add(user_obj1)
-    db.session.add(user_obj2)
-    db.session.add(user_obj3)
-    db.session.add(user_obj4)
-    db.session.add(location2)
-    db.session.add(location3)
-    db.session.add(location4)
-    db.session.add(location5)
+    # location2 = models.Location()
+    # location3 = models.Location()
+    # location4 = models.Location()
+    # location5 = models.Location()
+    # user_obj = models.Scooter(in_use = False, LocationID = 2)
+    # user_obj1 = models.Scooter(in_use = False, LocationID = 3)
+    # user_obj2 = models.Scooter(in_use = False, LocationID = 4)
+    # user_obj3 = models.Scooter(in_use = False, LocationID = 5)
+    # user_obj4 = models.Scooter(in_use = False, LocationID = 1)
+    # db.session.add(user_obj)
+    # db.session.add(user_obj1)
+    # db.session.add(user_obj2)
+    # db.session.add(user_obj3)
+    # db.session.add(user_obj4)
+    # db.session.add(location2)
+    # db.session.add(location3)
+    # db.session.add(location4)
+    # db.session.add(location5)
+    admin_obj = models.User.query.filter_by(email="admin@admin.com").first()
+    admin_obj.admin = True
     db.session.commit()
     return redirect(url_for("dashboard"))
 
@@ -68,6 +70,8 @@ def login():
             session["email"] = user_obj.email
             session["admin"] = user_obj.admin
             flash("Welcome " + user_obj.username + "!")
+            if user_obj.admin == True:
+                return redirect("/admin")
             return redirect(url_for("dashboard"))
         else:
             flash("Incorrect password!")
@@ -121,7 +125,13 @@ def reRoute():
     return redirect("/register")
 
 
-    
+@app.route("/admin")
+def admin_dash():
+    if session.get('admin') != 0:
+        return "admin dashboard!"
+    else:
+        return redirect(url_for("dashboard"))
+
 @app.route("/hire_scooter")
 def hire_scooter():
     # guest accounts unable to hire right now.
