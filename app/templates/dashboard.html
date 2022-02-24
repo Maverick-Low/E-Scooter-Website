@@ -8,33 +8,35 @@
     <h1>Dashboard!</h1>
 
     <h3>Active Orders</h3>
-    
-
-    
-
     {% if not active %}
         <p>You have no active orders</p>
     {% endif %}
 
     {% for elem in orders %}
         {% if elem.id  in active %}
-            <br> </br>
-            <p>Order Number: {{elem.id}}</p>
-            <p>Hours: {{elem.numHours}}</p>
-            <p>Price: £{{elem.price}}</p>
-            <p>Date: {{elem.date.day}}-{{elem.date.month}}-{{elem.date.year}} {{elem.date.hour}}:{{elem.date.minute}}</p>
-        <p>Expiry Date: {{elem.expiry.day}}-{{elem.expiry.month}}-{{elem.expiry.year}} {{elem.expiry.hour}}:{{elem.expiry.minute}}</p>
+            {% if not elem.cancelled %}
+                <p>Order Number: {{elem.id}}</p>
+                <p>Hours: {{elem.numHours}}</p>
+                <p>Price: £{{elem.price}}</p>
+                <p>Date: {{elem.date.day}}-{{elem.date.month}}-{{elem.date.year}} {{elem.date.hour}}:{{elem.date.minute}}</p>
+                <p>Expiry Date: {{elem.expiry.day}}-{{elem.expiry.month}}-{{elem.expiry.year}} {{elem.expiry.hour}}:{{elem.expiry.minute}}</p>
+                <button type="Cancel Order" class="btn btn-primary" ><a href="/cancel_booking/{{elem.id}}">Cancel Booking</a></button>
+                <br> </br>
+            {% endif %}
         {% endif %}
     {% endfor %}
-    
+    <br> </br>
     <h3>Order History</h3>
     {% for elem in orders %}
-        {% if elem.id not in active %}
+        {% if elem.id not in active or elem.cancelled %}
             <p>Order Number: {{elem.id}}</p>
-            <p>Hours: {{elem.numHours}}</p>
+            <p>Hours: {{elem.numHours}} Hr</p>
             <p>Price: £{{elem.price}}</p>
             <p>Date: {{elem.date.day}}-{{elem.date.month}}-{{elem.date.year}} {{elem.date.hour}}:{{elem.date.minute}}</p>
             <p>Expiry Date: {{elem.expiry.day}}-{{elem.expiry.month}}-{{elem.expiry.year}} {{elem.expiry.hour}}:{{elem.expiry.minute}}</p>
+            {% if elem.cancelled %}
+            <b>Cancelled Order</b>
+            {% endif %}
             <br> </br>
         {% endif %}
     {% endfor %} 
