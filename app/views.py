@@ -126,7 +126,9 @@ def logout():
     
 @app.route("/dashboard")
 def dashboard():
-    if session.get('admin') != 0:
+    if not session.get('email'):
+        return redirect("/")
+    elif session.get('admin') != 0:
         return redirect("/admin")
     else:
         
