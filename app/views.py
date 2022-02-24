@@ -6,7 +6,7 @@ from flask import render_template, request, url_for, redirect, flash, session
 from datetime import datetime
 from .forms import Registration, Login, Payment
 
-
+# merge check
 
 @app.route("/add_test")
 def add_test():

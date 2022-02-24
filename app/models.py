@@ -2,6 +2,8 @@ from datetime import date
 from sqlalchemy import ForeignKey, false
 from app import db
 
+# merge check
+
 #Table for users
 class User(db.Model):
     __tablename__ = 'users'

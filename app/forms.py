@@ -7,6 +7,7 @@ import re
 from datetime import date, datetime
 import pycountry
 
+# merge check
 
 class Login(FlaskForm):
         email = StringField('Enter email', validators=[DataRequired(), Length(max=60)])
