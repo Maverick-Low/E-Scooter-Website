@@ -1,4 +1,5 @@
 from encodings import utf_8
+from pickle import FALSE
 
 from sqlalchemy import false
 from app import app, models, bcrypt, db
@@ -103,6 +104,7 @@ def register():
             hashed_password = bcrypt.generate_password_hash(form.password_1.data).decode('utf-8')
             user_obj = models.User(username=form.username.data, email=form.email.data, password=hashed_password, admin=False)
             session["email"] = form.email.data
+            session["admin"] = False
             db.session.add(user_obj)
             db.session.commit()
             return render_template('Dashboard.html')
