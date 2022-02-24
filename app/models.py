@@ -36,3 +36,4 @@ class Booking(db.Model):
     date = db.Column(db.DateTime, nullable = False)
     expiry = db.Column(db.DateTime)
     price = db.Column(db.Integer, nullable = False)
+    cancelled = db.Column(db.Boolean, default = False, nullable=False)
