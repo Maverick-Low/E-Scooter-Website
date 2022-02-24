@@ -175,8 +175,8 @@ def payment(location):
             flash("Transaction confirmed!")
             return redirect("/remove_available/"+str(location))
         else:
-                flash('Card payment not accepted')
-                return render_template('payment.html', form=form)
+            flash('Card payment not accepted')
+            return render_template('payment.html', form=form)
 
 
 

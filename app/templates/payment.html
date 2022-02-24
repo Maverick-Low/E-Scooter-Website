@@ -36,7 +36,32 @@
                 {{ form.cvv.label(class = "form-label")}}
                 {{ form.cvv}}
               </fieldset>
-      
+
+              <br>
+              <h1>Billing details</h1>
+
+              <fieldset class="form-field">
+                {{ form.address_line_1.label(class = "form-label")}}
+                {{ form.address_line_1}}
+              </fieldset>
+
+              <fieldset class="form-field">
+                {{ form.address_line_2.label(class = "form-label")}}
+                {{ form.address_line_2}}
+              </fieldset>
+
+              <fieldset class="form-field">
+                {{ form.city.label(class = "form-label")}}
+                {{ form.city}}
+              </fieldset>
+
+              <fieldset class="form-field">
+                {{ form.postcode.label(class = "form-label")}}
+                {{ form.postcode}}
+              </fieldset>
+
+
+              
               {{ form.submit (class = "btn btn-primary") }}
       
             </form>

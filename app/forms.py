@@ -1,9 +1,11 @@
+from tokenize import String
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, DateTimeField, IntegerField, SubmitField, EmailField
 from wtforms.validators import EqualTo, DataRequired, ValidationError, Length, Email
 from app import models
 import re
 from datetime import date, datetime
+import pycountry
 
 
 class Login(FlaskForm):
@@ -86,12 +88,19 @@ class Payment(FlaskForm):
             raise ValidationError('Card number is invalid')
 
 
-    
+    #card details
     name = StringField('Enter name', validators=[DataRequired(message = "Enter your name please"), Length(max=60)])
     card_number = StringField('Enter card number', validators=[DataRequired(), Length(min=14, max=20)])
     cvv = StringField('Enter cvv', validators=[DataRequired() , Length(min=3, max=4)])
     expiry_date = DateTimeField('Enter expiry date (mm/YYYY)', validators=[DataRequired()], format='%m/%Y')
     submit = SubmitField('Submit')
+
+    #billing details
+    address_line_1 = StringField('Address line 1', validators=[DataRequired(), Length(max=60)])
+    address_line_2 = StringField('Address line 2', validators=[DataRequired(), Length(max=60)])
+    city = StringField('City', validators=[DataRequired(), Length(max=60)])
+    postcode = StringField('postcode', validators=[DataRequired(), Length(min=6, max=7)])
+
 
     def validate_name(self, name):
         excluded_chars = "*?!'^+%&/()=}][{$#£"
