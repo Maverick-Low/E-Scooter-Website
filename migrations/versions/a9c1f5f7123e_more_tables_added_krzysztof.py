@@ -5,6 +5,7 @@ Revises:
 Create Date: 2022-02-22 14:56:46.876215
 
 """
+from types import NoneType
 from alembic import op
 import sqlalchemy as sa
 

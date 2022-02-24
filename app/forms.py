@@ -1,3 +1,4 @@
+from email.policy import default
 from tokenize import String
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, DateTimeField, IntegerField, SubmitField, EmailField, SelectField
@@ -80,8 +81,8 @@ class Payment(FlaskForm):
     Make hidden fields in form for price and hours - make it easier to process please.
     
     """
-    price = 5
-    hours = 1
+    price = StringField('', default='5')
+    hours =  StringField('', default='1')
 
     #card details
     name = StringField('Enter name', validators=[DataRequired(message = "Enter your name please"), Length(max=60)])
@@ -92,7 +93,7 @@ class Payment(FlaskForm):
 
     #billing details
     address_line_1 = StringField('Address line 1', validators=[DataRequired(), Length(max=60)])
-    address_line_2 = StringField('Address line 2', validators=[DataRequired(), Length(max=60)])
+    address_line_2 = StringField('Address line 2', validators=[Length(max=60)])
     city = StringField('City', validators=[DataRequired(), Length(max=60)])
     postcode = StringField('Postcode', validators=[DataRequired(), Length(min=6, max=7)])
     

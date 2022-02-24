@@ -3,17 +3,13 @@ from encodings import utf_8
 from sqlalchemy import false
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session
-from datetime import datetime
+from datetime import datetime, timedelta
 from .forms import Registration, Login, Payment
 
 
 
 @app.route("/add_test")
 def add_test():
-    location2 = models.Location()
-    location3 = models.Location()
-    location4 = models.Location()
-    location5 = models.Location()
     user_obj = models.Scooter(in_use = False, LocationID = 2)
     user_obj1 = models.Scooter(in_use = False, LocationID = 3)
     user_obj2 = models.Scooter(in_use = False, LocationID = 4)
@@ -24,12 +20,18 @@ def add_test():
     db.session.add(user_obj2)
     db.session.add(user_obj3)
     db.session.add(user_obj4)
-    db.session.add(location2)
-    db.session.add(location3)
-    db.session.add(location4)
-    db.session.add(location5)
     db.session.commit()
     return redirect(url_for("dashboard"))
+
+
+@app.route("/reset_scooter")
+def reset_scooter():
+    Scooters = models.Scooter.query.filter_by(in_use = True).all()
+    for scooter in Scooters:
+        scooter.in_use  = False      
+    db.session.commit()
+    return redirect(url_for("hire_scooter"))
+
 
 
 # use this function to protect routes from unauthorised access
@@ -160,7 +162,9 @@ def remove_available(location):
     scooter_to_remove = models.Scooter.query.filter_by(LocationID = param[0], in_use=False).first()
     scooter_to_remove.in_use = True
     user = models.User.query.filter_by(email = session['email']).first()
-    booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = param[2], date= datetime.today(), price=param[1])
+    # hours_added = datetime.timedelta(hours = int(param[2]))
+    expiry = datetime.now() + timedelta(hours=int(param[2]))
+    booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = param[2], date= datetime.today(), price=param[1], expiry = expiry)
     db.session.add(booking)
     db.session.commit()
     flash(f'Scooter has been successfuly hired')
@@ -176,7 +180,7 @@ def payment(location):
         return render_template("payment.html", form=form, location = locations[location - 1])
     elif request.method == "POST":
         if form.validate_on_submit():
-            # arr = [request.form['price'],request.form['hours']]
+            arr = [form.price.data,form.hours.data]
             flash("Transaction confirmed!")
             return redirect("/remove_available/"+str(location)+'$' + str(arr[0]) + '$' + str(arr[1]))
         else:

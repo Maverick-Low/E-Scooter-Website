@@ -34,4 +34,5 @@ class Booking(db.Model):
     UserID = db.Column(db.Integer, ForeignKey("users.id"))
     numHours = db.Column(db.Integer, nullable = False)
     date = db.Column(db.DateTime, nullable = False)
+    expiry = db.Column(db.DateTime)
     price = db.Column(db.Integer, nullable = False)
