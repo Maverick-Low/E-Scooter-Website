@@ -23,38 +23,11 @@ class Registration(FlaskForm):
 
         # function that validates email adress upon registration
         # todo: write unit tests for functions
-        def validateEmail(self, email):     
+        def validate_email(self, email):     
             user_object = models.User.query.filter_by(email=email.data).first()
             if user_object: #if user is already registered don't allow them to register again
                 raise ValidationError('This email address is already registered!')
 
-            #regular expression for an email address with a single '.' after the '@':    
-            # email_regex_1 = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-
-            #regular expression for an email address with two '.'s after the '@': 
-            # email_regex_2 = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}+\.[A-Z|a-z]{2,}\b'
-            
-            # if not( (re.search(email_regex_2,str(email)))):# or (re.search(email_regex_1,str(email))) ):
-            #      raise ValidationError('This email is not of a valid format!')
-        
-        #function that validates the password when registering a new user
-        def validate_password_1(self, password_1):
-            password_1 = str(password_1)
-
-            special_symbol =["$", "@", "#", "%", "£", "^", "*", "(", ")"]
-            
-            if not any(char.isdigit() for char in password_1):
-                raise ValidationError('Password should have at least one numeric digit!')
-                
-            if not any(char.isupper() for char in password_1):
-                raise ValidationError('Password should have at least one uppercase letter!')
-                
-            if not any(char.islower() for char in password_1):
-                raise ValidationError('Password should have at least one lowercase letter!')
-
-            password_regex = re.compile('[^0-9a-zA-Z]+')
-            if not password_regex.search(password_1): 
-                raise ValidationError('Password should have at least one special symbol!')
     
     
     
