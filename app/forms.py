@@ -23,20 +23,11 @@ class Registration(FlaskForm):
 
         # function that validates email adress upon registration
         # todo: write unit tests for functions
-        def validateEmail(self, email):     
+        def validate_email(self, email):     
             user_object = models.User.query.filter_by(email=email.data).first()
             if user_object: #if user is already registered don't allow them to register again
                 raise ValidationError('This email address is already registered!')
 
-            #regular expression for an email address with a single '.' after the '@':    
-            # email_regex_1 = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-
-            #regular expression for an email address with two '.'s after the '@': 
-            # email_regex_2 = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}+\.[A-Z|a-z]{2,}\b'
-            
-            # if not( (re.search(email_regex_2,str(email)))):# or (re.search(email_regex_1,str(email))) ):
-            #      raise ValidationError('This email is not of a valid format!')
-        
         #function that validates the password when registering a new user
         def validate_password_1(self, password_1):
             password_1 = str(password_1)
@@ -81,12 +72,16 @@ class Payment(FlaskForm):
             checksum += sum(int(x) for x in str(d*2))
         return checksum % 10
 
-
-      #todo: add code that determines type of credit card
-    def validateCardNumber():
-        if luhns(self.card_number) != 0:
-            raise ValidationError('Card number is invalid')
-
+    #time and price
+    time_options = [(1, "1 hour - £5"), (4, "4 hours - £20"), (24 ,"1 day - £100") , (168, "1 week - £600")]
+    hire_period = SelectField('Select hire period',choices = time_options)
+    #price = 5 * hire_period.value
+    """
+    Make hidden fields in form for price and hours - make it easier to process please.
+    
+    """
+    price = 5
+    hours = 1
 
     #card details
     name = StringField('Enter name', validators=[DataRequired(message = "Enter your name please"), Length(max=60)])
@@ -101,6 +96,7 @@ class Payment(FlaskForm):
     city = StringField('City', validators=[DataRequired(), Length(max=60)])
     postcode = StringField('Postcode', validators=[DataRequired(), Length(min=6, max=7)])
     
+
     #hardcoded to start with united_kingdom
     #todo: use location services
     country_list = [("United Kingdom")]
@@ -121,5 +117,10 @@ class Payment(FlaskForm):
           if (datetime.today() - expiry_date.data).days > 0:
             raise ValidationError('Expiry date is not valid')
 
-    
+
+      #todo: add code that determines type of credit card
+    # def validate_card_number(self, card_number):
+    #     if luhns(self.card_number) != 0:
+    #         raise ValidationError('Card number is invalid')
+
                     

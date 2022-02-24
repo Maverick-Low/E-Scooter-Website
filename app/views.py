@@ -148,19 +148,23 @@ def hire_scooter():
 
 
 
-@app.route('/remove_available/<int:location>')
+@app.route('/remove_available/<string:location>')
 def remove_available(location):
     """
-    Remember to save scooter id in order table somewhere
-    in order to free correct scooter.
-    May cause isssues later
+    param[0] = locationID
+    param[1] = Price
+    param[2] = Hours
     """
-    scooter_to_remove = models.Scooter.query.filter_by(LocationID = location, in_use=False).first()
+    param = location.split('$')
+    
+    scooter_to_remove = models.Scooter.query.filter_by(LocationID = param[0], in_use=False).first()
     scooter_to_remove.in_use = True
+    user = models.User.query.filter_by(email = session['email']).first()
+    booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = param[2], date= datetime.today(), price=param[1])
+    db.session.add(booking)
     db.session.commit()
     flash(f'Scooter has been successfuly hired')
     return redirect(url_for('dashboard'))
-
 
 
 @app.route("/payment/<int:location>", methods = ["GET", "POST"])
@@ -172,8 +176,9 @@ def payment(location):
         return render_template("payment.html", form=form, location = locations[location - 1])
     elif request.method == "POST":
         if form.validate_on_submit():
+            # arr = [request.form['price'],request.form['hours']]
             flash("Transaction confirmed!")
-            return redirect("/remove_available/"+str(location))
+            return redirect("/remove_available/"+str(location)+'$' + str(arr[0]) + '$' + str(arr[1]))
         else:
             flash('Card payment not accepted')
             return render_template('payment.html', form=form)
