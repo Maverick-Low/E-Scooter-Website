@@ -1,17 +1,20 @@
+from pickle import FALSE
 from tokenize import String
 from flask_wtf import FlaskForm
+from sqlalchemy import true
 from wtforms import PasswordField, StringField, DateTimeField, IntegerField, SubmitField, EmailField, SelectField
-from wtforms.validators import EqualTo, DataRequired, ValidationError, Length, Email 
+from wtforms.validators import EqualTo, DataRequired, ValidationError, Length, Email, Regexp 
 from app import models
+from datetime import date, datetime
 import re
 from datetime import date, datetime
 import pycountry
 
 
 class Login(FlaskForm):
-        email = StringField('Enter email', validators=[DataRequired(), Length(max=60)])
-        password = PasswordField('Enter password', validators=[DataRequired(), Length(max=60)])
-        submit = SubmitField('Submit')
+    email = StringField('Enter email', validators=[DataRequired(), Length(max=60)])
+    password = PasswordField('Enter password', validators=[DataRequired(), Length(max=60)])
+    submit = SubmitField('Submit')
 
 
 class Registration(FlaskForm):
@@ -23,7 +26,7 @@ class Registration(FlaskForm):
 
         # function that validates email adress upon registration
         # todo: write unit tests for functions
-        def validateEmail(self, email):     
+        def validate_email(self, email):     
             user_object = models.User.query.filter_by(email=email.data).first()
             if user_object: #if user is already registered don't allow them to register again
                 raise ValidationError('This email address is already registered!')
@@ -37,56 +40,36 @@ class Registration(FlaskForm):
             # if not( (re.search(email_regex_2,str(email)))):# or (re.search(email_regex_1,str(email))) ):
             #      raise ValidationError('This email is not of a valid format!')
         
+
         #function that validates the password when registering a new user
         def validate_password_1(self, password_1):
-            password_1 = str(password_1)
+            count_numbers = 0
+            count_lowercase = 0
+            count_uppercase = 0
+            chars_number = "1234567890" #if at least one of these characters in here are in PW, error
+            chars_uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            chars_lowercase = "abcdefghijklmnopqrstuvwxyz"
+            for char in self.password_1.data:
+                if char in chars_number:
+                    count_numbers+=1
+                if char in chars_lowercase:
+                    count_lowercase+=1
+                if char in chars_uppercase:
+                    count_uppercase+=1
 
-            special_symbol =["$", "@", "#", "%", "£", "^", "*", "(", ")"]
-            
-            if not any(char.isdigit() for char in password_1):
-                raise ValidationError('Password should have at least one numeric digit!')
-                
-            if not any(char.isupper() for char in password_1):
-                raise ValidationError('Password should have at least one uppercase letter!')
-                
-            if not any(char.islower() for char in password_1):
-                raise ValidationError('Password should have at least one lowercase letter!')
-
-            password_regex = re.compile('[^0-9a-zA-Z]+')
-            if not password_regex.search(password_1): 
-                raise ValidationError('Password should have at least one special symbol!')
-    
-    
+            if count_numbers == 0:
+                    raise ValidationError(f"Password must have at least 1 number")
+            if count_lowercase == 0:
+                    raise ValidationError(f"Password must have at least 1 lowercase letter")
+            if count_uppercase == 0:
+                    raise ValidationError(f"Password must have at least 1 uppercase letter")
+        
     
 class Payment(FlaskForm):
     #function that checks if the expiry date is in the future
     # def validateCVV():
     #     if not (len(self.cvv) == 3 or self.cvv == 4):
     #         raise ValidationError('CVV is invalid')    
-
-    def luhns(card_number):
-        
-        #check if card number is numeric
-        if not card_number.isnumeric():
-            return -1
-        else: 
-            card_number = int(card_number)
-
-        digits = [int(x) for x in str(card_number)]
-        odd_digits = digits[-1::-2]
-        even_digits = digits[-2::-2]
-        checksum = 0
-        checksum += sum(odd_digits)
-        for d in even_digits:
-            checksum += sum(int(x) for x in str(d*2))
-        return checksum % 10
-
-
-      #todo: add code that determines type of credit card
-    def validateCardNumber():
-        if luhns(self.card_number) != 0:
-            raise ValidationError('Card number is invalid')
-
 
     #card details
     name = StringField('Enter name', validators=[DataRequired(message = "Enter your name please"), Length(max=60)])
@@ -109,17 +92,39 @@ class Payment(FlaskForm):
     
     country = SelectField('Select country', choices = country_list)
 
+    # Checks
     def validate_name(self, name):
-        excluded_chars = "*?!'^+%&/()=}][{$#£"
+        excluded_chars = "*?!'^+%&/()=}][{$#£1234567890"
         for char in self.name.data:
             if char in excluded_chars:
-                raise ValidationError(
-                    f"Character {char} is not allowed in username.")
+                raise ValidationError(f"Character {char} is not allowed in name.")
     
     
     def validate_expiry_date(self, expiry_date):
-          if (datetime.today() - expiry_date.data).days > 0:
+        if (datetime.today() - expiry_date.data).days > 0:
             raise ValidationError('Expiry date is not valid')
+
+    # def luhns(card_number):
+    # #check if card number is numeric
+    #     if not card_number.isnumeric():
+    #         return -1
+    #     else: 
+    #         card_number = int(card_number)
+
+    #     digits = [int(x) for x in str(card_number)]
+    #     odd_digits = digits[-1::-2]
+    #     even_digits = digits[-2::-2]
+    #     checksum = 0
+    #     checksum += sum(odd_digits)
+    #     for d in even_digits:
+    #         checksum += sum(int(x) for x in str(d*2))
+    #     return checksum % 10
+
+
+    #   #todo: add code that determines type of credit card
+    # def validate_card_number(self, card_number):
+    #     if luhns(self.card_number) != 0:
+    #         raise ValidationError('Card number is invalid')
 
     
                     
