@@ -25,7 +25,7 @@
 		position: absolute;
 		width: 1400px;
 		height: 1833px;
-		background-color: rgba(255,255,255,1);
+		background-color: rgba(255,255,255);
 		overflow: hidden;
 		--web-view-name: Website Main;
 		--web-view-id: Website_Main;
@@ -177,23 +177,28 @@
 		font-size: 11px;
 		color: rgba(204,204,204,1);
 	}
-	#MY_ACCOUNT {
+	.btn_myaccount {
+		background: inherit; 
+       	border: none;
 		opacity: 0.7;
 		left: 1196px;
 		top: 26px;
 		position: absolute;
-		overflow: visible;
 		width: 68px;
+		overflow: visible;
 		white-space: nowrap;
 		line-height: 20px;
 		margin-top: -4.5px;
-		text-align: left;
+		text-align: center;
 		font-family: Halyard Display;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 11px;
 		color: rgba(204,204,204,1);
+		cursor: pointer;
+		display: inline-block;
 	}
+	.btn_myaccount:hover {opacity: 1;}
 	#Group_6 {
 		position: absolute;
 		width: 92px;
@@ -1442,9 +1447,7 @@
 			<div id="ABOUT_US">
 				<span>ABOUT US</span>
 			</div>
-			<div id="MY_ACCOUNT">
-				<span>MY ACCOUNT</span>
-			</div>
+			<button class="btn_myaccount" onclick="window.location.href='../Login/Website_Login.html'">MY ACCOUNT</button>
 		</div>
 		<div id="Group_6">
 			<div id="EScooter">
@@ -1486,7 +1489,7 @@
 					</path>
 				</svg>
 				<div id="Find_a_drop-off_point">
-					<span>Find a drop-off point</span>
+					<input name="Find_a_drop-off_point" type="text" value="" placeholder="Find A Drop-Off Point" autocorrect="on" autocapitalize="words" autofocus="on">
 				</div>
 				<svg class="Line_1" viewBox="0 0 298 1">
 					<path id="Line_1" d="M 298 0 L 0 0">
@@ -1503,7 +1506,7 @@
 				</path>
 			</svg>
 			<div id="Find_a_pick-up_point">
-				<span>Find a pick-up point</span>
+				<input name="Find_a_pick-up_point" type="text" value="" placeholder="Find A Pick-Up Point" autocorrect="on" autocapitalize="words" autofocus="on">
 			</div>
 			<svg class="Line_1_bh" viewBox="0 0 298 1">
 				<path id="Line_1_bh" d="M 298 0 L 0 0">
