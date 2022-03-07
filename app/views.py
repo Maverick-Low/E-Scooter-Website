@@ -1,3 +1,4 @@
+from email.message import Message
 from encodings import utf_8
 from pickle import FALSE
 
@@ -6,6 +7,12 @@ from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session
 from datetime import datetime, timedelta
 from .forms import Registration, Login, Payment
+import smtplib, ssl
+from email.mime.text import MIMEText
+
+
+
+
 
 
 
@@ -226,11 +233,38 @@ def remove_available(location):
     scooter_to_remove = models.Scooter.query.filter_by(LocationID = param[0], in_use=False).first()
     scooter_to_remove.in_use = True
     user = models.User.query.filter_by(email = session['email']).first()
+    username = user.username
     # hours_added = datetime.timedelta(hours = int(param[2]))
     expiry = datetime.now() + timedelta(hours=int(param[2]))
     booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = param[2], date= datetime.today(), price=param[1], expiry = expiry)
     db.session.add(booking)
     db.session.commit()
+    #Sending confirmation email
+    #code for sending an email
+
+    """
+    Email sending functionality will not work when details are not filled in
+    Need a way of storing them securly as they should not be pushed with a commit.
+    """
+
+    # email = 'team38escooter@gmail.com'
+    # passw = '' # details in discord - need to add to be able to send emails
+    # reciever = session['emal']
+    # port = 465
+    # message = ('Hi ' + str(username) +', thanks for booking with us. Here are the details of your order:\nPrice: '+ str(param[1]) + '\nDuration: ' + str(param[2]) + '\nDate: ' + str(datetime.today().strftime("%d/%m/%Y, %H:%M")) + ' \nExpiry: ' + str(expiry.strftime("%d/%m/%Y, %H:%M")))
+
+    # msg = MIMEText(message)
+    # msg['Subject'] = 'Thanks for ordering with EScooter'
+    # msg['From'] = email
+    # msg['To'] = reciever
+
+
+
+    # with smtplib.SMTP_SSL("smtp.gmail.com", port) as server:
+    #     server.login(email, passw)
+    #     server.send_message(msg)
+    #     server.quit()
+    
     flash(f'Scooter has been successfuly hired')
     return redirect(url_for('dashboard'))
 
