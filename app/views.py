@@ -5,7 +5,7 @@ from sqlalchemy import false
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session
 from datetime import datetime, timedelta
-from .forms import Registration, Login, Payment
+from .forms import Registration, Login, Payment, Report
 
 
 
@@ -112,6 +112,23 @@ def register():
             flash('Failed to submit registration form!')
             return render_template('register.html', form=form)
 
+@app.route("/report", methods = ["GET", "POST"])
+def report():
+    form = Report()
+    if request.method == "GET":
+        return render_template('report.html', form=form)
+    elif request.method == "POST":
+        if form.validate_on_submit():
+            report_obj = models.Report(issue=form.issue.data, description=form.report.data)
+            db.session.add(report_obj)
+            db.session.commit()
+            flash('Report has been successfully sent!')
+            return render_template('Dashboard.html')
+        else:
+            flash('Failed to submit report form!')
+            return render_template('report.html', form=form)
+    
+
 
 @app.route("/logout")
 def logout():
@@ -151,7 +168,7 @@ def dashboard():
 def reRoute():
     return redirect("/register")
 
-
+# Admin-specific app routes
 @app.route("/admin")
 def admin_dash():
     if session.get('admin') != 0:
@@ -180,6 +197,23 @@ def admin_config():
     else:
         return render_template("configure.html")
 
+@app.route("/admin/issues")
+def admin_issues():
+    if session.get('admin') == 0:
+        return redirect("/dashboard")
+    else:
+        issues = models.Report.query.all()
+        return render_template("issues.html", issues = issues)
+# End of admin specific app routes
+@app.route("/admin/issues/resolve_issue/<string:issue_id>")
+def resolve_issue(issue_id):
+    if session.get('admin') == 0:
+        return redirect("/dashboard")
+    else:
+        issue_obj = models.Report.query.filter_by(id = issue_id).first()
+        issue_obj.resolved = True
+        db.session.commit()
+        return redirect(url_for('admin_issues'))
 
 @app.route("/hire_scooter")
 def hire_scooter():

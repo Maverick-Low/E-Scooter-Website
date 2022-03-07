@@ -1,0 +1,33 @@
+{% extends "admin_base.html" %}
+{% block content %}
+
+<head>
+    <title>Issues</title>
+</head>
+<body>
+    <h1>Reported Issues</h1>
+    {% if not issues %}
+        <p>There are no issues</p>
+    {% endif %}
+    <h2>Active issues:</h2>
+    {% for elem in issues %}
+        {%if elem.resolved == False%}
+            <p>Issue Number: {{elem.id}}</p>
+            <p>Type: {{elem.issue}}</p>
+            <p>Description: {{elem.description}}</p>
+            <button type= "button" class="btn btn-primary" ><a href="/admin/issues/resolve_issue/{{elem.id}}">Resolve Issue</a></button>
+            <br> </br>
+        {%endif%}
+    {% endfor %}
+    <h2>Resolved issues:</h2>
+        {% for elem in issues %}
+            {%if elem.resolved == True%}
+                <p>Issue Number: {{elem.id}}</p>
+                <p>Type: {{elem.issue}}</p>
+                <p>Description: {{elem.description}}</p>
+                <br> </br>
+            {%endif%}
+        {% endfor %}
+</body>
+
+{% endblock content %}

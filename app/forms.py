@@ -3,7 +3,7 @@ from pickle import FALSE
 from tokenize import String
 from flask_wtf import FlaskForm
 from sqlalchemy import true
-from wtforms import PasswordField, StringField, DateTimeField, IntegerField, SubmitField, EmailField, SelectField
+from wtforms import PasswordField, StringField, DateTimeField, IntegerField, SubmitField, EmailField, SelectField, FieldList, TextAreaField
 from wtforms.validators import EqualTo, DataRequired, ValidationError, Length, Email, Regexp 
 from app import models
 from datetime import date, datetime
@@ -15,6 +15,11 @@ import pycountry
 class Login(FlaskForm):
     email = StringField('Enter email', validators=[DataRequired(), Length(max=60)])
     password = PasswordField('Enter password', validators=[DataRequired(), Length(max=60)])
+    submit = SubmitField('Submit')
+
+class Report(FlaskForm):
+    issue = SelectField(choices=['Refund', 'Problem with website', 'Problem with registration', 'Problem with login', 'Other'])
+    report = TextAreaField('Describe the issue:', validators=[DataRequired(), Length(max=150)])
     submit = SubmitField('Submit')
 
 
