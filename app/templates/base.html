@@ -30,7 +30,7 @@
             <div class="navbar-nav mr-auto">
               {% if session.get("email") %}
                 <a class="nav-item nav-link" href="/dashboard">Dashboard</a>
-                <a class="nav-item nav-link" href="/hire_scooter">HireScooter</a>
+                <a class="nav-item nav-link" href="/hire_scooter">Hire Scooter</a>
               {% endif %}
         
               
@@ -38,6 +38,7 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
               {% if session.get("email") %}
+                <a class="nav-item nav-link" href="/report">Report Issue</a>
                 <a class="nav-item nav-link" href="/logout">Logout</a>
               {% else %}
                 <a class="nav-item nav-link" href="/">Login</a>
