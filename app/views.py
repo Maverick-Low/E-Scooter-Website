@@ -290,7 +290,7 @@ def extend_booking(bookingID, duration):
     db.session.commit()
     return redirect(url_for("dashboard"))
 
-
+#for merging
 """
 logout code:
 
