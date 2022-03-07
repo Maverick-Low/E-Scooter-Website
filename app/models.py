@@ -19,6 +19,7 @@ class Report(db.Model):
     issue = db.Column(db.String(60), nullable=False)
     description = db.Column(db.String(60), nullable=False)
 
+#for merge
 
 #Table for scooters
 class Scooter(db.Model):

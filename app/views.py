@@ -289,14 +289,14 @@ def payment(location):
             flash('Card payment not accepted')
             return render_template('payment.html', form=form, location = locations[location - 1])
 
+
+
 @app.route("/cancel_booking/<int:bookingID>")
 def cancel_booking(bookingID):
     booking_to_cancel = models.Booking.query.filter_by(id=bookingID).first()
     booking_to_cancel.cancelled = True
     db.session.commit()
     return redirect(url_for("dashboard"))
-
-
 
 
 
