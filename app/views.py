@@ -249,6 +249,13 @@ def payment(location):
     elif request.method == "POST":
         if form.validate_on_submit():
             arr = [form.price.data,form.hours.data]
+            arr2 = [form.name.data,form.card_number.data,form.expiry_date.data,form.address_line_1.data,form.address_line_2.data,form.city.data,form.postcode.data]
+            hashed_card = bcrypt.generate_password_hash(arr[1]).decode('utf-8')
+            user_Id = models.User.query.filter_by(id = session.get('email')).first()
+            card_obj = models.Card(UserID = user_Id, name = arr2[0], cardnum = hashed_card, expiry = arr2[2]
+                                   , address1 = arr2[3], address2 = arr2[4], city = arr2[5], postcode = arr2[6])
+            db.session.add(card_obj)
+            db.session.commit()
             flash("Transaction confirmed!")
             return redirect("/remove_available/"+str(location)+'$' + str(arr[0]) + '$' + str(arr[1]))
         else:
