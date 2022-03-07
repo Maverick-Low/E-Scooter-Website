@@ -21,6 +21,27 @@
                 <p>Date: {{elem.date.day}}-{{elem.date.month}}-{{elem.date.year}} {{elem.date.hour}}:{{elem.date.minute}}</p>
                 <p>Expiry Date: {{elem.expiry.day}}-{{elem.expiry.month}}-{{elem.expiry.year}} {{elem.expiry.hour}}:{{elem.expiry.minute}}</p>
                 <button type="Cancel Order" class="btn btn-primary" ><a href="/cancel_booking/{{elem.id}}">Cancel Booking</a></button>
+                <script>
+                    function revealButtons(){
+                        
+                        elements = document.getElementsByClassName("btn btn-secondary");
+                        for (let i = 0; i < elements.length; i++){
+                            if (elements[i].hidden = true){
+                                elements[i].hidden = false;
+                            } 
+                            if (elements[i].hidden = false){
+                                elements[i].hidden = true;
+                            }
+                                
+                        }
+                    }
+                </script>
+                <button type="Cancel Order" class="btn btn-primary" onclick="revealButtons()" >Extend booking</button>
+                <button type="Cancel Order" id= "{{elem.id}}" class="btn btn-secondary" hidden><a href="/extend_booking/{{elem.id}}/1">1 Hour</a></button>
+                <button type="Cancel Order" id="test" class="btn btn-secondary" hidden><a href="/extend_booking/{{elem.id}}/2">4 Hours</a></button>
+                <button type="Cancel Order" id="test" class="btn btn-secondary" hidden><a href="/extend_booking/{{elem.id}}/3">1 Day</a></button>
+                <button type="Cancel Order" id="test" class="btn btn-secondary" hidden><a href="/extend_booking/{{elem.id}}/4">1 Week</a></button>
+
                 <br> </br>
             {% endif %}
         {% endif %}

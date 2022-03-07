@@ -11,26 +11,26 @@ from .forms import Registration, Login, Payment
 
 @app.route("/add_test")
 def add_test():
-    # location2 = models.Location()
-    # location3 = models.Location()
-    # location4 = models.Location()
-    # location5 = models.Location()
-    # user_obj = models.Scooter(in_use = False, LocationID = 2)
-    # user_obj1 = models.Scooter(in_use = False, LocationID = 3)
-    # user_obj2 = models.Scooter(in_use = False, LocationID = 4)
-    # user_obj3 = models.Scooter(in_use = False, LocationID = 5)
-    # user_obj4 = models.Scooter(in_use = False, LocationID = 1)
-    # db.session.add(user_obj)
-    # db.session.add(user_obj1)
-    # db.session.add(user_obj2)
-    # db.session.add(user_obj3)
-    # db.session.add(user_obj4)
-    # db.session.add(location2)
-    # db.session.add(location3)
-    # db.session.add(location4)
-    # db.session.add(location5)
-    admin_obj = models.User.query.filter_by(email="admin@admin.com").first()
-    admin_obj.admin = True
+    location2 = models.Location()
+    location3 = models.Location()
+    location4 = models.Location()
+    location5 = models.Location()
+    user_obj = models.Scooter(in_use = False, LocationID = 2)
+    user_obj1 = models.Scooter(in_use = False, LocationID = 3)
+    user_obj2 = models.Scooter(in_use = False, LocationID = 4)
+    user_obj3 = models.Scooter(in_use = False, LocationID = 5)
+    user_obj4 = models.Scooter(in_use = False, LocationID = 1)
+    db.session.add(user_obj)
+    db.session.add(user_obj1)
+    db.session.add(user_obj2)
+    db.session.add(user_obj3)
+    db.session.add(user_obj4)
+    db.session.add(location2)
+    db.session.add(location3)
+    db.session.add(location4)
+    db.session.add(location5)
+    # admin_obj = models.User.query.filter_by(email="admin@admin.com").first()
+    # admin_obj.admin = True
     db.session.commit()
     return redirect(url_for("dashboard"))
 
@@ -263,6 +263,32 @@ def cancel_booking(bookingID):
     return redirect(url_for("dashboard"))
 
 
+
+
+
+@app.route("/extend_booking/<int:bookingID>/<int:duration>")
+def extend_booking(bookingID, duration):
+    booking_to_extend = models.Booking.query.filter_by(id=bookingID).first()
+    if duration == 1:
+        booking_to_extend.numHours += 1
+        booking_to_extend.price += 5
+        booking_to_extend.expiry +=  timedelta(hours=1)
+    elif duration == 2:
+        booking_to_extend.numHours += 4
+        booking_to_extend.price += 20
+        booking_to_extend.expiry +=  timedelta(hours=4)
+    elif duration == 3:
+        booking_to_extend.numHours += 24
+        booking_to_extend.price += 120
+        booking_to_extend.expiry +=  timedelta(days=1)
+    elif duration == 4:
+        booking_to_extend.numHours += 168
+        booking_to_extend.price += 840
+        booking_to_extend.expiry +=  timedelta(days=7)
+    
+    
+    db.session.commit()
+    return redirect(url_for("dashboard"))
 
 
 """
