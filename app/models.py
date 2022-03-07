@@ -46,3 +46,16 @@ class Booking(db.Model):
     expiry = db.Column(db.DateTime)
     price = db.Column(db.Integer, nullable = False)
     cancelled = db.Column(db.Boolean, default = False, nullable=False)
+    
+class Card(db.Model):
+    __tablename__ = "cards"
+    id = db.Column(db.Integer, primary_key=True)
+    UserID = db.Column(db.Integer, ForeignKey("users.id"))
+    name = db.Column(db.String, nullable = False)
+    cardnum = db.Column(db.Integer, nullable = False)
+    expiry = db.Column(db.DateTime, nullable = False)
+    address1 = db.Column(db.String, nullable = False)
+    address2 = db.Column(db.String)
+    city = db.Column(db.String, nullable = False)
+    postcode = db.Column(db.String, nullable = False)
+    
