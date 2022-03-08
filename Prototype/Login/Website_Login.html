@@ -79,8 +79,10 @@
 		top: 17px;
 		overflow: visible;
 	}
-	#EScooter {
-		left: 37px;
+	.btn_EScooter {
+		background: inherit;
+		border: none;
+		left: 18px;
 		top: 5px;
 		position: absolute;
 		overflow: visible;
@@ -94,6 +96,7 @@
 		font-weight: normal;
 		font-size: 13px;
 		color: rgba(255,255,255,1);
+		cursor: pointer;
 	}
 	#scooter_white {
 		position: absolute;
@@ -390,8 +393,8 @@
 		font-size: 30px;
 		color: rgba(0,0,0,1);
 	}
-	#Login_in_to_manage_your_accoun {
-		left: 557px;
+	#Login_in_to_manage_your_account {
+		left: 555px;
 		top: 211px;
 		position: absolute;
 		overflow: visible;
@@ -401,7 +404,7 @@
 		font-family: Halyard Display;
 		font-style: normal;
 		font-weight: lighter;
-		font-size: 12px;
+		font-size: 13px;
 		color: rgba(0,0,0,1);
 	}
 	#Group_1432 {
@@ -561,7 +564,7 @@
 	}
 	#Dont_have_an_account_Sign_up {
 		opacity: 0.8;
-		left: 615px;
+		left: 593px;
 		top: 468px;
 		position: absolute;
 		overflow: visible;
@@ -575,6 +578,27 @@
 		color: rgba(0,0,0,1);
 		letter-spacing: 0.2px;
 	}
+	.btn_signup {
+		background: inherit; 
+       	border: none;
+		opacity: 0.8;
+		left: 745px;
+		top: 468px;
+		position: absolute;
+		overflow: visible;
+		width: 50;
+		white-space: nowrap;
+		text-align: center;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 13px;
+		color: rgba(111,111,255,1);
+		letter-spacing: 0.2px;
+		cursor: pointer;
+		display: inline-block;
+	}
+	.btn_signup:hover {opacity: 1;}
 </style>
 </head>
 <body>
@@ -596,8 +620,8 @@
 			</svg>
 		</div>
 		<div id="Group_6">
-			<div id="EScooter">
-				<span>EScooter</span>
+			<div class="btn_EScooter">
+				<button class = "btn_EScooter" onclick="window.location.href='../Main/Website_Main.html'">EScooter</button>
 			</div>
 			<img id="scooter_white" src="scooter_white.png" srcset="scooter_white.png 1x, scooter_white@2x.png 2x">
 				
@@ -678,8 +702,8 @@
 	<div id="Sign_in">
 		<span>Sign in</span>
 	</div>
-	<div id="Login_in_to_manage_your_accoun">
-		<span>Login in to manage your account, bookings and cancellations</span>
+	<div id="Login_in_to_manage_your_account">
+		<span>Login to manage your account, bookings and cancellations</span>
 	</div>
 	<div id="Group_1432">
 		<svg class="Rectangle_1480">
@@ -719,8 +743,9 @@
 		</div>
 	</div>
 	<div id="Dont_have_an_account_Sign_up">
-		<span>Don't have an account? </span><span style="color:rgba(111,111,255,1);">Sign up</span>
+		<span>Don't have an account? </span>
 	</div>
+		<button class = "btn_signup" onclick="window.location.href='../Signup/Website_Sign_up___1.html'">Sign Up </button>
 </div>
 </body>
 </html>

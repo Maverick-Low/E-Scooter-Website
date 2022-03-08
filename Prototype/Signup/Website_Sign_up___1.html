@@ -79,8 +79,10 @@
 		top: 17px;
 		overflow: visible;
 	}
-	#EScooter {
-		left: 37px;
+	.btn_EScooter {
+		background: inherit;
+		border: none;
+		left: 18px;
 		top: 5px;
 		position: absolute;
 		overflow: visible;
@@ -94,6 +96,7 @@
 		font-weight: normal;
 		font-size: 13px;
 		color: rgba(255,255,255,1);
+		cursor: pointer;
 	}
 	#scooter_white {
 		position: absolute;
@@ -660,8 +663,8 @@
 			</svg>
 		</div>
 		<div id="Group_6">
-			<div id="EScooter">
-				<span>EScooter</span>
+			<div class="btn_EScooter">
+				<button class = "btn_EScooter" onclick="window.location.href='../Main/Website_Main.html'">EScooter</button>
 			</div>
 			<img id="scooter_white" src="scooter_white.png" srcset="scooter_white.png 1x, scooter_white@2x.png 2x">
 				
