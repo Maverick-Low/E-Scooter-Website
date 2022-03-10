@@ -124,7 +124,7 @@
 		top: 0px;
 		transform: matrix(1,0,0,1,0,0);
 	}
-	.HOME {
+	#HOME {
 		left: 571px;
 		top: 26px;
 		position: absolute;
@@ -139,8 +139,16 @@
 		font-weight: normal;
 		font-size: 11px;
 		color: rgba(204,204,204,1);
-		background: inherit;
-		cursor: pointer;
+		text-decoration: none;
+	}
+	#HOME:link{
+		color: rgba(204,204,204,1); 
+	}
+	#HOME:visited{
+		color: rgba(204,204,204,1); 
+	}
+	#HOME:hover{
+		opacity: 1; 
 	}
 	#PRICING {
 		opacity: 0.7;
@@ -158,6 +166,16 @@
 		font-weight: normal;
 		font-size: 11px;
 		color: rgba(204,204,204,1);
+		text-decoration: none;
+	}
+	#PRICING:link{
+		color: rgba(204,204,204,1); 
+	}
+	#PRICING:visited{
+		color: rgba(204,204,204,1); 
+	}
+	#PRICING:hover{
+		opacity: 1; 
 	}
 	#CONTACT {
 		opacity: 0.7;
@@ -175,6 +193,16 @@
 		font-weight: normal;
 		font-size: 11px;
 		color: rgba(204,204,204,1);
+		text-decoration: none;
+	}
+	#CONTACT:link{
+		color: rgba(204,204,204,1); 
+	}
+	#CONTACT:visited{
+		color: rgba(204,204,204,1); 
+	}
+	#CONTACT:hover{
+		opacity: 1; 
 	}
 	#ABOUT_US {
 		opacity: 0.7;
@@ -192,10 +220,18 @@
 		font-weight: normal;
 		font-size: 11px;
 		color: rgba(204,204,204,1);
+		text-decoration: none;
 	}
-	.btn_myaccount {
-		background: inherit; 
-       	border: none;
+	#ABOUT_US:link{
+		color: rgba(204,204,204,1); 
+	}
+	#ABOUT_US:visited{
+		color: rgba(204,204,204,1); 
+	}
+	#ABOUT_US:hover{
+		opacity: 1; 
+	}
+	#MY_ACCOUNT{
 		opacity: 0.7;
 		left: 1196px;
 		top: 26px;
@@ -211,10 +247,17 @@
 		font-weight: normal;
 		font-size: 11px;
 		color: rgba(204,204,204,1);
-		cursor: pointer;
-		display: inline-block;
+		text-decoration: none;
 	}
-	.btn_myaccount:hover {opacity: 1;}
+	#MY_ACCOUNT:link{
+		color: rgba(204,204,204,1); 
+	}
+	#MY_ACCOUNT:visited{
+		color: rgba(204,204,204,1); 
+	}
+	#MY_ACCOUNT:hover{
+		opacity: 1; 
+	}
 	#Group_6 {
 		position: absolute;
 		width: 92px;
@@ -1746,17 +1789,11 @@
 				<path id="base_r" d="M 0 0 L 1400 0 L 1400 183.3653717041016 L 0 183.3653717041016 L 0 0 Z">
 				</path>
 			</svg>
-			<button class="HOME" onclick="window.location.href='../Main/Website_Main.html'">HOME</button>
-			<div id="PRICING">
-				<span>PRICING</span>
-			</div>
-			<div id="CONTACT">
-				<span>CONTACT</span>
-			</div>
-			<div id="ABOUT_US">
-				<span>ABOUT US</span>
-			</div>
-			<button class="btn_myaccount" onclick="window.location.href='../Login/Website_Login.html'">MY ACCOUNT</button>
+			<a id="HOME" href="../Main/Website_Main.html">HOME</a>
+			<a id="PRICING" href= "../Error/Website_Error___1.html">PRICING</a>
+			<a id="CONTACT" href= "../Error/Website_Error___1.html">CONTACT</a>
+			<a id="ABOUT_US" href= "../Error/Website_Error___1.html">ABOUT US</a>			
+			<a id="MY_ACCOUNT" href="../Login/Website_Login.html">MY ACCOUNT</a>
 		</div>
 		<div id="Group_6">
 			<div class="btn_EScooter">
@@ -1768,8 +1805,8 @@
 </div>
 	
 <script>
+window.scrollTo(0,0);
 window.onscroll = function() {myFunction()};
-
 var header = document.getElementById("myheader");
 var sticky = header.offsetTop;
 
