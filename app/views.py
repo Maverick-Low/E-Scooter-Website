@@ -71,12 +71,12 @@ def login():
 
     form = Login()
     if request.method == "GET":
-        return render_template("login.html", form=form)
+        return render_template("Login/Website_Login.html", form=form)
     elif request.method == "POST" and form.validate_on_submit:
         user_obj = models.User.query.filter_by(email=form.email.data).first()
         if not user_obj:
             flash('This email is not registered!')
-            return render_template('login.html', form=form)
+            return render_template('Login/Website_Login.html', form=form)
         elif user_obj and bcrypt.check_password_hash(user_obj.password, form.password.data):
             session["email"] = user_obj.email
             session["admin"] = user_obj.admin
@@ -86,9 +86,9 @@ def login():
             return redirect(url_for("dashboard"))
         else:
             flash("Incorrect password!")
-            return render_template('login.html', form=form)
+            return render_template('Login/Website_Login.html', form=form)
     else:
-        return render_template("login.html", form=form)
+        return render_template("Login/Website_Login.html", form=form)
 
 @app.route("/register", methods = ["GET", "POST"])
 def register():
@@ -98,7 +98,7 @@ def register():
 
     form = Registration()
     if request.method == "GET":
-        return render_template('register.html', form=form)
+        return render_template('Signup/Website_Sign_up___1.html', form=form)
     elif request.method == "POST":
         if form.validate_on_submit():
             hashed_password = bcrypt.generate_password_hash(form.password_1.data).decode('utf-8')
@@ -110,7 +110,7 @@ def register():
             return render_template('Dashboard.html')
         else:
             flash('Failed to submit registration form!')
-            return render_template('register.html', form=form)
+            return render_template('Signup/Website_Sign_up___1.html', form=form)
 
 @app.route("/report", methods = ["GET", "POST"])
 def report():
