@@ -11,7 +11,7 @@ class User(db.Model):
     username = db.Column(db.String(60), nullable=False)
     password = db.Column(db.String(60), nullable=False)
 
-#Table for reported issues
+# Table for reported issues
 class Report(db.Model):
     __tablename__ = 'reports'
     id = db.Column(db.Integer, primary_key=True)
