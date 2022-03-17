@@ -29,7 +29,6 @@ class Registration(FlaskForm):
         password_1 = PasswordField('Enter password', validators=[DataRequired(), Length(min=8,max=60)])
         password_2 = PasswordField('Confirm password', validators=[DataRequired(), Length(min=8,max=60), EqualTo('password_1', message='Passwords must match!')])
         submit = SubmitField('Submit')
-
         # function that validates email adress upon registration
         # todo: write unit tests for functions
         def validate_email(self, email):     
