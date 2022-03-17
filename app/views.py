@@ -63,7 +63,7 @@ def routeGuard(guard_array, redirect_route):
 
 # if user is registered: adds user's email and admin flag to session and takes them to dashboard]
 # gives option for user to be redirected to register or continue as a guest
-@app.route("/", methods = ["GET", "POST"])
+@app.route("/login", methods = ["GET", "POST"])
 def login():
     if "email" in session:
         flash("You are already logged in!")
@@ -89,6 +89,15 @@ def login():
             return render_template('Login/Website_Login.html', form=form)
     else:
         return render_template("Login/Website_Login.html", form=form)
+
+@app.route("/")
+def mainmenu():
+        return render_template("Main/Website_Main.html")
+
+
+@app.route("/error404")
+def error404():
+        return render_template("Error/Website_Error___1.html")
 
 @app.route("/register", methods = ["GET", "POST"])
 def register():
@@ -153,7 +162,7 @@ def logout():
 @app.route("/dashboard")
 def dashboard():
     if not session.get('email'):
-        return redirect("/")
+        return redirect("/login")
     elif session.get('admin') != 0:
         return redirect("/admin")
     else:
