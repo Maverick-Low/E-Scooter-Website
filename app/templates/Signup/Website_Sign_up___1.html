@@ -239,7 +239,8 @@
 	.Password {
 		opacity: 0.5;
 		left: 0px;
-		top: 17.5px;
+		top: 18px;
+		height: 41px;
 		position: absolute;
 		overflow: visible;
 		width: 292px;
@@ -255,6 +256,7 @@
 		opacity: 0.5;
 		left: 0px;
 		top: 75px;
+		height: 41px;
 		position: absolute;
 		overflow: visible;
 		width: 292px;
@@ -329,10 +331,11 @@
 	.Email {
 		opacity: 0.5;
 		left: 0px;
-		top: 17.5px;
+		top: 18px;
 		position: absolute;
-		overflow: visible;
-		width: 292px;
+		overflow: hidden;
+		width: 272px;
+		height: 41px;
 		white-space: nowrap;
 		text-align: left;
 		font-family: Halyard Display;
@@ -580,6 +583,7 @@
 		position: absolute;
 		overflow: visible;
 		width: 44px;
+		height: 41px;
 		white-space: nowrap;
 		text-align: left;
 		font-family: Halyard Display;
@@ -591,10 +595,11 @@
 	.First_Name_bs {
 		opacity: 0.5;
 		left: 0px;
-		top: 18px;
+		top: 17.5px;
 		position: absolute;
 		overflow: visible;
 		width: 135px;
+		height: 41px;
 		white-space: nowrap;
 		text-align: left;
 		font-family: Halyard Display;
@@ -755,12 +760,6 @@
                   {% for error in form.password_2.errors %}
                       <li class='error-message'>{{ error }}</li>
                   {% endfor %}
-
-  <!--			
-                  <input id="Password" name="password_1" type="password" value="" placeholder="Password" autofocus="on"></input>
-
-                  <input id="Password2" name="password_2" type="password" value="" placeholder="Confirm Password" autofocus="on"></input>
-  -->
               </div>
           </div>
           <svg class="Icon_ionic-ios-lock" viewBox="2.813 1.406 9.375 12.188">
@@ -781,8 +780,6 @@
               {% for error in form.email.errors %}
                   <li class='error-message'>{{ error }}</li>
               {% endfor %}
-
-  <!--			<input id="Email" name="email" type="text" value="" placeholder="Email" autofocus="on"></input>-->
           </div>
           <div id="Icon_ionic-ios-mail">
               <svg class="Path_210" viewBox="1.406 4.297 12.188 7.421">
@@ -843,8 +840,6 @@
               {% for error in form.username.errors %}
                   <li class='error-message'>{{ error }}</li>
               {% endfor %}
-
-  <!--			<input id="First_Name_bs" name="username" type="text" value="" placeholder="First Name" autofocus="on"></input>-->
           </div>
       </div>
       <div id="Group_1441">
@@ -856,13 +851,13 @@
               <div id="Last_Name">
                   <span>Last Name</span>
               </div>
-  <!--			<input id="Last_Name_bx" name="lastname" type="text" value="" placeholder="Last Name" autofocus="on"></input>-->
+<!--  			<input id="Last_Name_bx" name="lastname" type="text" value="" placeholder="Last Name" autofocus="on"></input>-->
           </div>
       </div>
       <div id="Group_1433">
           <div id="Group_1442">
-                  {{ form.submit (class="signup")}}
-  <!--			<button type="submit" class="signup">Sign Up</button>-->
+<!--                  {{ form.submit (class="signup")}}-->
+  			<button type="submit" class="signup">Sign Up</button>
           </div>
       </div>
 	</form>

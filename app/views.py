@@ -98,9 +98,14 @@ def register():
 
     form = Registration()
     if request.method == "GET":
+        print("get")
+        #return render_template('register.html', form=form)
         return render_template('Signup/Website_Sign_up___1.html', form=form)
+
     elif request.method == "POST":
+        print("post")
         if form.validate_on_submit():
+            print("valid")
             hashed_password = bcrypt.generate_password_hash(form.password_1.data).decode('utf-8')
             user_obj = models.User(username=form.username.data, email=form.email.data, password=hashed_password, admin=False)
             session["email"] = form.email.data
@@ -109,8 +114,10 @@ def register():
             db.session.commit()
             return render_template('Dashboard.html')
         else:
+            print("failed")
             flash('Failed to submit registration form!')
             return render_template('Signup/Website_Sign_up___1.html', form=form)
+            #return render_template('register.html', form=form)
 
 @app.route("/report", methods = ["GET", "POST"])
 def report():
