@@ -107,23 +107,19 @@ def register():
 
     form = Registration()
     if request.method == "GET":
-        print("get")
         #return render_template('register.html', form=form)
         return render_template('Signup/Website_Sign_up___1.html', form=form)
 
     elif request.method == "POST":
-        print("post")
         if form.validate_on_submit():
-            print("valid")
             hashed_password = bcrypt.generate_password_hash(form.password_1.data).decode('utf-8')
             user_obj = models.User(username=form.username.data, email=form.email.data, password=hashed_password, admin=False)
             session["email"] = form.email.data
             session["admin"] = False
             db.session.add(user_obj)
             db.session.commit()
-            return render_template('Dashboard.html')
+            return render_template('Dashboard/Website_Dashboard.html')
         else:
-            print("failed")
             flash('Failed to submit registration form!')
             return render_template('Signup/Website_Sign_up___1.html', form=form)
             #return render_template('register.html', form=form)
@@ -139,7 +135,7 @@ def report():
             db.session.add(report_obj)
             db.session.commit()
             flash('Report has been successfully sent!')
-            return render_template('Dashboard.html')
+            return render_template('Dashboard/Website_Dashboard.html')
         else:
             flash('Failed to submit report form!')
             return render_template('report.html', form=form)
@@ -174,7 +170,7 @@ def dashboard():
         for o in orders:
             if (current_date < (o.expiry)):
                 active_id.append(o.id)
-        return render_template("dashboard.html", title='Dashboard', orders=orders, active= active_id)
+        return render_template("Dashboard/Website_Dashboard.html", title='Dashboard', orders=orders, active= active_id)
      
         
     
