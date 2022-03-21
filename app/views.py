@@ -335,6 +335,8 @@ def payment(location):
 @app.route("/cancel_booking/<int:bookingID>")
 def cancel_booking(bookingID):
     booking_to_cancel = models.Booking.query.filter_by(id=bookingID).first()
+    scooter_to_free = models.Scooter.query.filter_by(id = booking_to_cancel.ScooterID).first()
+    scooter_to_free.in_use = False
     booking_to_cancel.cancelled = True
     db.session.commit()
     return redirect(url_for("dashboard"))
