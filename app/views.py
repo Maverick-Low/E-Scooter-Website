@@ -128,7 +128,7 @@ def register():
 def report():
     form = Report()
     if request.method == "GET":
-        return render_template('report.html', form=form)
+        return render_template('Reports/Website_Report.html', form=form)
     elif request.method == "POST":
         if form.validate_on_submit():
             report_obj = models.Report(issue=form.issue.data, description=form.report.data)
@@ -138,7 +138,7 @@ def report():
             return render_template('Dashboard/Website_Dashboard.html')
         else:
             flash('Failed to submit report form!')
-            return render_template('report.html', form=form)
+            return render_template('Reports/Website_Report.html', form=form)
     
 
 
@@ -217,6 +217,7 @@ def admin_issues():
         issues = models.Report.query.all()
         return render_template("issues.html", issues = issues)
 # End of admin specific app routes
+
 @app.route("/admin/issues/resolve_issue/<string:issue_id>")
 def resolve_issue(issue_id):
     if session.get('admin') == 0:

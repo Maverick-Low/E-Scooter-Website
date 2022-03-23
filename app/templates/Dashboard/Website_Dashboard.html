@@ -665,8 +665,9 @@
 			<span>Order History</span>
 		</div>
 		<div id="Order_Number_3">
-			{% for elem in orders %}
+			{% for elem in orders|reverse %}
         		{% if elem.id not in active or elem.cancelled %}
+				{% if loop.index <= 2 %}
             		<p>Order Number: {{elem.id}}</p>
             		<p>Hours: {{elem.numHours}} Hr</p>
             		<p>Price: £{{elem.price}}</p>
@@ -676,6 +677,7 @@
             		<p style="font-weight: normal">Cancelled Order</p>
             		{% endif %}
             		<br> </br>
+				{% endif %}
         		{% endif %}
     		{% endfor %} 
 		</div>
