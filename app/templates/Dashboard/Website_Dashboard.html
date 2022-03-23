@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Dashboard</title>
+<style id="applicationStylesheet" type="text/css">
+	.mediaViewInfo {
+		--web-view-name: Website Dashboard;
+		--web-view-id: Website_Dashboard;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	:root {
+		--web-view-ids: Website_Dashboard;
+	}
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		border: none;
+	}
+	#Website_Dashboard {
+		position: absolute;
+		width: 1400px;
+		height: 799px;
+		background-color: rgba(255,255,255,1);
+		overflow: hidden;
+	}
+	@keyframes fadein {
+	
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	
+	}
+	#Path_1092 {
+		fill: rgba(205,205,205,1);
+	}
+	.Path_1092 {
+		overflow: visible;
+		position: absolute;
+		width: 1400px;
+		height: 799px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Header {
+		position: absolute;
+		width: 1400px;
+		height: 183.365px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#Group_1541 {
+		position: absolute;
+		width: 1400px;
+		height: 183.365px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#Header_-_Desktop {
+		position: absolute;
+		width: 1400px;
+		height: 183.365px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#base_ {
+		fill: url(#base_);
+	}
+	.base_ {
+		overflow: visible;
+		position: absolute;
+		width: 1400px;
+		height: 183.365px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#DASHBOARD {
+		left: 301px;
+		top: 25px;
+		position: absolute;
+		overflow: visible;
+		width: 86px;
+		white-space: nowrap;
+		cursor: pointer;
+		line-height: 20px;
+		margin-top: -2.5px;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 15px;
+		color: rgba(204,204,204,1);
+		text-decoration: none;
+	}
+	#DASHBOARD:link{
+		color: rgba(204,204,204,1); 
+	}
+	#DASHBOARD:visited{
+		color: rgba(204,204,204,1); 
+	}
+	#DASHBOARD:hover{
+		opacity: 1; 
+	}
+	#HELP {
+		opacity: 0.7;
+		left: 1116px;
+		top: 25px;
+		position: absolute;
+		overflow: visible;
+		width: 36px;
+		white-space: nowrap;
+		line-height: 20px;
+		margin-top: -2.5px;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 15px;
+		color: rgba(204,204,204,1);
+		text-decoration: none;
+	}
+	#HELP:link{
+		color: rgba(204,204,204,1); 
+	}
+	#HELP:visited{
+		color: rgba(204,204,204,1); 
+	}
+	#HELP:hover{
+		opacity: 1; 
+	}
+	#BOOK_RIDE {
+		opacity: 0.7;
+		left: 443px;
+		top: 25px;
+		position: absolute;
+		overflow: visible;
+		width: 75px;
+		white-space: nowrap;
+		line-height: 20px;
+		margin-top: -2.5px;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 15px;
+		color: rgba(204,204,204,1);
+		text-decoration: none;
+	}
+	#BOOK_RIDE:link{
+		color: rgba(204,204,204,1); 
+	}
+	#BOOK_RIDE:visited{
+		color: rgba(204,204,204,1); 
+	}
+	#BOOK_RIDE:hover{
+		opacity: 1; 
+	}
+	#LOG_OUT {
+		opacity: 0.7;
+		left: 1210px;
+		top: 25px;
+		position: absolute;
+		overflow: visible;
+		width: 61px;
+		white-space: nowrap;
+		cursor: pointer;
+		line-height: 20px;
+		margin-top: -2.5px;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 15px;
+		color: rgba(204,204,204,1);
+		text-decoration: none;
+	}
+	#LOG_OUT:link{
+		color: rgba(204,204,204,1); 
+	}
+	#LOG_OUT:visited{
+		color: rgba(204,204,204,1); 
+	}
+	#LOG_OUT:hover{
+		opacity: 1; 
+	}
+	#Group_6 {
+		position: absolute;
+		width: 92px;
+		height: 30px;
+		left: 130px;
+		top: 20px;
+		overflow: visible;
+	}
+	.btn_EScooter {
+		background: inherit;
+		border: none;
+		left: 18px;
+		top: 5px;
+		position: absolute;
+		overflow: visible;
+		width: 56px;
+		white-space: nowrap;
+		line-height: 20px;
+		margin-top: -3.5px;
+		text-align: left;
+		font-family: Sharp Sans No1;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 13px;
+		color: rgba(255,255,255,1);
+		cursor: pointer;
+	}
+	#scooter_white {
+		position: absolute;
+		width: 29px;
+		height: 30px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#Group_1540 {
+		position: absolute;
+		width: 1110.5px;
+		height: 55px;
+		left: 149px;
+		top: 129px;
+		overflow: visible;
+	}
+	#DASHBOARD_bf {
+		left: 0px;
+		top: 0px;
+		position: absolute;
+		overflow: visible;
+		width: 228px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 40px;
+		color: rgba(68,73,79,1);
+	}
+	#Line_7 {
+		fill: transparent;
+		stroke: rgba(255,255,255,1);
+		stroke-width: 2px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Line_7 {
+		overflow: visible;
+		position: absolute;
+		width: 1110px;
+		height: 2px;
+		left: 0.5px;
+		top: 54.5px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#Group_1538 {
+		position: absolute;
+		width: 1145px;
+		height: 542px;
+		left: 131px;
+		top: 209px;
+		overflow: visible;
+	}
+	#Rectangle_1488 {
+		fill: rgba(255,255,255,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_1488 {
+		filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.161));
+		position: absolute;
+		overflow: visible;
+		width: 1163px;
+		height: 560px;
+		left: 0px;
+		top: 0px;
+	}
+	#Group_1542 {
+		position: absolute;
+		width: 228px;
+		height: 225px;
+		left: 332px;
+		top: 225px;
+		overflow: visible;
+	}
+	#Active_Orders {
+		left: 0px;
+		top: 0px;
+		position: absolute;
+		overflow: visible;
+		width: 222px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 40px;
+		color: rgba(89,89,89,1);
+	}
+	#Order_Number_4 {
+		left: 0px;
+		top: 57px;
+		position: absolute;
+		overflow: visible;
+		width: 134px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: lighter;
+		font-size: 20px;
+		color: rgba(0,0,0,1);
+	}
+	#Hours_1 {
+		left: 0px;
+		top: 92px;
+		position: absolute;
+		overflow: visible;
+		width: 64px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: lighter;
+		font-size: 20px;
+		color: rgba(0,0,0,1);
+	}
+	#Price_5 {
+		left: 0px;
+		top: 127px;
+		position: absolute;
+		overflow: visible;
+		width: 72px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: lighter;
+		font-size: 20px;
+		color: rgba(0,0,0,1);
+	}
+	#Date_17-3-2022_1336 {
+		left: 0px;
+		top: 162px;
+		position: absolute;
+		overflow: visible;
+		width: 176px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: lighter;
+		font-size: 20px;
+		color: rgba(0,0,0,1);
+	}
+	#Expiry_Date_17-3-2022_1436 {
+		left: 0px;
+		top: 197px;
+		position: absolute;
+		overflow: visible;
+		width: 229px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: lighter;
+		font-size: 20px;
+		color: rgba(0,0,0,1);
+	}
+	#Group_1543 {
+		position: absolute;
+		width: 217px;
+		height: 260px;
+		left: 862px;
+		top: 225px;
+		overflow: visible;
+	}
+	#Order_History {
+		left: 0px;
+		top: 0px;
+		position: absolute;
+		overflow: visible;
+		width: 218px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 40px;
+		color: rgba(89,89,89,1);
+	}
+	#Order_Number_3 {
+		left: 0px;
+		top: 57px;
+		position: absolute;
+		overflow: visible;
+		width: 134px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: lighter;
+		font-size: 20px;
+		color: rgba(0,0,0,1);
+	}
+	#Hours_26 {
+		left: 0px;
+		top: 92px;
+		position: absolute;
+		overflow: visible;
+		width: 77px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: lighter;
+		font-size: 20px;
+		color: rgba(0,0,0,1);
+	}
+	#Price_130 {
+		left: 0px;
+		top: 127px;
+		position: absolute;
+		overflow: visible;
+		width: 93px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: lighter;
+		font-size: 20px;
+		color: rgba(0,0,0,1);
+	}
+	#Date_9-3-2022_2331 {
+		left: 0px;
+		top: 162px;
+		position: absolute;
+		overflow: visible;
+		width: 168px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: lighter;
+		font-size: 20px;
+		color: rgba(0,0,0,1);
+	}
+	#Expiry_Date_11-3-2022_131 {
+		left: 0px;
+		top: 197px;
+		position: absolute;
+		overflow: visible;
+		width: 211px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: lighter;
+		font-size: 20px;
+		color: rgba(0,0,0,1);
+	}
+	#Cancelled_Order {
+		left: 0px;
+		top: 232px;
+		position: absolute;
+		overflow: visible;
+		width: 134px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 20px;
+		color: rgba(0,0,0,1);
+	}
+	#Group_1514 {
+		position: absolute;
+		width: 228px;
+		height: 33px;
+		left: 332px;
+		top: 491px;
+		overflow: visible;
+	}
+	#Rectangle_1485 {
+		fill: rgba(43,48,54,1);
+	}
+	.Rectangle_1485 {
+		position: absolute;
+		overflow: visible;
+		width: 228px;
+		height: 33px;
+		left: 0px;
+		top: 0px;
+	}
+	.Cancel_Order {
+		left: 74px;
+		top: 6px;
+		position: absolute;
+		overflow: visible;
+		width: 35px;
+		white-space: nowrap;
+		text-align: center;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 15px;
+		color: rgba(255,255,255,1);
+	}
+	#Group_1544 {
+		position: absolute;
+		width: 228px;
+		height: 33px;
+		left: 332px;
+		top: 544px;
+		overflow: visible;
+	}
+	#Rectangle_1485_b {
+		fill: rgba(43,48,54,1);
+	}
+	.Rectangle_1485_b {
+		position: absolute;
+		overflow: visible;
+		width: 228px;
+		height: 33px;
+		left: 0px;
+		top: 0px;
+	}
+	.Extend_booking {
+		left: 67px;
+		top: 6px;
+		position: absolute;
+		overflow: visible;
+		width: 35px;
+		white-space: nowrap;
+		text-align: center;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 15px;
+		color: rgba(255,255,255,1);
+	}
+</style>
+</head>
+<body>
+<div id="Website_Dashboard">
+	<svg class="Path_1092" viewBox="0 0 1400 799">
+		<path id="Path_1092" d="M 0 0 L 1400 0 L 1400 799 L 0 799 L 0 0 Z">
+		</path>
+	</svg>
+	<div id="Header">
+		<div id="Group_1541">
+			<div id="Header_-_Desktop" class="Header___Desktop">
+				<svg class="base_" viewBox="0 0 1400 183.365">
+					<linearGradient id="base_" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
+						<stop offset="0" stop-color="#24292f" stop-opacity="1"></stop>
+						<stop offset="0.328" stop-color="#272c32" stop-opacity="0.953"></stop>
+						<stop offset="1" stop-color="#6c7074" stop-opacity="0"></stop>
+					</linearGradient>
+					<path id="base_" d="M 0 0 L 1400 0 L 1400 183.3653717041016 L 0 183.3653717041016 L 0 0 Z">
+					</path>
+				</svg>
+				<a id="DASHBOARD" href="/dashboard">DASHBOARD</a>
+				<a id="HELP" href="/report">HELP</a>
+				<a id="BOOK_RIDE" href="/hire_scooter">BOOK RIDE</a>
+				<a id="LOG_OUT" href="/logout">LOG OUT</a>
+			</div>
+			<div id="Group_6">
+				<div class="btn_EScooter">
+					<button class = "btn_EScooter" onclick="window.location.href='/'">EScooter</button>
+				</div>
+				<img id="scooter_white" src="/static/scooter_white.png" srcset="/static/scooter_white.png 1x, /static/scooter_white@2x.png 2x">
+					
+			</div>
+		</div>
+	</div>
+	<div id="Group_1540">
+		<div id="DASHBOARD_bf">
+			<span>DASHBOARD</span>
+		</div>
+		<svg class="Line_7" viewBox="0 0 1110 2">
+			<path id="Line_7" d="M 0 0 L 1110 0">
+			</path>
+		</svg>
+	</div>
+	<div id="Group_1538">
+		<svg class="Rectangle_1488">
+			<rect id="Rectangle_1488" rx="18" ry="18" x="0" y="0" width="1145" height="542">
+			</rect>
+		</svg>
+	</div>
+	<div id="Group_1542">
+		<div id="Active_Orders">
+			<span>Active Orders</span>
+		</div>
+		<div id="Order_Number_4">
+		{% if not active %}
+        	<p>You have no active orders</p>
+    	{% endif %}
+
+    	{% for elem in orders %}
+       	 {% if elem.id  in active %}
+            	{% if not elem.cancelled %}
+                	<p>Order Number: {{elem.id}}</p>
+                	<p>Hours: {{elem.numHours}}</p>
+                	<p>Price: £{{elem.price}}</p>
+                	<p>Date: {{elem.date.day}}-{{elem.date.month}}-{{elem.date.year}} {{elem.date.hour}}:{{elem.date.minute}}</p>
+                	<p>Expiry Date: {{elem.expiry.day}}-{{elem.expiry.month}}-{{elem.expiry.year}} {{elem.expiry.hour}}:{{elem.expiry.minute}}</p>
+					<button type="Cancel Order" class="btn btn-primary" ><a href="/cancel_booking/{{elem.id}}">Cancel Booking</a></button>
+                <script>
+                    function revealButtons(){
+                        document.getElementById("toggle_show").hidden = true;
+                        document.getElementById("toggle_hide").hidden = false;
+                        elements = document.getElementsByClassName("btn btn-secondary");
+                        for (let i = 0; i < elements.length; i++){
+                            elements[i].hidden = false 
+                        }
+                    }
+                    function hideButtons(){
+                        document.getElementById("toggle_show").hidden = false;
+                        document.getElementById("toggle_hide").hidden = true;
+                        elements = document.getElementsByClassName("btn btn-secondary");
+                        for (let i = 0; i < elements.length; i++){
+                            elements[i].hidden = true 
+                        }
+                        // for merging
+                    }
+                </script>
+                <button type="Cancel Order" class="btn btn-primary" id="toggle_show" onclick="revealButtons()" >Extend booking</button>
+                <button type="Cancel Order" class="btn btn-primary" id="toggle_hide" hidden onclick="hideButtons()" >Cancel</button>
+                <button type="Cancel Order" id= "{{elem.id}}" class="btn btn-secondary" hidden><a href="/extend_booking/{{elem.id}}/1">1 Hour</a></button>
+                <button type="Cancel Order" id="test" class="btn btn-secondary" hidden><a href="/extend_booking/{{elem.id}}/2">4 Hours</a></button>
+                <button type="Cancel Order" id="test" class="btn btn-secondary" hidden><a href="/extend_booking/{{elem.id}}/3">1 Day</a></button>
+                <button type="Cancel Order" id="test" class="btn btn-secondary" hidden><a href="/extend_booking/{{elem.id}}/4">1 Week</a></button>
+
+					<br></br>
+            	{% endif %}
+        	{% endif %}
+    	{% endfor %}
+    	<br> </br>
+		</div>
+	</div>
+	<!-- From Original Dashboard -->
+	
+	
+
+	
+	
+	
+	<!-- end -->
+	<div id="Group_1543">
+		<div id="Order_History">
+			<span>Order History</span>
+		</div>
+		<div id="Order_Number_3">
+			<span>Order Number: 3</span>
+		</div>
+		<div id="Hours_26">
+			<span>Hours: 26</span>
+		</div>
+		<div id="Price_130">
+			<span>Price: £130</span>
+		</div>
+		<div id="Date_9-3-2022_2331">
+			<span>Date: 9-3-2022 23:31</span>
+		</div>
+		<div id="Expiry_Date_11-3-2022_131">
+			<span>Expiry Date: 11-3-2022 1:31</span>
+		</div>
+		<div id="Cancelled_Order">
+			<span>Cancelled Order</span>
+		</div>
+	</div>
+<!--
+	<div id="Group_1514">
+		<svg class="Rectangle_1485">
+			<rect id="Rectangle_1485" rx="4" ry="4" x="0" y="0" width="228" height="33">
+			</rect>
+		</svg>
+		<div id="Cancel_Order">
+			<span>Cancel Order</span>
+		</div>
+	</div>
+	<div id="Group_1544">
+		<svg class="Rectangle_1485_b">
+			<rect id="Rectangle_1485_b" rx="4" ry="4" x="0" y="0" width="228" height="33">
+			</rect>
+		</svg>
+		<div id="Extend_booking">
+			<span>Extend booking</span>
+		</div>
+	</div>
+-->
+</div>
+</body>
+</html>
