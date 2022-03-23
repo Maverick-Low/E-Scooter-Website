@@ -97,8 +97,8 @@ class Payment(FlaskForm):
     #card details
     name = StringField('Enter name', validators=[DataRequired(message = "Enter your name please"), Length(max=60)])
     card_number = StringField('Enter card number', validators=[DataRequired(), Length(min=14, max=20)])
-    cvv = StringField('Enter cvv', validators=[DataRequired() , Length(min=3, max=4)])
-    expiry_date = DateTimeField('Enter expiry date (mm/YYYY)', validators=[DataRequired()], format='%m/%Y')
+    cvv = StringField('Enter cvv', validators=[DataRequired() , Length(min=3, max=4)],render_kw={"placeholder": "123"})
+    expiry_date = DateTimeField('Enter expiry date (mm/YYYY)', validators=[DataRequired()], format='%m/%Y',render_kw={"placeholder": "mm/YYYY"})
     submit = SubmitField('Submit')
 
     #billing details

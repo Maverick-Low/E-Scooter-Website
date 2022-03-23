@@ -291,7 +291,7 @@ def payment(location):
     if request.method == "GET":
         # In order to display the location that user is reserving scooter from on payment screen
         
-        return render_template("payment.html", form=form, location = locations[location - 1])
+        return render_template("Payment/Website_Payment___1.html", form=form, location = locations[location - 1])
     elif request.method == "POST":
         if form.validate_on_submit():
             arr = [form.price.data,form.hours.data]
@@ -306,7 +306,7 @@ def payment(location):
             return redirect("/remove_available/"+str(location)+'$' + str(arr[0]) + '$' + str(arr[1]))
         else:
             flash('Card payment not accepted')
-            return render_template('payment.html', form=form, location = locations[location - 1])
+            return render_template('Payment/Website_Payment___1.html', form=form, location = locations[location - 1])
 
 
 

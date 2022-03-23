@@ -79,8 +79,10 @@
 		top: 17px;
 		overflow: visible;
 	}
-	#EScooter {
-		left: 37px;
+	.btn_EScooter {
+		background: inherit;
+		border: none;
+		left: 18px;
 		top: 5px;
 		position: absolute;
 		overflow: visible;
@@ -94,6 +96,7 @@
 		font-weight: normal;
 		font-size: 13px;
 		color: rgba(255,255,255,1);
+		cursor: pointer;
 	}
 	#scooter_white {
 		position: absolute;
@@ -435,7 +438,7 @@
 		overflow: visible;
 	}
 	#Billing_Info {
-		opacity: 0.75;
+		opacity: 1;
 		left: 0px;
 		top: 0px;
 		position: absolute;
@@ -447,9 +450,9 @@
 		text-align: left;
 		font-family: Halyard Display;
 		font-style: normal;
-		font-weight: bold;
+		font-weight: 600;
 		font-size: 25px;
-		color: rgba(55,55,55,1);
+		color: white;
 	}
 	#Input {
 		position: absolute;
@@ -469,6 +472,11 @@
 		height: 48px;
 		left: 0px;
 		top: 22px;
+		outline: none;
+		border-radius: 4px;
+		padding-left: 20px;
+		font-size: 16px;
+		
 	}
 	#FULL_NAME {
 		opacity: 0.75;
@@ -505,6 +513,10 @@
 		height: 48px;
 		left: 0px;
 		top: 22px;
+		outline: none;
+		border-radius: 4px;
+		padding-left: 20px;
+		font-size: 16px;
 	}
 	#ADDRESS {
 		opacity: 0.75;
@@ -541,6 +553,10 @@
 		height: 48px;
 		left: 0px;
 		top: 22px;
+		outline: none;
+		border-radius: 4px;
+		padding-left: 20px;
+		font-size: 16px;
 	}
 	#CITY {
 		opacity: 0.75;
@@ -577,6 +593,10 @@
 		height: 48px;
 		left: 0px;
 		top: 22px;
+		outline: none;
+		border-radius: 4px;
+		padding-left: 20px;
+		font-size: 16px;
 	}
 	#POST_CODE {
 		opacity: 0.75;
@@ -613,6 +633,10 @@
 		height: 48px;
 		left: 0px;
 		top: 22px;
+		outline: none;
+		border-radius: 4px;
+		padding-left: 20px;
+		font-size: 16px;
 	}
 	#COUNTRY {
 		opacity: 0.75;
@@ -645,14 +669,6 @@
 		font-size: 14px;
 		color: rgba(93,93,93,1);
 	}
-	#Component_1 {
-		position: absolute;
-		width: 9.4px;
-		height: 6.1px;
-		left: 301px;
-		top: 43px;
-		overflow: visible;
-	}
 	#Path_36 {
 		fill: rgba(93,93,93,1);
 	}
@@ -666,7 +682,7 @@
 		transform: matrix(1,0,0,1,0,0);
 	}
 	#Credit_Card_Info {
-		opacity: 0.75;
+		opacity: 1;
 		left: 427px;
 		top: 0px;
 		position: absolute;
@@ -678,9 +694,9 @@
 		text-align: left;
 		font-family: Halyard Display;
 		font-style: normal;
-		font-weight: bold;
+		font-weight: 600;
 		font-size: 25px;
-		color: rgba(55,55,55,1);
+		color: white;
 	}
 	#Input_b {
 		position: absolute;
@@ -700,6 +716,10 @@
 		height: 48px;
 		left: 0px;
 		top: 22px;
+		outline: none;
+		border-radius: 4px;
+		padding-left: 20px;
+		font-size: 16px;
 	}
 	#CARD_NUMBER {
 		opacity: 0.75;
@@ -736,6 +756,10 @@
 		height: 48px;
 		left: 0px;
 		top: 22px;
+		outline: none;
+		border-radius: 4px;
+		padding-left: 20px;
+		font-size: 16px;
 	}
 	#CARDHOLDER_NAME {
 		opacity: 0.75;
@@ -772,6 +796,10 @@
 		height: 48px;
 		left: 0px;
 		top: 22px;
+		outline: none;
+		border-radius: 4px;
+		padding-left: 20px;
+		font-size: 16px;
 	}
 	#CVV {
 		opacity: 0.75;
@@ -822,6 +850,10 @@
 		height: 48px;
 		left: 0px;
 		top: 22px;
+		outline: none;
+		border-radius: 4px;
+		padding-left: 20px;
+		font-size: 16px;
 	}
 	#EXPIRE_DATE {
 		opacity: 0.75;
@@ -980,13 +1012,9 @@
 		height: 64px;
 		left: 0px;
 		top: 0px;
-	}
-	#Pay_Now {
-		left: 239px;
-		top: 6px;
-		position: absolute;
-		overflow: visible;
-		width: 123px;
+		cursor: pointer;
+		border-radius: 4px;
+		background: rgba(43,48,54,1);
 		white-space: nowrap;
 		text-align: center;
 		font-family: Halyard Display;
@@ -994,6 +1022,20 @@
 		font-weight: normal;
 		font-size: 35px;
 		color: rgba(255,255,255,1);
+	}
+	.error-message {
+  		text-align: right;
+  		color: red;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 10px;
+		padding-right: 10px;
+	}
+	.hire_hours{
+		position: absolute;
+		left: 250px;
+		top: 7px
 	}
 </style>
 </head>
@@ -1016,10 +1058,10 @@
 			</svg>
 		</div>
 		<div id="Group_6">
-			<div id="EScooter">
-				<span>EScooter</span>
+			<div class="btn_EScooter">
+				<button class = "btn_EScooter" onclick="window.location.href='/'">EScooter</button>
 			</div>
-			<img id="scooter_white" src="scooter_white.png" srcset="scooter_white.png 1x, scooter_white@2x.png 2x">
+			<img id="scooter_white" src="/static/scooter_white.png" srcset="/static/scooter_white.png 1x, /static/scooter_white@2x.png 2x">
 				
 		</div>
 	</div>
@@ -1123,114 +1165,110 @@
 			</svg>
 		</div>
 	</div>
+	<form method="POST" class="form">
+		{{ form.hidden_tag() }}
 	<div id="Billing_and_Card_Info">
 		<div id="Billing_Info">
 			<span>Billing Info</span>
 		</div>
+		<fieldset class="form-field">
+                {{ form.hire_period (class="hire_hours")}}
+        </fieldset>
 		<div id="Input">
-			<svg class="Rectangle_726">
-				<rect id="Rectangle_726" rx="4" ry="4" x="0" y="0" width="327" height="48">
-				</rect>
-			</svg>
 			<div id="FULL_NAME">
 				<span>FULL NAME</span>
 			</div>
+			<fieldset class="form-field">
+                {{ form.name (class="Rectangle_726")}}
+                {% for error in form.name.errors %}
+                  <li class='error-message'>{{ error }}</li>
+                {% endfor %}
+              </fieldset>
 		</div>
 		<div id="Input_bo">
-			<svg class="Rectangle_727">
-				<rect id="Rectangle_727" rx="4" ry="4" x="0" y="0" width="327" height="48">
-				</rect>
-			</svg>
 			<div id="ADDRESS">
 				<span>ADDRESS</span>
 			</div>
+			<fieldset class="form-field">
+                {{ form.address_line_1 (class="Rectangle_727")}}
+            </fieldset>
 		</div>
 		<div id="Input_br">
-			<svg class="Rectangle_729">
-				<rect id="Rectangle_729" rx="4" ry="4" x="0" y="0" width="160" height="48">
-				</rect>
-			</svg>
 			<div id="CITY">
 				<span>CITY</span>
 			</div>
+			<fieldset class="form-field">
+                {{ form.city (class="Rectangle_729")}}
+            </fieldset>
 		</div>
 		<div id="Input_bu">
-			<svg class="Rectangle_730">
-				<rect id="Rectangle_730" rx="4" ry="4" x="0" y="0" width="159" height="48">
-				</rect>
-			</svg>
 			<div id="POST_CODE">
 				<span>POST CODE</span>
 			</div>
+			<fieldset class="form-field">
+                {{ form.postcode (class="Rectangle_730")}}
+            </fieldset>
 		</div>
 		<div id="Input_bx">
-			<svg class="Rectangle_731">
-				<rect id="Rectangle_731" rx="4" ry="4" x="0" y="0" width="327" height="48">
-				</rect>
-			</svg>
 			<div id="COUNTRY">
 				<span>COUNTRY</span>
 			</div>
-			<div id="United_Kingdom">
-				<span>United Kingdom</span>
-			</div>
-			<div id="Component_1" class="Component_1">
-				<svg class="Path_36" viewBox="2 2 9.4 6.1">
-					<path id="Path_36" d="M 6.699999809265137 8.100000381469727 L 2 3.400000095367432 L 3.400000095367432 2 L 6.699999809265137 5.300000190734863 L 10 2 L 11.39999961853027 3.400000095367432 L 6.699999809265137 8.100000381469727 Z">
-					</path>
-				</svg>
-			</div>
+			<fieldset class="form-field">
+                {{ form.country (class="Rectangle_731")}}
+            </fieldset>
 		</div>
 		<div id="Credit_Card_Info">
 			<span>Credit Card Info</span>
 		</div>
 		<div id="Input_b">
-			<svg class="Rectangle_717">
-				<rect id="Rectangle_717" rx="4" ry="4" x="0" y="0" width="219" height="48">
-				</rect>
-			</svg>
 			<div id="CARD_NUMBER">
 				<span>CARD NUMBER</span>
 			</div>
+			<fieldset class="form-field">
+                {{ form.card_number (class="Rectangle_717")}}
+                {% for error in form.card_number.errors %}
+                  <li class='error-message'>{{ error }}</li>
+                {% endfor %}
+             </fieldset>
 		</div>
 		<div id="Input_ca">
-			<svg class="Rectangle_718">
-				<rect id="Rectangle_718" rx="4" ry="4" x="0" y="0" width="327" height="48">
-				</rect>
-			</svg>
 			<div id="CARDHOLDER_NAME">
 				<span>CARDHOLDER NAME</span>
 			</div>
+			<fieldset class="form-field">
+                {{ form.address_line_2 (class="Rectangle_718")}}
+            </fieldset>
 		</div>
 		<div id="Input_cb">
-			<svg class="Rectangle_720">
-				<rect id="Rectangle_720" rx="4" ry="4" x="0" y="0" width="160" height="48">
-				</rect>
-			</svg>
 			<div id="CVV">
 				<span>CVV</span>
 			</div>
-			<div id="n_23">
-				<span>123</span>
-			</div>
+			<fieldset class="form-field">
+                {{ form.cvv (class="Rectangle_720")}}
+                {% for error in form.cvv.errors %}
+                  <li class='error-message'>{{ error }}</li>
+                {% endfor %}
+            </fieldset>
 		</div>
 		<div id="Input_ce">
-			<svg class="Rectangle_719">
-				<rect id="Rectangle_719" rx="4" ry="4" x="0" y="0" width="327" height="48">
-				</rect>
-			</svg>
+			   <fieldset class="form-field">
+                {{ form.expiry_date (class="Rectangle_719")}}
+                {% for error in form.expiry_date.errors %}
+                  <li class='error-message'>{{ error }}</li>
+                {% endfor %}
+              </fieldset>
+<!--			<input class="Rectangle_719" name="expiry_date" type="date" value="" placeholder="mm/YYYY" autofocus="on"></input>-->
 			<div id="EXPIRE_DATE">
 				<span>EXPIRE DATE</span>
 			</div>
-			<div id="n_2______22">
-				<span>02   /   22</span>
-			</div>
+<!--
 			<div id="Component_2" class="Component_2">
 				<svg class="Path_36_cj" viewBox="2 2 9.4 6.1">
 					<path id="Path_36_cj" d="M 6.699999809265137 8.100000381469727 L 2 3.400000095367432 L 3.400000095367432 2 L 6.699999809265137 5.300000190734863 L 10 2 L 11.39999961853027 3.400000095367432 L 6.699999809265137 8.100000381469727 Z">
 					</path>
 				</svg>
 			</div>
+-->
 		</div>
 		<div id="Input_ck">
 			<svg class="Path_1085" viewBox="0 0 100 48">
@@ -1262,14 +1300,9 @@
 		</div>
 	</div>
 	<div id="Group_1514">
-		<svg class="Rectangle_1485">
-			<rect id="Rectangle_1485" rx="4" ry="4" x="0" y="0" width="600" height="64">
-			</rect>
-		</svg>
-		<div id="Pay_Now">
-			<span>Pay Now</span>
-		</div>
+		<button type="submit" class="Rectangle_1485">Pay Now</button>
 	</div>
+</form>
 </div>
 </body>
 </html>

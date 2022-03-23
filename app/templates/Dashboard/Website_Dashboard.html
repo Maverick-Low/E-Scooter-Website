@@ -660,35 +660,24 @@
     	<br> </br>
 		</div>
 	</div>
-	<!-- From Original Dashboard -->
-	
-	
-
-	
-	
-	
-	<!-- end -->
 	<div id="Group_1543">
 		<div id="Order_History">
 			<span>Order History</span>
 		</div>
 		<div id="Order_Number_3">
-			<span>Order Number: 3</span>
-		</div>
-		<div id="Hours_26">
-			<span>Hours: 26</span>
-		</div>
-		<div id="Price_130">
-			<span>Price: £130</span>
-		</div>
-		<div id="Date_9-3-2022_2331">
-			<span>Date: 9-3-2022 23:31</span>
-		</div>
-		<div id="Expiry_Date_11-3-2022_131">
-			<span>Expiry Date: 11-3-2022 1:31</span>
-		</div>
-		<div id="Cancelled_Order">
-			<span>Cancelled Order</span>
+			{% for elem in orders %}
+        		{% if elem.id not in active or elem.cancelled %}
+            		<p>Order Number: {{elem.id}}</p>
+            		<p>Hours: {{elem.numHours}} Hr</p>
+            		<p>Price: £{{elem.price}}</p>
+            		<p>Date: {{elem.date.day}}-{{elem.date.month}}-{{elem.date.year}} {{elem.date.hour}}:{{elem.date.minute}}</p>
+            		<p>Expiry Date: {{elem.expiry.day}}-{{elem.expiry.month}}-{{elem.expiry.year}} {{elem.expiry.hour}}:{{elem.expiry.minute}}</p>
+            		{% if elem.cancelled %}
+            		<p style="font-weight: normal">Cancelled Order</p>
+            		{% endif %}
+            		<br> </br>
+        		{% endif %}
+    		{% endfor %} 
 		</div>
 	</div>
 <!--
