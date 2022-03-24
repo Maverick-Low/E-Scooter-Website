@@ -1037,6 +1037,41 @@
 		left: 250px;
 		top: 7px
 	}
+	#Group_1565 {
+		position: absolute;
+		width: 95px;
+		height: 48px;
+		left: 953px;
+		top: 738px;
+		overflow: visible;
+	}
+	.Rectangle_1490 {
+		position: absolute;
+		overflow: visible;
+		width: 25px;
+		height: 25px;
+		left: 35px;
+		top: 23px;
+		border-radius: 4px;
+		background-color: white;
+		cursor: pointer;
+	}
+	#Save_Payment_Details {
+		opacity: 0.75;
+		left: 0px;
+		top: 0px;
+		position: absolute;
+		overflow: visible;
+		width: 96px;
+		white-space: nowrap;
+		line-height: 12px;
+		margin-top: -0.5px;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 11px;
+		color: rgba(55,55,55,1);
 </style>
 </head>
 <body>
@@ -1254,18 +1289,9 @@
                   <li class='error-message'>{{ error }}</li>
                 {% endfor %}
               </fieldset>
-<!--			<input class="Rectangle_719" name="expiry_date" type="date" value="" placeholder="mm/YYYY" autofocus="on"></input>-->
 			<div id="EXPIRE_DATE">
 				<span>EXPIRE DATE</span>
 			</div>
-<!--
-			<div id="Component_2" class="Component_2">
-				<svg class="Path_36_cj" viewBox="2 2 9.4 6.1">
-					<path id="Path_36_cj" d="M 6.699999809265137 8.100000381469727 L 2 3.400000095367432 L 3.400000095367432 2 L 6.699999809265137 5.300000190734863 L 10 2 L 11.39999961853027 3.400000095367432 L 6.699999809265137 8.100000381469727 Z">
-					</path>
-				</svg>
-			</div>
--->
 		</div>
 		<div id="Input_ck">
 			<svg class="Path_1085" viewBox="0 0 100 48">
@@ -1295,6 +1321,12 @@
 				</svg>
 			</div>
 		</div>
+	</div>
+	<div id="Group_1565">
+			<input type="checkbox" name="saveDetails" class="Rectangle_1490" value="yes">
+            <div id="Save_Payment_Details">
+                <span>Save Payment Details</span>
+            </div>
 	</div>
 	<div id="Group_1514">
 		<button type="submit" class="Rectangle_1485">Pay Now</button>

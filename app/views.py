@@ -1,5 +1,6 @@
 from email.message import Message
 from encodings import utf_8
+from enum import auto                     
 from pickle import FALSE
 
 from sqlalchemy import false
@@ -9,6 +10,8 @@ from datetime import datetime, timedelta
 from .forms import Registration, Login, Payment, Report, Booking
 import smtplib, ssl
 from email.mime.text import MIMEText
+from werkzeug.datastructures import MultiDict
+from cryptography.fernet import Fernet                                             
 
 
 
@@ -35,6 +38,9 @@ def add_test():
     db.session.add(location5)
     # admin_obj = models.User.query.filter_by(email="admin@admin.com").first()
     # admin_obj.admin = True
+    # issue = models.Report(issue = "Refund", description = "Havent recieved refund yet", priority = 1)
+    # db.session.add(issue)
+    models.Card.query.filter_by(id=1).delete()                                                                                                   
     db.session.commit()
     return redirect(url_for("dashboard"))
 
@@ -218,7 +224,6 @@ def register():
 
     form = Registration()
     if request.method == "GET":
-        #return render_template('register.html', form=form)
         return render_template('Signup/Website_Sign_up___1.html', form=form)
 
     elif request.method == "POST":
@@ -340,6 +345,21 @@ def resolve_issue(issue_id):
         db.session.commit()
         return redirect(url_for('admin_issues'))
 
+@app.route("/admin/issues/high_priority")
+def high_priority():
+    if session.get('admin') == 0:
+        return redirect("/dashboard")
+    else:
+        issues = models.Report.query.order_by(models.Report.priority.asc())
+        return render_template("issues.html", issues = issues)
+
+@app.route("/admin/issues/low_priority")
+def low_priority():
+    if session.get('admin') == 0:
+        return redirect("/dashboard")
+    else:
+        issues = models.Report.query.order_by(models.Report.priority.desc())
+        return render_template("issues.html", issues = issues)
 @app.route("/hire_scooter")
 def hire_scooter():
     #admin redirected to admin dashboard
@@ -382,6 +402,9 @@ def remove_available(location):
     """
     param = location.split('$')
     scooter_to_remove = models.Scooter.query.filter_by(LocationID = param[0], in_use=False).first()
+    if scooter_to_remove is None:
+        flash("Transaction failed: Someone ordered the last scooter before you.")
+        return redirect(url_for('dashboard'))                             
     scooter_to_remove.in_use = True
     user = models.User.query.filter_by(email = session['email']).first()
     username = user.username
@@ -433,34 +456,69 @@ def payment():
     location = request.args['location']
     arr = request.args['arr']
     #admin redirected to admin dashboard
-    form = Payment()
     locations = ['Trinity Centre','Train Station','Merrion Centre','LRI Hospital','UoL Edge Sports Centre']
     if session.get('admin') != 0:
         return redirect("/admin")
+    # write_key()
+    key = load_key()
+    f = Fernet(key)                           
     if request.method == "GET":
         # In order to display the location that user is reserving scooter from on payment screen
+            currentUser = models.User.query.filter_by(email = session.get('email')).first()
+        exists = db.session.query(models.Card.UserID).filter_by(UserID = currentUser.id).first() is not None
+        if (exists == True):
+            currentUserCard = models.Card.query.filter_by(UserID = currentUser.id).first()
+            autoFilledName = currentUserCard.name # Retrieves name of user
+            autoFilledCardNumber = f.decrypt(currentUserCard.cardnum).decode("utf-8") # Retrieves user's card number
+            autoFilledExpiry = currentUserCard.expiry.strftime("%m/%Y") # Retrieves user's card expiry date
+            autoFilledAddressLine1 = currentUserCard.address1
+            autoFilledAddressLine2 = currentUserCard.address2
+            autoFilledCity = currentUserCard.city
+            autoFilledPostCode = currentUserCard.postcode
+            form = Payment(formdata = MultiDict([('name', autoFilledName), ('card_number', autoFilledCardNumber), ('expiry_date', autoFilledExpiry),
+                                                 ('address_line_1', autoFilledAddressLine1), ('address_line_2', autoFilledAddressLine2), ('city', autoFilledCity),
+                                                 ('postcode', autoFilledPostCode), ]))
+        else: 
+            form = Payment()                                                                                                                     
         return render_template("Payment/Website_Payment___1.html", form=form, location = location, arr=arr)
     elif request.method == "POST":
+        form = Payment()                
         if form.validate_on_submit():
             location = int(location)
-            arr2 = [form.name.data,form.card_number.data,form.expiry_date.data,form.address_line_1.data,form.address_line_2.data,form.city.data,form.postcode.data]
-            hashed_card = bcrypt.generate_password_hash(arr2[1]).decode('utf-8')
-            user_Id = models.User.query.filter_by(id = session.get('email')).first()
-            card_obj = models.Card(UserID = user_Id, name = arr2[0], cardnum = hashed_card, expiry = arr2[2]
+            value = request.form.getlist('saveDetails')
+            arr = [form.price.data,form.hours.data]
+            if(len(value) != 0):                                                                       
+                arr2 = [form.name.data,form.card_number.data,form.expiry_date.data,form.address_line_1.data,form.address_line_2.data,form.city.data,form.postcode.data]
+                hashed_card = bcrypt.generate_password_hash(arr2[1]).decode('utf-8')
+                x = form.card_number.data.encode()
+                encryptedCard = f.encrypt(x                            
+                user_Id = models.User.query.filter_by(id = session.get('email')).first()
+                card_obj = models.Card(UserID = user_Id, name = arr2[0], cardnum = hashed_card, expiry = arr2[2]
                                    , address1 = arr2[3], address2 = arr2[4], city = arr2[5], postcode = arr2[6])
             db.session.add(card_obj)
             db.session.commit()
-            flash("Transaction confirmed!")
+            #flash("Transaction confirmed!")
             return redirect("/remove_available/"+str(location)+'$' + str(arr))
         else:
             flash('Card payment not accepted')
             return render_template('Payment/Website_Payment___1.html', form=form, location = location, arr=arr)
+# Encryption code taken from https://dev.to/anishde12020/cryptography-with-python-using-fernet-40o3
+def write_key():
+    key = Fernet.generate_key() # Generates the key
+    with open("key.key", "wb") as key_file: # Opens the file the key is to be written to
+        key_file.write(key) # Writes the key
+
+def load_key():
+    return open("key.key", "rb").read() #Opens the file, reads and returns the key stored in the file
+               
 
 
 
 @app.route("/cancel_booking/<int:bookingID>")
 def cancel_booking(bookingID):
     booking_to_cancel = models.Booking.query.filter_by(id=bookingID).first()
+    scooter_to_free = models.Scooter.query.filter_by(id = booking_to_cancel.ScooterID).first()
+    scooter_to_free.in_use = False                            
     booking_to_cancel.cancelled = True
     db.session.commit()
     return redirect(url_for("dashboard"))
