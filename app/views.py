@@ -2,7 +2,6 @@ from email.message import Message
 from encodings import utf_8
 from enum import auto                     
 from pickle import FALSE
-
 from sqlalchemy import false
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session
@@ -118,14 +117,11 @@ def trinity():
             return render_template("Main/Website_Main_Trinity.html",form = form, scooters = Scooters, count = count)
         elif request.method == "POST":
             if form.validate_on_submit():
-                print("submit")
                 arr = [form.price.data,form.hours.data]
                 return redirect(url_for("payment", location=1, arr=arr[1]))
             else:
-                print("error2")
                 return render_template("Main/Website_Main_Trinity.html",form = form, scooters = Scooters, count = count)
         else:
-            print("error1")
             return render_template("Main/Website_Main_Trinity.html",form = form, scooters = Scooters, count = count)
 
 @app.route("/train", methods = ["GET", "POST"])
@@ -459,12 +455,12 @@ def payment():
     locations = ['Trinity Centre','Train Station','Merrion Centre','LRI Hospital','UoL Edge Sports Centre']
     if session.get('admin') != 0:
         return redirect("/admin")
-    # write_key()
+    #write_key()
     key = load_key()
     f = Fernet(key)                           
     if request.method == "GET":
         # In order to display the location that user is reserving scooter from on payment screen
-            currentUser = models.User.query.filter_by(email = session.get('email')).first()
+        currentUser = models.User.query.filter_by(email = session.get('email')).first()
         exists = db.session.query(models.Card.UserID).filter_by(UserID = currentUser.id).first() is not None
         if (exists == True):
             currentUserCard = models.Card.query.filter_by(UserID = currentUser.id).first()
@@ -486,17 +482,15 @@ def payment():
         if form.validate_on_submit():
             location = int(location)
             value = request.form.getlist('saveDetails')
-            arr = [form.price.data,form.hours.data]
             if(len(value) != 0):                                                                       
                 arr2 = [form.name.data,form.card_number.data,form.expiry_date.data,form.address_line_1.data,form.address_line_2.data,form.city.data,form.postcode.data]
-                hashed_card = bcrypt.generate_password_hash(arr2[1]).decode('utf-8')
                 x = form.card_number.data.encode()
-                encryptedCard = f.encrypt(x                            
-                user_Id = models.User.query.filter_by(id = session.get('email')).first()
-                card_obj = models.Card(UserID = user_Id, name = arr2[0], cardnum = hashed_card, expiry = arr2[2]
+                encryptedCard = f.encrypt(x)                            
+                user = models.User.query.filter_by(email = session.get('email')).first()
+                card_obj = models.Card(UserID = user.id, name = arr2[0], cardnum = encryptedCard, expiry = arr2[2]
                                    , address1 = arr2[3], address2 = arr2[4], city = arr2[5], postcode = arr2[6])
-            db.session.add(card_obj)
-            db.session.commit()
+                db.session.add(card_obj)
+                db.session.commit()
             #flash("Transaction confirmed!")
             return redirect("/remove_available/"+str(location)+'$' + str(arr))
         else:
@@ -544,8 +538,6 @@ def extend_booking(bookingID, duration):
         booking_to_extend.numHours += 168
         booking_to_extend.price += 840
         booking_to_extend.expiry +=  timedelta(days=7)
-    
-    
     db.session.commit()
     return redirect(url_for("dashboard"))
 
