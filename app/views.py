@@ -265,6 +265,9 @@ def remove_available(location):
     param = location.split('$')
     
     scooter_to_remove = models.Scooter.query.filter_by(LocationID = param[0], in_use=False).first()
+    if scooter_to_remove is None:
+        flash("Transaction failed: Someone ordered the last scooter before you.")
+        return redirect(url_for('dashboard'))
     scooter_to_remove.in_use = True
     user = models.User.query.filter_by(email = session['email']).first()
     username = user.username
@@ -324,7 +327,7 @@ def payment(location):
                                    , address1 = arr2[3], address2 = arr2[4], city = arr2[5], postcode = arr2[6])
             db.session.add(card_obj)
             db.session.commit()
-            flash("Transaction confirmed!")
+            #flash("Transaction confirmed!")
             return redirect("/remove_available/"+str(location)+'$' + str(arr[0]) + '$' + str(arr[1]))
         else:
             flash('Card payment not accepted')
