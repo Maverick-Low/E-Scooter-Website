@@ -59,3 +59,7 @@ class Card(db.Model):
     city = db.Column(db.String, nullable = False)
     postcode = db.Column(db.String, nullable = False)
     
+class Price(db.Model):
+    __tablename__ = "pricing"
+    id = db.Column(db.Integer, primary_key=True)
+    price = db.Column(db.Integer, nullable = False)

@@ -188,7 +188,9 @@ def admin_bookings():
     if session.get('admin') == 0:
         return redirect("/dashboard")
     else:
-        return render_template("bookings.html")
+        bookings = models.Booking.query.all()
+        
+        return render_template("bookings.html", orders = bookings)
 
 @app.route("/admin/statistics")
 def admin_stats():
@@ -305,6 +307,10 @@ def remove_available(location):
     flash(f'Scooter has been successfuly hired')
     return redirect(url_for('dashboard'))
 
+@app.route("/admin/bookings")
+def bookings():
+    orders = models.Booking.query.all()
+    
 
 @app.route("/payment/<int:location>", methods = ["GET", "POST"])
 def payment(location):
@@ -370,6 +376,11 @@ def extend_booking(bookingID, duration):
     db.session.commit()
     return redirect(url_for("dashboard"))
 
+@app.route("/admin/pricing")
+def pricing():
+    prices = models.Price.query.all()
+    
+    
 #for merging
 """
 logout code:
