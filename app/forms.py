@@ -24,12 +24,11 @@ class Report(FlaskForm):
 
 
 class Registration(FlaskForm):
-        username = StringField('Enter username', validators=[DataRequired(), Length(max=60)])
-        email = StringField('Enter email', validators=[DataRequired(), Length(max=60), Email()])
-        password_1 = PasswordField('Enter password', validators=[DataRequired(), Length(min=8,max=60)])
-        password_2 = PasswordField('Confirm password', validators=[DataRequired(), Length(min=8,max=60), EqualTo('password_1', message='Passwords must match!')])
-        submit = SubmitField('Submit')
-
+        username = StringField('Enter username', validators=[DataRequired(), Length(max=60)], render_kw={"placeholder": "First Name",'style' : 'width: 135px; font-size: 13px; font-family: Halyard Display; font-style: normal; font-weight: normal;'})
+        email = StringField('Enter email', validators=[DataRequired(), Length(max=60), Email()], render_kw={"placeholder": "Email", 'style' : 'width: 292px; font-size: 13px; font-family: Halyard Display; font-style: normal; font-weight: normal;'})
+        password_1 = PasswordField('Enter password', validators=[DataRequired(), Length(min=8,max=60)], render_kw={"placeholder": "Password", 'style' : 'width: 292px; font-size: 13px; font-family: Halyard Display; font-style: normal; font-weight: normal;'})
+        password_2 = PasswordField('Confirm password', validators=[DataRequired(), Length(min=8,max=60), EqualTo('password_1', message='Passwords must match!')], render_kw={"placeholder": "Confirm Password",'style' : 'width: 292px; font-size: 13px; font-family: Halyard Display; font-style: normal; font-weight: normal;'})
+        submit = SubmitField('Submit', render_kw={"placeholder": "SIGN UP"})
         # function that validates email adress upon registration
         # todo: write unit tests for functions
         def validate_email(self, email):     
@@ -59,7 +58,19 @@ class Registration(FlaskForm):
                     raise ValidationError(f"Password must have at least 1 lowercase letter")
             if count_uppercase == 0:
                     raise ValidationError(f"Password must have at least 1 uppercase letter")
-        
+
+class Booking(FlaskForm):
+    #time and price
+    time_options = [(1, "1 hour - £5"), (4, "4 hours - £20"), (24 ,"1 day - £100") , (168, "1 week - £600")]
+    hire_period = SelectField('Select hire period',choices = time_options)
+    submit = SubmitField('Submit')
+    #price = 5 * hire_period.value
+    """
+    Make hidden fields in form for price and hours - make it easier to process please.
+    
+    """
+    price = StringField('', default='5')
+    hours =  StringField('', default='1')
     
 class Payment(FlaskForm):
     #function that checks if the expiry date is in the future
@@ -84,22 +95,12 @@ class Payment(FlaskForm):
             checksum += sum(int(x) for x in str(d*2))
         return checksum % 10
 
-    #time and price
-    time_options = [(1, "1 hour - £5"), (4, "4 hours - £20"), (24 ,"1 day - £100") , (168, "1 week - £600")]
-    hire_period = SelectField('Select hire period',choices = time_options)
-    #price = 5 * hire_period.value
-    """
-    Make hidden fields in form for price and hours - make it easier to process please.
-    
-    """
-    price = StringField('', default='5')
-    hours =  StringField('', default='1')
 
     #card details
     name = StringField('Enter name', validators=[DataRequired(message = "Enter your name please"), Length(max=60)])
     card_number = StringField('Enter card number', validators=[DataRequired(), Length(min=14, max=20)])
-    cvv = StringField('Enter cvv', validators=[DataRequired() , Length(min=3, max=4)])
-    expiry_date = DateTimeField('Enter expiry date (mm/YYYY)', validators=[DataRequired()], format='%m/%Y')
+    cvv = StringField('Enter cvv', validators=[DataRequired() , Length(min=3, max=4)],render_kw={"placeholder": "123"})
+    expiry_date = DateTimeField('Enter expiry date (mm/YYYY)', validators=[DataRequired()], format='%m/%Y',render_kw={"placeholder": "mm/YYYY"})
     submit = SubmitField('Submit')
 
     #billing details

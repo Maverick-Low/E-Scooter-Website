@@ -6,12 +6,9 @@ from sqlalchemy import false
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session
 from datetime import datetime, timedelta
-from .forms import Registration, Login, Payment, Report
+from .forms import Registration, Login, Payment, Report, Booking
 import smtplib, ssl
 from email.mime.text import MIMEText
-
-
-
 
 
 
@@ -70,7 +67,7 @@ def routeGuard(guard_array, redirect_route):
 
 # if user is registered: adds user's email and admin flag to session and takes them to dashboard]
 # gives option for user to be redirected to register or continue as a guest
-@app.route("/", methods = ["GET", "POST"])
+@app.route("/login", methods = ["GET", "POST"])
 def login():
     if "email" in session:
         flash("You are already logged in!")
@@ -78,12 +75,12 @@ def login():
 
     form = Login()
     if request.method == "GET":
-        return render_template("login.html", form=form)
+        return render_template("Login/Website_Login.html", form=form)
     elif request.method == "POST" and form.validate_on_submit:
         user_obj = models.User.query.filter_by(email=form.email.data).first()
         if not user_obj:
             flash('This email is not registered!')
-            return render_template('login.html', form=form)
+            return render_template('Login/Website_Login.html', form=form)
         elif user_obj and bcrypt.check_password_hash(user_obj.password, form.password.data):
             session["email"] = user_obj.email
             session["admin"] = user_obj.admin
@@ -93,9 +90,125 @@ def login():
             return redirect(url_for("dashboard"))
         else:
             flash("Incorrect password!")
-            return render_template('login.html', form=form)
+            return render_template('Login/Website_Login.html', form=form)
     else:
-        return render_template("login.html", form=form)
+        return render_template("Login/Website_Login.html", form=form)
+
+@app.route("/")
+def mainmenu():
+        return render_template("Main/Website_Main.html")
+
+@app.route("/trinity", methods = ["GET", "POST"])
+def trinity():
+        form = Booking()
+        Scooters = models.Scooter.query.filter_by(in_use = False).all()
+        # Counting the number of available scooters in each loaction
+        # For ease of displaying in hire_scooter.html
+        count = 0
+        for elem in Scooters:
+            if elem.LocationID == 1:
+                count += 1
+        if request.method == "GET":
+            return render_template("Main/Website_Main_Trinity.html",form = form, scooters = Scooters, count = count)
+        elif request.method == "POST":
+            if form.validate_on_submit():
+                print("submit")
+                arr = [form.price.data,form.hours.data]
+                return redirect(url_for("payment", location=1, arr=arr[1]))
+            else:
+                print("error2")
+                return render_template("Main/Website_Main_Trinity.html",form = form, scooters = Scooters, count = count)
+        else:
+            print("error1")
+            return render_template("Main/Website_Main_Trinity.html",form = form, scooters = Scooters, count = count)
+
+@app.route("/train", methods = ["GET", "POST"])
+def train():
+        form = Booking()
+        Scooters = models.Scooter.query.filter_by(in_use = False).all()
+        # Counting the number of available scooters in each loaction
+        # For ease of displaying in hire_scooter.html
+        count = 0
+        for elem in Scooters:
+            if elem.LocationID == 2:
+                count += 1
+        if request.method == "GET":
+            return render_template("Main/Website_Main_Train.html",form = form, scooters = Scooters, count = count)
+        elif request.method == "POST":
+            if form.validate_on_submit():
+                arr = [form.price.data,form.hours.data]
+                return redirect(url_for("payment", location=2, arr=arr[1]))
+            else:
+                return render_template("Main/Website_Main_Train.html",form = form, scooters = Scooters, count = count)
+        else:
+            return render_template("Main/Website_Main_Train.html",form = form, scooters = Scooters, count = count)
+
+@app.route("/lri", methods = ["GET", "POST"])
+def lri():
+        form = Booking()
+        Scooters = models.Scooter.query.filter_by(in_use = False).all()
+        # Counting the number of available scooters in each loaction
+        # For ease of displaying in hire_scooter.html
+        count = 0
+        for elem in Scooters:
+            if elem.LocationID == 3:
+                count += 1
+        if request.method == "GET":
+            return render_template("Main/Website_Main_LRI.html",form = form, scooters = Scooters, count = count)
+        elif request.method == "POST":
+            if form.validate_on_submit():
+                arr = [form.price.data,form.hours.data]
+                return redirect(url_for("payment", location=3, arr=arr[1]))
+            else:
+                return render_template("Main/Website_Main_LRI.html",form = form, scooters = Scooters, count = count)
+        else:
+            return render_template("Main/Website_Main_LRI.html",form = form, scooters = Scooters, count = count)
+
+@app.route("/merrion", methods = ["GET", "POST"])
+def merrion():
+        form = Booking()
+        Scooters = models.Scooter.query.filter_by(in_use = False).all()
+        # Counting the number of available scooters in each loaction
+        # For ease of displaying in hire_scooter.html
+        count = 0
+        for elem in Scooters:
+            if elem.LocationID == 4:
+                count += 1
+        if request.method == "GET":
+            return render_template("Main/Website_Main_Merrion.html",form = form, scooters = Scooters, count = count)
+        elif request.method == "POST":
+            if form.validate_on_submit():
+                arr = [form.price.data,form.hours.data]
+                return redirect(url_for("payment", location=4, arr=arr[1]))
+            else:
+                return render_template("Main/Website_Main_Merrion.html",form = form, scooters = Scooters, count = count)
+        else:
+            return render_template("Main/Website_Main_Merrion.html",form = form, scooters = Scooters, count = count)
+
+@app.route("/edge", methods = ["GET", "POST"])
+def edge():
+        form = Booking()
+        Scooters = models.Scooter.query.filter_by(in_use = False).all()
+        # Counting the number of available scooters in each loaction
+        # For ease of displaying in hire_scooter.html
+        count = 0
+        for elem in Scooters:
+            if elem.LocationID == 5:
+                count += 1
+        if request.method == "GET":
+            return render_template("Main/Website_Main_Edge.html",form = form, scooters = Scooters, count = count)
+        elif request.method == "POST":
+            if form.validate_on_submit():
+                arr = [form.price.data,form.hours.data]
+                return redirect(url_for("payment", location=5, arr=arr[1]))
+            else:
+                return render_template("Main/Website_Main_Edge.html",form = form, scooters = Scooters, count = count)
+        else:
+            return render_template("Main/Website_Main_Edge.html",form = form, scooters = Scooters, count = count)
+
+@app.route("/error404")
+def error404():
+        return render_template("Error/Website_Error___1.html")
 
 @app.route("/register", methods = ["GET", "POST"])
 def register():
@@ -105,7 +218,9 @@ def register():
 
     form = Registration()
     if request.method == "GET":
-        return render_template('register.html', form=form)
+        #return render_template('register.html', form=form)
+        return render_template('Signup/Website_Sign_up___1.html', form=form)
+
     elif request.method == "POST":
         if form.validate_on_submit():
             hashed_password = bcrypt.generate_password_hash(form.password_1.data).decode('utf-8')
@@ -114,26 +229,26 @@ def register():
             session["admin"] = False
             db.session.add(user_obj)
             db.session.commit()
-            return render_template('Dashboard.html')
+            return render_template('Dashboard/Website_Dashboard.html')
         else:
             flash('Failed to submit registration form!')
-            return render_template('register.html', form=form)
+            return render_template('Signup/Website_Sign_up___1.html', form=form)
 
 @app.route("/report", methods = ["GET", "POST"])
 def report():
     form = Report()
     if request.method == "GET":
-        return render_template('report.html', form=form)
+        return render_template('Reports/Website_Report.html', form=form)
     elif request.method == "POST":
         if form.validate_on_submit():
             report_obj = models.Report(issue=form.issue.data, description=form.report.data)
             db.session.add(report_obj)
             db.session.commit()
             flash('Report has been successfully sent!')
-            return render_template('Dashboard.html')
+            return render_template('Dashboard/Website_Dashboard.html')
         else:
             flash('Failed to submit report form!')
-            return render_template('report.html', form=form)
+            return render_template('Reports/Website_Report.html', form=form)
     
 
 
@@ -153,7 +268,7 @@ def logout():
 @app.route("/dashboard")
 def dashboard():
     if not session.get('email'):
-        return redirect("/")
+        return redirect("/login")
     elif session.get('admin') != 0:
         return redirect("/admin")
     else:
@@ -165,7 +280,7 @@ def dashboard():
         for o in orders:
             if (current_date < (o.expiry)):
                 active_id.append(o.id)
-        return render_template("dashboard.html", title='Dashboard', orders=orders, active= active_id)
+        return render_template("Dashboard/Website_Dashboard.html", title='Dashboard', orders=orders, active= active_id)
      
         
     
@@ -214,6 +329,7 @@ def admin_issues():
         issues = models.Report.query.all()
         return render_template("issues.html", issues = issues)
 # End of admin specific app routes
+
 @app.route("/admin/issues/resolve_issue/<string:issue_id>")
 def resolve_issue(issue_id):
     if session.get('admin') == 0:
@@ -265,14 +381,15 @@ def remove_available(location):
     param[2] = Hours
     """
     param = location.split('$')
-    
     scooter_to_remove = models.Scooter.query.filter_by(LocationID = param[0], in_use=False).first()
     scooter_to_remove.in_use = True
     user = models.User.query.filter_by(email = session['email']).first()
     username = user.username
     # hours_added = datetime.timedelta(hours = int(param[2]))
-    expiry = datetime.now() + timedelta(hours=int(param[2]))
-    booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = param[2], date= datetime.today(), price=param[1], expiry = expiry)
+    price = int(param[1])
+    price = price*5
+    expiry = datetime.now() + timedelta(hours=int(param[1]))
+    booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = param[1], date= datetime.today(), price = price, expiry = expiry)
     db.session.add(booking)
     db.session.commit()
     #Sending confirmation email
@@ -309,32 +426,35 @@ def bookings():
     orders = models.Booking.query.all()
     
 
-@app.route("/payment/<int:location>", methods = ["GET", "POST"])
-def payment(location):
+@app.route("/payment", methods = ["GET", "POST"])
+def payment():
+    if not session.get('email'):
+        return redirect("/login")
+    location = request.args['location']
+    arr = request.args['arr']
     #admin redirected to admin dashboard
+    form = Payment()
     locations = ['Trinity Centre','Train Station','Merrion Centre','LRI Hospital','UoL Edge Sports Centre']
     if session.get('admin') != 0:
         return redirect("/admin")
-    form = Payment()
     if request.method == "GET":
         # In order to display the location that user is reserving scooter from on payment screen
-        
-        return render_template("payment.html", form=form, location = locations[location - 1])
+        return render_template("Payment/Website_Payment___1.html", form=form, location = location, arr=arr)
     elif request.method == "POST":
         if form.validate_on_submit():
-            arr = [form.price.data,form.hours.data]
+            location = int(location)
             arr2 = [form.name.data,form.card_number.data,form.expiry_date.data,form.address_line_1.data,form.address_line_2.data,form.city.data,form.postcode.data]
-            hashed_card = bcrypt.generate_password_hash(arr[1]).decode('utf-8')
+            hashed_card = bcrypt.generate_password_hash(arr2[1]).decode('utf-8')
             user_Id = models.User.query.filter_by(id = session.get('email')).first()
             card_obj = models.Card(UserID = user_Id, name = arr2[0], cardnum = hashed_card, expiry = arr2[2]
                                    , address1 = arr2[3], address2 = arr2[4], city = arr2[5], postcode = arr2[6])
             db.session.add(card_obj)
             db.session.commit()
             flash("Transaction confirmed!")
-            return redirect("/remove_available/"+str(location)+'$' + str(arr[0]) + '$' + str(arr[1]))
+            return redirect("/remove_available/"+str(location)+'$' + str(arr))
         else:
             flash('Card payment not accepted')
-            return render_template('payment.html', form=form, location = locations[location - 1])
+            return render_template('Payment/Website_Payment___1.html', form=form, location = location, arr=arr)
 
 
 

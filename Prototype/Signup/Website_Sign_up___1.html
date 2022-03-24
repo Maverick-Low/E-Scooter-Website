@@ -118,6 +118,22 @@
 		left: 506px;
 		top: 134px;
 	}
+	input[type=text], input[type=password]{
+		width: 100%
+		box-sizing: border-box;
+		border: 0px solid #ccc;
+		border-radius:8px;
+		font-size: 10px;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: lighter;
+		font-size: 20px;
+		background: inherit;
+		width: 298px;
+		padding: 12px 15px;
+		outline: none;
+	}
 	#Sign_Up {
 		left: 652px;
 		top: 163px;
@@ -148,38 +164,12 @@
 		top: 0px;
 		overflow: visible;
 	}
-	#Rectangle_1482 {
-		fill: rgba(39,44,50,1);
-	}
-	.Rectangle_1482 {
-		position: absolute;
-		overflow: visible;
-		width: 292px;
-		height: 34px;
-		left: 0px;
-		top: 0px;
-	}
-	#Sign_up {
-		left: 121px;
-		top: 6px;
-		position: absolute;
-		overflow: visible;
-		width: 51px;
-		white-space: nowrap;
-		text-align: center;
-		font-family: Halyard Display;
-		font-style: normal;
-		font-weight: normal;
-		font-size: 16px;
-		color: rgba(255,255,255,1);
-		letter-spacing: 0.2px;
-	}
 	#Group_1437 {
 		position: absolute;
 		width: 292px;
 		height: 60px;
 		left: 554px;
-		top: 476px;
+		top: 461px;
 		overflow: visible;
 	}
 	#Group_1435 {
@@ -215,6 +205,23 @@
 		left: 0px;
 		top: 18px;
 	}
+	#Rectangle_14832 {
+		fill: rgba(255,255,255,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.Rectangle_14832 {
+		position: absolute;
+		overflow: visible;
+		width: 292px;
+		height: 42px;
+		left: 0px;
+		top: 75px;
+	}
 	#Enter_a_password {
 		left: 8px;
 		top: 0px;
@@ -231,13 +238,28 @@
 	}
 	#Password {
 		opacity: 0.5;
-		left: 13px;
-		top: 30px;
+		left: 0px;
+		top: 17.5px;
 		position: absolute;
 		overflow: visible;
-		width: 51px;
+		width: 292px;
 		white-space: nowrap;
-		text-align: center;
+		text-align: left;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 13px;
+		color: rgba(0,0,0,1);
+	}
+	#Password2 {
+		opacity: 0.5;
+		left: 0px;
+		top: 75px;
+		position: absolute;
+		overflow: visible;
+		width: 292px;
+		white-space: nowrap;
+		text-align: left;
 		font-family: Halyard Display;
 		font-style: normal;
 		font-weight: normal;
@@ -262,7 +284,7 @@
 		width: 292px;
 		height: 60px;
 		left: 554px;
-		top: 396px;
+		top: 386px;
 		overflow: visible;
 	}
 	#Group_1432 {
@@ -306,13 +328,13 @@
 	}
 	#Email {
 		opacity: 0.5;
-		left: 13px;
-		top: 30px;
+		left: 0px;
+		top: 17.5px;
 		position: absolute;
 		overflow: visible;
-		width: 29px;
+		width: 292px;
 		white-space: nowrap;
-		text-align: center;
+		text-align: left;
 		font-family: Halyard Display;
 		font-style: normal;
 		font-weight: normal;
@@ -357,7 +379,7 @@
 		width: 292px;
 		height: 60px;
 		left: 554px;
-		top: 316px;
+		top: 311px;
 		overflow: visible;
 	}
 	#Group_1438 {
@@ -409,11 +431,11 @@
 	}
 	#Phone_Number {
 		opacity: 0.5;
-		left: 59px;
-		top: 30px;
+		left: 0px;
+		top: 17.5px;
 		position: absolute;
 		overflow: visible;
-		width: 80px;
+		width: 292px;
 		white-space: nowrap;
 		text-align: left;
 		font-family: Halyard Display;
@@ -421,6 +443,7 @@
 		font-weight: normal;
 		font-size: 13px;
 		color: rgba(0,0,0,1);
+		padding-left: 55px
 	}
 	#n_4 {
 		left: 18px;
@@ -567,13 +590,13 @@
 	}
 	#First_Name_bs {
 		opacity: 0.5;
-		left: 8px;
-		top: 30px;
+		left: 0px;
+		top: 18px;
 		position: absolute;
 		overflow: visible;
-		width: 57px;
+		width: 135px;
 		white-space: nowrap;
-		text-align: center;
+		text-align: left;
 		font-family: Halyard Display;
 		font-style: normal;
 		font-weight: normal;
@@ -629,18 +652,45 @@
 	}
 	#Last_Name_bx {
 		opacity: 0.5;
-		left: 8px;
-		top: 30px;
+		left: 0px;
+		top: 18px;
 		position: absolute;
 		overflow: visible;
-		width: 57px;
+		width: 135px;
 		white-space: nowrap;
-		text-align: center;
+		text-align: left;
 		font-family: Halyard Display;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 13px;
 		color: rgba(0,0,0,1);
+	}
+	.signup {
+		background-color: rgba(39,44,50,1);
+		width: 292px;
+		height: 34px;
+		left: 0px;
+		top: 0px;
+		border: 0px solid black;
+		border-width: 0px;
+		border-linejoin: miter;
+		border-linecap: butt;
+		border-miterlimit: 4;
+		shape-rendering: auto;
+		border-radius: 8px;
+		position: absolute;
+		overflow: visible;
+		white-space: nowrap;
+		line-height: 32px;
+		margin-top: -1px;
+		text-align: center;
+		font-family: Halyard Display;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 16px;
+		color: rgba(255,255,255,1);
+		letter-spacing: 0.5px;
+		cursor: pointer;
 	}
 </style>
 </head>
@@ -679,13 +729,7 @@
 	</div>
 	<div id="Group_1433">
 		<div id="Group_1442">
-			<svg class="Rectangle_1482">
-				<rect id="Rectangle_1482" rx="6" ry="6" x="0" y="0" width="292" height="34">
-				</rect>
-			</svg>
-			<div id="Sign_up">
-				<span>Sign up</span>
-			</div>
+			<button type="submit" class="signup">Sign Up</button>
 		</div>
 	</div>
 	<div id="Group_1437">
@@ -695,12 +739,15 @@
 					<rect id="Rectangle_1483" rx="8" ry="8" x="0" y="0" width="292" height="42">
 					</rect>
 				</svg>
+				<svg class="Rectangle_14832">
+					<rect id="Rectangle_14832" rx="8" ry="8" x="0" y="0" width="292" height="42">
+					</rect>
+				</svg>
 				<div id="Enter_a_password">
 					<span>Enter a password</span>
 				</div>
-				<div id="Password">
-					<span>Password</span>
-				</div>
+				<input id="Password" name="password_1" type="password" value="" placeholder="Password" autofocus="on"></input>
+				<input id="Password2" name="password_2" type="password" value="" placeholder="Confirm Password" autofocus="on"></input>
 			</div>
 		</div>
 		<svg class="Icon_ionic-ios-lock" viewBox="2.813 1.406 9.375 12.188">
@@ -717,9 +764,7 @@
 			<div id="Enter_your_email">
 				<span>Enter your email</span>
 			</div>
-			<div id="Email">
-				<span>Email</span>
-			</div>
+			<input id="Email" name="email" type="text" value="" placeholder="Email" autofocus="on"></input>
 		</div>
 		<div id="Icon_ionic-ios-mail">
 			<svg class="Path_210" viewBox="1.406 4.297 12.188 7.421">
@@ -742,9 +787,7 @@
 				<div id="Enter_your_phone_number">
 					<span>Enter your phone number</span>
 				</div>
-				<div id="Phone_Number">
-					<span>Phone Number</span>
-				</div>
+				<input id="Phone_Number" name="phone_number" type="text" value="" placeholder="Phone Number" autofocus="on"></input>
 				<div id="n_4">
 					<span>+44</span>
 				</div>
@@ -778,9 +821,7 @@
 			<div id="First_Name">
 				<span>First Name</span>
 			</div>
-			<div id="First_Name_bs">
-				<span>First Name</span>
-			</div>
+			<input id="First_Name_bs" name="username" type="text" value="" placeholder="First Name" autofocus="on"></input>
 		</div>
 	</div>
 	<div id="Group_1441">
@@ -792,9 +833,7 @@
 			<div id="Last_Name">
 				<span>Last Name</span>
 			</div>
-			<div id="Last_Name_bx">
-				<span>Last Name</span>
-			</div>
+			<input id="Last_Name_bx" name="" type="text" value="" placeholder="Last Name" autofocus="on"></input>
 		</div>
 	</div>
 </div>
