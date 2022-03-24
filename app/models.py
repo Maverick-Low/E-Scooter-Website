@@ -18,6 +18,7 @@ class Report(db.Model):
     resolved = db.Column(db.Boolean, default=False)
     issue = db.Column(db.String(60), nullable=False)
     description = db.Column(db.String(60), nullable=False)
+    priority = db.Column(db.Integer, nullable=False, default=3)
 
 #for merge
 

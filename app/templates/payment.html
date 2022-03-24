@@ -25,7 +25,7 @@
 
               <br>
               
-              <fieldset class="form-field">
+              <fieldset class="form-field" value = name>
                 {{ form.name.label(class = "form-label")}}
                 {{ form.name}}
                 {% for error in form.name.errors %}
@@ -85,9 +85,13 @@
                 {{ form.country}}
               </fieldset>
 
-
+              <input type="checkbox" name="saveDetails" value="yes">
+              <label for="saveDetails">Save Payment Details</label>
               
-              {{ form.submit (class = "btn btn-primary") }}
+              <div>
+                {{ form.submit (class = "btn btn-primary") }}
+              </div>
+              
       
             </form>
           </div>
