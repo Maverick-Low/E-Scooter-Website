@@ -58,7 +58,19 @@ class Registration(FlaskForm):
                     raise ValidationError(f"Password must have at least 1 lowercase letter")
             if count_uppercase == 0:
                     raise ValidationError(f"Password must have at least 1 uppercase letter")
-        
+
+class Booking(FlaskForm):
+    #time and price
+    time_options = [(1, "1 hour - £5"), (4, "4 hours - £20"), (24 ,"1 day - £100") , (168, "1 week - £600")]
+    hire_period = SelectField('Select hire period',choices = time_options)
+    submit = SubmitField('Submit')
+    #price = 5 * hire_period.value
+    """
+    Make hidden fields in form for price and hours - make it easier to process please.
+    
+    """
+    price = StringField('', default='5')
+    hours =  StringField('', default='1')
     
 class Payment(FlaskForm):
     #function that checks if the expiry date is in the future
@@ -83,16 +95,6 @@ class Payment(FlaskForm):
             checksum += sum(int(x) for x in str(d*2))
         return checksum % 10
 
-    #time and price
-    time_options = [(1, "1 hour - £5"), (4, "4 hours - £20"), (24 ,"1 day - £100") , (168, "1 week - £600")]
-    hire_period = SelectField('Select hire period',choices = time_options)
-    #price = 5 * hire_period.value
-    """
-    Make hidden fields in form for price and hours - make it easier to process please.
-    
-    """
-    price = StringField('', default='5')
-    hours =  StringField('', default='1')
 
     #card details
     name = StringField('Enter name', validators=[DataRequired(message = "Enter your name please"), Length(max=60)])
