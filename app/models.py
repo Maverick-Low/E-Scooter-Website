@@ -58,4 +58,10 @@ class Card(db.Model):
     address2 = db.Column(db.String)
     city = db.Column(db.String, nullable = False)
     postcode = db.Column(db.String, nullable = False)
+
+class Price(db.Model):
+    __tablename__ = "prices"
+    id = db.Column(db.Integer, primary_key=True)
+    time = db.Column(db.String, nullable = False)
+    price = db.Column(db.Float, nullable = False)
     

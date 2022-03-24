@@ -196,6 +196,33 @@ def admin_stats():
         return redirect("/dashboard")
     else:
         return render_template("statistics.html")
+    
+    
+@app.route("/add_pricing")
+def add_pricing():
+    price1 = models.Price(time = "1 hour")
+    price2 = models.Price(time = "4 hour's")
+    price3 = models.Price(time = "1 day")
+    price4 = models.Price(time = "1 week")
+    db.session.add(price1)
+    db.session.add(price2)
+    db.session.add(price3)
+    db.session.add(price4)
+    db.session.commit()
+    return redirect("/dashboard")
+    
+    
+    
+@app.route("/admin/pricing")
+def pricing():
+    if session.get('admin') == 0:
+        return redirect("/dashboard")
+    else:
+        prices = models.Price.query.all()
+        return render_template("pricing.html", prices = prices)
+    
+    
+    
 
 @app.route("/admin/configure")
 def admin_config():
