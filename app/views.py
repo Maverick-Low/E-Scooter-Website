@@ -1,17 +1,14 @@
 from email.message import Message
 from encodings import utf_8
-from enum import auto
 from pickle import FALSE
 
 from sqlalchemy import false
 from app import app, models, bcrypt, db
-from flask import render_template, request, url_for, redirect, flash, session, request
+from flask import render_template, request, url_for, redirect, flash, session
 from datetime import datetime, timedelta
 from .forms import Registration, Login, Payment, Report
 import smtplib, ssl
 from email.mime.text import MIMEText
-from werkzeug.datastructures import MultiDict
-from cryptography.fernet import Fernet
 
 
 
@@ -21,29 +18,26 @@ from cryptography.fernet import Fernet
 
 @app.route("/add_test")
 def add_test():
-    # location2 = models.Location()
-    # location3 = models.Location()
-    # location4 = models.Location()
-    # location5 = models.Location()
-    # user_obj = models.Scooter(in_use = False, LocationID = 2)
-    # user_obj1 = models.Scooter(in_use = False, LocationID = 3)
-    # user_obj2 = models.Scooter(in_use = False, LocationID = 4)
-    # user_obj3 = models.Scooter(in_use = False, LocationID = 5)
-    # user_obj4 = models.Scooter(in_use = False, LocationID = 1)
-    # db.session.add(user_obj)
-    # db.session.add(user_obj1)
-    # db.session.add(user_obj2)
-    # db.session.add(user_obj3)
-    # db.session.add(user_obj4)
-    # db.session.add(location2)
-    # db.session.add(location3)
-    # db.session.add(location4)
-    # db.session.add(location5)
+    location2 = models.Location()
+    location3 = models.Location()
+    location4 = models.Location()
+    location5 = models.Location()
+    user_obj = models.Scooter(in_use = False, LocationID = 2)
+    user_obj1 = models.Scooter(in_use = False, LocationID = 3)
+    user_obj2 = models.Scooter(in_use = False, LocationID = 4)
+    user_obj3 = models.Scooter(in_use = False, LocationID = 5)
+    user_obj4 = models.Scooter(in_use = False, LocationID = 1)
+    db.session.add(user_obj)
+    db.session.add(user_obj1)
+    db.session.add(user_obj2)
+    db.session.add(user_obj3)
+    db.session.add(user_obj4)
+    db.session.add(location2)
+    db.session.add(location3)
+    db.session.add(location4)
+    db.session.add(location5)
     # admin_obj = models.User.query.filter_by(email="admin@admin.com").first()
     # admin_obj.admin = True
-    # issue = models.Report(issue = "Refund", description = "Havent recieved refund yet", priority = 1)
-    # db.session.add(issue)
-    models.Card.query.filter_by(id=1).delete()
     db.session.commit()
     return redirect(url_for("dashboard"))
 
@@ -173,6 +167,8 @@ def dashboard():
                 active_id.append(o.id)
         return render_template("dashboard.html", title='Dashboard', orders=orders, active= active_id)
      
+        
+    
 
 #solved bug where chrome automatically adds an extra '/' at the end of the url
 @app.route("/register/")
@@ -226,22 +222,6 @@ def resolve_issue(issue_id):
         db.session.commit()
         return redirect(url_for('admin_issues'))
 
-@app.route("/admin/issues/high_priority")
-def high_priority():
-    if session.get('admin') == 0:
-        return redirect("/dashboard")
-    else:
-        issues = models.Report.query.order_by(models.Report.priority.asc())
-        return render_template("issues.html", issues = issues)
-
-@app.route("/admin/issues/low_priority")
-def low_priority():
-    if session.get('admin') == 0:
-        return redirect("/dashboard")
-    else:
-        issues = models.Report.query.order_by(models.Report.priority.desc())
-        return render_template("issues.html", issues = issues)
-
 @app.route("/hire_scooter")
 def hire_scooter():
     #admin redirected to admin dashboard
@@ -285,9 +265,6 @@ def remove_available(location):
     param = location.split('$')
     
     scooter_to_remove = models.Scooter.query.filter_by(LocationID = param[0], in_use=False).first()
-    if scooter_to_remove is None:
-        flash("Transaction failed: Someone ordered the last scooter before you.")
-        return redirect(url_for('dashboard'))
     scooter_to_remove.in_use = True
     user = models.User.query.filter_by(email = session['email']).first()
     username = user.username
@@ -332,64 +309,32 @@ def payment(location):
     locations = ['Trinity Centre','Train Station','Merrion Centre','LRI Hospital','UoL Edge Sports Centre']
     if session.get('admin') != 0:
         return redirect("/admin")
-    # write_key()
-    key = load_key()
-    f = Fernet(key)
+    form = Payment()
     if request.method == "GET":
-        currentUser = models.User.query.filter_by(email = session.get('email')).first()
-        exists = db.session.query(models.Card.UserID).filter_by(UserID = currentUser.id).first() is not None
-        if (exists == True):
-            currentUserCard = models.Card.query.filter_by(UserID = currentUser.id).first()
-            autoFilledName = currentUserCard.name # Retrieves name of user
-            autoFilledCardNumber = f.decrypt(currentUserCard.cardnum).decode("utf-8") # Retrieves user's card number
-            autoFilledExpiry = currentUserCard.expiry.strftime("%m/%Y") # Retrieves user's card expiry date
-            autoFilledAddressLine1 = currentUserCard.address1
-            autoFilledAddressLine2 = currentUserCard.address2
-            autoFilledCity = currentUserCard.city
-            autoFilledPostCode = currentUserCard.postcode
-            form = Payment(formdata = MultiDict([('name', autoFilledName), ('card_number', autoFilledCardNumber), ('expiry_date', autoFilledExpiry),
-                                                 ('address_line_1', autoFilledAddressLine1), ('address_line_2', autoFilledAddressLine2), ('city', autoFilledCity),
-                                                 ('postcode', autoFilledPostCode), ]))
-        else: 
-            form = Payment()
-        flash(exists)
-        return render_template("payment.html", form=form, location = locations[location - 1]) # In order to display the location that user is reserving scooter from on payment screen
-    elif request.method == "POST":
-        form = Payment()
-        if form.validate_on_submit():
-            value = request.form.getlist('saveDetails')
-            arr = [form.price.data,form.hours.data]
-            if(len(value) != 0):            
-                arr2 = [form.name.data,form.card_number.data,form.expiry_date.data,form.address_line_1.data,form.address_line_2.data,form.city.data,form.postcode.data]
-                x = form.card_number.data.encode()
-                encryptedCard = f.encrypt(x)
-                user = models.User.query.filter_by(email = session.get('email')).first()
-                card_obj = models.Card(UserID = user.id, name = arr2[0], cardnum = encryptedCard, expiry = arr2[2]
-                                    , address1 = arr2[3], address2 = arr2[4], city = arr2[5], postcode = arr2[6])
-                db.session.add(card_obj)
-                db.session.commit()
-            #flash("Transaction confirmed!")
-            return redirect("/remove_available/"+str(location)+'$' + str(arr[0]) + '$' + str(arr[1]))
+        # In order to display the location that user is reserving scooter from on payment screen
         
+        return render_template("payment.html", form=form, location = locations[location - 1])
+    elif request.method == "POST":
+        if form.validate_on_submit():
+            arr = [form.price.data,form.hours.data]
+            arr2 = [form.name.data,form.card_number.data,form.expiry_date.data,form.address_line_1.data,form.address_line_2.data,form.city.data,form.postcode.data]
+            hashed_card = bcrypt.generate_password_hash(arr[1]).decode('utf-8')
+            user_Id = models.User.query.filter_by(id = session.get('email')).first()
+            card_obj = models.Card(UserID = user_Id, name = arr2[0], cardnum = hashed_card, expiry = arr2[2]
+                                   , address1 = arr2[3], address2 = arr2[4], city = arr2[5], postcode = arr2[6])
+            db.session.add(card_obj)
+            db.session.commit()
+            flash("Transaction confirmed!")
+            return redirect("/remove_available/"+str(location)+'$' + str(arr[0]) + '$' + str(arr[1]))
         else:
             flash('Card payment not accepted')
             return render_template('payment.html', form=form, location = locations[location - 1])
 
-# Encryption code taken from https://dev.to/anishde12020/cryptography-with-python-using-fernet-40o3
-def write_key():
-    key = Fernet.generate_key() # Generates the key
-    with open("key.key", "wb") as key_file: # Opens the file the key is to be written to
-        key_file.write(key) # Writes the key
-
-def load_key():
-    return open("key.key", "rb").read() #Opens the file, reads and returns the key stored in the file
 
 
 @app.route("/cancel_booking/<int:bookingID>")
 def cancel_booking(bookingID):
     booking_to_cancel = models.Booking.query.filter_by(id=bookingID).first()
-    scooter_to_free = models.Scooter.query.filter_by(id = booking_to_cancel.ScooterID).first()
-    scooter_to_free.in_use = False
     booking_to_cancel.cancelled = True
     db.session.commit()
     return redirect(url_for("dashboard"))
