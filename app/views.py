@@ -170,7 +170,7 @@ def dashboard():
 
 @app.route("/testBookings")
 def create_test_bookings():
-    db.session.query(models.Booking).delete()
+    #db.session.query(models.Booking).delete()
     db.session.commit()
     b1 = models.Booking(numHours=0, date=datetime.now()-timedelta(days=1), expiry=datetime.now(), price=5, cancelled=False)
     b2 = models.Booking(numHours=0, date=datetime.now()-timedelta(weeks=4), expiry=datetime.now(), price=8, cancelled=False) 
@@ -183,12 +183,12 @@ def create_test_bookings():
     db.session.commit()
     return redirect("/")
 
-@app.route("/admin/weekly-income")
+@app.route("/admin/statistics")
 def weekly_income():
     # Redirects user if admin is not in session
     if not session.get('admin'):
         return redirect("/")
-    create_test_bookings()
+    #create_test_bookings()
     week_start_date = [] # Stores week start dates starting from the date a week ago today
     week = (datetime.combine(datetime.now(), time.min))-timedelta(weeks=1)
     week_start_date.append(week)
@@ -216,6 +216,8 @@ def weekly_income():
     # week_start_date = ["1", "2", "3"]
     # sums = ["5", "5", "5"]
     #return render_template("graphs.html", weeks=week_start_date, income=sums)
+    week_start_date.reverse();
+    sums.reverse();
     return render_template("graphs.html", weeks=json.dumps(week_start_date), income=json.dumps(sums))
 
 
@@ -241,12 +243,12 @@ def admin_bookings():
     else:
         return render_template("bookings.html")
 
-@app.route("/admin/statistics")
-def admin_stats():
-    if session.get('admin') == 0:
-        return redirect("/dashboard")
-    else:
-        return render_template("statistics.html")
+# @app.route("/admin/statistics")
+# def admin_stats():
+#     if session.get('admin') == 0:
+#         return redirect("/dashboard")
+#     else:
+#         return render_template("statistics.html")
 
 @app.route("/admin/configure")
 def admin_config():
