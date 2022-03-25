@@ -5,12 +5,21 @@ from pickle import FALSE
 from sqlalchemy import false
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date, time
 from .forms import Registration, Login, Payment, Report, Booking
 import smtplib, ssl
 from email.mime.text import MIMEText
 from werkzeug.datastructures import MultiDict
-from cryptography.fernet import Fernet                                             
+from cryptography.fernet import Fernet  
+import json                                           
+# from datetime import datetime, timedelta, date, time
+# from .forms import Registration, Login, Payment, Report
+# import smtplib, ssl
+# from email.mime.text import MIMEText
+# import json
+
+
+
 
 
 
@@ -283,7 +292,61 @@ def dashboard():
                 active_id.append(o.id)
         return render_template("Dashboard/Website_Dashboard.html", title='Dashboard', orders=orders, active= active_id)
      
+        # return render_template("dashboard.html", title='Dashboard', orders=orders, active= active_id)
+
+@app.route("/testBookings")
+def create_test_bookings():
+    #db.session.query(models.Booking).delete()
+    db.session.commit()
+    b1 = models.Booking(numHours=0, date=datetime.now()-timedelta(days=1), expiry=datetime.now(), price=5, cancelled=False)
+    b2 = models.Booking(numHours=0, date=datetime.now()-timedelta(weeks=4), expiry=datetime.now(), price=8, cancelled=False) 
+    b3 = models.Booking(numHours=0, date=datetime.now()-timedelta(weeks=3), expiry=datetime.now(), price=11, cancelled=False)
+    b4 = models.Booking(numHours=0, date=datetime.now()-timedelta(weeks=2), expiry=datetime.now(), price=23, cancelled=False)
+    db.session.add(b1)
+    db.session.add(b2)
+    db.session.add(b3)
+    db.session.add(b4)
+    db.session.commit()
+    return redirect("/")
+
+@app.route("/admin/statistics")
+def weekly_income():
+    # Redirects user if admin is not in session
+    if not session.get('admin'):
+        return redirect("/")
+    create_test_bookings()
+    week_start_date = [] # Stores week start dates starting from the date a week ago today
+    week = (datetime.combine(datetime.now(), time.min))-timedelta(weeks=1)
+    week_start_date.append(week)
+    sums = [0] * 6 # Stores the sum of the price for each booking within the corresponding week
+    
+    for i in range(5): # Let the graph show information going 10 weeks back from today
+        week = week-timedelta(weeks=1)
+        week_start_date.append(week)
+        # Find all bookings within a given week
+        orders = models.Booking.query.all()
+        order_list = []
+        for obj in orders:
+            if obj.date <= week_start_date[i] and obj.date > week_start_date[i+1]:
+                order_list.append(obj)
+        # Sum the price of all the bookings in this week
         
+        for order in order_list:
+            sums[i] += order.price
+    
+    # Format the week start dates to a string day/month/year which will then be displayed in the graph
+    count = 0
+    for d in week_start_date:
+        week_start_date[count] = str(d.strftime("%d/%m/%Y"))
+        count += 1
+    # week_start_date = ["1", "2", "3"]
+    # sums = ["5", "5", "5"]
+    #return render_template("graphs.html", weeks=week_start_date, income=sums)
+    week_start_date.reverse();
+    sums.reverse();
+    return render_template("graphs.html", weeks=json.dumps(week_start_date), income=json.dumps(sums))
+
+
     
 
 #solved bug where chrome automatically adds an extra '/' at the end of the url
@@ -308,12 +371,12 @@ def admin_bookings():
         
         return render_template("bookings.html", orders = bookings)
 
-@app.route("/admin/statistics")
-def admin_stats():
-    if session.get('admin') == 0:
-        return redirect("/dashboard")
-    else:
-        return render_template("statistics.html")
+# @app.route("/admin/statistics")
+# def admin_stats():
+#     if session.get('admin') == 0:
+#         return redirect("/dashboard")
+#     else:
+#         return render_template("statistics.html")
 
 @app.route("/admin/configure")
 def admin_config():
