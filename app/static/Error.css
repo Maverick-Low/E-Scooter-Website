@@ -1,0 +1,749 @@
+
+.mediaViewInfo {
+	--web-view-name: Website Error – 1;
+	--web-view-id: Website_Error__1;
+	--web-scale-on-resize: true;
+	--web-enable-deep-linking: true;
+}
+:root {
+	--web-view-ids: Website_Error__1;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	border: none;
+}
+#Website_Error__1 {
+	position: absolute;
+	width: 1400px;
+	height: 1033px;
+	background-color: rgba(255,255,255,1);
+	overflow: hidden;
+	--web-view-name: Website Error – 1;
+	--web-view-id: Website_Error__1;
+	--web-scale-on-resize: true;
+	--web-enable-deep-linking: true;
+}
+@keyframes fadein {
+
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+
+}
+#Rectangle_666 {
+	fill: rgba(157,157,157,1);
+}
+.Rectangle_666 {
+	position: absolute;
+	overflow: visible;
+	width: 1400px;
+	height: 1033px;
+	left: 0px;
+	top: 0px;
+}
+#okai-vehicles-nc9hr3AbnSU-unsp {
+	position: absolute;
+	width: 1400px;
+	height: 933px;
+	left: 0px;
+	top: 0px;
+	overflow: visible;
+}
+.Header {
+	position: absolute;
+	width: 1400px;
+	height: 183.365px;
+	left: 0px;
+	top: 0px;
+	overflow: visible;
+}
+#Header_-_Desktop {
+	position: absolute;
+	width: 1400px;
+	height: 183.365px;
+	left: 0px;
+	top: 0px;
+	overflow: visible;
+}
+.sticky {
+	position: fixed;
+	top:0;
+	width: 100%;
+}
+.content{
+	padding: 16px;
+}
+.sticky + .content {
+	padding-top: 109px
+}
+#base_x {
+	fill: url(#base_x);
+}
+.base_x {
+	overflow: visible;
+	position: absolute;
+	width: 1400px;
+	height: 183.365px;
+	left: 0px;
+	top: 0px;
+	transform: matrix(1,0,0,1,0,0);
+}
+#HOME {
+	opacity: 0.7;
+	left: 571px;
+	top: 26px;
+	position: absolute;
+	overflow: visible;
+	width: 30px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -4.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 11px;
+	color: rgba(204,204,204,1);
+	text-decoration: none;
+}
+#HOME:link{
+	color: rgba(204,204,204,1);
+}
+#HOME:visited{
+	color: rgba(204,204,204,1);
+}
+#HOME:hover{
+	opacity: 1;
+}
+#PRICING {
+	opacity: 0.7;
+	left: 708px;
+	top: 26px;
+	position: absolute;
+	overflow: visible;
+	width: 40px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -4.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 11px;
+	color: rgba(204,204,204,1);
+	text-decoration: none;
+}
+#PRICING:link{
+	color: rgba(204,204,204,1);
+}
+#PRICING:visited{
+	color: rgba(204,204,204,1);
+}
+#PRICING:hover{
+	opacity: 1;
+}
+#CONTACT {
+	opacity: 0.7;
+	left: 776px;
+	top: 26px;
+	position: absolute;
+	overflow: visible;
+	width: 47px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -4.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 11px;
+	color: rgba(204,204,204,1);
+	text-decoration: none;
+}
+#CONTACT:link{
+	color: rgba(204,204,204,1);
+}
+#CONTACT:visited{
+	color: rgba(204,204,204,1);
+}
+#CONTACT:hover{
+	opacity: 1;
+}
+#ABOUT_US {
+	opacity: 0.7;
+	left: 629px;
+	top: 26px;
+	position: absolute;
+	overflow: visible;
+	width: 50px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -4.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 11px;
+	color: rgba(204,204,204,1);
+	text-decoration: none;
+}
+#ABOUT_US:link{
+	color: rgba(204,204,204,1);
+}
+#ABOUT_US:visited{
+	color: rgba(204,204,204,1);
+}
+#ABOUT_US:hover{
+	opacity: 1;
+}
+#MY_ACCOUNT{
+	opacity: 0.7;
+	left: 1196px;
+	top: 26px;
+	position: absolute;
+	width: 68px;
+	overflow: visible;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -4.5px;
+	text-align: center;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 11px;
+	color: rgba(204,204,204,1);
+	text-decoration: none;
+}
+#MY_ACCOUNT:link{
+	color: rgba(204,204,204,1);
+}
+#MY_ACCOUNT:visited{
+	color: rgba(204,204,204,1);
+}
+#MY_ACCOUNT:hover{
+	opacity: 1;
+}
+#Group_6 {
+	position: absolute;
+	width: 92px;
+	height: 30px;
+	left: 130px;
+	top: 20px;
+	overflow: visible;
+}
+.btn_EScooter {
+	background: inherit;
+	border: none;
+	left: 18px;
+	top: 5px;
+	position: absolute;
+	overflow: visible;
+	width: 56px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -3.5px;
+	text-align: left;
+	font-family: Sharp Sans No1;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	color: rgba(255,255,255,1);
+	cursor: pointer;
+}
+#scooter_white {
+	position: absolute;
+	width: 29px;
+	height: 30px;
+	left: 0px;
+	top: 0px;
+	overflow: visible;
+}
+#Footer_-_Desktop {
+	position: absolute;
+	width: 1800px;
+	height: 200px;
+	left: -200px;
+	top: 833px;
+	overflow: visible;
+}
+#base_ {
+	fill: rgba(147,147,147,1);
+}
+.base_ {
+	position: absolute;
+	overflow: visible;
+	width: 1800px;
+	height: 200px;
+	left: 0px;
+	top: 0px;
+}
+#main {
+	position: absolute;
+	width: 272px;
+	height: 87px;
+	left: 420px;
+	top: 54px;
+	overflow: visible;
+}
+#Home {
+	left: 0px;
+	top: 0px;
+	position: absolute;
+	overflow: visible;
+	width: 35px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -3.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	color: rgba(203,208,211,1);
+	letter-spacing: 0.5px;
+}
+#About {
+	left: 100px;
+	top: 0px;
+	position: absolute;
+	overflow: visible;
+	width: 36px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -3.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	color: rgba(203,208,211,1);
+	letter-spacing: 0.5px;
+}
+#Testimonials {
+	left: 200px;
+	top: 0px;
+	position: absolute;
+	overflow: visible;
+	width: 73px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -3.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	color: rgba(203,208,211,1);
+	letter-spacing: 0.5px;
+}
+#Pricing {
+	left: 0px;
+	top: 46px;
+	position: absolute;
+	overflow: visible;
+	width: 41px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -3.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	color: rgba(203,208,211,1);
+	letter-spacing: 0.5px;
+}
+#Terms {
+	left: 100px;
+	top: 46px;
+	position: absolute;
+	overflow: visible;
+	width: 36px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -3.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	color: rgba(203,208,211,1);
+	letter-spacing: 0.5px;
+}
+#Integrations {
+	left: 200px;
+	top: 46px;
+	position: absolute;
+	overflow: visible;
+	width: 70px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -3.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	color: rgba(203,208,211,1);
+	letter-spacing: 0.5px;
+}
+#Contact {
+	left: 0px;
+	top: 69px;
+	position: absolute;
+	overflow: visible;
+	width: 47px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -3.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	color: rgba(203,208,211,1);
+	letter-spacing: 0.5px;
+}
+#Guidlines {
+	left: 100px;
+	top: 69px;
+	position: absolute;
+	overflow: visible;
+	width: 55px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -3.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	color: rgba(203,208,211,1);
+	letter-spacing: 0.5px;
+}
+#Careers {
+	left: 200px;
+	top: 69px;
+	position: absolute;
+	overflow: visible;
+	width: 46px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -3.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	color: rgba(203,208,211,1);
+	letter-spacing: 0.5px;
+}
+#Bookings {
+	left: 0px;
+	top: 23px;
+	position: absolute;
+	overflow: visible;
+	width: 54px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -3.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	color: rgba(203,208,211,1);
+	letter-spacing: 0.5px;
+}
+#Help {
+	left: 100px;
+	top: 23px;
+	position: absolute;
+	overflow: visible;
+	width: 28px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -3.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	color: rgba(203,208,211,1);
+	letter-spacing: 0.5px;
+}
+#Advertise {
+	left: 200px;
+	top: 23px;
+	position: absolute;
+	overflow: visible;
+	width: 56px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -3.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	color: rgba(203,208,211,1);
+	letter-spacing: 0.5px;
+}
+#subscribe {
+	position: absolute;
+	width: 260px;
+	height: 56px;
+	left: 920px;
+	top: 58px;
+	overflow: visible;
+}
+#field {
+	opacity: 0.35;
+	fill: transparent;
+	stroke: rgba(255,255,255,1);
+	stroke-width: 2px;
+	stroke-linejoin: miter;
+	stroke-linecap: butt;
+	stroke-miterlimit: 4;
+	shape-rendering: auto;
+}
+.field {
+	overflow: visible;
+	position: absolute;
+	width: 260px;
+	height: 40px;
+	left: 0px;
+	top: 0px;
+	transform: matrix(1,0,0,1,0,0);
+}
+#send {
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	left: 224px;
+	top: 12px;
+	overflow: visible;
+}
+#send_bo {
+	fill: rgba(255,255,255,1);
+}
+.send_bo {
+	overflow: visible;
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	left: 0px;
+	top: 0px;
+	transform: matrix(1,0,0,1,0,0);
+}
+#Email {
+	opacity: 0.5;
+	left: 20px;
+	top: 10px;
+	position: absolute;
+	overflow: visible;
+	width: 37px;
+	height: 22px;
+	line-height: 20px;
+	margin-top: -3.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	color: rgba(255,255,255,1);
+}
+#Stay_in_touch_for_latest_updat {
+	left: 60px;
+	top: 44px;
+	position: absolute;
+	overflow: hidden;
+	width: 141px;
+	height: 12px;
+	line-height: 20px;
+	margin-top: -4.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 11px;
+	color: rgba(203,208,211,1);
+}
+#Social {
+	position: absolute;
+	width: 160px;
+	height: 16.001px;
+	left: 1320px;
+	top: 56px;
+	overflow: visible;
+}
+#web {
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	left: 144px;
+	top: 0px;
+	overflow: visible;
+}
+#Path_4 {
+	fill: rgba(255,255,255,1);
+}
+.Path_4 {
+	overflow: visible;
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	left: 0px;
+	top: 0px;
+	transform: matrix(1,0,0,1,0,0);
+}
+#instagram {
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	left: 0px;
+	top: 0px;
+	overflow: visible;
+}
+#Path_3 {
+	fill: rgba(255,255,255,1);
+}
+.Path_3 {
+	overflow: visible;
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	left: 0px;
+	top: 0px;
+	transform: matrix(1,0,0,1,0,0);
+}
+#twitter {
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	left: 48px;
+	top: 0px;
+	overflow: visible;
+}
+#Rectangle_393 {
+	fill: transparent;
+}
+.Rectangle_393 {
+	position: absolute;
+	overflow: visible;
+	width: 16px;
+	height: 16px;
+	left: 0px;
+	top: 0px;
+}
+#Path_2 {
+	fill: rgba(255,255,255,1);
+}
+.Path_2 {
+	overflow: visible;
+	position: absolute;
+	width: 16px;
+	height: 12.978px;
+	left: 0px;
+	top: 1.999px;
+	transform: matrix(1,0,0,1,0,0);
+}
+#facebook {
+	position: absolute;
+	width: 16px;
+	height: 16.001px;
+	left: 96px;
+	top: 0px;
+	overflow: visible;
+}
+#Rectangle_392 {
+	fill: transparent;
+}
+.Rectangle_392 {
+	position: absolute;
+	overflow: visible;
+	width: 16px;
+	height: 16px;
+	left: 0px;
+	top: 0px;
+}
+#Path_1 {
+	fill: rgba(255,255,255,1);
+}
+.Path_1 {
+	overflow: visible;
+	position: absolute;
+	width: 8.355px;
+	height: 16px;
+	left: 4px;
+	top: 0.001px;
+	transform: matrix(1,0,0,1,0,0);
+}
+#n_04 {
+	filter: drop-shadow(0px 3px 6px rgba(93, 93, 93, 0.659));
+	left: 190px;
+	top: 183px;
+	position: absolute;
+	overflow: visible;
+	width: 283px;
+	white-space: nowrap;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 150px;
+	color: rgba(255,255,255,1);
+	letter-spacing: 0.1px;
+}
+#Sorry_that_page_doesnt_exist {
+	filter: drop-shadow(0px 3px 6px rgba(93, 93, 93, 0.729));
+	left: 141px;
+	top: 390px;
+	position: absolute;
+	overflow: visible;
+	width: 381px;
+	white-space: nowrap;
+	line-height: 32px;
+	margin-top: -1px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 30px;
+	color: rgba(255,255,255,1);
+	letter-spacing: 0.1px;
+}
+#Go_back_to_homepage__ {
+	opacity: 0.8;
+	left: 239px;
+	top: 453px;
+	position: absolute;
+	overflow: visible;
+	width: 203px;
+	white-space: nowrap;
+	line-height: 32px;
+	margin-top: -6px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 20px;
+	color: rgba(130,130,255,1);
+	letter-spacing: 0.1px;
+	text-decoration: none;
+}
+#Go_back_to_homepage__:link{
+	color: rgba(130,130,255,1);
+}
+#Go_back_to_homepage__:visited{
+	color: rgba(130,130,255,1);
+}
+#Go_back_to_homepage__:hover{
+	opacity: 1;
+}
+
