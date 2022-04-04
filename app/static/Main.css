@@ -1466,12 +1466,13 @@ input[type=text]{
 	top: 0px;
 	transform: matrix(1,0,0,1,0,0);
 }
-#n__Hours {
-	left: 26px;
-	top: 17px;
+.n__Hours {
+	left: 1120px;
+	top: 1453px;
 	position: absolute;
 	overflow: visible;
-	width: 59px;
+	width: 111px;
+	height: 48px;
 	white-space: nowrap;
 	text-align: left;
 	font-family: Arial;
@@ -1479,6 +1480,11 @@ input[type=text]{
 	font-weight: normal;
 	font-size: 14px;
 	color: rgba(93,93,93,1);
+	border: solid;
+	border-color: rgba(112,112,112,1);
+	border-width: 1px;
+	outline: none;
+	border-radius: 3px;
 }
 #Arrow_Small_Down__1 {
 	position: absolute;
