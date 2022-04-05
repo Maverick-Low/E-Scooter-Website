@@ -16,8 +16,8 @@
 }
 #Website_Login {
 	position: absolute;
-	width: 1400px;
-	height: 800px;
+	width: 100%;
+	height: 100%;
 	background-color: rgba(255,255,255,1);
 	overflow: hidden;
 	--web-view-name: Website Login;
@@ -31,14 +31,14 @@
 .Rectangle_666 {
 	position: absolute;
 	overflow: visible;
-	width: 1400px;
-	height: 800px;
+	width: 100%;
+	height: 100%;
 	left: 0px;
 	top: 0px;
 }
 #Header {
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 183.365px;
 	left: 0px;
 	top: 0px;
@@ -46,7 +46,7 @@
 }
 #Header_-_Desktop {
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 183.365px;
 	left: 0px;
 	top: 0px;
@@ -58,17 +58,26 @@
 .base_n {
 	overflow: visible;
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 183.365px;
 	left: 0px;
 	top: 0px;
 	transform: matrix(1,0,0,1,0,0);
 }
+.container{
+	position:absolute;
+	overflow: visible;
+	width: 406px;
+	height: 100%;
+	left: calc(50% - 194.5px);
+	top: 0px;
+	
+}
 #Group_6 {
 	position: absolute;
 	width: 92px;
 	height: 30px;
-	left: 654px;
+	left: 36%;
 	top: 17px;
 	overflow: visible;
 }
@@ -104,18 +113,18 @@
 }
 .Rectangle_667 {
 	filter: drop-shadow(0px 3px 6px rgba(39, 39, 39, 0.471));
-	position: absolute;
+	position: relative;
 	overflow: visible;
 	width: 406px;
 	height: 584px;
-	left: 506px;
+	left: 0px;
 	top: 134px;
 }
 #Component_21 {
 	position: absolute;
 	width: 342px;
 	height: 54px;
-	left: 529px;
+	left: 23px;
 	top: 611px;
 	overflow: visible;
 }
@@ -187,7 +196,7 @@
 	position: absolute;
 	width: 342px;
 	height: 54px;
-	left: 529px;
+	left: 23px;
 	top: 529px;
 	overflow: visible;
 }
@@ -325,7 +334,7 @@
 	position: absolute;
 	width: 345px;
 	height: 31px;
-	left: 527.5px;
+	left: 21.5px;
 	top: 492px;
 	overflow: visible;
 }
@@ -373,7 +382,7 @@
 	color: rgba(112,112,112,1);
 }
 #Sign_in {
-	left: 659px;
+	left: 153px;
 	top: 163px;
 	position: absolute;
 	overflow: visible;
@@ -387,7 +396,7 @@
 	color: rgba(0,0,0,1);
 }
 #Login_in_to_manage_your_account {
-	left: 555px;
+	left: 49px;
 	top: 211px;
 	position: absolute;
 	overflow: visible;
@@ -404,7 +413,7 @@
 	position: absolute;
 	width: 292px;
 	height: 60px;
-	left: 554px;
+	left: 48px;
 	top: 248px;
 	overflow: visible;
 }
@@ -444,7 +453,7 @@
 	position: absolute;
 	width: 292px;
 	height: 60px;
-	left: 554px;
+	left: 48px;
 	top: 328px;
 	overflow: visible;
 }
@@ -488,13 +497,13 @@
 	position: absolute;
 	width: 16.738px;
 	height: 13.391px;
-	left: 818.5px;
+	left: 312.5px;
 	top: 361.109px;
 	transform: matrix(1,0,0,1,0,0);
 }
 #Dont_have_an_account_Sign_up {
 	opacity: 0.8;
-	left: 593px;
+	left: 87px;
 	top: 468px;
 	position: absolute;
 	overflow: visible;
@@ -510,7 +519,7 @@
 }
 #SIGNUP {
 	opacity: 0.8;
-	left: 745px;
+	left: 239px;
 	top: 468px;
 	position: absolute;
 	overflow: visible;
@@ -584,7 +593,7 @@ input[type=text], input[type=password]{
 	background-color: rgba(39,44,50,1);
 	width: 292px;
 	height: 34px;
-	left: 554px;
+	left: 48px;
 	top: 413px;
 	border: 0px solid black;
 	border-width: 0px;
