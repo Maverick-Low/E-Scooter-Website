@@ -702,7 +702,7 @@ input[type=text]{
 	left: 60px;
 	top: 44px;
 	position: absolute;
-	overflow: hidden;
+	overflow: visible;
 	width: 141px;
 	height: 12px;
 	line-height: 20px;
