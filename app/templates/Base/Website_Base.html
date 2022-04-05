@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../../static/Main.css">
+<link rel="stylesheet" href="../../static/Base.css">
 {% if title %}
 <title>{{title}}</title>
 {% else %}
@@ -15,40 +15,12 @@
 <div>
 {% block content %}{% endblock %}
 </div>
-<div class="Header" id= "myheader">
-		<div id="Header_-_Desktop" class="Header___Desktop">
-			<svg class="base_r" viewBox="0 0 1400 183.365">
-				<linearGradient id="base_r" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
-					<stop offset="0" stop-color="#24292f" stop-opacity="1"></stop>
-					<stop offset="0.328" stop-color="#272c32" stop-opacity="0.953"></stop>
-					<stop offset="1" stop-color="#6c7074" stop-opacity="0"></stop>
-				</linearGradient>
-				<path id="base_r" d="M 0 0 L 1400 0 L 1400 183.3653717041016 L 0 183.3653717041016 L 0 0 Z">
-				</path>
-			</svg>
-			<a id="HOME" href="/">HOME</a>
-			<a id="PRICING" href= "/error404">PRICING</a>
-			<a id="CONTACT" href= "/error404">CONTACT</a>
-			<a id="ABOUT_US" href= "/error404">ABOUT US</a>
-			{% if session.get("email") %}
-			<a id="MY_ACCOUNT" href="/dashboard">MY ACCOUNT</a>
-            {% else %}
-			<a id="MY_ACCOUNT" href="/login">LOG IN</a>
-            {% endif %}
-		</div>
-		<div id="Group_6">
-			<div class="btn_EScooter">
-				<button class = "btn_EScooter" onclick="window.location.href='/'">EScooter</button>
-			</div>
-			<img id="scooter_white" src="/static/scooter_white.png" srcset="/static/scooter_white.png 1x, /static/scooter_white@2x.png 2x">	
-		</div>
-</div>
 <div id="Footer_-_Desktop" class="Footer___Desktop">
       <svg class="base_bs">
-          <rect id="base_bs" rx="0" ry="0" x="0" y="0" width="1800" height="200">
+          <rect id="base_bs" rx="0" ry="0" x="0" y="0" width="100%" height="200" preserveAspectRatio="none">
           </rect>
       </svg>
-      <div id="main">
+      <div class="main">
           <div id="Home">
               <span>Home</span>
           </div>
@@ -86,7 +58,7 @@
               <span>Advertise</span>
           </div>
       </div>
-      <div id="subscribe">
+      <div class="subscribe">
           <svg class="field" viewBox="0 0 260 40">
               <path id="field" d="M 6 0 L 254 0 C 257.313720703125 0 260 2.686291217803955 260 6 L 260 34 C 260 37.3137092590332 257.313720703125 40 254 40 L 6 40 C 2.686291217803955 40 0 37.3137092590332 0 34 L 0 6 C 0 2.686291217803955 2.686291217803955 0 6 0 Z">
               </path>
@@ -138,6 +110,92 @@
               </svg>
           </div>
       </div>
+</div>
+<img id="scooter_white_co" src="/static/scooter_white_co.png" srcset="/static/scooter_white_co.png 1x, /static/scooter_white_co@2x.png 2x">
+<div class="Header" id= "myheader">
+		<div id="Header_-_Desktop" class="Header___Desktop">
+			<svg class="base_r" viewBox="0 0 1400 183.365" preserveAspectRatio="none">
+				<linearGradient id="base_r" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
+					<stop offset="0" stop-color="#24292f" stop-opacity="1"></stop>
+					<stop offset="0.328" stop-color="#272c32" stop-opacity="0.953"></stop>
+					<stop offset="1" stop-color="#6c7074" stop-opacity="0"></stop>
+				</linearGradient>
+				<path id="base_r" d="M 0 0 L 1400 0 L 1400 183.3653717041016 L 0 183.3653717041016 L 0 0 Z">
+				</path>
+			</svg>
+			<div class="topnav">
+				<a id="HOME" href="/">HOME</a>
+				<a id="PRICING" href= "/error404">PRICING</a>
+				<a id="CONTACT" href= "/error404">CONTACT</a>
+				<a id="ABOUT_US" href= "/error404">ABOUT US</a>
+				{% if session.get("email") %}
+				<a id="MY_ACCOUNT" href="/dashboard">MY ACCOUNT</a>
+            	{% else %}
+				<a id="MY_ACCOUNT" href="/login">LOG IN</a>
+            	{% endif %}
+			</div>
+
+		</div>
+	<div class="mobile_menu">
+	<div class="Component_34___5">
+		<svg class="Rectangle_1486_cr">
+			<linearGradient id="Rectangle_1486_cr" spreadMethod="pad" x1="0" x2="1" y1="0.391" y2="0.392">
+				<stop offset="0" stop-color="#272c33" stop-opacity="0"></stop>
+				<stop offset="0.0501" stop-color="#282d33" stop-opacity="1"></stop>
+				<stop offset="1" stop-color="#272c33" stop-opacity="1"></stop>
+			</linearGradient>
+			<rect id="Rectangle_1486_cr" rx="0" ry="0" x="0" y="0" width="361" height="843">
+			</rect>
+		</svg>
+		<div id="Home_cz">
+			<span>Home</span>
+		</div>
+		<div id="About_Us_c">
+			<span>About Us</span>
+		</div>
+		<div id="Pricing_c">
+			<span>Pricing</span>
+		</div>
+		<div id="Contact_c">
+			<span>Contact</span>
+		</div>
+		<svg class="Line_4_c" viewBox="0 0 114 1">
+			<path id="Line_4" d="M 0 0 L 114 0">
+			</path>
+		</svg>
+		<svg class="Line_5_c" viewBox="0 0 114 1">
+			<path id="Line_5" d="M 0 0 L 114 0">
+			</path>
+		</svg>
+		<svg class="Line_6_c" viewBox="0 0 114 1">
+			<path id="Line_6" d="M 0 0 L 114 0">
+			</path>
+		</svg>
+		<div id="My_Account_c">
+			<span>My Account</span>
+		</div>
+	</div>
+	<div id="Icon_ionic-ios-menu">
+			<svg class="Path_1089" viewBox="4.5 10.125 31.52 2.627">
+				<path id="Path_1089" d="M 34.70621871948242 12.75162696838379 L 5.813313484191895 12.75162696838379 C 5.090990543365479 12.75162696838379 4.499999523162842 12.16063499450684 4.499999523162842 11.43831348419189 L 4.499999523162842 11.43831348419189 C 4.499999523162842 10.71599102020264 5.090990543365479 10.12499904632568 5.813313484191895 10.12499904632568 L 34.70621871948242 10.12499904632568 C 35.42853927612305 10.12499904632568 36.01953125 10.71599102020264 36.01953125 11.43831348419189 L 36.01953125 11.43831348419189 C 36.01953125 12.16063499450684 35.42853927612305 12.75162696838379 34.70621871948242 12.75162696838379 Z">
+				</path>
+			</svg>
+			<svg class="Path_1090" viewBox="4.5 16.875 31.52 2.627">
+				<path id="Path_1090" d="M 34.70621871948242 19.50162696838379 L 5.813313484191895 19.50162696838379 C 5.090990543365479 19.50162696838379 4.499999523162842 18.91063499450684 4.499999523162842 18.18831253051758 L 4.499999523162842 18.18831253051758 C 4.499999523162842 17.46599006652832 5.090990543365479 16.87499809265137 5.813313484191895 16.87499809265137 L 34.70621871948242 16.87499809265137 C 35.42853927612305 16.87499809265137 36.01953125 17.46599006652832 36.01953125 18.18831253051758 L 36.01953125 18.18831253051758 C 36.01953125 18.91063499450684 35.42853927612305 19.50162696838379 34.70621871948242 19.50162696838379 Z">
+				</path>
+			</svg>
+			<svg class="Path_1091" viewBox="4.5 23.625 31.52 2.627">
+				<path id="Path_1091" d="M 34.70621871948242 26.25162696838379 L 5.813313484191895 26.25162696838379 C 5.090990543365479 26.25162696838379 4.499999523162842 25.66063499450684 4.499999523162842 24.93831253051758 L 4.499999523162842 24.93831253051758 C 4.499999523162842 24.21599006652832 5.090990543365479 23.62499809265137 5.813313484191895 23.62499809265137 L 34.70621871948242 23.62499809265137 C 35.42853927612305 23.62499809265137 36.01953125 24.21599006652832 36.01953125 24.93831253051758 L 36.01953125 24.93831253051758 C 36.01953125 25.66063499450684 35.42853927612305 26.25162696838379 34.70621871948242 26.25162696838379 Z">
+				</path>
+			</svg>
+	</div>
+	</div>
+	<div id="Group_6">
+			<div class="btn_EScooter">
+				<button class = "btn_EScooter" onclick="window.location.href='/'">EScooter</button>
+			</div>
+			<img id="scooter_white" src="/static/scooter_white.png" srcset="/static/scooter_white.png 1x, /static/scooter_white@2x.png 2x">	
+		</div>
 </div>
 </body>
 <script>
