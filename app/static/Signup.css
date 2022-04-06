@@ -15,8 +15,8 @@
 }
 #Website_Sign_up__1 {
 	position: absolute;
-	width: 1400px;
-	height: 800px;
+	width: 100%;
+	height: 100%;
 	background-color: rgba(255,255,255,1);
 	overflow: hidden;
 	--web-view-name: Website Sign up – 1;
@@ -30,14 +30,14 @@
 .Rectangle_666 {
 	position: absolute;
 	overflow: visible;
-	width: 1400px;
-	height: 800px;
+	width: 100%;
+	height: 100%;
 	left: 0px;
 	top: 0px;
 }
 #Header {
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 183.365px;
 	left: 0px;
 	top: 0px;
@@ -45,7 +45,7 @@
 }
 #Header_-_Desktop {
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 183.365px;
 	left: 0px;
 	top: 0px;
@@ -57,17 +57,25 @@
 .base_n {
 	overflow: visible;
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 183.365px;
 	left: 0px;
 	top: 0px;
 	transform: matrix(1,0,0,1,0,0);
 }
+.container{
+	position:absolute;
+	overflow: visible;
+	width: 406px;
+	height: 100%;
+	left: calc(50% - 194.5px);
+	top: 0px;
+}
 #Group_6 {
 	position: absolute;
 	width: 92px;
 	height: 30px;
-	left: 654px;
+	left: 36%;
 	top: 17px;
 	overflow: visible;
 }
@@ -103,11 +111,11 @@
 }
 .Rectangle_667 {
 	filter: drop-shadow(0px 3px 6px rgba(39, 39, 39, 0.471));
-	position: absolute;
+	position: relative;
 	overflow: visible;
 	width: 406px;
 	height: 584px;
-	left: 506px;
+	left: 0px;
 	top: 134px;
 }
 input[type=text], input[type=password]{
@@ -127,7 +135,7 @@ input[type=text], input[type=password]{
 	outline: none;
 }
 #Sign_Up {
-	left: 652px;
+	left: 146px;
 	top: 163px;
 	position: absolute;
 	overflow: visible;
@@ -144,7 +152,7 @@ input[type=text], input[type=password]{
 	position: absolute;
 	width: 292px;
 	height: 34px;
-	left: 554px;
+	left: 48px;
 	top: 609px;
 	overflow: visible;
 }
@@ -160,7 +168,7 @@ input[type=text], input[type=password]{
 	position: absolute;
 	width: 292px;
 	height: 60px;
-	left: 554px;
+	left: 48px;
 	top: 461px;
 	overflow: visible;
 }
@@ -277,7 +285,7 @@ input[type=text], input[type=password]{
 	position: absolute;
 	width: 292px;
 	height: 60px;
-	left: 554px;
+	left: 48px;
 	top: 386px;
 	overflow: visible;
 }
@@ -373,7 +381,7 @@ input[type=text], input[type=password]{
 	position: absolute;
 	width: 292px;
 	height: 60px;
-	left: 554px;
+	left: 48px;
 	top: 311px;
 	overflow: visible;
 }
@@ -540,7 +548,7 @@ input[type=text], input[type=password]{
 	position: absolute;
 	width: 135px;
 	height: 60px;
-	left: 554px;
+	left: 48px;
 	top: 236px;
 	overflow: visible;
 }
@@ -604,7 +612,7 @@ input[type=text], input[type=password]{
 	position: absolute;
 	width: 135px;
 	height: 60px;
-	left: 711px;
+	left: 205px;
 	top: 236px;
 	overflow: visible;
 }
