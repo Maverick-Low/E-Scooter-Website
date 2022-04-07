@@ -16,9 +16,33 @@
 html{
 	scroll-behavior: smooth;
 }
+.Footer___Desktop{
+	position: absolute;
+	width: 100%;
+	height: 200px;
+	left: 0px;
+	top: 1635px;
+	overflow: visible;
+}
+#Footer_-_Desktop {
+	position: absolute;
+	width: 100%;
+	height: 200px;
+	left: 0px;
+	top: 1635px;
+	overflow: visible;
+}
+#scooter_white_co {
+	position: absolute;
+	width: 29px;
+	height: 30px;
+	left: 6%;
+	top: 1713px;
+	overflow: visible;
+}
 #Website_Main {
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 1833px;
 	background-color: rgba(255,255,255);
 	overflow: hidden;
@@ -33,14 +57,14 @@ html{
 .Rectangle_664 {
 	position: absolute;
 	overflow: visible;
-	width: 1400px;
+	width: 100%;
 	height: 800px;
 	left: 0px;
 	top: 852px;
 }
 #Front_Page {
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 934px;
 	left: 0px;
 	top: -54px;
@@ -48,7 +72,7 @@ html{
 }
 #Image_2 {
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 934px;
 	left: 0px;
 	top: 0px;
@@ -61,7 +85,7 @@ html{
 .Path_11 {
 	overflow: visible;
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 880px;
 	left: 0px;
 	top: 54px;
@@ -349,12 +373,20 @@ input[type=text]{
 	color: rgba(255,255,255,1);
 	letter-spacing: 0.2px;
 }
-#Group_1537 {
+.container_1537{
 	position: absolute;
 	width: 1450px;
 	height: 838px;
-	left: 0px;
+	left: calc(50% - 725px);
 	top: 535px;
+	overflow: visible;
+}
+#Group_1537 {
+	position: absolute;
+	width: 100%;
+	height: 838px;
+	left: 0px;
+	top: 0px;
 	overflow: visible;
 }
 #Group_1558 {
@@ -571,7 +603,7 @@ input[type=text]{
 }
 #Front_Page {
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 934px;
 	left: 0px;
 	top: -54px;
@@ -579,7 +611,7 @@ input[type=text]{
 }
 #Image_2 {
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 934px;
 	left: 0px;
 	top: 0px;
@@ -592,7 +624,7 @@ input[type=text]{
 .Path_11 {
 	overflow: visible;
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 880px;
 	left: 0px;
 	top: 54px;
@@ -604,14 +636,22 @@ input[type=text]{
 .Rectangle_1489 {
 	position: absolute;
 	overflow: visible;
-	width: 1400px;
+	width: 100%;
 	height: 309px;
 	left: 0px;
 	top: 1326px;
 }
+.container{
+	position: absolute;
+	overflow: visible;
+	width: 1010px;
+	height: 309px;
+	left: calc(50% - 620px);
+	top: 1326px;
+}
 #Book_Your_Ride {
-	left: 113px;
-	top: 1385px;
+	left: 28px;
+	top: 59px;
 	position: absolute;
 	overflow: visible;
 	width: 243px;
@@ -630,8 +670,8 @@ input[type=text]{
 	position: absolute;
 	width: 298.5px;
 	height: 30.5px;
-	left: 85px;
-	top: 1450px;
+	left: 0px;
+	top: 124px;
 	overflow: visible;
 }
 #Icon_awesome-search {
@@ -676,8 +716,6 @@ input[type=text]{
 }
 .Line_1 {
 	overflow: visible;
-
-
 	position: absolute;
 	width: 298px;
 	height: 1px;
@@ -686,8 +724,8 @@ input[type=text]{
 	transform: matrix(1,0,0,1,0,0);
 }
 #Confirm_Booking {
-	left: 1068px;
-	top: 1385px;
+	left: 983px;
+	top: 59px;
 	position: absolute;
 	overflow: visible;
 	width: 213px;
@@ -707,8 +745,8 @@ input[type=text]{
 	position: absolute;
 	width: 211px;
 	height: 32px;
-	left: 1069px;
-	top: 1531px;
+	left: 984px;
+	top: 205px;
 	overflow: visible;
 }
 #Group_1516 {
@@ -746,8 +784,8 @@ input[type=text]{
 	letter-spacing: 0.2px;
 }
 #Availability {
-	left: 579px;
-	top: 1385px;
+	left: 494px;
+	top: 59px;
 	position: absolute;
 	overflow: visible;
 	width: 243px;
@@ -763,8 +801,8 @@ input[type=text]{
 	letter-spacing: 0.1px;
 }
 #Scooters_Available__1 {
-	left: 538px;
-	top: 1453px;
+	left: 453px;
+	top: 127px;
 	position: absolute;
 	overflow: visible;
 	width: 188px;
@@ -783,8 +821,8 @@ input[type=text]{
 	position: absolute;
 	width: 111px;
 	height: 48px;
-	left: 645px;
-	top: 1523px;
+	left: 560px;
+	top: 197px;
 	overflow: visible;
 }
 #Path_209 {
@@ -840,8 +878,8 @@ input[type=text]{
 	transform: matrix(1,0,0,1,0,0);
 }
 #Total_Price__5 {
-	left: 1108px;
-	top: 1453px;
+	left: 1023px;
+	top: 127px;
 	position: absolute;
 	overflow: visible;
 	width: 136px;

@@ -246,22 +246,6 @@
 	top: 0px;
 	overflow: visible;
 }
-.Footer___Desktop{
-	position: absolute;
-	width: 100%;
-	height: 200px;
-	left: 0px;
-	top: 1635px;
-	overflow: visible;
-}
-#Footer_-_Desktop {
-	position: absolute;
-	width: 100%;
-	height: 200px;
-	left: 0px;
-	top: 1635px;
-	overflow: visible;
-}
 #base_bs {
 	fill: rgba(147,147,147,1);
 }
@@ -699,14 +683,6 @@
 	left: 4px;
 	top: 0.001px;
 	transform: matrix(1,0,0,1,0,0);
-}
-#scooter_white_co {
-	position: absolute;
-	width: 29px;
-	height: 30px;
-	left: 6%;
-	top: 1713px;
-	overflow: visible;
 }
 /*For Mobile*/
 .mobile_menu{

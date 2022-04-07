@@ -10,12 +10,12 @@
 <body>
 <div id="Website_Sign_up__1">
 	<svg class="Rectangle_666">
-		<rect id="Rectangle_666" rx="0" ry="0" x="0" y="0" width="1400" height="800">
+		<rect id="Rectangle_666" rx="0" ry="0" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none">
 		</rect>
 	</svg>
 	<div id="Header">
 		<div id="Header_-_Desktop" class="Header___Desktop">
-			<svg class="base_n" viewBox="0 0 1400 183.365">
+			<svg class="base_n" viewBox="0 0 1400 183.365" preserveAspectRatio="none">
 				<linearGradient id="base_n" spreadMethod="pad" x1="0.5" x2="0.5" y1="0" y2="1">
 					<stop offset="0" stop-color="#24292f" stop-opacity="1"></stop>
 					<stop offset="0.328" stop-color="#272c32" stop-opacity="0.953"></stop>
@@ -25,14 +25,15 @@
 				</path>
 			</svg>
 		</div>
-		<div id="Group_6">
+	</div>
+	<div class="container">
+	<div id="Group_6">
 			<div class="btn_EScooter">
 				<button class = "btn_EScooter" onclick="window.location.href='/'">EScooter</button>
 			</div>
 			<img id="scooter_white" src="/static/scooter_white.png" srcset="/static/scooter_white.png 1x, /static/scooter_white@2x.png 2x">
 				
 		</div>
-	</div>
 	<form method = "POST" class="form">
 		{{ form.hidden_tag() }}
       <svg class="Rectangle_667">
@@ -165,6 +166,7 @@
           </div>
       </div>
 	</form>
+	</div>
 </div>
 </body>
 </html>
