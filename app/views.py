@@ -408,7 +408,8 @@ def remove_available(location):
     price = int(param[1])
     price = price*5
     expiry = datetime.now() + timedelta(hours=int(param[1]))
-    booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = param[1], date= datetime.today(), price = price, expiry = expiry)
+    scooter=scooter_to_remove.id
+    booking = models.Booking(ScooterID = scooter, UserID = user.id, numHours = param[1], date= datetime.today(), price = price, expiry = expiry)
     db.session.add(booking)
     db.session.commit()
     #Sending confirmation email
@@ -419,23 +420,23 @@ def remove_available(location):
     Need a way of storing them securly as they should not be pushed with a commit.
     """
 
-    # email = 'team38escooter@gmail.com'
-    # passw = '' # details in discord - need to add to be able to send emails
-    # reciever = session['emal']
-    # port = 465
-    # message = ('Hi ' + str(username) +', thanks for booking with us. Here are the details of your order:\nPrice: '+ str(param[1]) + '\nDuration: ' + str(param[2]) + '\nDate: ' + str(datetime.today().strftime("%d/%m/%Y, %H:%M")) + ' \nExpiry: ' + str(expiry.strftime("%d/%m/%Y, %H:%M")))
+    email = 'team38escooter@gmail.com'
+    passw = '' # details in discord - need to add to be able to send emails
+    reciever = session['email']
+    port = 465
+    message = ('Hi ' + str(username) +', thanks for booking with us. Here are the details of your order:\nPrice: '+ str(price) + '\nDuration: ' + str(param[1]) + '\nDate: ' + str(datetime.today().strftime("%d/%m/%Y, %H:%M")) + ' \nExpiry: ' + str(expiry.strftime("%d/%m/%Y, %H:%M")))
 
-    # msg = MIMEText(message)
-    # msg['Subject'] = 'Thanks for ordering with EScooter'
-    # msg['From'] = email
-    # msg['To'] = reciever
+    msg = MIMEText(message)
+    msg['Subject'] = 'Thanks for ordering with EScooter'
+    msg['From'] = email
+    msg['To'] = reciever
 
 
 
-    # with smtplib.SMTP_SSL("smtp.gmail.com", port) as server:
-    #     server.login(email, passw)
-    #     server.send_message(msg)
-    #     server.quit()
+    with smtplib.SMTP_SSL("smtp.gmail.com", port) as server:
+        server.login(email, passw)
+        server.send_message(msg)
+        server.quit()
     
     flash(f'Scooter has been successfuly hired')
     return redirect(url_for('dashboard'))
