@@ -12,7 +12,7 @@
 		<rect id="Rectangle_664" rx="0" ry="0" x="0" y="0" width="100%" height="800">
 		</rect>
 	</svg>
-	<div class = "container_1537">
+	<div class = "container_1536">
 	<div id="Group_1537">
 		<div id="Group_1558">
 			<img id="Image_1" src="/static/Image_1.png" srcset="/static/Image_1.png 1x, /static/Image_1@2x.png 2x">
@@ -78,20 +78,48 @@
 		<rect id="Rectangle_1489" rx="0" ry="0" x="0" y="0" width="100%" height="309">
 		</rect>
 	</svg>
+	<form method="POST">
 	<div class="container">
+	{{form.hidden_tag() }}
+	<div class="container_2">
+	<div id="Availability">
+		<span>Availability</span>
+	</div>
+	<div id="Scooters_Available__1">
+    		<h3 style="padding-left: 40px"> Available Scooters: </h3>
+	</div>
+	<div id="Scooters_Available__0">
+    		<h3 style="font-size: 15px"> No scooters available </h3>
+		 	<h3 style="font-size: 15px"> at this location currently </h3>
+	</div>
+	</div>
+	<div class="container_3">
+	<div id="Confirm_Booking">
+		<span>Confirm Booking</span>
+	</div>
+    {{ form.hire_period (class="n__Hours")}}
+	<div id="Group_1557">
+		<div id="Group_1516">
+			<button type="submit" class="Rectangle_1482" onclick="locationSubmit()">Proceed To Payment</button>
+		</div>
+	</div>
+	</div>
+	<input id= "location" name="location" type="text"></input>
+	</form>
+	<div class="container_1554">
 	<div id="Book_Your_Ride">
 		<span>Book Your Ride</span>
 	</div>
 	<div id="Group_1554">
-		<div class="dropdown">
-			<button onclick="myDropdown()" class="dropbtn">Find a pick-up point</button>
-			<div id="myDropdown" class="dropdown-content">
-				<a href="\trinity">Trinity Centre</a>
-				<a href="\train">Leeds Train Station</a>
-				<a href="\merrion">Merrion Centre</a>
-				<a href="\lri">LRI Hospital</a>
-				<a href="\edge">UoL Edge Sports Centre</a>
-			</div>
+		<div class="custom-select">
+			<select id="myDropdown">
+				<option value= "0">Pick-Up Location</option>
+				<option value= "1">Trinity Centre</option>
+				<option value= "2">Leeds Train Station</option>
+				<option value= "3">Merrion Centre</option>
+				<option value= "4">LRI Hospital</option>
+				<option value= "5">UoL Edge Sports Centre</option>
+			</select>
 		</div>
 		<svg class="Icon_awesome-search" viewBox="0.223 0.313 17.238 17.239">
 			<path id="Icon_awesome-search" d="M 17.223388671875 15.3126220703125 L 14.223388671875 11.3126220703125 C 14.07094955444336 11.16018390655518 13.44018936157227 11.3126220703125 13.223388671875 11.3126220703125 L 12.223388671875 11.3126220703125 C 13.15833950042725 10.11683177947998 14.223388671875 8.948788642883301 14.223388671875 7.3126220703125 C 14.223388671875 3.420373439788818 11.11563587188721 0.3126220703125 7.223388671875 0.3126220703125 C 3.331141710281372 0.3126220703125 0.223388671875 3.420373439788818 0.223388671875 7.3126220703125 C 0.223388671875 11.20487117767334 3.331142425537109 14.3126220703125 7.223388671875 14.3126220703125 C 8.859554290771484 14.3126220703125 10.02759838104248 13.24757385253906 11.223388671875 12.3126220703125 L 11.223388671875 13.3126220703125 C 11.223388671875 13.52942276000977 11.07095050811768 13.16018295288086 11.223388671875 13.3126220703125 L 15.223388671875 17.3126220703125 C 15.54181575775146 17.63104820251465 15.90834903717041 17.63104820251465 16.223388671875 17.3126220703125 L 17.223388671875 16.3126220703125 C 17.54181480407715 15.99419689178467 17.53842926025391 15.63104820251465 17.223388671875 15.3126220703125 Z M 7.223388671875 11.3126220703125 C 4.828420639038086 11.3126220703125 2.223388671875 9.710978507995605 2.223388671875 7.3126220703125 C 2.223388671875 4.917652130126953 4.825033664703369 2.3126220703125 7.223388671875 2.3126220703125 C 9.61835765838623 2.3126220703125 11.223388671875 4.914265155792236 11.223388671875 7.3126220703125 C 11.223388671875 9.707592010498047 9.621744155883789 11.3126220703125 7.223388671875 11.3126220703125 Z">
@@ -102,13 +130,9 @@
 			</path>
 		</svg>
 	</div>
-	<div id="Confirm_Booking">
-		<span>Confirm Booking</span>
-	</div>
-	<div id="Availability">
-		<span>Availability</span>
 	</div>
 	</div>
+<!--	Json script from: https://dataanalyticsireland.ie/2021/12/13/how-to-pass-a-javascript-variable-to-python-using-json/ -->
       <div id="Reimagine_Mobility">
           <span>Reimagine Mobility</span>
       </div>
@@ -127,21 +151,152 @@
 	
 <script>
 window.scrollTo(0,0);
-	function myDropdown() {
-  document.getElementById("myDropdown").classList.toggle("show");
+/* External code - Select menu javascript from https://www.w3schools.com/howto/howto_custom_select.asp - adapted for context */	
+var x, i, j, l, ll, selElmnt, a, b, c;
+var pin1 = document.getElementById("Group_1562");
+var pin2 = document.getElementById("Group_1550");
+var pin3 = document.getElementById("Group_1547");
+var pin4 = document.getElementById("Group_1551");
+var pin5 = document.getElementById("Group_1552");
+var container = document.getElementsByClassName("container");
+var count = {{count|tojson }};
+/* Look for any elements with the class "custom-select": */
+x = document.getElementsByClassName("custom-select");
+l = x.length;
+for (i = 0; i < l; i++) {
+  selElmnt = x[i].getElementsByTagName("select")[0];
+  ll = selElmnt.length;
+  /* For each element, create a new DIV that will act as the selected item: */
+  a = document.createElement("DIV");
+  a.setAttribute("class", "select-selected");
+  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+  x[i].appendChild(a);
+  /* For each element, create a new DIV that will contain the option list: */
+  b = document.createElement("DIV");
+  b.setAttribute("class", "select-items select-hide");
+  for (j = 1; j < ll; j++) {
+    /* For each option in the original select element,
+    create a new DIV that will act as an option item: */
+    c = document.createElement("DIV");
+    c.innerHTML = selElmnt.options[j].innerHTML;
+    c.addEventListener("click", function(e) {
+        /* When an item is clicked, update the original select box,
+        and the selected item: */
+        var y, i, k, s, h, sl, yl;
+        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+        sl = s.length;
+        h = this.parentNode.previousSibling;
+        for (i = 0; i < sl; i++) {
+          if (s.options[i].innerHTML == this.innerHTML) {
+            s.selectedIndex = i;
+            h.innerHTML = this.innerHTML;
+            y = this.parentNode.getElementsByClassName("same-as-selected");
+            yl = y.length;
+            for (k = 0; k < yl; k++) {
+              y[k].removeAttribute("class");
+            }
+            this.setAttribute("class", "same-as-selected");
+            break;
+          }
+        }
+        h.click();
+    });
+    b.appendChild(c);
+  }
+  x[i].appendChild(b);
+  a.addEventListener("click", function(e) {
+	if (selElmnt.options[selElmnt.selectedIndex].innerHTML == "Trinity Centre"){
+		pin1.style.display = "block";
+		pin2.style.display = "none";
+		pin3.style.display = "none";
+		pin4.style.display = "none";
+		pin5.style.display = "none";
+	}
+	else if (selElmnt.options[selElmnt.selectedIndex].innerHTML == "Leeds Train Station"){
+		pin1.style.display = "none";
+		pin2.style.display = "block";
+		pin3.style.display = "none";
+		pin4.style.display = "none";
+		pin5.style.display = "none";
+	}
+	else if (selElmnt.options[selElmnt.selectedIndex].innerHTML == "Merrion Centre"){
+		pin1.style.display = "none";
+		pin2.style.display = "none";
+		pin3.style.display = "block";
+		pin4.style.display = "none";
+		pin5.style.display = "none";
+	}
+	else if (selElmnt.options[selElmnt.selectedIndex].innerHTML == "LRI Hospital"){
+		pin1.style.display = "none";
+		pin2.style.display = "none";
+		pin3.style.display = "none";
+		pin4.style.display = "block";
+		pin5.style.display = "none";
+	}
+	else if (selElmnt.options[selElmnt.selectedIndex].innerHTML == "UoL Edge Sports Centre"){
+		pin1.style.display = "none";
+		pin1.style.display = "none";
+		pin2.style.display = "none";
+		pin3.style.display = "none";
+		pin4.style.display = "none";
+		pin5.style.display = "block";
+	}
+	else{
+		pin1.style.display = "none";
+		pin2.style.display = "none";
+		pin3.style.display = "none";
+		pin4.style.display = "none";
+		pin5.style.display = "none";
+	}
+	if ((count[(selElmnt.selectedIndex)-1]) > 0){
+			document.getElementById("Group_1557").style.display = "block";
+			document.getElementById("Scooters_Available__1").innerHTML = "Available Scooters: " + (count[(selElmnt.selectedIndex)-1]);
+			document.getElementById("Scooters_Available__1").style.display = "block";
+			document.getElementById("Scooters_Available__0").style.display = "none";
+			document.getElementById("location").value = selElmnt.selectedIndex;
+
+			
+	}
+	else{
+			document.getElementById("Group_1557").style.display = "none";
+			document.getElementById("Scooters_Available__1").style.display = "none";
+			document.getElementById("Scooters_Available__0").style.display = "block";
+
+	}
+    /* When the select box is clicked, close any other select boxes,
+    and open/close the current select box: */
+    e.stopPropagation();
+    closeAllSelect(this);
+    this.nextSibling.classList.toggle("select-hide");
+    this.classList.toggle("select-arrow-active");
+  });
 }
-	window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
+function closeAllSelect(elmnt) {
+  /* A function that will close all select boxes in the document,
+  except the current select box: */
+  var x, y, i, xl, yl, arrNo = [];
+  x = document.getElementsByClassName("select-items");
+  y = document.getElementsByClassName("select-selected");
+  xl = x.length;
+  yl = y.length;
+  for (i = 0; i < yl; i++) {
+    if (elmnt == y[i]) {
+      arrNo.push(i)
+    } else {
+      y[i].classList.remove("select-arrow-active");
     }
   }
-}																																											
+  for (i = 0; i < xl; i++) {
+    if (arrNo.indexOf(i)) {
+      x[i].classList.add("select-hide");
+    }
+  }
+}
+
+/* If the user clicks anywhere outside the select box,
+then close all select boxes: */
+document.addEventListener("click", closeAllSelect);	
+
 </script>
 </body>
 {% endblock %}

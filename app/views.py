@@ -4,7 +4,7 @@ from enum import auto
 from pickle import FALSE
 from sqlalchemy import false
 from app import app, models, bcrypt, db
-from flask import render_template, request, url_for, redirect, flash, session
+from flask import render_template, request, url_for, redirect, flash, session,json
 from datetime import datetime, timedelta
 from .forms import Registration, Login, Payment, Report, Booking
 import smtplib, ssl
@@ -99,115 +99,37 @@ def login():
     else:
         return render_template("Login/Website_Login.html", form=form)
 
-@app.route("/")
+@app.route("/", methods = ["GET", "POST"])
 def mainmenu():
-        return render_template("Main/Website_Main.html")
-
-@app.route("/trinity", methods = ["GET", "POST"])
-def trinity():
         form = Booking()
         Scooters = models.Scooter.query.filter_by(in_use = False).all()
         # Counting the number of available scooters in each loaction
         # For ease of displaying in hire_scooter.html
-        count = 0
+        count = [0,0,0,0,0]
         for elem in Scooters:
             if elem.LocationID == 1:
-                count += 1
+                count[0] += 1
+            elif elem.LocationID == 2:
+                count[1] += 1
+            elif elem.LocationID == 3:
+                count[2] += 1
+            elif elem.LocationID == 4:
+                count[3] += 1
+            elif elem.LocationID == 5:
+                count[4] += 1
         if request.method == "GET":
-            return render_template("Main/Website_Main_Trinity.html",form = form, scooters = Scooters, count = count)
+            return render_template("Main/Website_Main.html",form = form, scooters = Scooters, count = count)
         elif request.method == "POST":
             if form.validate_on_submit():
                 arr = [form.price.data,form.hours.data]
-                return redirect(url_for("payment", location=1, arr=arr[1]))
+                location = int(form.location.data)
+                print(location)
+                return redirect(url_for("payment", location=location, arr=arr[1]))
             else:
-                return render_template("Main/Website_Main_Trinity.html",form = form, scooters = Scooters, count = count)
+                return render_template("Main/Website_Main.html",form = form, scooters = Scooters, count = count)
         else:
-            return render_template("Main/Website_Main_Trinity.html",form = form, scooters = Scooters, count = count)
-
-@app.route("/train", methods = ["GET", "POST"])
-def train():
-        form = Booking()
-        Scooters = models.Scooter.query.filter_by(in_use = False).all()
-        # Counting the number of available scooters in each loaction
-        # For ease of displaying in hire_scooter.html
-        count = 0
-        for elem in Scooters:
-            if elem.LocationID == 2:
-                count += 1
-        if request.method == "GET":
-            return render_template("Main/Website_Main_Train.html",form = form, scooters = Scooters, count = count)
-        elif request.method == "POST":
-            if form.validate_on_submit():
-                arr = [form.price.data,form.hours.data]
-                return redirect(url_for("payment", location=2, arr=arr[1]))
-            else:
-                return render_template("Main/Website_Main_Train.html",form = form, scooters = Scooters, count = count)
-        else:
-            return render_template("Main/Website_Main_Train.html",form = form, scooters = Scooters, count = count)
-
-@app.route("/lri", methods = ["GET", "POST"])
-def lri():
-        form = Booking()
-        Scooters = models.Scooter.query.filter_by(in_use = False).all()
-        # Counting the number of available scooters in each loaction
-        # For ease of displaying in hire_scooter.html
-        count = 0
-        for elem in Scooters:
-            if elem.LocationID == 3:
-                count += 1
-        if request.method == "GET":
-            return render_template("Main/Website_Main_LRI.html",form = form, scooters = Scooters, count = count)
-        elif request.method == "POST":
-            if form.validate_on_submit():
-                arr = [form.price.data,form.hours.data]
-                return redirect(url_for("payment", location=3, arr=arr[1]))
-            else:
-                return render_template("Main/Website_Main_LRI.html",form = form, scooters = Scooters, count = count)
-        else:
-            return render_template("Main/Website_Main_LRI.html",form = form, scooters = Scooters, count = count)
-
-@app.route("/merrion", methods = ["GET", "POST"])
-def merrion():
-        form = Booking()
-        Scooters = models.Scooter.query.filter_by(in_use = False).all()
-        # Counting the number of available scooters in each loaction
-        # For ease of displaying in hire_scooter.html
-        count = 0
-        for elem in Scooters:
-            if elem.LocationID == 4:
-                count += 1
-        if request.method == "GET":
-            return render_template("Main/Website_Main_Merrion.html",form = form, scooters = Scooters, count = count)
-        elif request.method == "POST":
-            if form.validate_on_submit():
-                arr = [form.price.data,form.hours.data]
-                return redirect(url_for("payment", location=4, arr=arr[1]))
-            else:
-                return render_template("Main/Website_Main_Merrion.html",form = form, scooters = Scooters, count = count)
-        else:
-            return render_template("Main/Website_Main_Merrion.html",form = form, scooters = Scooters, count = count)
-
-@app.route("/edge", methods = ["GET", "POST"])
-def edge():
-        form = Booking()
-        Scooters = models.Scooter.query.filter_by(in_use = False).all()
-        # Counting the number of available scooters in each loaction
-        # For ease of displaying in hire_scooter.html
-        count = 0
-        for elem in Scooters:
-            if elem.LocationID == 5:
-                count += 1
-        if request.method == "GET":
-            return render_template("Main/Website_Main_Edge.html",form = form, scooters = Scooters, count = count)
-        elif request.method == "POST":
-            if form.validate_on_submit():
-                arr = [form.price.data,form.hours.data]
-                return redirect(url_for("payment", location=5, arr=arr[1]))
-            else:
-                return render_template("Main/Website_Main_Edge.html",form = form, scooters = Scooters, count = count)
-        else:
-            return render_template("Main/Website_Main_Edge.html",form = form, scooters = Scooters, count = count)
-
+            return render_template("Main/Website_Main.html",form = form, scooters = Scooters, count = count)
+        
 @app.route("/error404")
 def error404():
         return render_template("Error/Website_Error___1.html")

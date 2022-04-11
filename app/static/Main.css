@@ -16,6 +16,9 @@
 html{
 	scroll-behavior: smooth;
 }
+#location{
+	display: none;
+}
 .Footer___Desktop{
 	position: absolute;
 	width: 100%;
@@ -347,9 +350,6 @@ input[type=text]{
 	top: 0px;
 	overflow: visible;
 }
-#Rectangle_1482 {
-	fill: rgba(39,44,50,1);
-}
 .Rectangle_1482 {
 	position: absolute;
 	overflow: visible;
@@ -357,13 +357,9 @@ input[type=text]{
 	height: 32px;
 	left: 0px;
 	top: 0px;
-}
-#Proceed_To_Payment {
-	left: 37px;
-	top: 5px;
-	position: absolute;
-	overflow: visible;
-	width: 137px;
+	outline: none;
+	border-radius: 4px;
+	font-size: 16px;		  
 	white-space: nowrap;
 	text-align: center;
 	font-family: Halyard Display;
@@ -372,8 +368,18 @@ input[type=text]{
 	font-size: 16px;
 	color: rgba(255,255,255,1);
 	letter-spacing: 0.2px;
+	background-color: rgba(39,44,50,1);
+	cursor: pointer;
 }
 .container_1537{
+	position: absolute;
+	width: 1450px;
+	height: 838px;
+	left: calc(50% - 725px);
+	top: 535px;
+	overflow: visible;
+}
+.container_1536{
 	position: absolute;
 	width: 1450px;
 	height: 838px;
@@ -644,10 +650,18 @@ input[type=text]{
 .container{
 	position: absolute;
 	overflow: visible;
-	width: 1010px;
+	width: 100%;
 	height: 309px;
-	left: calc(50% - 620px);
+	left: 0px;
 	top: 1326px;
+}
+.container_1554{
+	position: absolute;
+	overflow: visible;
+	width: 500px;
+	height: 300px;
+	left: calc(20% - 160px);
+	top: 0px;
 }
 #Book_Your_Ride {
 	left: 28px;
@@ -683,7 +697,7 @@ input[type=text]{
 	width: 17.238px;
 	height: 17.239px;
 	left: 0px;
-	top: 7px;
+	top: 5.5px;
 	transform: matrix(1,0,0,1,0,0);
 }
 #Find_a_pick-up_point {
@@ -720,11 +734,19 @@ input[type=text]{
 	width: 298px;
 	height: 1px;
 	left: 0.5px;
-	top: 30.5px;
+	top: 33px;
 	transform: matrix(1,0,0,1,0,0);
 }
+.container_3{
+	position: absolute;
+	overflow: visible;
+	width: 300px;
+	height: 500px;
+	right: calc(20% - 250px);
+	top: 0px;
+}
 #Confirm_Booking {
-	left: 983px;
+	left: 0px;
 	top: 59px;
 	position: absolute;
 	overflow: visible;
@@ -742,10 +764,11 @@ input[type=text]{
 
 }
 #Group_1557 {
+	display: none;
 	position: absolute;
 	width: 211px;
 	height: 32px;
-	left: 984px;
+	left: 0px;
 	top: 205px;
 	overflow: visible;
 }
@@ -753,7 +776,7 @@ input[type=text]{
 	position: absolute;
 	width: 211px;
 	height: 32px;
-	left: 0px;
+	left: -2px;
 	top: 0px;
 	overflow: visible;
 }
@@ -767,13 +790,6 @@ input[type=text]{
 	height: 32px;
 	left: 0px;
 	top: 0px;
-}
-#Proceed_To_Payment {
-	left: 37px;
-	top: 5px;
-	position: absolute;
-	overflow: visible;
-	width: 137px;
 	white-space: nowrap;
 	text-align: center;
 	font-family: Halyard Display;
@@ -781,10 +797,40 @@ input[type=text]{
 	font-weight: normal;
 	font-size: 16px;
 	color: rgba(255,255,255,1);
-	letter-spacing: 0.2px;
+	letter-spacing: 0.2px;				 				   
+	outline: none;
+	border-radius: 4px;
+}
+.n__Hours {
+	left: 50px;
+	top: 127px;
+	position: absolute;
+	overflow: visible;
+	width: 111px;
+	height: 48px;
+	white-space: nowrap;
+	text-align: left;
+	font-family: Arial;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	color: rgba(93,93,93,1);
+	border: solid;
+	border-color: rgba(112,112,112,1);
+	border-width: 1px;
+	outline: none;
+	border-radius: 3px;
+}
+.container_2{
+	position: absolute;
+	overflow: visible;
+	width: 200px;
+	height: 200px;
+	left: calc(50% - 100px);
+	top: 0px;
 }
 #Availability {
-	left: 494px;
+	left: 0px;
 	top: 59px;
 	position: absolute;
 	overflow: visible;
@@ -801,7 +847,26 @@ input[type=text]{
 	letter-spacing: 0.1px;
 }
 #Scooters_Available__1 {
-	left: 453px;
+	display: none;
+	left: 27px;
+	top: 127px;
+	position: absolute;
+	overflow: visible;
+	width: 188px;
+	white-space: nowrap;
+	line-height: 32px;
+	margin-top: -6px;
+	text-align: center;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 20px;
+	color: rgba(93,93,93,1);
+	letter-spacing: 0.5px;
+}
+#Scooters_Available__0 {
+	display: none;
+	left: 28px;
 	top: 127px;
 	position: absolute;
 	overflow: visible;
@@ -843,20 +908,7 @@ input[type=text]{
 	top: 0px;
 	transform: matrix(1,0,0,1,0,0);
 }
-#n__Hours {
-	left: 26px;
-	top: 17px;
-	position: absolute;
-	overflow: visible;
-	width: 59px;
-	white-space: nowrap;
-	text-align: left;
-	font-family: Arial;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 14px;
-	color: rgba(93,93,93,1);
-}
+
 #Arrow_Small_Down__1 {
 	position: absolute;
 	width: 9px;
@@ -894,11 +946,16 @@ input[type=text]{
 	color: rgba(93,93,93,1);
 	letter-spacing: 0.5px;
 }
-.dropbtn {
-	width: 298px;
+.show {display: block;}
+
+
+/* External code - select menu css from https://www.w3schools.com/howto/howto_custom_select.asp */
+/* The container must be positioned relative: */
+.custom-select {
+  	width: 298px;
 	height: 40px;
 	left: 5px;
-	top: -18.5px;
+	top: -12px;
 	padding-left: 23px;
 	background-color: inherit;
 	border: none;
@@ -907,8 +964,6 @@ input[type=text]{
 	overflow: visible;
 	width: 282px;
 	white-space: nowrap;
-	line-height: 32px;
-	margin-top: -6px;
 	text-align: left;
 	font-family: Halyard Display;
 	font-style: normal;
@@ -916,30 +971,51 @@ input[type=text]{
 	font-size: 20px;
 	color: rgba(93,93,93,1);
 	letter-spacing: 0.5px;
-	border-color: rgba(112,112,112,1);
-	border-width: 1px;
-	border-linejoin: miter;
-	border-linecap: butt;
-	border-miterlimit: 4;
-	shape-rendering: auto;
-	border-radius: 5px;
 }
 
-.dropbtn:hover, .dropbtn:focus {
+.custom-select select {
+  display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
   background-color: inherit;
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 23px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: rgba(93,93,93,1) transparent transparent transparent;
 }
 
-.dropdown-content {
-  display: none;
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent rgba(93,93,93,1) transparent;
+  top: 15px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+  color: rgba(93,93,93,1);
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
   position: absolute;
-  left: 0px;
-  top: 25px;
-  background-color: white;
+  background-color: #fff;
+  top: 100%;
+  left: 0;
+  right: 0;
+  left: -4px;
+  top: 47px;
   min-width: 298px;
   overflow: auto;
   text-align: center;
@@ -951,13 +1027,11 @@ input[type=text]{
   z-index: 1;
 }
 
-.dropdown-content a {
-  color: rgba(93,93,93,1);
-  padding: 8px 16px;
-  text-decoration: none;
-  display: block;
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
 }
 
-.dropdown a:hover {background-color: #ddd;}
-
-.show {display: block;}
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}

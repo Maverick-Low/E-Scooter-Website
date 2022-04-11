@@ -61,6 +61,7 @@ class Registration(FlaskForm):
 
 class Booking(FlaskForm):
     #time and price
+    location = StringField('')
     time_options = [(1, "1 hour - £5"), (4, "4 hours - £20"), (24 ,"1 day - £100") , (168, "1 week - £600")]
     hire_period = SelectField('Select hire period',choices = time_options)
     submit = SubmitField('Submit')
