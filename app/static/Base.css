@@ -44,14 +44,14 @@
 }
 .sticky {
 	position: fixed;
-	top:0;
+	top:0px;
 	width: 100%;
 }
 .content{
-	padding: 16px;
+	padding: 0px;
 }
 .sticky + .content {
-	padding-top: 109px
+	padding-top: 0px
 }
 #base_r {
 	fill: url(#base_r);
@@ -687,8 +687,8 @@
 /*For Mobile*/
 .mobile_menu{
 	position: absolute;
-    width: 361px;
-    height: 843px;
+    width: 11px;
+    height: 879px;
     right: 0px;
     top: 0px;
     overflow: visible;
@@ -705,11 +705,14 @@
     right: 60px;
     top: 26px;
     overflow: visible;
+	cursor: pointer;
+	background-color: inherit;
 }
 .Component_34___5 {
+	display: none;
     position: absolute;
     width: 361px;
-    height: 843px;
+    height: 100%;
     right: 0px;
     top: 0px;
     overflow: visible;
@@ -720,8 +723,8 @@
 .Rectangle_1486_cr {
     position: absolute;
     overflow: visible;
-    width: 361px;
-    height: 843px;
+    width: 100%;
+    height: 100%;
     left: 0px;
     top: 0px;
 }
@@ -761,9 +764,17 @@
     top: 15.76px;
     transform: matrix(1,0,0,1,0,0);
 }
-#Home_cz {
-    left: 151px;
+.container_menu{
+	left: 151px;
     top: 145px;
+    position: absolute;
+    overflow: visible;
+	width: 100%;
+	height: 100%;
+}
+#Home_cz {
+    left: 0px;
+    top: 0px;
     position: absolute;
     overflow: visible;
     width: 75px;
@@ -777,10 +788,12 @@
     font-size: 30px;
     color: rgba(255,255,255,1);
     letter-spacing: 0.1px;
+	background-color: inherit;
+	cursor: pointer;
 }
 #About_Us_c {
-    left: 131px;
-    top: 210px;
+    left: -20px;
+    top: 65px;
     position: absolute;
     overflow: visible;
     width: 115px;
@@ -794,10 +807,12 @@
     font-size: 30px;
     color: rgba(255,255,255,1);
     letter-spacing: 0.1px;
+	background-color: inherit;
+	cursor: pointer;
 }
 #Pricing_c {
-    left: 146px;
-    top: 275px;
+    left: -5px;
+    top: 130px;
     position: absolute;
     overflow: visible;
     width: 85px;
@@ -811,10 +826,12 @@
     font-size: 30px;
     color: rgba(255,255,255,1);
     letter-spacing: 0.1px;
+	background-color: inherit;
+	cursor: pointer;
 }
 #Contact_c {
-    left: 139px;
-    top: 340px;
+    left: -12px;
+    top: 195px;
     position: absolute;
     overflow: visible;
     width: 99px;
@@ -828,6 +845,8 @@
     font-size: 30px;
     color: rgba(255,255,255,1);
     letter-spacing: 0.1px;
+	background-color: inherit;
+	cursor: pointer;
 }
 #Line_4_c {
     fill: transparent;
@@ -843,8 +862,8 @@
     position: absolute;
     width: 114px;
     height: 1px;
-    left: 131px;
-    top: 201px;
+    left: -20px;
+    top: 56px;
     transform: matrix(1,0,0,1,0,0);
 }
 #Line_5_c {
@@ -861,8 +880,8 @@
     position: absolute;
     width: 114px;
     height: 1px;
-    left: 131px;
-    top: 266px;
+    left: -20px;
+    top: 121px;
     transform: matrix(1,0,0,1,0,0);
 }
 #Line_6_c {
@@ -879,13 +898,13 @@
     position: absolute;
     width: 114px;
     height: 1px;
-    left: 131px;
-    top: 331px;
+    left: -20px;
+    top: 186px;
     transform: matrix(1,0,0,1,0,0);
 }
 #My_Account_c {
-    left: 115px;
-    top: 714px;
+    left: -36px;
+    top: 400px;
     position: absolute;
     overflow: visible;
     width: 147px;
@@ -899,4 +918,6 @@
     font-size: 30px;
     color: rgba(255,255,255,1);
     letter-spacing: 0.1px;
+	background-color: inherit;
+	cursor: pointer;
 }

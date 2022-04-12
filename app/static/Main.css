@@ -141,6 +141,7 @@ html{
 	color: rgba(93,93,93,1);
 	letter-spacing: 0.1px;
 }
+
 input[type=text]{
 	width: 100%;
 	box-sizing: border-box;
@@ -268,12 +269,19 @@ input[type=text]{
 	top: 0px;
 	transform: matrix(1,0,0,1,0,0);
 }
-#Reimagine_Mobility {
-	left: 242px;
-	top: 331px;
+.container_4{
+	left: 203px;
+	top: 249px;
 	position: absolute;
 	overflow: visible;
 	width: 269px;
+}
+#Reimagine_Mobility {
+	left: 39px;
+	top: 82px;
+	position: absolute;
+	overflow: visible;
+	width: 383px;
 	white-space: nowrap;
 	text-align: left;
 	font-family: Sharp Sans No1;
@@ -283,8 +291,8 @@ input[type=text]{
 	color: rgba(255,255,255,1);
 }
 #EScooter_One {
-	left: 203px;
-	top: 249px;
+	left: 0px;
+	top: 0px;
 	position: absolute;
 	overflow: visible;
 	width: 383px;
@@ -301,8 +309,8 @@ input[type=text]{
 	position: absolute;
 	width: 226px;
 	height: 55px;
-	left: 263px;
-	top: 483px;
+	left: 60px;
+	top: 234px;
 	overflow: visible;
 }
 .btn_Rectangle_665 {
@@ -342,6 +350,10 @@ input[type=text]{
 	letter-spacing: 0.5px;
 	cursor: pointer;
 }
+@media screen and (max-width: 900px){
+	.container_4{left: calc(50% - 187px)}
+}
+
 #Group_1516 {
 	position: absolute;
 	width: 211px;
@@ -375,7 +387,7 @@ input[type=text]{
 	position: absolute;
 	width: 1450px;
 	height: 838px;
-	left: calc(50% - 725px);
+	left: calc(50% - 725.5px);
 	top: 535px;
 	overflow: visible;
 }
@@ -383,7 +395,7 @@ input[type=text]{
 	position: absolute;
 	width: 1450px;
 	height: 838px;
-	left: calc(50% - 725px);
+	left: calc(50% - 725.5px);
 	top: 535px;
 	overflow: visible;
 }
@@ -648,11 +660,11 @@ input[type=text]{
 	top: 1326px;
 }
 .container{
+	margin: auto;
 	position: absolute;
 	overflow: visible;
 	width: 100%;
 	height: 309px;
-	left: 0px;
 	top: 1326px;
 }
 .container_1554{
@@ -660,7 +672,7 @@ input[type=text]{
 	overflow: visible;
 	width: 500px;
 	height: 300px;
-	left: calc(20% - 160px);
+	left: calc(20% - 130px);
 	top: 0px;
 }
 #Book_Your_Ride {
@@ -745,7 +757,7 @@ input[type=text]{
 	right: calc(20% - 250px);
 	top: 0px;
 }
-#Confirm_Booking {
+.Confirm_Booking {
 	left: 0px;
 	top: 59px;
 	position: absolute;
@@ -826,10 +838,10 @@ input[type=text]{
 	overflow: visible;
 	width: 200px;
 	height: 200px;
-	left: calc(50% - 100px);
+	left: calc(50% - 108px);
 	top: 0px;
 }
-#Availability {
+.Availability {
 	left: 0px;
 	top: 59px;
 	position: absolute;
@@ -948,6 +960,31 @@ input[type=text]{
 }
 .show {display: block;}
 
+@media screen and (max-width: 900px){
+	.container_1554 {
+		left: calc(50% - 150px);
+		top: -40px;
+		height: 1px;
+	}
+	.container_2{
+		left: calc(50% - 120px);
+		top: 15px;
+		height: 10px;
+	}
+	.Availability{
+		top: -30px;
+		display: none;
+	}
+	.container_3{
+		left: calc(50% - 100px);
+		top: 50px;
+		height: 10px;
+	}
+	.Confirm_Booking{
+		top: -30px;
+		display: none;
+	}
+}
 
 /* External code - select menu css from https://www.w3schools.com/howto/howto_custom_select.asp */
 /* The container must be positioned relative: */

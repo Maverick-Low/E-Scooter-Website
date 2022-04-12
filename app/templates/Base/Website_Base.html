@@ -144,38 +144,34 @@
 				<stop offset="0.0501" stop-color="#282d33" stop-opacity="1"></stop>
 				<stop offset="1" stop-color="#272c33" stop-opacity="1"></stop>
 			</linearGradient>
-			<rect id="Rectangle_1486_cr" rx="0" ry="0" x="0" y="0" width="361" height="843">
+			<rect id="Rectangle_1486_cr" rx="0" ry="0" x="0" y="0" width="100%" height="100%">
 			</rect>
 		</svg>
-		<div id="Home_cz">
-			<span>Home</span>
-		</div>
-		<div id="About_Us_c">
-			<span>About Us</span>
-		</div>
-		<div id="Pricing_c">
-			<span>Pricing</span>
-		</div>
-		<div id="Contact_c">
-			<span>Contact</span>
-		</div>
-		<svg class="Line_4_c" viewBox="0 0 114 1">
+		<div class = "container_menu">
+		<button id="Home_cz" onclick="window.location.href='/'">Home</button>
+		<button id="About_Us_c" onclick="window.location.href='/error404'">About Us</button>
+		<button id="Pricing_c" onclick="window.location.href='/error404'">Pricing</button>
+		<button id="Contact_c" onclick="window.location.href='/error404'">Contact</button>
+		<svg class="Line_4_c" viewBox="0 0 114 1" preserveAspectRatio="none">
 			<path id="Line_4" d="M 0 0 L 114 0">
 			</path>
 		</svg>
-		<svg class="Line_5_c" viewBox="0 0 114 1">
+		<svg class="Line_5_c" viewBox="0 0 114 1" preserveAspectRatio="none">
 			<path id="Line_5" d="M 0 0 L 114 0">
 			</path>
 		</svg>
-		<svg class="Line_6_c" viewBox="0 0 114 1">
+		<svg class="Line_6_c" viewBox="0 0 114 1" preserveAspectRatio="none">
 			<path id="Line_6" d="M 0 0 L 114 0">
 			</path>
 		</svg>
-		<div id="My_Account_c">
-			<span>My Account</span>
+		{% if session.get("email") %}
+		<button id="My_Account_c" onclick="window.location.href='/dashboard'">My Account</button>
+		{% else %}
+		<button id="My_Account_c" onclick="window.location.href='/login'">Login</button>
+		{% endif %}
 		</div>
 	</div>
-	<div id="Icon_ionic-ios-menu">
+	<button id="Icon_ionic-ios-menu" onclick="mobileMenu()">
 			<svg class="Path_1089" viewBox="4.5 10.125 31.52 2.627">
 				<path id="Path_1089" d="M 34.70621871948242 12.75162696838379 L 5.813313484191895 12.75162696838379 C 5.090990543365479 12.75162696838379 4.499999523162842 12.16063499450684 4.499999523162842 11.43831348419189 L 4.499999523162842 11.43831348419189 C 4.499999523162842 10.71599102020264 5.090990543365479 10.12499904632568 5.813313484191895 10.12499904632568 L 34.70621871948242 10.12499904632568 C 35.42853927612305 10.12499904632568 36.01953125 10.71599102020264 36.01953125 11.43831348419189 L 36.01953125 11.43831348419189 C 36.01953125 12.16063499450684 35.42853927612305 12.75162696838379 34.70621871948242 12.75162696838379 Z">
 				</path>
@@ -188,7 +184,7 @@
 				<path id="Path_1091" d="M 34.70621871948242 26.25162696838379 L 5.813313484191895 26.25162696838379 C 5.090990543365479 26.25162696838379 4.499999523162842 25.66063499450684 4.499999523162842 24.93831253051758 L 4.499999523162842 24.93831253051758 C 4.499999523162842 24.21599006652832 5.090990543365479 23.62499809265137 5.813313484191895 23.62499809265137 L 34.70621871948242 23.62499809265137 C 35.42853927612305 23.62499809265137 36.01953125 24.21599006652832 36.01953125 24.93831253051758 L 36.01953125 24.93831253051758 C 36.01953125 25.66063499450684 35.42853927612305 26.25162696838379 34.70621871948242 26.25162696838379 Z">
 				</path>
 			</svg>
-	</div>
+	</button>
 	</div>
 	<div id="Group_6">
 			<div class="btn_EScooter">
@@ -199,6 +195,22 @@
 </div>
 </body>
 <script>
+var x = 0;
+function mobileMenu(){
+	var mobileMenu = document.getElementsByClassName('Component_34___5');
+	if (x == 0){
+		x = 1;
+		for (var i = 0; i < mobileMenu.length; i ++) {
+            mobileMenu[i].style.display = 'inline-block';
+        }
+	}
+	else if (x == 1){
+		x = 0;
+		for (var i = 0; i < mobileMenu.length; i ++) {
+            mobileMenu[i].style.display = 'none';
+        }
+	}
+}
 window.onscroll = function() {myFunction()};
 var header = document.getElementById("myheader");
 var sticky = header.offsetTop;
@@ -207,7 +219,7 @@ function myFunction() {
   if (window.pageYOffset > sticky) {
     header.classList.add("sticky");
   } else {
-    header.classList.remove("sticky");
+    header.classList.add("sticky");
   }
 }
 </script>
