@@ -15,8 +15,8 @@
 }
 #Website_Payment__1 {
 	position: absolute;
-	width: 1400px;
-	height: 1033px;
+	width: 100%;
+	height: 100%;
 	background-color: rgba(255,255,255,1);
 	overflow: hidden;
 	--web-view-name: Website Payment – 1;
@@ -30,14 +30,14 @@
 .Rectangle_666 {
 	position: absolute;
 	overflow: visible;
-	width: 1400px;
-	height: 1033px;
+	width: 100%;
+	height: 100%;
 	left: 0px;
 	top: 0px;
 }
 #Header {
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 183.365px;
 	left: 0px;
 	top: 0px;
@@ -45,7 +45,7 @@
 }
 #Header_-_Desktop {
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 183.365px;
 	left: 0px;
 	top: 0px;
@@ -57,17 +57,17 @@
 .base_n {
 	overflow: visible;
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 183.365px;
 	left: 0px;
 	top: 0px;
 	transform: matrix(1,0,0,1,0,0);
 }
 #Group_6 {
-	position: absolute;
+	position: relative;
 	width: 92px;
 	height: 30px;
-	left: 654px;
+	margin: auto;
 	top: 17px;
 	overflow: visible;
 }
@@ -99,9 +99,9 @@
 	overflow: visible;
 }
 #Payment {
-	left: 610px;
+	margin: auto;
 	top: 100px;
-	position: absolute;
+	position: relative;
 	overflow: visible;
 	width: 181px;
 	white-space: nowrap;
@@ -113,9 +113,9 @@
 	color: rgba(255,255,255,1);
 }
 #Choose_payment_method_below {
-	left: 604px;
-	top: 177px;
-	position: absolute;
+	margin: auto;
+	top: 100px;
+	position: relative;
 	overflow: visible;
 	width: 193px;
 	white-space: nowrap;
@@ -126,12 +126,24 @@
 	font-size: 15px;
 	color: rgba(255,255,255,1);
 }
+@media screen and (max-width: 900px){
+	.Payment_Selector{
+		display: none;
+	}
+}
+.Payment_Selector{
+	position: relative;
+	margin:auto;
+	width: 860px;
+	height: 120px;
+	top: 130px;
+}
 #Payment_1 {
 	position: absolute;
 	width: 260px;
 	height: 120px;
-	left: 270px;
-	top: 236px;
+	left: 0px;
+	top: 0px;
 	overflow: visible;
 }
 #Rectangle_723 {
@@ -167,8 +179,8 @@
 	position: absolute;
 	width: 260px;
 	height: 120px;
-	left: 870px;
-	top: 236px;
+	left: 600px;
+	top: 0px;
 	overflow: visible;
 }
 #Rectangle_725 {
@@ -290,8 +302,8 @@
 	position: absolute;
 	width: 260px;
 	height: 120px;
-	left: 570px;
-	top: 236px;
+	left: 300px;
+	top: 0px;
 	overflow: visible;
 }
 #Rectangle_724 {
@@ -422,11 +434,11 @@
 	transform: matrix(1,0,0,1,0,0);
 }
 #Billing_and_Card_Info {
-	position: absolute;
+	position: relative;
 	width: 754px;
 	height: 389px;
-	left: 323px;
-	top: 411px;
+	margin: auto;
+	top: 181px;
 	overflow: visible;
 }
 #Billing_Info {
@@ -987,11 +999,11 @@
 	transform: matrix(1,0,0,1,0,0);
 }
 #Group_1514 {
-	position: absolute;
+	position: relative;
 	width: 600px;
 	height: 64px;
-	left: 400px;
-	top: 855px;
+	margin: auto;
+	top: 225px;
 	overflow: visible;
 }
 #Rectangle_1485 {
@@ -1033,8 +1045,8 @@
 	position: absolute;
 	width: 95px;
 	height: 48px;
-	left: 953px;
-	top: 738px;
+	left: 630px;
+	top: 327px;
 	overflow: visible;
 }
 .Rectangle_1490 {

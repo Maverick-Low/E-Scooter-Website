@@ -15,8 +15,8 @@
 }
 #Website_Report {
 	position: absolute;
-	width: 1400px;
-	height: 800px;
+	width: 100%;
+	height: 100%;
 	background-color: rgba(255,255,255,1);
 	overflow: hidden;
 	--web-view-name: Website Report;
@@ -30,14 +30,14 @@
 .Rectangle_666 {
 	position: absolute;
 	overflow: visible;
-	width: 1400px;
-	height: 800px;
+	width: 100%;
+	height: 100%;
 	left: 0px;
 	top: 0px;
 }
 #Header {
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 183.365px;
 	left: 0px;
 	top: 0px;
@@ -45,7 +45,7 @@
 }
 #Header_-_Desktop {
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 183.365px;
 	left: 0px;
 	top: 0px;
@@ -57,17 +57,17 @@
 .base_ {
 	overflow: visible;
 	position: absolute;
-	width: 1400px;
+	width: 100%;
 	height: 183.365px;
 	left: 0px;
 	top: 0px;
 	transform: matrix(1,0,0,1,0,0);
 }
 #Group_6 {
-	position: absolute;
+	position: relative;
 	width: 92px;
 	height: 30px;
-	left: 654px;
+	margin: auto;
 	top: 17px;
 	overflow: visible;
 }
@@ -99,10 +99,10 @@
 	overflow: visible;
 }
 #Group_1532 {
-	position: absolute;
+	position: relative;
 	width: 388px;
 	height: 566px;
-	left: 506px;
+	margin: auto;
 	top: 134px;
 	overflow: visible;
 }

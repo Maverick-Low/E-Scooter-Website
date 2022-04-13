@@ -21,10 +21,18 @@
 	left: 40%;
 	top: 26px;
 }
-
+.topnav-dashboard{
+	display: none;
+	position: absolute;
+	overflow: hidden;
+	width: 100%;
+	height: 100px;
+	left: 301px;
+	top: 25px;
+}
 @media screen and (max-width: 900px){
 	.topnav {display: none;}
-	.main {display: none;}	
+	.main {display: none;}
 }
 .Header {
 	position: absolute;
@@ -197,6 +205,115 @@
 	color: rgba(204,204,204,1);
 }
 #MY_ACCOUNT:hover{
+	opacity: 1;
+}
+#DASHBOARD {
+	left: 0px;
+	top: 0px;
+	position: absolute;
+	overflow: visible;
+	width: 86px;
+	white-space: nowrap;
+	cursor: pointer;
+	line-height: 20px;
+	margin-top: -2.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 15px;
+	color: rgba(204,204,204,1);
+	text-decoration: none;
+}
+#DASHBOARD:link{
+	color: rgba(204,204,204,1);
+}
+#DASHBOARD:visited{
+	color: rgba(204,204,204,1);
+}
+#DASHBOARD:hover{
+	opacity: 1;
+}
+#HELP {
+	opacity: 0.7;
+	right: 585px;
+	top: 0px;
+	position: absolute;
+	overflow: visible;
+	width: 36px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -2.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 15px;
+	color: rgba(204,204,204,1);
+	text-decoration: none;
+}
+#HELP:link{
+	color: rgba(204,204,204,1);
+}
+#HELP:visited{
+	color: rgba(204,204,204,1);
+}
+#HELP:hover{
+	opacity: 1;
+}
+#BOOK_RIDE {
+	opacity: 0.7;
+	left: 142px;
+	top: 0px;
+	position: absolute;
+	overflow: visible;
+	width: 75px;
+	white-space: nowrap;
+	line-height: 20px;
+	margin-top: -2.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 15px;
+	color: rgba(204,204,204,1);
+	text-decoration: none;
+}
+#BOOK_RIDE:link{
+	color: rgba(204,204,204,1);
+}
+#BOOK_RIDE:visited{
+	color: rgba(204,204,204,1);
+}
+#BOOK_RIDE:hover{
+	opacity: 1;
+}
+#LOG_OUT {
+	opacity: 0.7;
+	right: 491px;
+	top: 0px;
+	position: absolute;
+	overflow: visible;
+	width: 61px;
+	white-space: nowrap;
+	cursor: pointer;
+	line-height: 20px;
+	margin-top: -2.5px;
+	text-align: left;
+	font-family: Halyard Display;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 15px;
+	color: rgba(204,204,204,1);
+	text-decoration: none;
+}
+#LOG_OUT:link{
+	color: rgba(204,204,204,1);
+}
+#LOG_OUT:visited{
+	color: rgba(204,204,204,1);
+}
+#LOG_OUT:hover{
 	opacity: 1;
 }
 @media screen and (min-width: 900px){
@@ -765,6 +882,15 @@
     transform: matrix(1,0,0,1,0,0);
 }
 .container_menu{
+	left: 151px;
+    top: 145px;
+    position: absolute;
+    overflow: visible;
+	width: 100%;
+	height: 100%;
+}
+.container_menu2{
+	display: none;
 	left: 151px;
     top: 145px;
     position: absolute;
