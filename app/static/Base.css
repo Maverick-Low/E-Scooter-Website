@@ -1,3 +1,7 @@
+@import url("https://use.typekit.net/sqj6cer.css");
+@import url(//db.onlinewebfonts.com/c/154ebfcef3ca74b92a56a5826ee85d74?family=Sharp+Sans+No1+Bold);
+@import url(//db.onlinewebfonts.com/c/4b20d1a4e849e41959b1c169dd9683c4?family=Sharp+Sans+No1+Light);
+@import url(//db.onlinewebfonts.com/c/59e7605c0e625de0522a548ac1a15d91?family=Sharp+Sans+No1+Medium+Italic);
 .mediaViewInfo {
 	--web-view-name: Website Main;
 	--web-view-id: Website_Main;
@@ -13,6 +17,7 @@
 	box-sizing: border-box;
 	border: none;
 }
+
 .topnav{
 	position: absolute;
 	overflow: hidden;
@@ -83,7 +88,7 @@
 	line-height: 20px;
 	margin-top: -4.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 11px;
@@ -110,7 +115,7 @@
 	line-height: 20px;
 	margin-top: -4.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 11px;
@@ -137,7 +142,7 @@
 	line-height: 20px;
 	margin-top: -4.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 11px;
@@ -164,7 +169,7 @@
 	line-height: 20px;
 	margin-top: -4.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 11px;
@@ -191,7 +196,7 @@
 	line-height: 20px;
 	margin-top: -4.5px;
 	text-align: center;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 11px;
@@ -218,7 +223,7 @@
 	line-height: 20px;
 	margin-top: -2.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 15px;
@@ -245,7 +250,7 @@
 	line-height: 20px;
 	margin-top: -2.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 15px;
@@ -272,7 +277,7 @@
 	line-height: 20px;
 	margin-top: -2.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 15px;
@@ -300,7 +305,7 @@
 	line-height: 20px;
 	margin-top: -2.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 15px;
@@ -348,7 +353,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Sharp Sans No1;
+	font-family: Sharp Sans No1 Medium Italic, Sans-Serif;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -392,7 +397,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -409,7 +414,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -426,7 +431,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -443,7 +448,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -460,7 +465,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -477,7 +482,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -494,7 +499,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -511,7 +516,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -528,7 +533,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -545,7 +550,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -562,7 +567,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -579,7 +584,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -656,7 +661,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -672,7 +677,7 @@
 	line-height: 20px;
 	margin-top: -4.5px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 11px;
@@ -908,7 +913,7 @@
     line-height: 32px;
     margin-top: -1px;
     text-align: center;
-    font-family: Halyard Display;
+    font-family: halyard-display;
     font-style: normal;
     font-weight: normal;
     font-size: 30px;
@@ -927,7 +932,7 @@
     line-height: 32px;
     margin-top: -1px;
     text-align: center;
-    font-family: Halyard Display;
+    font-family: halyard-display;
     font-style: normal;
     font-weight: normal;
     font-size: 30px;
@@ -938,15 +943,16 @@
 }
 #Pricing_c {
     left: -5px;
-    top: 130px;
+    top: 125px;
     position: absolute;
     overflow: visible;
     width: 85px;
+	height: 40px;
     white-space: nowrap;
     line-height: 32px;
     margin-top: -1px;
     text-align: center;
-    font-family: Halyard Display;
+    font-family: halyard-display;
     font-style: normal;
     font-weight: normal;
     font-size: 30px;
@@ -965,7 +971,7 @@
     line-height: 32px;
     margin-top: -1px;
     text-align: center;
-    font-family: Halyard Display;
+    font-family: halyard-display;
     font-style: normal;
     font-weight: normal;
     font-size: 30px;
@@ -1034,11 +1040,12 @@
     position: absolute;
     overflow: visible;
     width: 147px;
+	height: 40px;
     white-space: nowrap;
     line-height: 32px;
-    margin-top: -1px;
+    margin-top: 0px;
     text-align: center;
-    font-family: Halyard Display;
+    font-family: halyard-display;
     font-style: normal;
     font-weight: normal;
     font-size: 30px;

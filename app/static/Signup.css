@@ -1,3 +1,7 @@
+@import url("https://use.typekit.net/sqj6cer.css");
+@import url(//db.onlinewebfonts.com/c/154ebfcef3ca74b92a56a5826ee85d74?family=Sharp+Sans+No1+Bold);
+@import url(//db.onlinewebfonts.com/c/4b20d1a4e849e41959b1c169dd9683c4?family=Sharp+Sans+No1+Light);
+@import url(//db.onlinewebfonts.com/c/59e7605c0e625de0522a548ac1a15d91?family=Sharp+Sans+No1+Medium+Italic);
 .mediaViewInfo {
 	--web-view-name: Website Sign up – 1;
 	--web-view-id: Website_Sign_up__1;
@@ -16,7 +20,7 @@
 #Website_Sign_up__1 {
 	position: absolute;
 	width: 100%;
-	height: 100%;
+	height: 120%;
 	background-color: rgba(255,255,255,1);
 	overflow: hidden;
 	--web-view-name: Website Sign up – 1;
@@ -91,7 +95,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Sharp Sans No1;
+	font-family: Sharp Sans No1 Medium Italic, Sans-Serif;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -125,7 +129,7 @@ input[type=text], input[type=password]{
 	border-radius:8px;
 	font-size: 10px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: lighter;
 	font-size: 20px;
@@ -142,7 +146,7 @@ input[type=text], input[type=password]{
 	width: 97px;
 	white-space: nowrap;
 	text-align: center;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 30px;
@@ -230,7 +234,7 @@ input[type=text], input[type=password]{
 	width: 69px;
 	white-space: nowrap;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 10px;
@@ -246,7 +250,7 @@ input[type=text], input[type=password]{
 	width: 292px;
 	white-space: nowrap;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -262,7 +266,7 @@ input[type=text], input[type=password]{
 	width: 292px;
 	white-space: nowrap;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -322,7 +326,7 @@ input[type=text], input[type=password]{
 	width: 65px;
 	white-space: nowrap;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 10px;
@@ -338,7 +342,7 @@ input[type=text], input[type=password]{
 	height: 41px;
 	white-space: nowrap;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -426,7 +430,7 @@ input[type=text], input[type=password]{
 	width: 102px;
 	white-space: nowrap;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 10px;
@@ -441,7 +445,7 @@ input[type=text], input[type=password]{
 	width: 292px;
 	white-space: nowrap;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -456,7 +460,7 @@ input[type=text], input[type=password]{
 	width: 22px;
 	white-space: nowrap;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -586,7 +590,7 @@ input[type=text], input[type=password]{
 	height: 41px;
 	white-space: nowrap;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 10px;
@@ -602,7 +606,7 @@ input[type=text], input[type=password]{
 	height: 41px;
 	white-space: nowrap;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -649,7 +653,7 @@ input[type=text], input[type=password]{
 	width: 44px;
 	white-space: nowrap;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 10px;
@@ -664,7 +668,7 @@ input[type=text], input[type=password]{
 	width: 135px;
 	white-space: nowrap;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -689,7 +693,7 @@ input[type=text], input[type=password]{
 	line-height: 32px;
 	margin-top: -1px;
 	text-align: center;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 16px;
@@ -700,7 +704,7 @@ input[type=text], input[type=password]{
 .error-message {
 	text-align: right;
 	color: red;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 10px;

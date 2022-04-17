@@ -1,4 +1,7 @@
-
+@import url("https://use.typekit.net/sqj6cer.css");
+@import url(//db.onlinewebfonts.com/c/154ebfcef3ca74b92a56a5826ee85d74?family=Sharp+Sans+No1+Bold);
+@import url(//db.onlinewebfonts.com/c/4b20d1a4e849e41959b1c169dd9683c4?family=Sharp+Sans+No1+Light);
+@import url(//db.onlinewebfonts.com/c/59e7605c0e625de0522a548ac1a15d91?family=Sharp+Sans+No1+Medium+Italic);
 .mediaViewInfo {
 	--web-view-name: Website Login;
 	--web-view-id: Website_Login;
@@ -17,7 +20,7 @@
 #Website_Login {
 	position: absolute;
 	width: 100%;
-	height: 100%;
+	height: 120%;
 	background-color: rgba(255,255,255,1);
 	overflow: hidden;
 	--web-view-name: Website Login;
@@ -93,7 +96,7 @@
 	line-height: 20px;
 	margin-top: -3.5px;
 	text-align: left;
-	font-family: Sharp Sans No1;
+	font-family: Sharp Sans No1 Medium Italic, Sans-Serif;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -375,7 +378,7 @@
 	width: 17px;
 	white-space: nowrap;
 	text-align: center;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: lighter;
 	font-size: 20px;
@@ -389,7 +392,7 @@
 	width: 83px;
 	white-space: nowrap;
 	text-align: center;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 30px;
@@ -403,7 +406,7 @@
 	width: 287px;
 	white-space: nowrap;
 	text-align: center;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: 300;
 	font-size: 13px;
@@ -442,7 +445,7 @@
 	width: 95px;
 	white-space: nowrap;
 	text-align: center;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 10px;
@@ -482,7 +485,7 @@
 	width: 39px;
 	white-space: nowrap;
 	text-align: center;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 10px;
@@ -510,7 +513,7 @@
 	width: 171px;
 	white-space: nowrap;
 	text-align: center;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -526,7 +529,7 @@
 	width: 50;
 	white-space: nowrap;
 	text-align: center;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -550,7 +553,7 @@ input[type=text], input[type=password]{
 	border-radius:8px;
 	font-size: 10px;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: lighter;
 	font-size: 20px;
@@ -568,7 +571,7 @@ input[type=text], input[type=password]{
 	width: 292px;
 	white-space: nowrap;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -583,7 +586,7 @@ input[type=text], input[type=password]{
 	width: 292px;
 	white-space: nowrap;
 	text-align: left;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 13px;
@@ -608,7 +611,7 @@ input[type=text], input[type=password]{
 	line-height: 32px;
 	margin-top: -1px;
 	text-align: center;
-	font-family: Halyard Display;
+	font-family: halyard-display;
 	font-style: normal;
 	font-weight: lighter;
 	font-size: 16px;
