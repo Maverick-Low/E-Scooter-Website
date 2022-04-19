@@ -60,18 +60,18 @@ class Registration(FlaskForm):
                     raise ValidationError(f"Password must have at least 1 uppercase letter")
 
 class Booking(FlaskForm):
+    # prices = models.Price.query.all()
     #time and price
     location = StringField('')
-    time_options = [(1, "1 hour - £5"), (4, "4 hours - £20"), (24 ,"1 day - £100") , (168, "1 week - £600")]
-    hire_period = SelectField('Select hire period',choices = time_options)
+    hours = StringField('')
+    # time_options = [(1, "1 hour - £"+str(prices[0].price)), (2, "4 hours - £"+str(prices[1].price)), (3 ,"1 day - £"+str(prices[2].price)) , (4, "1 week - £"+str(prices[3].price))]
+    # hire_period = SelectField('Select hire period',choices = time_options)
     submit = SubmitField('Submit')
     #price = 5 * hire_period.value
     """
     Make hidden fields in form for price and hours - make it easier to process please.
     
     """
-    price = StringField('', default='5')
-    hours =  StringField('', default='1')
     
 class Payment(FlaskForm):
     #function that checks if the expiry date is in the future
@@ -143,8 +143,6 @@ class Payment(FlaskForm):
         for char in self.cvv.data:
             if not char in chars:
                 raise ValidationError(f"Character {char} is not allowed in cvv.")
-
-
     # def luhns(card_number):
     # #check if card number is numeric
     #     if not card_number.isnumeric():
@@ -169,4 +167,22 @@ class Payment(FlaskForm):
 
                     
     
+class Prices(FlaskForm):
+    hour_price = StringField('Enter a price', validators=[DataRequired(), Length(max= 60), Regexp('\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})')])
+    four_hour_price= StringField('Enter a price', validators=[DataRequired(), Length(max=60)])
+    day_price = StringField('Enter a price', validators=[DataRequired(), Length(max=60)])
+    week_price = StringField('Enter a price', validators=[DataRequired(), Length(max=60)])
+    submit = SubmitField('Submit')
+
+    # def valid_float(self, price):
+    #     count = 0
+    #     for i in range(len(price)):
+    #         if price[i] == ".":
+    #             count+=1
+    #             if count > 1:
+    #                 raise ValidationError("Invalid Price entered. Should follow the format - 0.00")
+
+
+
+
                     

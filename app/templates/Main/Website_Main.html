@@ -96,10 +96,23 @@
 	<div class="Confirm_Booking">
 		<span>Confirm Booking</span>
 	</div>
-    {{ form.hire_period (class="n__Hours")}}
+	<select class="n__Hours" id="myDropdown2">
+				<option value= "1">1 Hour - {{prices[0].price }}</option>
+				<option value= "2">4 Hours - {{prices[1].price }}</option>
+				<option value= "3">1 Day - {{prices[2].price }}</option>
+				<option value= "4">1 Week - {{prices[3].price }}</option>
+	</select>
+	<script>
+		function hoursSubmit(){
+            var select = document.getElementById('myDropdown2');
+            var value = select.options[select.selectedIndex].value;
+            document.getElementById("hours").value = value;
+		}
+	</script>
+	<input id= "hours" name="hours" type="text"></input>
 	<div id="Group_1557">
 		<div id="Group_1516">
-			<button type="submit" class="Rectangle_1482" onclick="locationSubmit()">Proceed To Payment</button>
+			<button type="submit" class="Rectangle_1482" onclick="hoursSubmit()">Proceed To Payment</button>
 		</div>
 	</div>
 	</div>

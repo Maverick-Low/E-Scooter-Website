@@ -101,6 +101,7 @@ def login():
 
 @app.route("/", methods = ["GET", "POST"])
 def mainmenu():
+        prices = models.Price.query.all()
         form = Booking()
         Scooters = models.Scooter.query.filter_by(in_use = False).all()
         # Counting the number of available scooters in each loaction
@@ -118,17 +119,16 @@ def mainmenu():
             elif elem.LocationID == 5:
                 count[4] += 1
         if request.method == "GET":
-            return render_template("Main/Website_Main.html",form = form, scooters = Scooters, count = count)
+            return render_template("Main/Website_Main.html",form = form, scooters = Scooters, count = count, prices = prices)
         elif request.method == "POST":
             if form.validate_on_submit():
-                arr = [form.price.data,form.hours.data]
                 location = int(form.location.data)
-                print(location)
-                return redirect(url_for("payment", location=location, arr=arr[1]))
+                hours = int(form.hours.data)
+                return redirect(url_for("payment", location=location, hours=hours))
             else:
-                return render_template("Main/Website_Main.html",form = form, scooters = Scooters, count = count)
+                return render_template("Main/Website_Main.html",form = form, scooters = Scooters, count = count, prices = prices)
         else:
-            return render_template("Main/Website_Main.html",form = form, scooters = Scooters, count = count)
+            return render_template("Main/Website_Main.html",form = form, scooters = Scooters, count = count, prices = prices)
         
 @app.route("/error404")
 def error404():
@@ -315,8 +315,7 @@ def remove_available(location):
         return redirect("/admin")
     """
     param[0] = locationID
-    param[1] = Price
-    param[2] = Hours
+    param[1] = Hours
     """
     param = location.split('$')
     scooter_to_remove = models.Scooter.query.filter_by(LocationID = param[0], in_use=False).first()
@@ -327,8 +326,9 @@ def remove_available(location):
     user = models.User.query.filter_by(email = session['email']).first()
     username = user.username
     # hours_added = datetime.timedelta(hours = int(param[2]))
-    price = int(param[1])
-    price = price*5
+    hours = int(param[1])
+    price = models.price.query.filter_by(id=hours).price
+    print(price)
     expiry = datetime.now() + timedelta(hours=int(param[1]))
     booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = param[1], date= datetime.today(), price = price, expiry = expiry)
     db.session.add(booking)
@@ -372,7 +372,7 @@ def payment():
     if not session.get('email'):
         return redirect("/login")
     location = request.args['location']
-    arr = request.args['arr']
+    arr = request.args['hours']
     #admin redirected to admin dashboard
     locations = ['Trinity Centre','Train Station','Merrion Centre','LRI Hospital','UoL Edge Sports Centre']
     if session.get('admin') != 0:
@@ -463,11 +463,46 @@ def extend_booking(bookingID, duration):
     db.session.commit()
     return redirect(url_for("dashboard"))
 
-@app.route("/admin/pricing")
+@app.route("/add_pricing")
+def add_pricing():
+    price1 = models.Price(time = "1 hour", price = 10)
+    price2 = models.Price(time = "4 hour's", price = 10)
+    price3 = models.Price(time = "1 day", price = 10)
+    price4 = models.Price(time = "1 week", price = 10)
+    db.session.add(price1)
+    db.session.add(price2)
+    db.session.add(price3)
+    db.session.add(price4)
+    db.session.commit()
+    return redirect("/dashboard")
+    
+    
+    
+@app.route("/admin/pricing", methods = ["GET", "POST"])
 def pricing():
-    prices = models.Price.query.all()
-    
-    
+    if session.get('admin') == 0:
+        return redirect("/dashboard")
+    else:
+        form = Prices()
+        if request.method == "GET":
+            prices = models.Price.query.all()
+            autoFillPrice1 = prices[0].price
+            autoFillPrice2 = prices[1].price
+            autoFillPrice3 = prices[2].price
+            autoFillPrice4 = prices[3].price
+            form = Prices(formdata = MultiDict([('hour_price', autoFillPrice1), ('four_hour_price', autoFillPrice2), ('day_price', autoFillPrice3),
+                                                ('week_price', autoFillPrice4),]))
+            return render_template("pricing.html", form = form, prices = prices)
+
+        elif request.method == "POST":
+            prices = models.Price.query.all()
+            prices[0].price = form.hour_price.data
+            prices[1].price = form.four_hour_price.data
+            prices[2].price = form.day_price.data
+            prices[3].price = form.week_price.data
+            db.session.commit()
+            return redirect("/admin")
+     
 #for merging
 """
 logout code:
