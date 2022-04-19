@@ -6,7 +6,7 @@ from sqlalchemy import false
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session,json
 from datetime import datetime, timedelta
-from .forms import Registration, Login, Payment, Report, Booking
+from .forms import Registration, Login, Payment, Report, Booking, Prices
 import smtplib, ssl
 from email.mime.text import MIMEText
 from werkzeug.datastructures import MultiDict
@@ -326,8 +326,8 @@ def remove_available(location):
     user = models.User.query.filter_by(email = session['email']).first()
     username = user.username
     # hours_added = datetime.timedelta(hours = int(param[2]))
-    hours = int(param[1])
-    price = models.price.query.filter_by(id=hours).price
+    hours1 = int(param[1])
+    price = models.Price.query.filter_by(id=hours1).first().price
     print(price)
     expiry = datetime.now() + timedelta(hours=int(param[1]))
     booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = param[1], date= datetime.today(), price = price, expiry = expiry)
@@ -444,21 +444,22 @@ def cancel_booking(bookingID):
 @app.route("/extend_booking/<int:bookingID>/<int:duration>")
 def extend_booking(bookingID, duration):
     booking_to_extend = models.Booking.query.filter_by(id=bookingID).first()
+    prices = models.Price.query.all()
     if duration == 1:
         booking_to_extend.numHours += 1
-        booking_to_extend.price += 5
+        booking_to_extend.price += prices[0].price
         booking_to_extend.expiry +=  timedelta(hours=1)
     elif duration == 2:
         booking_to_extend.numHours += 4
-        booking_to_extend.price += 20
+        booking_to_extend.price += prices[1].price
         booking_to_extend.expiry +=  timedelta(hours=4)
     elif duration == 3:
         booking_to_extend.numHours += 24
-        booking_to_extend.price += 120
+        booking_to_extend.price += prices[2].price
         booking_to_extend.expiry +=  timedelta(days=1)
     elif duration == 4:
         booking_to_extend.numHours += 168
-        booking_to_extend.price += 840
+        booking_to_extend.price += prices[3].price
         booking_to_extend.expiry +=  timedelta(days=7)
     db.session.commit()
     return redirect(url_for("dashboard"))
