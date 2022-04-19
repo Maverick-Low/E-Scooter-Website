@@ -26,29 +26,34 @@ import json
 
 @app.route("/add_test")
 def add_test():
-    location2 = models.Location()
-    location3 = models.Location()
-    location4 = models.Location()
-    location5 = models.Location()
-    user_obj = models.Scooter(in_use = False, LocationID = 2)
-    user_obj1 = models.Scooter(in_use = False, LocationID = 3)
-    user_obj2 = models.Scooter(in_use = False, LocationID = 4)
-    user_obj3 = models.Scooter(in_use = False, LocationID = 5)
-    user_obj4 = models.Scooter(in_use = False, LocationID = 1)
-    db.session.add(user_obj)
-    db.session.add(user_obj1)
-    db.session.add(user_obj2)
-    db.session.add(user_obj3)
-    db.session.add(user_obj4)
-    db.session.add(location2)
-    db.session.add(location3)
-    db.session.add(location4)
-    db.session.add(location5)
-    # admin_obj = models.User.query.filter_by(email="admin@admin.com").first()
-    # admin_obj.admin = True
-    # issue = models.Report(issue = "Refund", description = "Havent recieved refund yet", priority = 1)
-    # db.session.add(issue)
-    models.Card.query.filter_by(id=1).delete()                                                                                                   
+    db.session.commit()
+    # location2 = models.Location()
+    # location3 = models.Location()
+    # location4 = models.Location()
+    # location5 = models.Location()
+    # user_obj = models.Scooter(in_use = False, LocationID = 2)
+    # user_obj1 = models.Scooter(in_use = False, LocationID = 3)
+    # user_obj2 = models.Scooter(in_use = False, LocationID = 4)
+    # user_obj3 = models.Scooter(in_use = False, LocationID = 5)
+    # user_obj4 = models.Scooter(in_use = False, LocationID = 1)
+    # db.session.add(user_obj)
+    # db.session.add(user_obj1)
+    # db.session.add(user_obj2)
+    # db.session.add(user_obj3)
+    # db.session.add(user_obj4)
+    # db.session.add(location2)
+    # db.session.add(location3)
+    # db.session.add(location4)
+    # db.session.add(location5)
+    admin_obj = models.User.query.filter_by(email="admin@admin.com").first()
+    admin_obj.admin = True
+    staff_obj = models.User.query.filter_by(email="staff@staff.com").first()
+    staff_obj.staff = True
+    # # # issue = models.Report(issue = "Refund", description = "Havent recieved refund yet", priority = 1)
+    # # # db.session.add(issue)
+    # # models.Card.query.filter_by(id=1).delete()    
+    # 
+                                                            
     db.session.commit()
     return redirect(url_for("dashboard"))
 
@@ -98,6 +103,7 @@ def login():
         elif user_obj and bcrypt.check_password_hash(user_obj.password, form.password.data):
             session["email"] = user_obj.email
             session["admin"] = user_obj.admin
+            session["staff"] = user_obj.staff
             flash("Welcome " + user_obj.username + "!")
             # if user_obj.admin == True:
             #     return redirect("/admin")
@@ -114,6 +120,11 @@ def mainmenu():
 
 @app.route("/trinity", methods = ["GET", "POST"])
 def trinity():
+        if 'admin' in session:
+            return redirect("/admin")
+        elif 'staff' in session:
+            return redirect("/staff")
+
         form = Booking()
         Scooters = models.Scooter.query.filter_by(in_use = False).all()
         # Counting the number of available scooters in each loaction
@@ -135,6 +146,12 @@ def trinity():
 
 @app.route("/train", methods = ["GET", "POST"])
 def train():
+
+        if 'admin' in session:
+            return redirect("/admin")
+        elif 'staff' in session:
+            return redirect("/staff")
+
         form = Booking()
         Scooters = models.Scooter.query.filter_by(in_use = False).all()
         # Counting the number of available scooters in each loaction
@@ -156,6 +173,11 @@ def train():
 
 @app.route("/lri", methods = ["GET", "POST"])
 def lri():
+        if 'admin' in session:
+            return redirect("/admin")
+        elif 'staff' in session:
+            return redirect("/staff")
+
         form = Booking()
         Scooters = models.Scooter.query.filter_by(in_use = False).all()
         # Counting the number of available scooters in each loaction
@@ -177,6 +199,11 @@ def lri():
 
 @app.route("/merrion", methods = ["GET", "POST"])
 def merrion():
+        if 'admin' in session:
+            return redirect("/admin")
+        elif 'staff' in session:
+            return redirect("/staff")
+        
         form = Booking()
         Scooters = models.Scooter.query.filter_by(in_use = False).all()
         # Counting the number of available scooters in each loaction
@@ -198,6 +225,11 @@ def merrion():
 
 @app.route("/edge", methods = ["GET", "POST"])
 def edge():
+        if 'admin' in session:
+            return redirect("/admin")
+        elif 'staff' in session:
+            return redirect("/staff")
+        
         form = Booking()
         Scooters = models.Scooter.query.filter_by(in_use = False).all()
         # Counting the number of available scooters in each loaction
@@ -270,6 +302,8 @@ def logout():
         session.pop("email", None)
     if "admin" in session:
         session.pop("admin", None)
+    if "staff" in session:
+        session.pop("staff", None)
     if logout:
         flash("You have successfully logged out!")
     
@@ -281,6 +315,8 @@ def dashboard():
         return redirect("/login")
     elif session.get('admin') != 0:
         return redirect("/admin")
+    elif session.get('staff') != 0:
+        return redirect('staff')
     else:
         
         user = models.User.query.filter_by(email = session['email']).first()
@@ -359,12 +395,16 @@ def reRoute():
 def admin_dash():
     if session.get('admin') != 0:
         return render_template("admin_dashboard.html")
+    elif session.get('staff'):
+        return redirect("/staff")
     else:
         return redirect(url_for("dashboard"))
 
 @app.route("/admin/bookings")
 def admin_bookings():
     if session.get('admin') == 0:
+        if 'staff' in session:
+            return redirect("\staff")
         return redirect("/dashboard")
     else:
         bookings = models.Booking.query.all()
@@ -381,6 +421,8 @@ def admin_bookings():
 @app.route("/admin/configure")
 def admin_config():
     if session.get('admin') == 0:
+        if 'staff' in session:
+            return redirect("\staff")
         return redirect("/dashboard")
     else:
         return render_template("configure.html")
@@ -388,6 +430,8 @@ def admin_config():
 @app.route("/admin/issues")
 def admin_issues():
     if session.get('admin') == 0:
+        if 'staff' in session:
+            return redirect("\staff")
         return redirect("/dashboard")
     else:
         issues = models.Report.query.all()
@@ -397,6 +441,8 @@ def admin_issues():
 @app.route("/admin/issues/resolve_issue/<string:issue_id>")
 def resolve_issue(issue_id):
     if session.get('admin') == 0:
+        if 'staff' in session:
+            return redirect("\staff")
         return redirect("/dashboard")
     else:
         issue_obj = models.Report.query.filter_by(id = issue_id).first()
@@ -407,6 +453,8 @@ def resolve_issue(issue_id):
 @app.route("/admin/issues/high_priority")
 def high_priority():
     if session.get('admin') == 0:
+        if 'staff' in session:
+            return redirect("\staff")
         return redirect("/dashboard")
     else:
         issues = models.Report.query.order_by(models.Report.priority.asc())
@@ -415,10 +463,13 @@ def high_priority():
 @app.route("/admin/issues/low_priority")
 def low_priority():
     if session.get('admin') == 0:
+        if 'staff' in session:
+            return redirect("\staff")
         return redirect("/dashboard")
     else:
         issues = models.Report.query.order_by(models.Report.priority.desc())
         return render_template("issues.html", issues = issues)
+
 @app.route("/hire_scooter")
 def hire_scooter():
     #admin redirected to admin dashboard
@@ -505,6 +556,8 @@ def remove_available(location):
 
 @app.route("/admin/bookings")
 def bookings():
+    if 'staff' in session:
+            return redirect("\staff")
     orders = models.Booking.query.all()
     
 
@@ -606,9 +659,17 @@ def extend_booking(bookingID, duration):
 
 @app.route("/admin/pricing")
 def pricing():
+    if 'staff' in session:
+            return redirect("\staff")
     prices = models.Price.query.all()
     
     
+
+@app.route("/staff")
+def staff_dashboard():
+    return ("Staff dashboard")
+
+
 #for merging
 """
 logout code:

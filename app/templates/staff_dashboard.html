@@ -1,0 +1,17 @@
+{% extends "admin_base.html" %}
+{% block content %}
+
+<head>
+    <title>AdminDashboard</title>
+</head>
+<body>
+    <h1>Staff Dashboard!</h1>
+
+    <a href="/admin/bookings" class="myButton">View bookings</a>
+    <a href="/admin/statistics" class="myButton">View statistics</a>
+    <a href="admin/configure" class="myButton">Configure details</a>
+    <a href="admin/issues" class="myButton">View reported issues</a>
+    <a href="admin/statistics" class="myButton">View weekly income for rental options</a>
+</body>
+
+{% endblock content %}
