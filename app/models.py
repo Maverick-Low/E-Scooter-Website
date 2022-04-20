@@ -11,7 +11,7 @@ class User(db.Model):
     email = db.Column(db.String(60), nullable=False, unique=True)
     username = db.Column(db.String(60), nullable=False)
     password = db.Column(db.String(60), nullable=False)
-    # discount = db.Column(db.Boolean, default=False)
+    discount = db.Column(db.Boolean, default=False)
 
 
 # Table for reported issues

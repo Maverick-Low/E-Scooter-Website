@@ -275,6 +275,14 @@ def register():
         if form.validate_on_submit():
             hashed_password = bcrypt.generate_password_hash(form.password_1.data).decode('utf-8')
             user_obj = models.User(username=form.username.data, email=form.email.data, password=hashed_password, admin=False)
+            #check whether account is a student account
+            #if it is then apply a discount
+            email = str(form.email.data)
+            emailLength = int(len(email))
+            if form.email.data[int(emailLength - 6): int(emailLength)] == ".ac.uk":
+                user_obj.discount = True
+
+
             session["email"] = form.email.data
             session["admin"] = False
             db.session.add(user_obj)
@@ -529,6 +537,10 @@ def remove_available(location):
     # hours_added = datetime.timedelta(hours = int(param[2]))
     price = int(param[1])
     price = price*5
+    #apply discount
+    if user.discount == True:
+        price = price*4/5
+
     expiry = datetime.now() + timedelta(hours=int(param[1]))
     booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = param[1], date= datetime.today(), price = price, expiry = expiry)
     db.session.add(booking)
@@ -646,6 +658,7 @@ def cancel_booking(bookingID):
 @app.route("/extend_booking/<int:bookingID>/<int:duration>")
 def extend_booking(bookingID, duration):
     booking_to_extend = models.Booking.query.filter_by(id=bookingID).first()
+    old_price = booking_to_extend.price
     if duration == 1:
         booking_to_extend.numHours += 1
         booking_to_extend.price += 5
@@ -662,6 +675,12 @@ def extend_booking(bookingID, duration):
         booking_to_extend.numHours += 168
         booking_to_extend.price += 840
         booking_to_extend.expiry +=  timedelta(days=7)
+    
+    #apply discount
+    current_user = models.User.query.filter_by(email = session.get('email')).first()
+    if current_user.discount == True:
+        booking_to_extend.price = old_price + (booking_to_extend.price - old_price)*4/5
+
     db.session.commit()
     return redirect(url_for("dashboard"))
 
