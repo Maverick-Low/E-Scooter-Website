@@ -279,9 +279,10 @@ def register():
             #if it is then apply a discount
             email = str(form.email.data)
             emailLength = int(len(email))
-            if form.email.data[int(emailLength - 6): int(emailLength)] == ".ac.uk":
+            # also chekcing if the user is a senior
+            user_age = int(form.age.data)
+            if form.email.data[int(emailLength - 6): int(emailLength)] == ".ac.uk" or user_age >= 65:
                 user_obj.discount = True
-
 
             session["email"] = form.email.data
             session["admin"] = False
