@@ -1,3 +1,4 @@
+from ast import If
 from email.message import Message
 from encodings import utf_8
 from enum import auto                     
@@ -110,6 +111,7 @@ def login():
             # if user_obj.admin == True:
             #     return redirect("/admin")
             return redirect(url_for("dashboard"))
+            
         else:
             flash("Incorrect password!")
             return render_template('Login/Website_Login.html', form=form)
@@ -122,10 +124,11 @@ def mainmenu():
 
 @app.route("/trinity", methods = ["GET", "POST"])
 def trinity():
-        if 'admin' in session:
+        if session.get('admin') != 0:
             return redirect("/admin")
-        elif 'staff' in session:
-            return redirect("/staff")
+        if session.get('staff') != 0:
+            return redirect('staff')
+        
 
         form = Booking()
         Scooters = models.Scooter.query.filter_by(in_use = False).all()
@@ -149,10 +152,11 @@ def trinity():
 @app.route("/train", methods = ["GET", "POST"])
 def train():
 
-        if 'admin' in session:
+        if session.get('admin') != 0:
             return redirect("/admin")
-        elif 'staff' in session:
-            return redirect("/staff")
+        if session.get('staff') != 0:
+            return redirect('staff')
+        
 
         form = Booking()
         Scooters = models.Scooter.query.filter_by(in_use = False).all()
@@ -175,10 +179,11 @@ def train():
 
 @app.route("/lri", methods = ["GET", "POST"])
 def lri():
-        if 'admin' in session:
+        if session.get('admin') != 0:
             return redirect("/admin")
-        elif 'staff' in session:
-            return redirect("/staff")
+        if session.get('staff') != 0:
+            return redirect('staff')
+        
 
         form = Booking()
         Scooters = models.Scooter.query.filter_by(in_use = False).all()
@@ -201,10 +206,11 @@ def lri():
 
 @app.route("/merrion", methods = ["GET", "POST"])
 def merrion():
-        if 'admin' in session:
+        if session.get('admin') != 0:
             return redirect("/admin")
-        elif 'staff' in session:
-            return redirect("/staff")
+        if session.get('staff') != 0:
+            return redirect('staff')
+        
         
         form = Booking()
         Scooters = models.Scooter.query.filter_by(in_use = False).all()
@@ -227,10 +233,10 @@ def merrion():
 
 @app.route("/edge", methods = ["GET", "POST"])
 def edge():
-        if 'admin' in session:
+        if session.get('admin') != 0:
             return redirect("/admin")
-        elif 'staff' in session:
-            return redirect("/staff")
+        if session.get('staff') != 0:
+            return redirect('staff')
         
         form = Booking()
         Scooters = models.Scooter.query.filter_by(in_use = False).all()
@@ -406,7 +412,7 @@ def admin_dash():
 def admin_bookings():
     if session.get('admin') == 0:
         if 'staff' in session:
-            return redirect("\staff")
+            return redirect("/staff")
         return redirect("/dashboard")
     else:
         bookings = models.Booking.query.all()
@@ -424,7 +430,7 @@ def admin_bookings():
 def admin_config():
     if session.get('admin') == 0:
         if 'staff' in session:
-            return redirect("\staff")
+            return redirect("/staff")
         return redirect("/dashboard")
     else:
         return render_template("configure.html")
@@ -433,7 +439,7 @@ def admin_config():
 def admin_issues():
     if session.get('admin') == 0:
         if 'staff' in session:
-            return redirect("\staff")
+            return redirect("/staff")
         return redirect("/dashboard")
     else:
         issues = models.Report.query.all()
@@ -444,7 +450,7 @@ def admin_issues():
 def resolve_issue(issue_id):
     if session.get('admin') == 0:
         if 'staff' in session:
-            return redirect("\staff")
+            return redirect("/staff")
         return redirect("/dashboard")
     else:
         issue_obj = models.Report.query.filter_by(id = issue_id).first()
@@ -456,7 +462,7 @@ def resolve_issue(issue_id):
 def high_priority():
     if session.get('admin') == 0:
         if 'staff' in session:
-            return redirect("\staff")
+            return redirect("/staff")
         return redirect("/dashboard")
     else:
         issues = models.Report.query.order_by(models.Report.priority.asc())
@@ -466,7 +472,7 @@ def high_priority():
 def low_priority():
     if session.get('admin') == 0:
         if 'staff' in session:
-            return redirect("\staff")
+            return redirect("/staff")
         return redirect("/dashboard")
     else:
         issues = models.Report.query.order_by(models.Report.priority.desc())
@@ -657,22 +663,20 @@ def extend_booking(bookingID, duration):
         booking_to_extend.price += 840
         booking_to_extend.expiry +=  timedelta(days=7)
     db.session.commit()
-    return redirect(url_for("dashboard3"))
+    return redirect(url_for("dashboard"))
 
 @app.route("/admin/pricing")
 def pricing():
-    if 'staff' in session:
-            return redirect("\staff")
+    
     prices = models.Price.query.all()
     
     
 #main route for the staff interface, staff gets re routed here if trying to access illegal routes
 @app.route("/staff")
 def staff_dashboard():
-    if not 'staff' in session:
-        if 'admin' in session:
-            return redirect('\admin')
-        return redirect('\dashboard') 
+    print(session)
+    if session.get('staff') == 0:
+        return redirect('/')
 
     return render_template('staff_dashboard.html')
 
