@@ -491,6 +491,16 @@
 	font-size: 10px;
 	color: rgba(0,0,0,1);
 }
+#Password_Show{
+	overflow: visible;
+	position: absolute;
+	width: 16.738px;
+	height: 13.391px;
+	left: 312.5px;
+	top: 361.109px;
+	cursor: pointer;
+	background-color: inherit;
+}
 #Icon_awesome-eye-slash {
 	opacity: 0.6;
 	fill: rgba(0,0,0,1);
@@ -500,8 +510,8 @@
 	position: absolute;
 	width: 16.738px;
 	height: 13.391px;
-	left: 312.5px;
-	top: 361.109px;
+	left: 0px;
+	top: 0px;
 	transform: matrix(1,0,0,1,0,0);
 }
 #Dont_have_an_account_Sign_up {
