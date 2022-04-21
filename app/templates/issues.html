@@ -6,8 +6,8 @@
 </head>
 <body>
     <h1>View by:</h1>
-    <button type= "button" class="btn btn-primary" ><a href="/admin/issues/high_priority">High priority</a></button>
-    <button type= "button" class="btn btn-primary" ><a href="/admin/issues/low_priority">Low priority</a></button>
+    <button type= "button" class="btn btn-primary" onclick="window.location.href='/admin/issues/high_priority'" style = "color: white">High priority</button>
+    <button type= "button" class="btn btn-primary" onclick="window.location.href='/admin/issues/low_priority'" style = "color: white">Low priority</button>
     <h1>Reported Issues</h1>
     {% if not issues %}
         <p>There are no issues</p>
@@ -19,7 +19,7 @@
             <p>Type: {{elem.issue}}</p>
             <p>Description: {{elem.description}}</p>
             <p>Priority: {{elem.priority}}</p>
-            <button type= "button" class="btn btn-primary" ><a href="/admin/issues/resolve_issue/{{elem.id}}">Resolve Issue</a></button>
+			<button type= "button" class="btn btn-primary" onclick="window.location.href='/admin/issues/resolve_issue/{{elem.id}}'" style = "color: white">Resolve Issue</button>
             <br> </br>
         {%endif%}
     {% endfor %}

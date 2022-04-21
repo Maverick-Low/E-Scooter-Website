@@ -403,6 +403,7 @@
 	font-size: 13px;
 	color: rgba(203,208,211,1);
 	letter-spacing: 0.5px;
+	text-decoration: none
 }
 #About {
 	left: 100px;
@@ -420,6 +421,7 @@
 	font-size: 13px;
 	color: rgba(203,208,211,1);
 	letter-spacing: 0.5px;
+	text-decoration: none
 }
 #Testimonials {
 	left: 200px;
@@ -437,6 +439,7 @@
 	font-size: 13px;
 	color: rgba(203,208,211,1);
 	letter-spacing: 0.5px;
+	text-decoration: none
 }
 #Pricing {
 	left: 0px;
@@ -454,6 +457,7 @@
 	font-size: 13px;
 	color: rgba(203,208,211,1);
 	letter-spacing: 0.5px;
+	text-decoration: none
 }
 #Terms {
 	left: 100px;
@@ -471,6 +475,7 @@
 	font-size: 13px;
 	color: rgba(203,208,211,1);
 	letter-spacing: 0.5px;
+	text-decoration: none
 }
 #Integrations {
 	left: 200px;
@@ -488,6 +493,7 @@
 	font-size: 13px;
 	color: rgba(203,208,211,1);
 	letter-spacing: 0.5px;
+	text-decoration: none
 }
 #Contact {
 	left: 0px;
@@ -505,8 +511,9 @@
 	font-size: 13px;
 	color: rgba(203,208,211,1);
 	letter-spacing: 0.5px;
+	text-decoration: none
 }
-#Guidlines {
+#Guidelines {
 	left: 100px;
 	top: 69px;
 	position: absolute;
@@ -522,6 +529,7 @@
 	font-size: 13px;
 	color: rgba(203,208,211,1);
 	letter-spacing: 0.5px;
+	text-decoration: none
 }
 #Careers {
 	left: 200px;
@@ -539,6 +547,7 @@
 	font-size: 13px;
 	color: rgba(203,208,211,1);
 	letter-spacing: 0.5px;
+	text-decoration: none
 }
 #Bookings {
 	left: 0px;
@@ -556,6 +565,7 @@
 	font-size: 13px;
 	color: rgba(203,208,211,1);
 	letter-spacing: 0.5px;
+	text-decoration: none
 }
 #Help {
 	left: 100px;
@@ -573,6 +583,7 @@
 	font-size: 13px;
 	color: rgba(203,208,211,1);
 	letter-spacing: 0.5px;
+	text-decoration: none
 }
 #Advertise {
 	left: 200px;
@@ -590,26 +601,7 @@
 	font-size: 13px;
 	color: rgba(203,208,211,1);
 	letter-spacing: 0.5px;
-}
-@media (min-width: 900px){
-    .subscribe {
-        position: absolute;
-        width: 260px;
-        height: 56px;
-        left: 50%;
-        top: 58px;
-        overflow: visible;
-    }
-}
-@media (max-width: 900px){
-	.subscribe {
-	position: absolute;
-	width: 260px;
-	height: 56px;
-	left: 25%;
-	top: 58px;
-	overflow: visible;
-}
+	text-decoration: none
 }
 #field {
 	opacity: 0.35;
@@ -684,6 +676,14 @@
 	color: rgba(203,208,211,1);
 }
 @media (min-width: 900px){
+    .subscribe {
+        position: absolute;
+        width: 260px;
+        height: 56px;
+        left: 50%;
+        top: 58px;
+        overflow: visible;
+    }
 	#Social {
 	position: absolute;
 	width: 160px;
@@ -694,6 +694,14 @@
 	}
 }
 @media (max-width: 900px){
+	.subscribe {
+	position: absolute;
+	width: 260px;
+	height: 56px;
+	left: 25%;
+	top: 58px;
+	overflow: visible;
+	}
 	#Social {
 	position: absolute;
 	width: 160px;

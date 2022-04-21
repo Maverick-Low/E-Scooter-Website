@@ -2,15 +2,6 @@
 @import url(//db.onlinewebfonts.com/c/154ebfcef3ca74b92a56a5826ee85d74?family=Sharp+Sans+No1+Bold);
 @import url(//db.onlinewebfonts.com/c/4b20d1a4e849e41959b1c169dd9683c4?family=Sharp+Sans+No1+Light);
 @import url(//db.onlinewebfonts.com/c/59e7605c0e625de0522a548ac1a15d91?family=Sharp+Sans+No1+Medium+Italic);
-.mediaViewInfo {
-	--web-view-name: Website Payment – 1;
-	--web-view-id: Website_Payment__1;
-	--web-scale-on-resize: true;
-	--web-enable-deep-linking: true;
-}
-:root {
-	--web-view-ids: Website_Payment__1;
-}
 * {
 	margin: 0;
 	padding: 0;

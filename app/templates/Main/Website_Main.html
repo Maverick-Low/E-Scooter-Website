@@ -97,10 +97,10 @@
 		<span>Confirm Booking</span>
 	</div>
 	<select class="n__Hours" id="myDropdown2">
-				<option value= "1">1 Hour - {{prices[0].price }}</option>
-				<option value= "2">4 Hours - {{prices[1].price }}</option>
-				<option value= "3">1 Day - {{prices[2].price }}</option>
-				<option value= "4">1 Week - {{prices[3].price }}</option>
+				<option value= "1">1 Hour - £{{prices[0].price|round|int }}</option>
+				<option value= "2">4 Hours - £{{prices[1].price|round|int }}</option>
+				<option value= "3">1 Day - £{{prices[2].price|round|int }}</option>
+				<option value= "4">1 Week - £{{prices[3].price|round|int }}</option>
 	</select>
 	<script>
 		function hoursSubmit(){

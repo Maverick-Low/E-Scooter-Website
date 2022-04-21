@@ -108,7 +108,7 @@
         		{% if elem.id not in active or elem.cancelled %}
 				{% if loop.index <= 2 %}
             		<p>Order Number: {{elem.id}}</p>
-            		<p>Hours: {{elem.numHours}} Hr</p>
+            		<p>Hours: {{elem.numHours}}</p>
             		<p>Price: £{{elem.price}}</p>
             		<p>Date: {{elem.date.day}}-{{elem.date.month}}-{{elem.date.year}} {{elem.date.hour}}:{{elem.date.minute}}</p>
             		<p>Expiry Date: {{elem.expiry.day}}-{{elem.expiry.month}}-{{elem.expiry.year}} {{elem.expiry.hour}}:{{elem.expiry.minute}}</p>
