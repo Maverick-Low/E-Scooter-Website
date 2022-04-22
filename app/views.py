@@ -367,7 +367,7 @@ def weekly_income():
     # Redirects user if admin is not in session
     if not session.get('admin'):
         return redirect("/")
-    create_test_bookings()
+    # create_test_bookings()
     week_start_date = [] # Stores week start dates starting from the date a week ago today
     week = (datetime.combine(datetime.now(), time.min))-timedelta(weeks=1)
     week_start_date.append(week)

@@ -25,7 +25,7 @@ class Report(FlaskForm):
 
 class Registration(FlaskForm):
         username = StringField('Enter username', validators=[DataRequired(), Length(max=60)], render_kw={"placeholder": "Username",'style' : 'width: 135px; font-size: 13px; font-family: Halyard Display; font-style: normal; font-weight: normal;'})
-        age = StringField('Enter Age', validators=[DataRequired()], render_kw={"placeholder": "Age",'style' : 'width: 135px; font-size: 13px; font-family: Halyard Display; font-style: normal; font-weight: normal;'})
+        age = StringField('Enter Age', validators=[DataRequired(), Length(max=3)], render_kw={"placeholder": "Age",'style' : 'width: 135px; font-size: 13px; font-family: Halyard Display; font-style: normal; font-weight: normal;'})
         email = StringField('Enter email', validators=[DataRequired(), Length(max=60), Email()], render_kw={"placeholder": "Email", 'style' : 'width: 292px; font-size: 13px; font-family: Halyard Display; font-style: normal; font-weight: normal;'})
         password_1 = PasswordField('Enter password', validators=[DataRequired(), Length(min=8,max=60)], render_kw={"placeholder": "Password", 'style' : 'width: 292px; font-size: 13px; font-family: Halyard Display; font-style: normal; font-weight: normal;'})
         password_2 = PasswordField('Confirm password', validators=[DataRequired(), Length(min=8,max=60), EqualTo('password_1', message='Passwords must match!')], render_kw={"placeholder": "Confirm Password",'style' : 'width: 292px; font-size: 13px; font-family: Halyard Display; font-style: normal; font-weight: normal;'})
@@ -37,6 +37,11 @@ class Registration(FlaskForm):
             if user_object: #if user is already registered don't allow them to register again
                 raise ValidationError('This email address is already registered!')
 
+        #check wether the age is valid
+        def validate_age(self, age):
+            if age.isDigit() == False:
+                raise ValidationError('Please provide a numeric age!')
+        
         #function that validates the password when registering a new user
         def validate_password_1(self, password_1):
             count_numbers = 0
