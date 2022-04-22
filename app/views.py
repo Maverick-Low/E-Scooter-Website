@@ -7,7 +7,7 @@ from sqlalchemy import false
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session
 from datetime import datetime, timedelta, date, time
-from .forms import Registration, Login, Payment, Report, Booking
+from .forms import Registration, Login, Payment, Report, Booking, Prices
 import smtplib, ssl
 from email.mime.text import MIMEText
 from werkzeug.datastructures import MultiDict
@@ -434,6 +434,98 @@ def admin_bookings():
 #         return redirect("/dashboard")
 #     else:
 #         return render_template("statistics.html")
+    
+    
+@app.route("/add_pricing")
+def add_pricing():
+    price1 = models.Price(time = "1 hour")
+    price2 = models.Price(time = "4 hour's")
+    price3 = models.Price(time = "1 day")
+    price4 = models.Price(time = "1 week")
+    db.session.add(price1)
+    db.session.add(price2)
+    db.session.add(price3)
+    db.session.add(price4)
+    db.session.commit()
+    return redirect("/dashboard")
+    
+    
+    
+@app.route("/admin/pricing", methods = ["GET", "POST"])
+def pricing():
+    if session.get('admin') == 0:
+        return redirect("/dashboard")
+    else:
+        form = Prices()
+        if request.method == "GET":
+            prices = models.Price.query.all()
+            autoFillPrice1 = prices[0].price
+            autoFillPrice2 = prices[1].price
+            autoFillPrice3 = prices[2].price
+            autoFillPrice4 = prices[3].price
+            form = Prices(formdata = MultiDict([('hour_price', autoFillPrice1), ('four_hour_price', autoFillPrice2), ('day_price', autoFillPrice3),
+                                                ('week_price', autoFillPrice4),]))
+            return render_template("pricing.html", form = form, prices = prices)
+
+        elif request.method == "POST":
+            prices = models.Price.query.all()
+            prices[0].price = form.hour_price.data
+            prices[1].price = form.four_hour_price.data
+            prices[2].price = form.day_price.data
+            prices[3].price = form.week_price.data
+            db.session.commit()
+            return redirect("/admin")
+            
+        
+    
+# def payment(location):
+#     #admin redirected to admin dashboard
+#     locations = ['Trinity Centre','Train Station','Merrion Centre','LRI Hospital','UoL Edge Sports Centre']
+#     if session.get('admin') != 0:
+#         return redirect("/admin")
+#     # write_key()
+#     key = load_key()
+#     f = Fernet(key)
+#     if request.method == "GET":
+#         currentUser = models.User.query.filter_by(email = session.get('email')).first()
+#         exists = db.session.query(models.Card.UserID).filter_by(UserID = currentUser.id).first() is not None
+#         if (exists == True):
+#             currentUserCard = models.Card.query.filter_by(UserID = currentUser.id).first()
+#             autoFilledName = currentUserCard.name # Retrieves name of user
+#             autoFilledCardNumber = f.decrypt(currentUserCard.cardnum).decode("utf-8") # Retrieves user's card number
+#             autoFilledExpiry = currentUserCard.expiry.strftime("%m/%Y") # Retrieves user's card expiry date
+#             autoFilledAddressLine1 = currentUserCard.address1
+#             autoFilledAddressLine2 = currentUserCard.address2
+#             autoFilledCity = currentUserCard.city
+#             autoFilledPostCode = currentUserCard.postcode
+#             form = Payment(formdata = MultiDict([('name', autoFilledName), ('card_number', autoFilledCardNumber), ('expiry_date', autoFilledExpiry),
+#                                                  ('address_line_1', autoFilledAddressLine1), ('address_line_2', autoFilledAddressLine2), ('city', autoFilledCity),
+#                                                  ('postcode', autoFilledPostCode), ]))
+#         else: 
+#             form = Payment()
+#         flash(exists)
+#         return render_template("payment.html", form=form, location = locations[location - 1]) # In order to display the location that user is reserving scooter from on payment screen
+#     elif request.method == "POST":
+#         form = Payment()
+#         if form.validate_on_submit():
+#             value = request.form.getlist('saveDetails')
+#             arr = [form.price.data,form.hours.data]
+#             if(len(value) != 0):            
+#                 arr2 = [form.name.data,form.card_number.data,form.expiry_date.data,form.address_line_1.data,form.address_line_2.data,form.city.data,form.postcode.data]
+#                 x = form.card_number.data.encode()
+#                 encryptedCard = f.encrypt(x)
+#                 user = models.User.query.filter_by(email = session.get('email')).first()
+#                 card_obj = models.Card(UserID = user.id, name = arr2[0], cardnum = encryptedCard, expiry = arr2[2]
+#                                     , address1 = arr2[3], address2 = arr2[4], city = arr2[5], postcode = arr2[6])
+#                 db.session.add(card_obj)
+#                 db.session.commit()
+#             #flash("Transaction confirmed!")
+#             return redirect("/remove_available/"+str(location)+'$' + str(arr[0]) + '$' + str(arr[1]))
+        
+#         else:
+#             flash('Card payment not accepted')
+#             return render_template('payment.html', form=form, location = locations[location - 1])   
+    
 
 @app.route("/admin/configure")
 def admin_config():
@@ -656,6 +748,7 @@ def cancel_booking(bookingID):
 
 
 
+
 @app.route("/extend_booking/<int:bookingID>/<int:duration>")
 def extend_booking(bookingID, duration):
     booking_to_extend = models.Booking.query.filter_by(id=bookingID).first()
@@ -685,10 +778,10 @@ def extend_booking(bookingID, duration):
     db.session.commit()
     return redirect(url_for("dashboard"))
 
-@app.route("/admin/pricing")
-def pricing():
+# @app.route("/admin/pricing")
+# def pricing():
     
-    prices = models.Price.query.all()
+#     prices = models.Price.query.all()
     
     
 #main route for the staff interface, staff gets re routed here if trying to access illegal routes

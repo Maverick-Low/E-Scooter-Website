@@ -78,6 +78,25 @@ class Booking(FlaskForm):
     price = StringField('', default='5')
     hours =  StringField('', default='1')
     
+
+class Prices(FlaskForm):
+    hour_price = StringField('Enter a price', validators=[DataRequired(), Length(max= 60), Regexp('\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})')])
+    four_hour_price= StringField('Enter a price', validators=[DataRequired(), Length(max=60)])
+    day_price = StringField('Enter a price', validators=[DataRequired(), Length(max=60)])
+    week_price = StringField('Enter a price', validators=[DataRequired(), Length(max=60)])
+    submit = SubmitField('Submit')
+
+    # def valid_float(self, price):
+    #     count = 0
+    #     for i in range(len(price)):
+    #         if price[i] == ".":
+    #             count+=1
+    #             if count > 1:
+    #                 raise ValidationError("Invalid Price entered. Should follow the format - 0.00")
+
+        
+
+
 class Payment(FlaskForm):
     #function that checks if the expiry date is in the future
     # def validateCVV():
@@ -148,6 +167,8 @@ class Payment(FlaskForm):
         for char in self.cvv.data:
             if not char in chars:
                 raise ValidationError(f"Character {char} is not allowed in cvv.")
+            
+    
 
 
     # def luhns(card_number):
