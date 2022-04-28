@@ -240,18 +240,18 @@ def dashboard():
 def create_test_bookings():
     # db.session.query(models.Booking).delete()
     db.session.commit()
-    b1 = models.Booking(numHours=0, date=datetime.now() - timedelta(days=1), expiry=datetime.now(), price=5,
-                        cancelled=False)
-    b2 = models.Booking(numHours=0, date=datetime.now() - timedelta(weeks=4), expiry=datetime.now(), price=8,
-                        cancelled=False)
-    b3 = models.Booking(numHours=0, date=datetime.now() - timedelta(weeks=3), expiry=datetime.now(), price=11,
-                        cancelled=False)
-    b4 = models.Booking(numHours=0, date=datetime.now() - timedelta(weeks=2), expiry=datetime.now(), price=23,
-                        cancelled=False)
+    b1 = models.Booking(numHours=1, date=datetime.now() - timedelta(weeks=2), expiry=datetime.now(), price=5,
+                        cancelled=False, option=1)
+    # b2 = models.Booking(numHours=0, date=datetime.now() - timedelta(weeks=4), expiry=datetime.now(), price=8,
+    #                     cancelled=False)
+    # b3 = models.Booking(numHours=0, date=datetime.now() - timedelta(weeks=3), expiry=datetime.now(), price=11,
+    #                     cancelled=False)
+    # b4 = models.Booking(numHours=0, date=datetime.now() - timedelta(weeks=2), expiry=datetime.now(), price=23,
+    #                     cancelled=False)
     db.session.add(b1)
-    db.session.add(b2)
-    db.session.add(b3)
-    db.session.add(b4)
+    # db.session.add(b2)
+    # db.session.add(b3)
+    # db.session.add(b4)
     db.session.commit()
     return redirect("/")
 
@@ -314,7 +314,7 @@ def weekly_income_rental():
         for obj in orders:
             if obj.date <= current_week and obj.date > end_week:
                 #check the rental option of the booking
-                if obj.numHours == hours[i]:
+                if obj.option == i+1:
                     order_list.append(obj)
         # Sum the price of all the bookings in this week for specific rental option
         
@@ -509,7 +509,7 @@ def remove_available(location):
 
 
     expiry = datetime.now() + timedelta(hours=int(param[1]))
-    booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = param[1], date= datetime.today(), price = price, expiry = expiry)
+    booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = h, date= datetime.today(), price = price, expiry = expiry, option = param[1])
     db.session.add(booking)
     db.session.commit()
     #Sending confirmation email
