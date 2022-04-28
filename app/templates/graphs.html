@@ -15,7 +15,7 @@
     {{ sum }}
     <br>
     {% endfor %} -->
-    <canvas id="lineGraph" width="800" height="800"></canvas>
+    <canvas id="lineGraph" width="800" height="600"></canvas>
     <script>
         let graphWeeks = JSON.parse({{weeks | tojson }})
         let graphIncome = JSON.parse({{income | tojson }})
@@ -63,6 +63,8 @@
         });
     </script>
 </body>
+    <a href="/admin/statistics/week" class="myButton">Week Breakdown</a>
+    <a href="/admin/statistics/rental_option" class="myButton">Rental Options Breakdown</a>
 </html>
 
 {% endblock %}

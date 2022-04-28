@@ -263,11 +263,11 @@ def weekly_income():
         return redirect("/")
     # create_test_bookings()
     week_start_date = []  # Stores week start dates starting from the date a week ago today
-    week = (datetime.combine(datetime.now(), time.min)) - timedelta(weeks=1)
+    week = (datetime.combine(datetime.now(), time.min)) + timedelta(weeks=1)
     week_start_date.append(week)
-    sums = [0] * 6  # Stores the sum of the price for each booking within the corresponding week
+    sums = [0] * 8  # Stores the sum of the price for each booking within the corresponding week
 
-    for i in range(5):  # Let the graph show information going 10 weeks back from today
+    for i in range(7):  # Let the graph show information going 10 weeks back from today
         week = week - timedelta(weeks=1)
         week_start_date.append(week)
         # Find all bookings within a given week
@@ -284,6 +284,7 @@ def weekly_income():
     # Format the week start dates to a string day/month/year which will then be displayed in the graph
     count = 0
     for d in week_start_date:
+        d = d - timedelta(weeks=1)
         week_start_date[count] = str(d.strftime("%d/%m/%Y"))
         count += 1
     # week_start_date = ["1", "2", "3"]
