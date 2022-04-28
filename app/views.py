@@ -294,6 +294,76 @@ def weekly_income():
     return render_template("graphs.html", weeks=json.dumps(week_start_date), income=json.dumps(sums))
 
 
+@app.route("/admin/statistics/rental_option")
+def weekly_income_rental():
+    # Redirects user if admin is not in session
+    if not session.get('admin'):
+        return redirect("/")
+
+    
+    rental_options = ['1 Hour', '4 Hours', '1 Day', '1 Week'] #  Rental options available within the website
+    hours = [1, 4, 24, 168]
+    current_week = (datetime.combine(datetime.now(), time.min))
+    end_week = current_week - timedelta(days=6)
+    sums = [0] * 4 # a sum for each rental option available
+    
+    for i in range(4): # Need to check orders for each specified rental option
+        # Find all bookings within a given week for specific rental option
+        orders = models.Booking.query.all()
+        order_list = []
+        for obj in orders:
+            if obj.date <= current_week and obj.date > end_week:
+                #check the rental option of the booking
+                if obj.numHours == hours[i]:
+                    order_list.append(obj)
+        # Sum the price of all the bookings in this week for specific rental option
+        
+        for order in order_list:
+            sums[i] += order.price
+    
+    return render_template("graphs_rental_option.html", weeks=json.dumps(rental_options), income=json.dumps(sums))
+
+
+
+@app.route("/admin/statistics/week")
+def daily_income():
+    # Redirects user if admin is not in session
+    if not session.get('admin'):
+        return redirect("/")
+    # create_test_bookings()
+    days_to_model = [] # Stores week start dates starting from the date a week ago today
+    day = (datetime.combine(datetime.now(), time.min))
+    days_to_model.append(day)
+    sums = [0] * 6 # Stores the sum of the price for each booking within the corresponding week
+    
+    for i in range(5): # Let the graph show information going 10 weeks back from today
+        day = day-timedelta(days=1)
+        days_to_model.append(day)
+        # Find all bookings within a given week
+        orders = models.Booking.query.all()
+        order_list = []
+        for obj in orders:
+            if obj.date <= days_to_model[i] and obj.date > days_to_model[i+1]:
+                order_list.append(obj)
+        # Sum the price of all the bookings in this week
+        
+        for order in order_list:
+            sums[i] += order.price
+    
+    # Format the week start dates to a string day/month/year which will then be displayed in the graph
+    count = 0
+    for d in days_to_model:
+        days_to_model[count] = str(d.strftime("%d/%m/%Y"))
+        count += 1
+    # week_start_date = ["1", "2", "3"]
+    # sums = ["5", "5", "5"]
+    #return render_template("graphs.html", weeks=week_start_date, income=sums)
+    days_to_model.reverse();
+    sums.reverse();
+    return render_template("graphs_week.html", weeks=json.dumps(days_to_model), income=json.dumps(sums))
+
+
+
 #solved bug where chrome automatically adds an extra '/' at the end of the url
 @app.route("/register/")
 def reRoute():
