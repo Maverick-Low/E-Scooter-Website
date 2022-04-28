@@ -439,7 +439,7 @@ def remove_available(location):
 
 
     expiry = datetime.now() + timedelta(hours=int(param[1]))
-    booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = param[1], date= datetime.today(), price = price, expiry = expiry)
+    booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = h, date= datetime.today(), price = price, expiry = expiry)
     db.session.add(booking)
     db.session.commit()
     #Sending confirmation email
@@ -566,7 +566,8 @@ def extend_booking(bookingID, duration):
     for order in orders:
         if order.date >= week and order.UserID == user_obj.id:
             hours += order.numHours
-    
+
+    #check if discount should be applied
     if hours >= 8 or user_obj.discount == True:
         if duration == 1:
             booking_to_extend.numHours += 1
@@ -645,14 +646,33 @@ def pricing():
             return redirect("/admin")
      
 
-
-@app.route("/staff")
+#main route for staff dashboard
+@app.route('/staff')
 def staff_dashboard():
-    print(session)
     if session.get('staff') == 0:
         return redirect('/')
-    return("Staff Dashboard!")
+    return render_template('staff_dashboard.html')
 
+
+@app.route('/staff/booking')
+def staff_booking():
+    if session.get('staff') == 0:
+        return redirect('/')
+    return render_template('staff_booking.html')
+
+
+@app.route('/staff/issues')
+def staff_issues():
+    if session.get('staff') == 0:
+        return redirect('/')
+    return render_template('staff_issues.html')
+
+
+@app.route('/staff/manage')
+def staff_manage():
+    if session.get('staff') == 0:
+        return redirect('/')
+    return render_template('staff_manage.html')
 
 
 #for merging
