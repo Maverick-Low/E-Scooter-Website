@@ -674,6 +674,13 @@ def staff_manage():
         return redirect('/')
     return render_template('staff_manage.html')
 
+# @app.route('/resolve_issue')
+# def resolve_issue():
+
+
+# @pp.route('/escalate_issue')
+# def escalate_issue():
+
 
 #for merging
 """
