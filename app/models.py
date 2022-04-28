@@ -7,9 +7,12 @@ class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     admin = db.Column(db.Boolean, default=False)
+    staff = db.Column(db.Boolean, default=False)
     email = db.Column(db.String(60), nullable=False, unique=True)
     username = db.Column(db.String(60), nullable=False)
     password = db.Column(db.String(60), nullable=False)
+    discount = db.Column(db.Boolean, default=False)
+
 
 # Table for reported issues
 class Report(db.Model):

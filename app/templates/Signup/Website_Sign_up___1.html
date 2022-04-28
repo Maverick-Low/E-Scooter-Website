@@ -154,9 +154,13 @@
                   </rect>
               </svg>
               <div id="Last_Name">
-                  <span>Last Name</span>
+                  <span>Age</span>
               </div>
-  			<input id="Last_Name_bx" name="lastname" type="text" value="" placeholder="Last Name" autofocus="on"></input>
+              {{ form.age (class="First_Name_bs") }}
+				{% for error in form.age.errors %}
+					<li class='error-message'>{{ error }}</li>
+				{% endfor %}
+  			<input id="Last_Name_bx" name="Age" type="text" value="" placeholder="Age" autofocus="on"></input>
           </div>
       </div>
       <div id="Group_1433">

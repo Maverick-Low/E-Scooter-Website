@@ -35,8 +35,10 @@ def add_test():
     db.session.add(location3)
     db.session.add(location4)
     db.session.add(location5)
-    # admin_obj = models.User.query.filter_by(email="admin@admin.com").first()
-    # admin_obj.admin = True
+    admin_obj = models.User.query.filter_by(email="admin@admin.com").first()
+    admin_obj.admin = True
+    staff_obj = models.User.query.filter_by(email="staff@staff.com").first()
+    staff_obj.staff = True
     # issue = models.Report(issue = "Refund", description = "Havent recieved refund yet", priority = 1)
     # db.session.add(issue)
     models.Card.query.filter_by(id=1).delete()                                                                                                   
@@ -89,6 +91,7 @@ def login():
         elif user_obj and bcrypt.check_password_hash(user_obj.password, form.password.data):
             session["email"] = user_obj.email
             session["admin"] = user_obj.admin
+            session["staff"] = user_obj.staff
             flash("Welcome " + user_obj.username + "!")
             # if user_obj.admin == True:
             #     return redirect("/admin")
@@ -101,6 +104,10 @@ def login():
 
 @app.route("/", methods = ["GET", "POST"])
 def mainmenu():
+        if session.get('admin') != 0:
+            return redirect("/admin")
+        if session.get('staff') != 0:
+            return redirect('/staff')
         prices = models.Price.query.all()
         form = Booking()
         Scooters = models.Scooter.query.filter_by(in_use = False).all()
@@ -132,7 +139,11 @@ def mainmenu():
         
 @app.route("/error404")
 def error404():
-        return render_template("Error/Website_Error___1.html")
+    if session.get('admin') != 0:
+        return redirect("/admin")
+    if session.get('staff') != 0:
+        return redirect('/staff')
+    return render_template("Error/Website_Error___1.html")
 
 @app.route("/register", methods = ["GET", "POST"])
 def register():
@@ -146,14 +157,29 @@ def register():
 
     elif request.method == "POST":
         if form.validate_on_submit():
+            print("validated")
             hashed_password = bcrypt.generate_password_hash(form.password_1.data).decode('utf-8')
             user_obj = models.User(username=form.username.data, email=form.email.data, password=hashed_password, admin=False)
+            #check wether account is a student account
+            #if it is then apply a discount
+            email = str(form.email.data)
+            print(email)
+            emailLength = int(len(email))
+            print(emailLength)
+            #check if user is a senior
+            user_age = int(form.age.data)
+            print(user_age)
+            if form.email.data[int(emailLength - 6): int(emailLength)] == ".ac.uk" or user_age >= 65:
+                user_obj.discount = True
+            print("success")
             session["email"] = form.email.data
             session["admin"] = False
+            session["staff"] = False
             db.session.add(user_obj)
             db.session.commit()
             return render_template('Dashboard/Website_Dashboard.html')
         else:
+            print("not validated")
             flash('Failed to submit registration form!')
             return render_template('Signup/Website_Sign_up___1.html', form=form)
 
@@ -183,6 +209,8 @@ def logout():
         session.pop("email", None)
     if "admin" in session:
         session.pop("admin", None)
+    if "staff" in session:
+        session.pop("staff", None)
     if logout:
         flash("You have successfully logged out!")
     
@@ -194,6 +222,8 @@ def dashboard():
         return redirect("/login")
     elif session.get('admin') != 0:
         return redirect("/admin")
+    elif session.get('staff') != 0:
+        return redirect('staff')
     else:
         
         user = models.User.query.filter_by(email = session['email']).first()
@@ -229,7 +259,7 @@ def create_test_bookings():
 @app.route("/admin/statistics")
 def weekly_income():
     # Redirects user if admin is not in session
-    if not session.get('admin'):
+    if session.get('admin') == 0:
         return redirect("/")
     # create_test_bookings()
     week_start_date = []  # Stores week start dates starting from the date a week ago today
@@ -384,7 +414,30 @@ def remove_available(location):
     # hours_added = datetime.timedelta(hours = int(param[2]))
     hours1 = int(param[1])
     price = models.Price.query.filter_by(id=hours1).first().price
-    print(price)
+    
+    #check if user is a frequent user
+    orders = []
+    #calculate week start date
+    week = datetime.now() - timedelta(weeks=1)
+    #select all bookings for the current user
+    orders = models.Booking.query.all()
+    hours =  0
+    for order in orders:
+        if order.date >= week and order.UserID == user.id:
+            hours += order.numHours
+    
+    if user.discount == True or hours >= 8:
+        price = price * 4/5
+
+    h = 1
+    if param[1] == 2:
+        h = 4
+    elif param[1] == 3:
+        h = 24
+    elif param[1] == 4:
+        h = 24 *7
+
+
     expiry = datetime.now() + timedelta(hours=int(param[1]))
     booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = param[1], date= datetime.today(), price = price, expiry = expiry)
     db.session.add(booking)
@@ -501,22 +554,53 @@ def cancel_booking(bookingID):
 def extend_booking(bookingID, duration):
     booking_to_extend = models.Booking.query.filter_by(id=bookingID).first()
     prices = models.Price.query.all()
-    if duration == 1:
-        booking_to_extend.numHours += 1
-        booking_to_extend.price += prices[0].price
-        booking_to_extend.expiry +=  timedelta(hours=1)
-    elif duration == 2:
-        booking_to_extend.numHours += 4
-        booking_to_extend.price += prices[1].price
-        booking_to_extend.expiry +=  timedelta(hours=4)
-    elif duration == 3:
-        booking_to_extend.numHours += 24
-        booking_to_extend.price += prices[2].price
-        booking_to_extend.expiry +=  timedelta(days=1)
-    elif duration == 4:
-        booking_to_extend.numHours += 168
-        booking_to_extend.price += prices[3].price
-        booking_to_extend.expiry +=  timedelta(days=7)
+    
+    #check if user 
+    user_obj = models.User.query.filter_by(id =booking_to_extend.UserID).first()
+    orders = []
+    #calculate week start date
+    week = datetime.now() - timedelta(weeks=1)
+    #select all bookings for the current user
+    orders = models.Booking.query.all()
+    hours =  0
+    for order in orders:
+        if order.date >= week and order.UserID == user_obj.id:
+            hours += order.numHours
+    
+    if hours >= 8 or user_obj.discount == True:
+        if duration == 1:
+            booking_to_extend.numHours += 1
+            booking_to_extend.price += prices[0].price*0.8
+            booking_to_extend.expiry +=  timedelta(hours=1)
+        elif duration == 2:
+            booking_to_extend.numHours += 4
+            booking_to_extend.price += prices[1].price*0.8
+            booking_to_extend.expiry +=  timedelta(hours=4)
+        elif duration == 3:
+            booking_to_extend.numHours += 24
+            booking_to_extend.price += prices[2].price*0.8
+            booking_to_extend.expiry +=  timedelta(days=1)
+        elif duration == 4:
+            booking_to_extend.numHours += 168
+            booking_to_extend.price += prices[3].price*0.8
+            booking_to_extend.expiry +=  timedelta(days=7)
+    else:
+        if duration == 1:
+            booking_to_extend.numHours += 1
+            booking_to_extend.price += prices[0].price
+            booking_to_extend.expiry +=  timedelta(hours=1)
+        elif duration == 2:
+            booking_to_extend.numHours += 4
+            booking_to_extend.price += prices[1].price
+            booking_to_extend.expiry +=  timedelta(hours=4)
+        elif duration == 3:
+            booking_to_extend.numHours += 24
+            booking_to_extend.price += prices[2].price
+            booking_to_extend.expiry +=  timedelta(days=1)
+        elif duration == 4:
+            booking_to_extend.numHours += 168
+            booking_to_extend.price += prices[3].price
+            booking_to_extend.expiry +=  timedelta(days=7)
     db.session.commit()
     return redirect(url_for("dashboard"))
 
@@ -560,6 +644,17 @@ def pricing():
             db.session.commit()
             return redirect("/admin")
      
+
+
+@app.route("/staff")
+def staff_dashboard():
+    print(session)
+    if session.get('staff') == 0:
+        return redirect('/')
+    return("Staff Dashboard!")
+
+
+
 #for merging
 """
 logout code:
