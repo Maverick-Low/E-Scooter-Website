@@ -286,6 +286,7 @@ def register():
 
             session["email"] = form.email.data
             session["admin"] = False
+            session["staff"] = False
             db.session.add(user_obj)
             db.session.commit()
             return render_template('Dashboard/Website_Dashboard.html')
@@ -630,9 +631,34 @@ def remove_available(location):
     # hours_added = datetime.timedelta(hours = int(param[2]))
     price = int(param[1])
     price = price*5
+    
+
+    #check if the user is a frequent users
+    orders = []
+    #calculate week start date
+    week = datetime.now()-timedelta(weeks=1)
+    #select all bookings for the current user
+    orders = models.Booking.query.all()
+    hours = 0
+    for order in orders:
+        if order.date >= week and order.UserID == user.id:
+            hours += order.numHours
+
+    print(hours, "\n")
+    print(user.discount, "\n")
     #apply discount
     if user.discount == True:
-        price = price*4/5
+        if hours >= 8:
+            #discounts stack for now, could be changed 
+            price = price *3/5
+        else:
+            price = price *4/5
+    else:
+        if hours >= 8:
+            price = price *4/5
+        
+
+
 
     expiry = datetime.now() + timedelta(hours=int(param[1]))
     booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = param[1], date= datetime.today(), price = price, expiry = expiry)

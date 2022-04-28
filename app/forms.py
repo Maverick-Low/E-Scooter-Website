@@ -39,8 +39,10 @@ class Registration(FlaskForm):
 
         #check wether the age is valid
         def validate_age(self, age):
-            if age.isDigit() == False:
-                raise ValidationError('Please provide a numeric age!')
+            digits = "0123456789"
+            for a in self.age.data:
+                if a not in digits:
+                    raise ValidationError('Please provide a numeric age!')
         
         #function that validates the password when registering a new user
         def validate_password_1(self, password_1):
