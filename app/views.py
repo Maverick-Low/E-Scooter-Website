@@ -8,7 +8,7 @@ from sqlalchemy import false
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session,json
 from datetime import datetime, timedelta, date, time
-from .forms import Registration, Login, Payment, Report, Booking, Prices, AddScooter
+from .forms import Registration, Login, Payment, Report, Booking, Prices, AddScooter, EditScooter
 import smtplib, ssl
 from email.mime.text import MIMEText
 from werkzeug.datastructures import MultiDict
@@ -691,6 +691,26 @@ def staff_add():
         return redirect(url_for('staff_manage'))
     if request.method == 'GET':
         return render_template('staff_add.html', form=form)
+
+@app.route('/staff/edit_scooter/<int:scooterID>', methods= ['POST','GET'])
+def staff_edit_scooter(scooterID):
+    form = EditScooter()
+    if session.get('staff') == 0:
+        return redirect('/')
+    scooter = models.Scooter.query.filter_by(id=scooterID).first()
+
+    if request.method == 'GET':
+        form = EditScooter(formdata = MultiDict([('location',scooter.LocationID), ('in_use',scooter.in_use)]))
+        return render_template('staff_edit.html', form = form)
+
+    if request.method == 'POST':
+        boolean_value = True
+        if form.in_use.data == 0:
+            boolean_value = False
+        scooter.in_use=boolean_value
+        scooter.LocationID = form.location.data
+        db.session.commit()
+        return redirect(url_for('staff_manage'))
 
 @app.route('/staff/remove_scooter/<int:scooterID>', methods = ['POST', 'GET'])
 def staff_remove_scooter(scooterID):

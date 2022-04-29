@@ -32,13 +32,15 @@
 		</thead>
 		<tbody>
 			{% for s in scooters %}
+			
 				<tr>
 					<th scope="row">{{ s.id }}</th>
 					<td> {{ locations[s.LocationID] }}</td>
 					<td> {{ s.in_use }} </td>
 					<td> <a href="/staff/remove_scooter/{{s.id}}">remove</a> </td>
-					<td> Edit </td>
+					<td> <a href="/staff/edit_scooter/{{s.id}}">edit scooter</a> </td>
 				</tr>
+
 			{% endfor %}
 		  <!-- <tr>
 			<th scope="row">1</th>
