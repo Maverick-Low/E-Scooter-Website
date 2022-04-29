@@ -190,7 +190,7 @@ def report():
         return render_template('Reports/Website_Report.html', form=form)
     elif request.method == "POST":
         if form.validate_on_submit():
-            report_obj = models.Report(issue=form.issue.data, description=form.report.data)
+            report_obj = models.Report(issue=form.issue.data, description=form.report.data, priority= 1)
             db.session.add(report_obj)
             db.session.commit()
             flash('Report has been successfully sent!')
@@ -335,19 +335,23 @@ def admin_issues():
     if session.get('admin') == 0:
         return redirect("/dashboard")
     else:
-        issues = models.Report.query.all()
+        issues = models.Report.query.filter_by(priority=2)
         return render_template("issues.html", issues = issues)
 # End of admin specific app routes
 
-@app.route("/admin/issues/resolve_issue/<string:issue_id>")
+#maybe change the name of this route
+@app.route('/admin/issues/resolve_issue/<string:issue_id>')
 def resolve_issue(issue_id):
-    if session.get('admin') == 0:
-        return redirect("/dashboard")
+    if session.get('admin') == 0 and session.get('staff') == 0:
+        return redirect('/dashboard')
     else:
         issue_obj = models.Report.query.filter_by(id = issue_id).first()
         issue_obj.resolved = True
         db.session.commit()
-        return redirect(url_for('admin_issues'))
+        if session.get('admin') != 0:
+            return redirect(url_for('admin_issues'))
+        else:
+            return redirect('/staff/issues')
 
 @app.route("/admin/issues/high_priority")
 def high_priority():
@@ -665,7 +669,11 @@ def staff_booking():
 def staff_issues():
     if session.get('staff') == 0:
         return redirect('/')
-    return render_template('staff_issues.html')
+
+    issues = []
+    issues = models.Report.query.filter_by(priority = 1)#.all()
+
+    return render_template('staff_issues.html', issues=issues)
 
 
 @app.route('/staff/manage')
@@ -677,9 +685,13 @@ def staff_manage():
 # @app.route('/resolve_issue')
 # def resolve_issue():
 
-
-# @pp.route('/escalate_issue')
-# def escalate_issue():
+#increment the issue's priority 
+@app.route('/escalate_issue/<string:issue_id>')
+def escalate_issue(issue_id):
+    issue = models.Report.query.filter_by(id = issue_id).first()
+    issue.priority = 2
+    db.session.commit()
+    return redirect('/staff/issues')
 
 
 #for merging
