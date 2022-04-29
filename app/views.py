@@ -2,6 +2,7 @@ from email.message import Message
 from encodings import utf_8
 from enum import auto                     
 from pickle import FALSE
+from types import NoneType
 from sqlalchemy import false
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session,json
@@ -104,10 +105,10 @@ def login():
 
 @app.route("/", methods = ["GET", "POST"])
 def mainmenu():
-        if session.get('admin') != 0:
-            return redirect("/admin")
-        if session.get('staff') != 0:
+        if 'staff' in session and session.get('staff') != 0:
             return redirect('/staff')
+        if 'admin' in session and session.get('admin') != 0:
+            return redirect("/admin")
         prices = models.Price.query.all()
         form = Booking()
         Scooters = models.Scooter.query.filter_by(in_use = False).all()
@@ -298,7 +299,7 @@ def weekly_income():
 @app.route("/admin/statistics/rental_option")
 def weekly_income_rental():
     # Redirects user if admin is not in session
-    if not session.get('admin'):
+    if session.get('admin') == 0:
         return redirect("/")
 
     
@@ -329,7 +330,7 @@ def weekly_income_rental():
 @app.route("/admin/statistics/week")
 def daily_income():
     # Redirects user if admin is not in session
-    if not session.get('admin'):
+    if session.get('admin') == 0:
         return redirect("/")
     # create_test_bookings()
     days_to_model = [] # Stores week start dates starting from the date a week ago today
