@@ -1,12 +1,14 @@
+# from crypt import methods
 from email.message import Message
 from encodings import utf_8
 from enum import auto                     
 from pickle import FALSE
+import re
 from sqlalchemy import false
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session,json
 from datetime import datetime, timedelta, date, time
-from .forms import Registration, Login, Payment, Report, Booking, Prices
+from .forms import Registration, Login, Payment, Report, Booking, Prices, AddScooter
 import smtplib, ssl
 from email.mime.text import MIMEText
 from werkzeug.datastructures import MultiDict
@@ -677,11 +679,18 @@ def staff_manage():
     return render_template('staff_manage.html', scooters = all_scooters, locations=locations)
 
 
-@app.route('/staff/add')
+@app.route('/staff/add', methods=['POST', 'GET'])
 def staff_add():
+    form = AddScooter()
     if session.get('staff') == 0:
         return redirect('/')
-    return render_template('staff_add.html')
+    if request.method == 'POST':
+        new_scooter = models.Scooter(LocationID = int(form.location.data), in_use=False)
+        db.session.add(new_scooter)
+        db.session.commit()
+        return redirect(url_for('staff_manage'))
+    if request.method == 'GET':
+        return render_template('staff_add.html', form=form)
 
 
 #for merging

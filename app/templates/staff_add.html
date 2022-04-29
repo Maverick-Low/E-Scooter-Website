@@ -12,6 +12,15 @@
 	</svg>
 	<br></br>
 
+
+    <form method="POST" class="form">
+        {{ form.hidden_tag() }}
+        {{ form.location.label}}
+        {{ form.location}}
+        <br></br>
+        {{ form.submit }}
+    </form>
+
 </body>
 
 {% endblock content %}
