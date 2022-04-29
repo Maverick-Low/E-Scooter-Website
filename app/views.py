@@ -37,8 +37,8 @@ def add_test():
     db.session.add(location5)
     admin_obj = models.User.query.filter_by(email="admin@admin.com").first()
     admin_obj.admin = True
-    staff_obj = models.User.query.filter_by(email="staff@staff.com").first()
-    staff_obj.staff = True
+    # staff_obj = models.User.query.filter_by(email="staff@staff.com").first()
+    # staff_obj.staff = True
     # issue = models.Report(issue = "Refund", description = "Havent recieved refund yet", priority = 1)
     # db.session.add(issue)
     models.Card.query.filter_by(id=1).delete()                                                                                                   
@@ -483,7 +483,6 @@ def payment():
     location = request.args['location']
     arr = request.args['hours']
     #admin redirected to admin dashboard
-    locations = ['Trinity Centre','Train Station','Merrion Centre','LRI Hospital','UoL Edge Sports Centre']
     if session.get('admin') != 0:
         return redirect("/admin")
     #write_key()
@@ -672,7 +671,17 @@ def staff_issues():
 def staff_manage():
     if session.get('staff') == 0:
         return redirect('/')
-    return render_template('staff_manage.html')
+    all_scooters = models.Scooter.query.all()
+    locations = ['','Trinity Centre','Train Station','Merrion Centre','LRI Hospital','UoL Edge Sports Centre']
+    
+    return render_template('staff_manage.html', scooters = all_scooters, locations=locations)
+
+
+@app.route('/staff/add')
+def staff_add():
+    if session.get('staff') == 0:
+        return redirect('/')
+    return render_template('staff_add.html')
 
 
 #for merging

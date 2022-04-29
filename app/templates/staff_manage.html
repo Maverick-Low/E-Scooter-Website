@@ -12,6 +12,55 @@
 	</svg>
 	<br></br>
 
+
+	<h2> Options </h2>
+	<a href="/staff/add" class="myButton">Add Scooter</a>
+	<a href="/staff/booking" class="myButton">View Scooters by Location</a>
+
+
+	<h2> All Scooters </h2>
+	<table class="table table-striped table-dark">
+		<thead>
+		  <tr>
+			<th scope="col">Scooter ID</th>
+			<th scope="col">Location</th>
+			<th scope="col">In Use</th>
+			<th scope="col">Remove Scooter</th>
+			<th scope="col">Edit Scooter Details</th>
+			
+		  </tr>
+		</thead>
+		<tbody>
+			{% for s in scooters %}
+				<tr>
+					<th scope="row">{{ s.id }}</th>
+					<td> {{ locations[s.LocationID] }}</td>
+					<td> {{ s.in_use }} </td>
+					<td> Remove </td>
+					<td> Edit </td>
+				</tr>
+			{% endfor %}
+		  <!-- <tr>
+			<th scope="row">1</th>
+			<td>Mark</td>
+			<td>Otto</td>
+			<td>@mdo</td>
+		  </tr>
+		  <tr>
+			<th scope="row">2</th>
+			<td>Jacob</td>
+			<td>Thornton</td>
+			<td>@fat</td>
+		  </tr>
+		  <tr>
+			<th scope="row">3</th>
+			<td>Larry</td>
+			<td>the Bird</td>
+			<td>@twitter</td>
+		  </tr> -->
+		</tbody>
+	  </table>
+
 </body>
 
 {% endblock content %}
