@@ -36,7 +36,7 @@
 					<th scope="row">{{ s.id }}</th>
 					<td> {{ locations[s.LocationID] }}</td>
 					<td> {{ s.in_use }} </td>
-					<td> Remove </td>
+					<td> <a href="/staff/remove_scooter/{{s.id}}">remove</a> </td>
 					<td> Edit </td>
 				</tr>
 			{% endfor %}

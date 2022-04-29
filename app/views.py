@@ -692,7 +692,14 @@ def staff_add():
     if request.method == 'GET':
         return render_template('staff_add.html', form=form)
 
-
+@app.route('/staff/remove_scooter/<int:scooterID>', methods = ['POST', 'GET'])
+def staff_remove_scooter(scooterID):
+    if session.get('staff') == 0:
+        return redirect('/')
+    scooter = models.Scooter.query.filter_by(id=scooterID).first()
+    db.session.delete(scooter)
+    db.session.commit()
+    return redirect(url_for('staff_manage'))
 #for merging
 """
 logout code:
