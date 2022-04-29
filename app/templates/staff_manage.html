@@ -15,7 +15,6 @@
 
 	<h2> Options </h2>
 	<a href="/staff/add" class="myButton">Add Scooter</a>
-	<a href="/staff/booking" class="myButton">View Scooters by Location</a>
 
 
 	<h2> All Scooters </h2>
@@ -32,7 +31,7 @@
 		</thead>
 		<tbody>
 			{% for s in scooters %}
-			
+
 				<tr>
 					<th scope="row">{{ s.id }}</th>
 					<td> {{ locations[s.LocationID] }}</td>
