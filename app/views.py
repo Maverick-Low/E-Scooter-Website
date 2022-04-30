@@ -104,10 +104,10 @@ def login():
 
 @app.route("/", methods = ["GET", "POST"])
 def mainmenu():
-        if session.get('admin') != 0:
-            return redirect("/admin")
-        if session.get('staff') != 0:
+        if 'staff' in session and session.get('staff') != 0:
             return redirect('/staff')
+        if 'admin' in session and session.get('admin') != 0:
+            return redirect("/admin")
         prices = models.Price.query.all()
         form = Booking()
         Scooters = models.Scooter.query.filter_by(in_use = False).all()
