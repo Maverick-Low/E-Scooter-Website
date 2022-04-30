@@ -139,9 +139,9 @@ def mainmenu():
         
 @app.route("/error404")
 def error404():
-    if session.get('admin') != 0:
+    if "admin" in session and session.get('admin') != 0:
         return redirect("/admin")
-    if session.get('staff') != 0:
+    if 'staff' in session and session.get('staff') != 0:
         return redirect('/staff')
     return render_template("Error/Website_Error___1.html")
 
