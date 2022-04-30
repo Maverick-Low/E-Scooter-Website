@@ -144,6 +144,77 @@ class Payment(FlaskForm):
         for char in self.cvv.data:
             if not char in chars:
                 raise ValidationError(f"Character {char} is not allowed in cvv.")
+
+class Guest_Payment(FlaskForm):
+    #function that checks if the expiry date is in the future
+    # def validateCVV():
+    #     if not (len(self.cvv) == 3 or self.cvv == 4):
+    #         raise ValidationError('CVV is invalid')    
+
+    def luhns(card_number):
+        
+        #check if card number is numeric
+        if not card_number.isnumeric():
+            return -1
+        else: 
+            card_number = int(card_number)
+
+        digits = [int(x) for x in str(card_number)]
+        odd_digits = digits[-1::-2]
+        even_digits = digits[-2::-2]
+        checksum = 0
+        checksum += sum(odd_digits)
+        for d in even_digits:
+            checksum += sum(int(x) for x in str(d*2))
+        return checksum % 10
+
+    email = StringField('Enter email', validators=[DataRequired(), Length(max=60), Email()])
+    #card details
+    name = StringField('Enter name', validators=[DataRequired(message = "Enter your name please"), Length(max=60)])
+    card_number = StringField('Enter card number', validators=[DataRequired(), Length(min=14, max=20)])
+    cvv = StringField('Enter cvv', validators=[DataRequired() , Length(min=3, max=4)],render_kw={"placeholder": "123"})
+    expiry_date = DateTimeField('Enter expiry date (mm/YYYY)', validators=[DataRequired()], format='%m/%Y',render_kw={"placeholder": "mm/YYYY"})
+    submit = SubmitField('Submit')
+
+    #billing details
+    address_line_1 = StringField('Address line 1', validators=[DataRequired(), Length(max=60)])
+    address_line_2 = StringField('Address line 2', validators=[Length(max=60)])
+    city = StringField('City', validators=[DataRequired(), Length(max=60)])
+    postcode = StringField('Postcode', validators=[DataRequired(), Length(min=6, max=7)])
+    
+
+    #hardcoded to start with united_kingdom
+    #todo: use location services
+    country_list = [("United Kingdom")]
+    for c in pycountry.countries:
+        country_list.append(c.name)
+    
+    country = SelectField('Select country', choices = country_list)
+
+    # Checks
+    def validate_name(self, name):
+        excluded_chars = "*?!'^+%&/()=}][{$#£1234567890"
+        for char in self.name.data:
+            if char in excluded_chars:
+                raise ValidationError(f"Character {char} is not allowed in name.")
+    
+    def validate_expiry_date(self, expiry_date):
+        if (datetime.today() - expiry_date.data).days > 0:
+            raise ValidationError('Expiry date is not valid')
+
+
+      #todo: add code that determines type of credit card
+    def validate_card_number(self, card_number):
+        chars = "1234567890"
+        for char in self.card_number.data:
+            if not char in chars:
+                raise ValidationError(f"Character {char} is not allowed in card number.")
+    
+    def validate_cvv(self, cvv):
+        chars = "1234567890"
+        for char in self.cvv.data:
+            if not char in chars:
+                raise ValidationError(f"Character {char} is not allowed in cvv.")
     # def luhns(card_number):
     # #check if card number is numeric
     #     if not card_number.isnumeric():

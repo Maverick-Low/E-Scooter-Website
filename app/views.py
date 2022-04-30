@@ -6,7 +6,7 @@ from sqlalchemy import false
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session,json
 from datetime import datetime, timedelta, date, time
-from .forms import Registration, Login, Payment, Report, Booking, Prices
+from .forms import Registration, Login, Payment, Report, Booking, Prices, Guest_Payment
 import smtplib, ssl
 from email.mime.text import MIMEText
 from werkzeug.datastructures import MultiDict
@@ -131,7 +131,10 @@ def mainmenu():
             if form.validate_on_submit():
                 location = int(form.location.data)
                 hours = int(form.hours.data)
-                return redirect(url_for("payment", location=location, hours=hours))
+                if 'email' in session:
+                    return redirect(url_for("payment", location=location, hours=hours))
+                else: 
+                    return redirect(url_for("guest_payment", location=location, hours=hours))
             else:
                 return render_template("Main/Website_Main.html",form = form, scooters = Scooters, count = count, prices = prices)
         else:
@@ -527,6 +530,26 @@ def payment():
         else:
             flash('Card payment not accepted')
             return render_template('Payment/Website_Payment___1.html', form=form, location = location, arr=arr)
+
+@app.route("/guest_payment", methods = ["GET", "POST"])
+def guest_payment():
+    location = request.args['location']
+    arr = request.args['hours']
+    form = Guest_Payment()
+    locations = ['Trinity Centre','Train Station','Merrion Centre','LRI Hospital','UoL Edge Sports Centre']          
+    if request.method == "GET":
+        # In order to display the location that user is reserving scooter from on payment screen                                                                                                                   
+        return render_template("Payment/Guest_Payment.html", form=form, location = location, arr=arr)
+    elif request.method == "POST":
+        if form.validate_on_submit():
+            location = int(location)                                                               
+            #flash("Transaction confirmed!")
+            return redirect("/remove_available/"+str(location)+'$' + str(arr))
+        else:
+            flash('Card payment not accepted')
+            return render_template('Payment/Guest_Payment.html', form=form, location = location, arr=arr)
+
+
 # Encryption code taken from https://dev.to/anishde12020/cryptography-with-python-using-fernet-40o3
 def write_key():
     key = Fernet.generate_key() # Generates the key

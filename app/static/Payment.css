@@ -423,6 +423,31 @@
 	top: 0px;
 	transform: matrix(1,0,0,1,0,0);
 }
+#Email {
+	position: absolute;
+	width: 754px;
+	height: 389px;
+	left: calc(50% - 377px);
+	top: 400px;
+	overflow: visible;
+}
+.container_email{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 327px;
+	height: 390px;
+}
+
+#Input_1 {
+	position: absolute;
+	width: 327px;
+	height: 70px;
+	left: 0px;
+	top: 0px;
+	overflow: visible;
+}
+
 #Billing_and_Card_Info {
 	position: absolute;
 	width: 754px;
@@ -455,6 +480,7 @@
 	font-size: 25px;
 	color: white;
 }
+
 #Input {
 	position: absolute;
 	width: 327px;
