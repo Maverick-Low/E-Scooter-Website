@@ -1115,7 +1115,10 @@
 		top: 250px;
 	}
 	#Group_1514 {
-	top: 700px;
+	top: 750px;
+	}
+	.container_email{
+		top: 300px;
 	}
 }
 @media screen and (max-width: 800px){
@@ -1131,22 +1134,39 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
+	.container_email{
+		top: 305px;
+		left: 24px;
+	}
 	.container_card{
 		position: relative;
 		left: unset;
 		margin-left: auto;
 		margin-right: auto;
-		margin-top: 10%;
+		margin-top: 15%;
 	}
 	#Group_1514 {
 		position: absolute;
 		left: calc(8%);
 		width: 92%;
-		top: 1150px;
+		top: 1175px;
 	}
 	.Rectangle_1485{
 		width: 92%;
 	}
 }
-
+@media screen and (min-width: 900px){
+	.container_billing{
+		top: -70px;
+	}
+	.container_email{
+		top: 450px;
+	}
+	.container_card{
+		top: -70px;
+	}
+	#Group_1514 {
+		top: 900px;
+	}
+}
 

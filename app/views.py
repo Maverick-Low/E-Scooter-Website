@@ -8,7 +8,7 @@ from sqlalchemy import false
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session,json
 from datetime import datetime, timedelta, date, time
-from .forms import Registration, Login, Payment, Report, Booking, Prices, AddScooter, EditScooter
+from .forms import Registration, Login, Payment, Report, Booking, Prices, AddScooter, EditScooter, Guest_Payment
 import smtplib, ssl
 from email.mime.text import MIMEText
 from werkzeug.datastructures import MultiDict
