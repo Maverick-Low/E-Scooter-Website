@@ -1,3 +1,4 @@
+from ast import Sub
 from email.policy import default
 from pickle import FALSE
 from tokenize import String
@@ -258,3 +259,12 @@ class Prices(FlaskForm):
 
 
                     
+class AddScooter(FlaskForm):
+    location = SelectField(u'Select Location to add Scooter: ', choices = [(1,'Trinity Centre'), (2,'Train Station'), (3,'Merrion Centre'), (4,'LRI Hospital'), (5,'UoL Edge')])
+    submit = SubmitField('Add Scooter')
+
+
+class EditScooter(FlaskForm):
+    location = SelectField(u'Select new location for Scooter: ', choices = [(1,'Trinity Centre'), (2,'Train Station'), (3,'Merrion Centre'), (4,'LRI Hospital'), (5,'UoL Edge')])
+    in_use = SelectField(u'Select whether the scooter is currently in use: ', choices= [(0,'No'), (1,'Yes')])
+    submit = SubmitField('Apply Changes')

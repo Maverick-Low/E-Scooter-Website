@@ -1,12 +1,14 @@
+# from crypt import methods
 from email.message import Message
 from encodings import utf_8
 from enum import auto                     
 from pickle import FALSE
+import re
 from sqlalchemy import false
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session,json
 from datetime import datetime, timedelta, date, time
-from .forms import Registration, Login, Payment, Report, Booking, Prices, Guest_Payment
+from .forms import Registration, Login, Payment, Report, Booking, Prices, AddScooter, EditScooter
 import smtplib, ssl
 from email.mime.text import MIMEText
 from werkzeug.datastructures import MultiDict
@@ -37,8 +39,8 @@ def add_test():
     db.session.add(location5)
     admin_obj = models.User.query.filter_by(email="admin@admin.com").first()
     admin_obj.admin = True
-    staff_obj = models.User.query.filter_by(email="staff@staff.com").first()
-    staff_obj.staff = True
+    # staff_obj = models.User.query.filter_by(email="staff@staff.com").first()
+    # staff_obj.staff = True
     # issue = models.Report(issue = "Refund", description = "Havent recieved refund yet", priority = 1)
     # db.session.add(issue)
     models.Card.query.filter_by(id=1).delete()                                                                                                   
@@ -490,7 +492,6 @@ def payment():
     location = request.args['location']
     arr = request.args['hours']
     #admin redirected to admin dashboard
-    locations = ['Trinity Centre','Train Station','Merrion Centre','LRI Hospital','UoL Edge Sports Centre']
     if session.get('admin') != 0:
         return redirect("/admin")
     #write_key()
@@ -703,7 +704,24 @@ def staff_issues():
 def staff_manage():
     if session.get('staff') == 0:
         return redirect('/')
-    return render_template('staff_manage.html')
+    all_scooters = models.Scooter.query.all()
+    locations = ['','Trinity Centre','Train Station','Merrion Centre','LRI Hospital','UoL Edge Sports Centre']
+    
+    return render_template('staff_manage.html', scooters = all_scooters, locations=locations)
+
+
+@app.route('/staff/add', methods=['POST', 'GET'])
+def staff_add():
+    form = AddScooter()
+    if session.get('staff') == 0:
+        return redirect('/')
+    if request.method == 'POST':
+        new_scooter = models.Scooter(LocationID = int(form.location.data), in_use=False)
+        db.session.add(new_scooter)
+        db.session.commit()
+        return redirect(url_for('staff_manage'))
+    if request.method == 'GET':
+        return render_template('staff_add.html', form=form)
 
 # @app.route('/resolve_issue')
 # def resolve_issue():
@@ -716,7 +734,34 @@ def escalate_issue(issue_id):
     db.session.commit()
     return redirect('/staff/issues')
 
+@app.route('/staff/edit_scooter/<int:scooterID>', methods= ['POST','GET'])
+def staff_edit_scooter(scooterID):
+    form = EditScooter()
+    if session.get('staff') == 0:
+        return redirect('/')
+    scooter = models.Scooter.query.filter_by(id=scooterID).first()
 
+    if request.method == 'GET':
+        form = EditScooter(formdata = MultiDict([('location',scooter.LocationID), ('in_use',scooter.in_use)]))
+        return render_template('staff_edit.html', form = form)
+
+    if request.method == 'POST':
+        boolean_value = True
+        if form.in_use.data == 0:
+            boolean_value = False
+        scooter.in_use=boolean_value
+        scooter.LocationID = form.location.data
+        db.session.commit()
+        return redirect(url_for('staff_manage'))
+
+@app.route('/staff/remove_scooter/<int:scooterID>', methods = ['POST', 'GET'])
+def staff_remove_scooter(scooterID):
+    if session.get('staff') == 0:
+        return redirect('/')
+    scooter = models.Scooter.query.filter_by(id=scooterID).first()
+    db.session.delete(scooter)
+    db.session.commit()
+    return redirect(url_for('staff_manage'))
 #for merging
 """
 logout code:
