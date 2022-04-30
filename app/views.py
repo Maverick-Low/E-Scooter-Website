@@ -1,8 +1,9 @@
+from asyncio.windows_events import NULL
 from email.message import Message
 from encodings import utf_8
 from enum import auto                     
 from pickle import FALSE
-from sqlalchemy import false
+from sqlalchemy import false, null
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session,json
 from datetime import datetime, timedelta, date, time
@@ -544,10 +545,40 @@ def guest_payment():
         if form.validate_on_submit():
             location = int(location)                                                               
             #flash("Transaction confirmed!")
-            return redirect("/remove_available/"+str(location)+'$' + str(arr))
+            remove_scooter(location, arr)
+            #send_email(form.email.data)
+            return redirect(url_for('dashboard'))
         else:
             flash('Card payment not accepted')
             return render_template('Payment/Guest_Payment.html', form=form, location = location, arr=arr)
+        
+def remove_scooter(location, hours):
+    scooter_to_remove = models.Scooter.query.filter_by(LocationID = location, in_use=False).first()
+    if scooter_to_remove is None:
+        flash("Transaction failed: Someone ordered the last scooter before you.")
+        return redirect(url_for('dashboard'))                             
+    scooter_to_remove.in_use = True
+    if 'email' in session:
+        user = models.User.query.filter_by(email = session['email']).first()
+        username = user.username
+    # hours_added = datetime.timedelta(hours = int(param[2]))
+    hours1 = int(hours)
+    price = models.Price.query.filter_by(id=hours1).first().price
+
+    h = 1
+    if hours == 2:
+        h = 4
+    elif hours == 3:
+        h = 24
+    elif hours == 4:
+        h = 24 *7
+        
+    expiry = datetime.now() + timedelta(hours=int(h))
+    booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = None, numHours = h, date= datetime.today(), price = price, expiry = expiry)
+    db.session.add(booking)
+    db.session.commit()
+    
+    
 
 
 # Encryption code taken from https://dev.to/anishde12020/cryptography-with-python-using-fernet-40o3
