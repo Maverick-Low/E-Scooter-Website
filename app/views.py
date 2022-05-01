@@ -49,17 +49,42 @@ from cryptography.fernet import Fernet
 #     return redirect(url_for("dashboard"))
 
 #route used for resetting scooter database
-# @app.route("/reset_scooter")
-# def reset_scooter():
-#     Scooters = models.Scooter.query.filter_by(in_use = True).all()
-#     for scooter in Scooters:
-#         scooter.in_use  = False      
-#     db.session.commit()
-#     return redirect(url_for("hire_scooter"))
+@app.route("/reset_scooter")
+def reset_scooter():
+    Scooters = models.Scooter.query.filter_by(in_use=True).all()
+    for scooter in Scooters:
+        scooter.in_use=False    
+    db.session.commit()
+    return redirect("/")
 
 
 # if user is registered: adds user's email and admin flag to session and takes them to dashboard]
 # gives option for user to be redirected to register or continue as a guest
+
+
+@app.route("/add_test")
+def add_test():
+    scooters = models.Scooter.query.all()
+    for i in scooters:
+        db.session.delete(i)
+    
+    for i in range(0,4):
+        user_obj = models.Scooter(in_use=False, LocationID=1)
+        db.session.add(user_obj)
+    for i in range(0,4):
+        user_obj = models.Scooter(in_use=False, LocationID=2)
+        db.session.add(user_obj)
+    for i in range(0,4):
+        user_obj = models.Scooter(in_use=False, LocationID=3)
+        db.session.add(user_obj)
+    for i in range(0,4):
+        user_obj = models.Scooter(in_use=False, LocationID=4)
+        db.session.add(user_obj)
+    for i in range(0,4):
+        user_obj = models.Scooter(in_use=False, LocationID=5)
+        db.session.add(user_obj)
+    db.session.commit()
+    return redirect("/")
 
 
 def update_availibility():
@@ -70,6 +95,7 @@ def update_availibility():
             scooter = models.Scooter.query.filter_by(id = booking.ScooterID).first()
             scooter.in_use = False
     db.session.commit()
+    
 
 @app.route("/add_admin", methods=["GET", "POST"])
 def add_admin():
@@ -80,6 +106,7 @@ def add_admin():
     db.session.add(staff_obj)
     db.session.commit()
     return redirect("/")
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -617,7 +644,7 @@ def processBooking(Hours,LocationID):
 
     expiry = datetime.now() + timedelta(hours=int(Hours))
     booking = models.Booking(ScooterID=scooter_to_remove.id, UserID=user.id,
-                             numHours=h, date=datetime.today(), price=price, expiry=expiry)
+                             numHours=h, date=datetime.today(), price=price, expiry=expiry, option=Hours ,email = session['email'])
     db.session.add(booking)
     db.session.commit()
     # Sending confirmation email

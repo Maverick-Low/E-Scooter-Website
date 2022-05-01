@@ -1,4 +1,5 @@
 from datetime import date
+import email
 from sqlalchemy import ForeignKey, false
 from app import db
 
@@ -51,6 +52,7 @@ class Booking(db.Model):
     price = db.Column(db.Integer, nullable = False)
     cancelled = db.Column(db.Boolean, default = False, nullable=False)
     option = db.Column(db.Integer, nullable = False)
+    email = db.Column(db.String(60), nullable=False)
     
 class Card(db.Model):
     __tablename__ = "cards"
