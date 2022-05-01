@@ -4,6 +4,7 @@ from encodings import utf_8
 from enum import auto                     
 from pickle import FALSE
 import re
+from types import NoneType
 from sqlalchemy import false
 from app import app, models, bcrypt, db
 from flask import render_template, request, url_for, redirect, flash, session,json
@@ -39,8 +40,8 @@ def add_test():
     db.session.add(location5)
     admin_obj = models.User.query.filter_by(email="admin@admin.com").first()
     admin_obj.admin = True
-    # staff_obj = models.User.query.filter_by(email="staff@staff.com").first()
-    # staff_obj.staff = True
+    staff_obj = models.User.query.filter_by(email="staff@staff.com").first()
+    staff_obj.staff = True
     # issue = models.Report(issue = "Refund", description = "Havent recieved refund yet", priority = 1)
     # db.session.add(issue)
     models.Card.query.filter_by(id=1).delete()                                                                                                   
@@ -245,18 +246,18 @@ def dashboard():
 def create_test_bookings():
     # db.session.query(models.Booking).delete()
     db.session.commit()
-    b1 = models.Booking(numHours=0, date=datetime.now() - timedelta(days=1), expiry=datetime.now(), price=5,
-                        cancelled=False)
-    b2 = models.Booking(numHours=0, date=datetime.now() - timedelta(weeks=4), expiry=datetime.now(), price=8,
-                        cancelled=False)
-    b3 = models.Booking(numHours=0, date=datetime.now() - timedelta(weeks=3), expiry=datetime.now(), price=11,
-                        cancelled=False)
-    b4 = models.Booking(numHours=0, date=datetime.now() - timedelta(weeks=2), expiry=datetime.now(), price=23,
-                        cancelled=False)
+    b1 = models.Booking(numHours=1, date=datetime.now() - timedelta(weeks=2), expiry=datetime.now(), price=5,
+                        cancelled=False, option=1)
+    # b2 = models.Booking(numHours=0, date=datetime.now() - timedelta(weeks=4), expiry=datetime.now(), price=8,
+    #                     cancelled=False)
+    # b3 = models.Booking(numHours=0, date=datetime.now() - timedelta(weeks=3), expiry=datetime.now(), price=11,
+    #                     cancelled=False)
+    # b4 = models.Booking(numHours=0, date=datetime.now() - timedelta(weeks=2), expiry=datetime.now(), price=23,
+    #                     cancelled=False)
     db.session.add(b1)
-    db.session.add(b2)
-    db.session.add(b3)
-    db.session.add(b4)
+    # db.session.add(b2)
+    # db.session.add(b3)
+    # db.session.add(b4)
     db.session.commit()
     return redirect("/")
 
@@ -268,11 +269,11 @@ def weekly_income():
         return redirect("/")
     # create_test_bookings()
     week_start_date = []  # Stores week start dates starting from the date a week ago today
-    week = (datetime.combine(datetime.now(), time.min)) - timedelta(weeks=1)
+    week = (datetime.combine(datetime.now(), time.min)) + timedelta(weeks=1)
     week_start_date.append(week)
-    sums = [0] * 6  # Stores the sum of the price for each booking within the corresponding week
+    sums = [0] * 8  # Stores the sum of the price for each booking within the corresponding week
 
-    for i in range(5):  # Let the graph show information going 10 weeks back from today
+    for i in range(7):  # Let the graph show information going 10 weeks back from today
         week = week - timedelta(weeks=1)
         week_start_date.append(week)
         # Find all bookings within a given week
@@ -289,6 +290,7 @@ def weekly_income():
     # Format the week start dates to a string day/month/year which will then be displayed in the graph
     count = 0
     for d in week_start_date:
+        d = d - timedelta(weeks=1)
         week_start_date[count] = str(d.strftime("%d/%m/%Y"))
         count += 1
     # week_start_date = ["1", "2", "3"]
@@ -297,6 +299,76 @@ def weekly_income():
     week_start_date.reverse();
     sums.reverse();
     return render_template("graphs.html", weeks=json.dumps(week_start_date), income=json.dumps(sums))
+
+
+@app.route("/admin/statistics/rental_option")
+def weekly_income_rental():
+    # Redirects user if admin is not in session
+    if session.get('admin') == 0:
+        return redirect("/")
+
+    
+    rental_options = ['1 Hour', '4 Hours', '1 Day', '1 Week'] #  Rental options available within the website
+    hours = [1, 4, 24, 168]
+    current_week = (datetime.combine(datetime.now(), time.min))
+    end_week = current_week - timedelta(days=6)
+    sums = [0] * 4 # a sum for each rental option available
+    
+    for i in range(4): # Need to check orders for each specified rental option
+        # Find all bookings within a given week for specific rental option
+        orders = models.Booking.query.all()
+        order_list = []
+        for obj in orders:
+            if obj.date <= current_week and obj.date > end_week:
+                #check the rental option of the booking
+                if obj.option == i+1:
+                    order_list.append(obj)
+        # Sum the price of all the bookings in this week for specific rental option
+        
+        for order in order_list:
+            sums[i] += order.price
+    
+    return render_template("graphs_rental_option.html", weeks=json.dumps(rental_options), income=json.dumps(sums))
+
+
+
+@app.route("/admin/statistics/week")
+def daily_income():
+    # Redirects user if admin is not in session
+    if session.get('admin') == 0:
+        return redirect("/")
+    # create_test_bookings()
+    days_to_model = [] # Stores week start dates starting from the date a week ago today
+    day = (datetime.combine(datetime.now(), time.min))
+    days_to_model.append(day)
+    sums = [0] * 6 # Stores the sum of the price for each booking within the corresponding week
+    
+    for i in range(5): # Let the graph show information going 10 weeks back from today
+        day = day-timedelta(days=1)
+        days_to_model.append(day)
+        # Find all bookings within a given week
+        orders = models.Booking.query.all()
+        order_list = []
+        for obj in orders:
+            if obj.date <= days_to_model[i] and obj.date > days_to_model[i+1]:
+                order_list.append(obj)
+        # Sum the price of all the bookings in this week
+        
+        for order in order_list:
+            sums[i] += order.price
+    
+    # Format the week start dates to a string day/month/year which will then be displayed in the graph
+    count = 0
+    for d in days_to_model:
+        days_to_model[count] = str(d.strftime("%d/%m/%Y"))
+        count += 1
+    # week_start_date = ["1", "2", "3"]
+    # sums = ["5", "5", "5"]
+    #return render_template("graphs.html", weeks=week_start_date, income=sums)
+    days_to_model.reverse();
+    sums.reverse();
+    return render_template("graphs_week.html", weeks=json.dumps(days_to_model), income=json.dumps(sums))
+
 
 
 #solved bug where chrome automatically adds an extra '/' at the end of the url
@@ -448,11 +520,11 @@ def remove_available(location):
 
 
     expiry = datetime.now() + timedelta(hours=int(param[1]))
-    booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = h, date= datetime.today(), price = price, expiry = expiry)
+    booking = models.Booking(ScooterID = scooter_to_remove.id, UserID = user.id, numHours = h, date= datetime.today(), price = price, expiry = expiry, option = param[1])
     db.session.add(booking)
     db.session.commit()
     #Sending confirmation email
-    #code for sending an email
+    #code for sending an email  
 
     """
     Email sending functionality will not work when details are not filled in
@@ -700,9 +772,9 @@ def staff_issues():
     return render_template('staff_issues.html', issues=issues)
 
 
-@app.route('/staff/manage')
+@app.route('/admin/manage')
 def staff_manage():
-    if session.get('staff') == 0:
+    if session.get('admin') == 0:
         return redirect('/')
     all_scooters = models.Scooter.query.all()
     locations = ['','Trinity Centre','Train Station','Merrion Centre','LRI Hospital','UoL Edge Sports Centre']
@@ -710,16 +782,16 @@ def staff_manage():
     return render_template('staff_manage.html', scooters = all_scooters, locations=locations)
 
 
-@app.route('/staff/add', methods=['POST', 'GET'])
+@app.route('/admin/add', methods=['POST', 'GET'])
 def staff_add():
     form = AddScooter()
-    if session.get('staff') == 0:
+    if session.get('admin') == 0:
         return redirect('/')
     if request.method == 'POST':
         new_scooter = models.Scooter(LocationID = int(form.location.data), in_use=False)
         db.session.add(new_scooter)
         db.session.commit()
-        return redirect(url_for('staff_manage'))
+        return redirect('/admin/manage')
     if request.method == 'GET':
         return render_template('staff_add.html', form=form)
 
@@ -734,10 +806,10 @@ def escalate_issue(issue_id):
     db.session.commit()
     return redirect('/staff/issues')
 
-@app.route('/staff/edit_scooter/<int:scooterID>', methods= ['POST','GET'])
+@app.route('/admin/edit_scooter/<int:scooterID>', methods= ['POST','GET'])
 def staff_edit_scooter(scooterID):
     form = EditScooter()
-    if session.get('staff') == 0:
+    if session.get('admin') == 0:
         return redirect('/')
     scooter = models.Scooter.query.filter_by(id=scooterID).first()
 
@@ -752,16 +824,16 @@ def staff_edit_scooter(scooterID):
         scooter.in_use=boolean_value
         scooter.LocationID = form.location.data
         db.session.commit()
-        return redirect(url_for('staff_manage'))
+        return redirect('/admin/manage')
 
-@app.route('/staff/remove_scooter/<int:scooterID>', methods = ['POST', 'GET'])
+@app.route('/admin/remove_scooter/<int:scooterID>', methods = ['POST', 'GET'])
 def staff_remove_scooter(scooterID):
-    if session.get('staff') == 0:
+    if session.get('admin') == 0:
         return redirect('/')
     scooter = models.Scooter.query.filter_by(id=scooterID).first()
     db.session.delete(scooter)
     db.session.commit()
-    return redirect(url_for('staff_manage'))
+    return redirect('/admin/manage')
 #for merging
 """
 logout code:

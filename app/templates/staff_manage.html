@@ -1,4 +1,4 @@
-{% extends "staff_base.html" %}
+{% extends "admin_base.html" %}
 {% block content %}
 
 <head>
@@ -14,7 +14,7 @@
 
 
 	<h2> Options </h2>
-	<a href="/staff/add" class="myButton">Add Scooter</a>
+	<a href="/admin/add" class="myButton">Add Scooter</a>
 
 
 	<h2> All Scooters </h2>
@@ -36,8 +36,8 @@
 					<th scope="row">{{ s.id }}</th>
 					<td> {{ locations[s.LocationID] }}</td>
 					<td> {{ s.in_use }} </td>
-					<td> <a href="/staff/remove_scooter/{{s.id}}">remove</a> </td>
-					<td> <a href="/staff/edit_scooter/{{s.id}}">edit scooter</a> </td>
+					<td> <a href="/admin/remove_scooter/{{s.id}}">remove</a> </td>
+					<td> <a href="/admin/edit_scooter/{{s.id}}">edit scooter</a> </td>
 				</tr>
 
 			{% endfor %}
