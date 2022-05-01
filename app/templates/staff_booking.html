@@ -24,155 +24,20 @@
 						<option value= "5">UoL Edge Sports Centre</option>
 					</select>
 				</div>
-				<script>
-					window.scrollTo(0,0);
-					/* External code - Select menu javascript from https://www.w3schools.com/howto/howto_custom_select.asp - adapted for context */	
-					var x, i, j, l, ll, selElmnt, a, b, c;
-					var pin1 = document.getElementById("Group_1562");
-					var pin2 = document.getElementById("Group_1550");
-					var pin3 = document.getElementById("Group_1547");
-					var pin4 = document.getElementById("Group_1551");
-					var pin5 = document.getElementById("Group_1552");
-					var container = document.getElementsByClassName("container");
+				<p> There are:
+					<span class="output"></span>
+				</p>
+			 
+				 
+				<script type="text/javascript">
+				function getOption() {
 					var count = {{count|tojson }};
-					/* Look for any elements with the class "custom-select": */
-					x = document.getElementsByClassName("custom-select");
-					l = x.length;
-					for (i = 0; i < l; i++) {
-					  selElmnt = x[i].getElementsByTagName("select")[0];
-					  ll = selElmnt.length;
-					  /* For each element, create a new DIV that will act as the selected item: */
-					  a = document.createElement("DIV");
-					  a.setAttribute("class", "select-selected");
-					  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-					  x[i].appendChild(a);
-					  /* For each element, create a new DIV that will contain the option list: */
-					  b = document.createElement("DIV");
-					  b.setAttribute("class", "select-items select-hide");
-					  for (j = 1; j < ll; j++) {
-						/* For each option in the original select element,
-						create a new DIV that will act as an option item: */
-						c = document.createElement("DIV");
-						c.innerHTML = selElmnt.options[j].innerHTML;
-						c.addEventListener("click", function(e) {
-							/* When an item is clicked, update the original select box,
-							and the selected item: */
-							var y, i, k, s, h, sl, yl;
-							s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-							sl = s.length;
-							h = this.parentNode.previousSibling;
-							for (i = 0; i < sl; i++) {
-							  if (s.options[i].innerHTML == this.innerHTML) {
-								s.selectedIndex = i;
-								h.innerHTML = this.innerHTML;
-								y = this.parentNode.getElementsByClassName("same-as-selected");
-								yl = y.length;
-								for (k = 0; k < yl; k++) {
-								  y[k].removeAttribute("class");
-								}
-								this.setAttribute("class", "same-as-selected");
-								break;
-							  }
-							}
-							h.click();
-						});
-						b.appendChild(c);
-					  }
-					  x[i].appendChild(b);
-					  a.addEventListener("click", function(e) {
-						if (selElmnt.options[selElmnt.selectedIndex].innerHTML == "Trinity Centre"){
-							pin1.style.display = "block";
-							pin2.style.display = "none";
-							pin3.style.display = "none";
-							pin4.style.display = "none";
-							pin5.style.display = "none";
-						}
-						else if (selElmnt.options[selElmnt.selectedIndex].innerHTML == "Leeds Train Station"){
-							pin1.style.display = "none";
-							pin2.style.display = "block";
-							pin3.style.display = "none";
-							pin4.style.display = "none";
-							pin5.style.display = "none";
-						}
-						else if (selElmnt.options[selElmnt.selectedIndex].innerHTML == "Merrion Centre"){
-							pin1.style.display = "none";
-							pin2.style.display = "none";
-							pin3.style.display = "block";
-							pin4.style.display = "none";
-							pin5.style.display = "none";
-						}
-						else if (selElmnt.options[selElmnt.selectedIndex].innerHTML == "LRI Hospital"){
-							pin1.style.display = "none";
-							pin2.style.display = "none";
-							pin3.style.display = "none";
-							pin4.style.display = "block";
-							pin5.style.display = "none";
-						}
-						else if (selElmnt.options[selElmnt.selectedIndex].innerHTML == "UoL Edge Sports Centre"){
-							pin1.style.display = "none";
-							pin1.style.display = "none";
-							pin2.style.display = "none";
-							pin3.style.display = "none";
-							pin4.style.display = "none";
-							pin5.style.display = "block";
-						}
-						else{
-							pin1.style.display = "none";
-							pin2.style.display = "none";
-							pin3.style.display = "none";
-							pin4.style.display = "none";
-							pin5.style.display = "none";
-						}
-						if ((count[(selElmnt.selectedIndex)-1]) > 0){
-								document.getElementById("Group_1557").style.display = "block";
-								document.getElementById("Scooters_Available__1").innerHTML = "Available Scooters: " + (count[(selElmnt.selectedIndex)-1]);
-								document.getElementById("Scooters_Available__1").style.display = "block";
-								document.getElementById("Scooters_Available__0").style.display = "none";
-								document.getElementById("location").value = selElmnt.selectedIndex;
-					
-								
-						}
-						else{
-								document.getElementById("Group_1557").style.display = "none";
-								document.getElementById("Scooters_Available__1").style.display = "none";
-								document.getElementById("Scooters_Available__0").style.display = "block";
-					
-						}
-						/* When the select box is clicked, close any other select boxes,
-						and open/close the current select box: */
-						e.stopPropagation();
-						closeAllSelect(this);
-						this.nextSibling.classList.toggle("select-hide");
-						this.classList.toggle("select-arrow-active");
-					  });
-					}
-					function closeAllSelect(elmnt) {
-					  /* A function that will close all select boxes in the document,
-					  except the current select box: */
-					  var x, y, i, xl, yl, arrNo = [];
-					  x = document.getElementsByClassName("select-items");
-					  y = document.getElementsByClassName("select-selected");
-					  xl = x.length;
-					  yl = y.length;
-					  for (i = 0; i < yl; i++) {
-						if (elmnt == y[i]) {
-						  arrNo.push(i)
-						} else {
-						  y[i].classList.remove("select-arrow-active");
-						}
-					  }
-					  for (i = 0; i < xl; i++) {
-						if (arrNo.indexOf(i)) {
-						  x[i].classList.add("select-hide");
-						}
-					  }
-					}
-					
-					/* If the user clicks anywhere outside the select box,
-					then close all select boxes: */
-					document.addEventListener("click", closeAllSelect);	
-					
-					</script>
+					selElmnt = document.querySelector('#myDropdown');
+					output = (count[(selElmnt.selectedIndex)-1]);
+					document.querySelector('.output').textContent = output;
+				}
+				document.addEventListener("click", getOption);
+				</script>
 		  </div>
 		  <div class = 'col'>
 			<h1>Payment!</h1>
