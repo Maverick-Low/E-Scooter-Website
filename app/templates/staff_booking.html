@@ -14,18 +14,17 @@
 		<div class = 'row'>
 		  <div class = 'col'>
 			<h1> Choose a location:</h1>		
-				<div class="custom-select">
-					<select id="myDropdown">
-						<option value= "0">Pick-Up Location</option>
-						<option value= "1">Trinity Centre</option>
-						<option value= "2">Leeds Train Station</option>
-						<option value= "3">Merrion Centre</option>
-						<option value= "4">LRI Hospital</option>
-						<option value= "5">UoL Edge Sports Centre</option>
-					</select>
-				</div>
-				<p> There are:
+                <select id="myDropdown" style = "font-size: 25px;">
+                    <option value= "0">Pick-Up Location</option>
+                    <option value= "1">Trinity Centre</option>
+                    <option value= "2">Leeds Train Station</option>
+                    <option value= "3">Merrion Centre</option>
+                    <option value= "4">LRI Hospital</option>
+                    <option value= "5">UoL Edge Sports Centre</option>
+                </select>
+				<p style = "font-size: 20px; padding-top: 20px;"> There Are
 					<span class="output"></span>
+					Scooters Available.
 				</p>
 			 
 				 
@@ -34,7 +33,13 @@
 					var count = {{count|tojson }};
 					selElmnt = document.querySelector('#myDropdown');
 					output = (count[(selElmnt.selectedIndex)-1]);
-					document.querySelector('.output').textContent = output;
+					if (output > 1){
+						document.querySelector('.output').textContent = output;
+					}
+					else{
+						document.querySelector('.output').textContent = "No";
+
+					}
 				}
 				document.addEventListener("click", getOption);
 				</script>
