@@ -878,10 +878,10 @@ def staff_dashboard():
 
 @app.route("/staff/booking", methods = ["GET", "POST"])
 def staff_booking():
-
     if session.get("staff") == 0:
         return redirect("/")
     #admin redirected to admin dashboard
+    prices = models.Price.query.all()
     Scooters = models.Scooter.query.filter_by(in_use = False).all()
     count = [0,0,0,0,0]
     for elem in Scooters:
@@ -899,16 +899,17 @@ def staff_booking():
     form = Guest_Payment()
     if request.method == "GET":
         # In order to display the location that user is reserving scooter from on payment screen
-        return render_template("staff_booking.html", form=form,count=count)
+        return render_template("staff_booking.html", form=form,count=count,prices=prices)
     elif request.method == "POST":
-        print(form.location.data)
         if form.validate_on_submit():
-            processBooking(hours,location)
+            print("I have validated")
+            processBooking(form.hours.data,form.location.data)
             flash("Transaction confirmed!")
-            return redirect("/")
+            return redirect("/staff")
         else:
+            print("I have not validated")
             flash("Card payment not accepted")
-            return render_template("payment.html", form=form, location = locations[location - 1])
+            return redirect("/staff/booking")
 
     
     if session.get("staff") == 0:

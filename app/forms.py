@@ -140,6 +140,7 @@ class Guest_Payment(FlaskForm):
     expiry_date = DateTimeField("Enter expiry date (mm/YYYY)", validators=[DataRequired()], format="%m/%Y",render_kw={"placeholder": "mm/YYYY"})
     submit = SubmitField("Submit")
     location = StringField("")
+    hours = StringField("")
 
     #billing details
     address_line_1 = StringField("Address line 1", validators=[DataRequired(), Length(max=60)])
