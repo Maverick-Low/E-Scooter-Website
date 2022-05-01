@@ -121,7 +121,7 @@ def mainmenu():
         if elem.LocationID == 1:
             count[0] += 1
         elif elem.LocationID == 2:
-            count[1] += 1s
+            count[1] += 1
         elif elem.LocationID == 3:
             count[2] += 1
         elif elem.LocationID == 4:
