@@ -53,14 +53,24 @@
 				<fieldset class="form-field">
 					{{ form.email.label(class = "form-label")}}
 					{{ form.email }}
-				  </fieldset>
-	
-				<fieldset class="form-field">
-				  {{ form.hire_period.label(class = "form-label")}}
-				  {{ form.hire_period }}
 				</fieldset>
-  
-				<br>
+
+				<p> Select hire period: 
+					<select class="n__Hours" id="myDropdown2">
+						<option value= "1">1 Hour - £{{prices[0].price|round|int }}</option>
+						<option value= "2">4 Hours - £{{prices[1].price|round|int }}</option>
+						<option value= "3">1 Day - £{{prices[2].price|round|int }}</option>
+						<option value= "4">1 Week - £{{prices[3].price|round|int }}</option>
+					</select>
+				</p>
+				<script>
+					function hoursSubmit(){
+						var select = document.getElementById('myDropdown2');
+						var value = select.options[select.selectedIndex].value;
+						document.getElementById("hours").value = value;
+					}
+				</script>
+				<input style = "display: none;"  id= "hours" name="hours" type="text"></input>
 				
 				<fieldset class="form-field">
 				  {{ form.name.label(class = "form-label")}}
