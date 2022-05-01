@@ -901,17 +901,11 @@ def staff_booking():
         # In order to display the location that user is reserving scooter from on payment screen
         return render_template("staff_booking.html", form=form,count=count)
     elif request.method == "POST":
+        print(form.location.data)
         if form.validate_on_submit():
-            arr = [form.price.data,form.hours.data]
-            arr2 = [form.name.data,form.card_number.data,form.expiry_date.data,form.address_line_1.data,form.address_line_2.data,form.city.data,form.postcode.data]
-            hashed_card = bcrypt.generate_password_hash(arr[1]).decode("utf-8")
-            user_Id = models.User.query.filter_by(id = session.get("email")).first()
-            card_obj = models.Card(UserID = user_Id, name = arr2[0], cardnum = hashed_card, expiry = arr2[2]
-                                   , address1 = arr2[3], address2 = arr2[4], city = arr2[5], postcode = arr2[6])
-            db.session.add(card_obj)
-            db.session.commit()
+            processBooking(hours,location)
             flash("Transaction confirmed!")
-            return redirect("/remove_available/"+str(location)+"$" + str(arr[0]) + "$" + str(arr[1]))
+            return redirect("/")
         else:
             flash("Card payment not accepted")
             return render_template("payment.html", form=form, location = locations[location - 1])
@@ -921,7 +915,6 @@ def staff_booking():
         return redirect("/")
 
     form = Booking()
-
 
     return render_template("staff_booking.html")
 

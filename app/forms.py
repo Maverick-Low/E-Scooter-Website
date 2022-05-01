@@ -139,6 +139,7 @@ class Guest_Payment(FlaskForm):
     cvv = StringField("Enter cvv", validators=[DataRequired() , Length(min=3, max=4)],render_kw={"placeholder": "123"})
     expiry_date = DateTimeField("Enter expiry date (mm/YYYY)", validators=[DataRequired()], format="%m/%Y",render_kw={"placeholder": "mm/YYYY"})
     submit = SubmitField("Submit")
+    location = StringField("")
 
     #billing details
     address_line_1 = StringField("Address line 1", validators=[DataRequired(), Length(max=60)])
