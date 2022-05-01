@@ -206,7 +206,7 @@ def report():
     
 
 
-@app.route("/logout")
+@app.route("/logout", methods=['GET', 'POST'])
 def logout():
     logout = False
     if "email" in session:
