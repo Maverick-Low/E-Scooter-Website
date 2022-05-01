@@ -71,6 +71,15 @@ def update_availibility():
             scooter.in_use = False
     db.session.commit()
 
+@app.route("/add_admin", methods=["GET", "POST"])
+def add_admin():
+    password = bcrypt.generate_password_hash("Password1").decode("utf-8")
+    admin_obj = models.User(admin=True,email="admin@admin.com",username="admin",password=password)
+    staff_obj = models.User(staff=True,email="staff@staff.com",username="staff",password=password)
+    db.session.add(admin_obj)
+    db.session.add(staff_obj)
+    db.session.commit()
+    return redirect("/")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
