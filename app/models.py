@@ -50,6 +50,7 @@ class Booking(db.Model):
     expiry = db.Column(db.DateTime)
     price = db.Column(db.Integer, nullable = False)
     cancelled = db.Column(db.Boolean, default = False, nullable=False)
+    option = db.Column(db.Integer, nullable = False)
     
 class Card(db.Model):
     __tablename__ = "cards"
