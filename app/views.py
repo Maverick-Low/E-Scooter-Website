@@ -18,34 +18,41 @@ from cryptography.fernet import Fernet
 
 @app.route("/add_test")
 def add_test():
-    location2 = models.Location()
-    location3 = models.Location()
-    location4 = models.Location()
-    location5 = models.Location()
-    user_obj = models.Scooter(in_use=False, LocationID=2)
-    user_obj1 = models.Scooter(in_use=False, LocationID=3)
-    user_obj2 = models.Scooter(in_use=False, LocationID=4)
-    user_obj3 = models.Scooter(in_use=False, LocationID=5)
-    user_obj4 = models.Scooter(in_use=False, LocationID=1)
-    db.session.add(user_obj)
-    db.session.add(user_obj1)
-    db.session.add(user_obj2)
-    db.session.add(user_obj3)
-    db.session.add(user_obj4)
-    db.session.add(location2)
-    db.session.add(location3)
-    db.session.add(location4)
-    db.session.add(location5)
-    admin_obj = models.User.query.filter_by(email="admin@admin.com").first()
-    admin_obj.admin = True
+    # location2 = models.Location()
+    # location3 = models.Location()
+    # location4 = models.Location()
+    # location5 = models.Location()
+    # user_obj = models.Scooter(in_use=False, LocationID=2)
+    # user_obj1 = models.Scooter(in_use=False, LocationID=3)
+    # user_obj2 = models.Scooter(in_use=False, LocationID=4)
+    # user_obj3 = models.Scooter(in_use=False, LocationID=5)
+    # user_obj4 = models.Scooter(in_use=False, LocationID=1)
+    # db.session.add(user_obj)
+    # db.session.add(user_obj1)
+    # db.session.add(user_obj2)
+    # db.session.add(user_obj3)
+    # db.session.add(user_obj4)
+    # db.session.add(location2)
+    # db.session.add(location3)
+    # db.session.add(location4)
+    # db.session.add(location5)
+    # admin_obj = models.User.query.filter_by(email="admin@admin.com").first()
+    # admin_obj.admin = True
     # staff_obj = models.User.query.filter_by(email="staff@staff.com").first()
     # staff_obj.staff = True
     # issue = models.Report(issue = "Refund", description = "Havent recieved refund yet", priority = 1)
     # db.session.add(issue)
-    models.Card.query.filter_by(id=1).delete()
+    # models.Card.query.filter_by(id=1).delete()
+    # scooter = models.Scooter.query.filter_by(id=4).first()
+    # scooter.in_use = True
+    booking = models.Booking.query.filter_by(id=18).first()
+    timedelta(minutes = 10)
+    now = datetime.now()
+    new = now + timedelta(minutes = 1)
+    booking.expiry = new
+    #booking = models.Booking(ScooterID = 4,UserID = 7, numHours = 1, date = now, expiry = new, price = 8, cancelled = False)
     db.session.commit()
-    return redirect(url_for("dashboard"))
-
+    return redirect("/")
 
 @app.route("/reset_scooter")
 def reset_scooter():
@@ -74,6 +81,16 @@ def routeGuard(guard_array, redirect_route):
 
 # if user is registered: adds user's email and admin flag to session and takes them to dashboard]
 # gives option for user to be redirected to register or continue as a guest
+
+
+def update_availibility():
+    orders = models.Booking.query.all()
+    current_date = datetime.now()
+    for booking in orders:
+        if (current_date > (booking.expiry)):
+            scooter = models.Scooter.query.filter_by(id = booking.ScooterID).first()
+            scooter.in_use = False
+    db.session.commit()
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -107,6 +124,7 @@ def login():
 
 @app.route("/", methods=["GET", "POST"])
 def mainmenu():
+    update_availibility()
     if 'staff' in session and session.get('staff') != 0:
         return redirect('/staff')
     if 'admin' in session and session.get('admin') != 0:
@@ -498,6 +516,79 @@ def remove_available(location):
     flash(f'Scooter has been successfuly hired')
     return redirect(url_for('dashboard'))
 
+def processBooking(Hours,LocationID):
+    # admin redirected to admin dashboard
+    if session.get('admin') != 0:
+        return redirect("/admin")
+    """
+    param[0] = locationID
+    param[1] = Hours
+    """
+    scooter_to_remove = models.Scooter.query.filter_by(
+        LocationID=LocationID, in_use=False).first()
+    if scooter_to_remove is None:
+        flash("Transaction failed: Someone ordered the last scooter before you.")
+        return redirect(url_for('dashboard'))
+    scooter_to_remove.in_use = True
+    db.session.commit()
+    user = models.User.query.filter_by(email=session['email']).first()
+    username = user.username
+    # hours_added = datetime.timedelta(hours = int(param[2]))
+    hours1 = int(Hours)
+    price = models.Price.query.filter_by(id=hours1).first().price
+
+    # check if user is a frequent user
+    orders = []
+    # calculate week start date
+    week = datetime.now() - timedelta(weeks=1)
+    # select all bookings for the current user
+    orders = models.Booking.query.all()
+    hours = 0
+    for order in orders:
+        if order.date >= week and order.UserID == user.id:
+            hours += order.numHours
+
+    if user.discount == True or hours >= 8:
+        price = price * 4/5
+
+    h = 1
+    if Hours == 2:
+        h = 4
+    elif Hours == 3:
+        h = 24
+    elif Hours == 4:
+        h = 24 * 7
+
+    expiry = datetime.now() + timedelta(hours=int(Hours))
+    booking = models.Booking(ScooterID=scooter_to_remove.id, UserID=user.id,
+                             numHours=h, date=datetime.today(), price=price, expiry=expiry)
+    db.session.add(booking)
+    db.session.commit()
+    # Sending confirmation email
+    # code for sending an email
+
+    """
+    Email sending functionality will not work when details are not filled in
+    Need a way of storing them securly as they should not be pushed with a commit.
+    """
+
+    # email = 'team38escooter@gmail.com'
+    # passw = '' # details in discord - need to add to be able to send emails
+    # reciever = session['emal']
+    # port = 465
+    # message = ('Hi ' + str(username) +', thanks for booking with us. Here are the details of your order:\nPrice: '+ str(param[1]) + '\nDuration: ' + str(param[2]) + '\nDate: ' + str(datetime.today().strftime("%d/%m/%Y, %H:%M")) + ' \nExpiry: ' + str(expiry.strftime("%d/%m/%Y, %H:%M")))
+
+    # msg = MIMEText(message)
+    # msg['Subject'] = 'Thanks for ordering with EScooter'
+    # msg['From'] = email
+    # msg['To'] = reciever
+
+    # with smtplib.SMTP_SSL("smtp.gmail.com", port) as server:
+    #     server.login(email, passw)
+    #     server.send_message(msg)
+    #     server.quit()
+
+    flash(f'Scooter has been successfuly hired')
 
 @app.route("/admin/bookings")
 def bookings():
@@ -558,7 +649,9 @@ def payment():
                 db.session.add(card_obj)
                 db.session.commit()
             #flash("Transaction confirmed!")
-            return redirect("/remove_available/"+str(location)+'$' + str(arr))
+            processBooking(arr,location)
+            return redirect(url_for('dashboard'))
+            #return redirect("/remove_available/"+str(location)+'$' + str(arr))
         else:
             flash('Card payment not accepted')
             return render_template('Payment/Website_Payment___1.html', form=form, location=location, arr=arr)
