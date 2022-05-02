@@ -141,9 +141,9 @@ def login():
 @app.route("/", methods = ["GET", "POST"])
 def mainmenu():
     update_availibility()
-    if 'staff' in session and session.get('staff') != 0:
-        return redirect('/staff')
-    if 'admin' in session and session.get('admin') != 0:
+    if "staff" in session and session.get("staff") != 0:
+        return redirect("/staff")
+    if "admin" in session and session.get("admin") != 0:
         return redirect("/admin")
     prices = models.Price.query.all()
     form = Booking()
@@ -334,7 +334,7 @@ def weekly_income():
     return render_template("graphs.html", weeks=json.dumps(week_start_date), income=json.dumps(sums))
 
 
-# solved bug where chrome automatically adds an extra '/' at the end of the url
+# solved bug where chrome automatically adds an extra "/" at the end of the url
 @app.route("/admin/statistics/rental_option")
 def weekly_income_rental():
     # Redirects user if admin is not in session
@@ -574,24 +574,24 @@ def remove_available(location):
     Need a way of storing them securly as they should not be pushed with a commit.
     """
 
-    # email = "team38escooter@gmail.com"
-    # passw = "" # details in discord - need to add to be able to send emails
-    # reciever = session["email"]
-    # port = 465
-    # message = ("Hi " + str(username) +", thanks for booking with us. Here are the details of your order:\nPrice: "+ str(param[1]) + "\nDuration: ' + str(param[2]) + '\nDate: ' + str(datetime.today().strftime("%d/%m/%Y, %H:%M")) + ' \nExpiry: ' + str(expiry.strftime("%d/%m/%Y, %H:%M")))
+    email = "team38escooter@gmail.com"
+    passw = "@PASSword12" # details in discord - need to add to be able to send emails
+    reciever = email
+    port = 465
+    message = ("Hi " + str(username) +", thanks for booking with us. Here are the details of your order:\nPrice: "+ str(price) + "\nDuration: " + str(h) + "\nDate: " + str(datetime.today().strftime("%d/%m/%Y, %H:%M")) + " \nExpiry: " + str(expiry.strftime("%d/%m/%Y, %H:%M")))
 
-    # msg = MIMEText(message)
-    # msg['Subject'] = 'Thanks for ordering with EScooter'
-    # msg['From'] = email
-    # msg['To'] = reciever
+    msg = MIMEText(message)
+    msg["Subject"] = "Thanks for ordering with EScooter"
+    msg["From"] = email
+    msg["To"] = reciever
 
-    # with smtplib.SMTP_SSL("smtp.gmail.com", port) as server:
-    #     server.login(email, passw)
-    #     server.send_message(msg)
-    #     server.quit()
+    with smtplib.SMTP_SSL("smtp.gmail.com", port) as server:
+        server.login(email, passw)
+        server.send_message(msg)
+        server.quit()
 
-    flash(f'Scooter has been successfuly hired')
-    return redirect(url_for('dashboard'))
+    flash(f"Scooter has been successfuly hired")
+    return redirect(url_for("dashboard"))
 
 def processBooking(Hours,LocationID,Email):
     # admin redirected to admin dashboard
@@ -606,11 +606,11 @@ def processBooking(Hours,LocationID,Email):
         LocationID=LocationID, in_use=False).first()
     if scooter_to_remove is None:
         flash("Transaction failed: Someone ordered the last scooter before you.")
-        return redirect(url_for('dashboard'))
+        return redirect(url_for("dashboard"))
     scooter_to_remove.in_use = True
     db.session.commit()
     if session.get("email"):
-        user = models.User.query.filter_by(email=session['email']).first()
+        user = models.User.query.filter_by(email=session["email"]).first()
         username = user.username
         UserID = user.id
     # hours_added = datetime.timedelta(hours = int(param[2]))
@@ -650,28 +650,28 @@ def processBooking(Hours,LocationID,Email):
     # Sending confirmation email
     # code for sending an email
 
-    """
-    Email sending functionality will not work when details are not filled in
-    Need a way of storing them securly as they should not be pushed with a commit.
-    """
+    # """
+    # Email sending functionality will not work when details are not filled in
+    # Need a way of storing them securly as they should not be pushed with a commit.
+    # """
 
-    # email = 'team38escooter@gmail.com'
-    # passw = '' # details in discord - need to add to be able to send emails
-    # reciever = session['email']
-    # port = 465
-    # message = ('Hi ' + str(username) +', thanks for booking with us. Here are the details of your order:\nPrice: '+ str(param[1]) + '\nDuration: ' + str(param[2]) + '\nDate: ' + str(datetime.today().strftime("%d/%m/%Y, %H:%M")) + ' \nExpiry: ' + str(expiry.strftime("%d/%m/%Y, %H:%M")))
+    email = "team38escooter@gmail.com"
+    passw = "@PASSword12" # details in discord - need to add to be able to send emails
+    reciever = Email
+    port = 465
+    message = ("Hi " + str(username) +", thanks for booking with us. Here are the details of your order:\nPrice: "+ str(price) + "\nDuration: " + str(h) + "\nDate: " + str(datetime.today().strftime("%d/%m/%Y, %H:%M")) + " \nExpiry: " + str(expiry.strftime("%d/%m/%Y, %H:%M")))
 
-    # msg = MIMEText(message)
-    # msg['Subject'] = 'Thanks for ordering with EScooter'
-    # msg['From'] = email
-    # msg['To'] = reciever
+    msg = MIMEText(message)
+    msg["Subject"] = "Thanks for ordering with EScooter"
+    msg["From"] = email
+    msg["To"] = reciever
 
-    # with smtplib.SMTP_SSL("smtp.gmail.com", port) as server:
-    #     server.login(email, passw)
-    #     server.send_message(msg)
-    #     server.quit()
+    with smtplib.SMTP_SSL("smtp.gmail.com", port) as server:
+        server.login(email, passw)
+        server.send_message(msg)
+        server.quit()
 
-    flash(f'Scooter has been successfuly hired')
+    flash(f"Scooter has been successfuly hired")
 
 @app.route("/admin/bookings")
 def bookings():
@@ -680,10 +680,10 @@ def bookings():
 
 @app.route("/payment", methods=["GET", "POST"])
 def payment():
-    if not session.get('email'):
+    if not session.get("email"):
         return redirect("/login")
-    location = request.args['location']
-    arr = request.args['hours']
+    location = request.args["location"]
+    arr = request.args["hours"]
     #admin redirected to admin dashboard
     if session.get("admin") != 0:
         return redirect("/admin")
@@ -725,8 +725,8 @@ def payment():
                 db.session.commit()
             #flash("Transaction confirmed!")
             processBooking(arr,location,session["email"])
-            return redirect(url_for('dashboard'))
-            #return redirect("/remove_available/"+str(location)+'$' + str(arr))
+            return redirect(url_for("dashboard"))
+            #return redirect("/remove_available/"+str(location)+"$" + str(arr))
         else:
             flash("Card payment not accepted")
             return render_template("Payment/Website_Payment___1.html", form=form, location = location, arr=arr)
@@ -997,7 +997,7 @@ def staff_remove_scooter(scooterID):
 logout code:
 
 if not session.get("email"):
-    flash('ERROR')
+    flash("ERROR")
     return redirect (url_for("login"))
 flash("Successful logout")
 session.pop("email", None)
