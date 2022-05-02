@@ -59,7 +59,7 @@
         	<p>You have no active orders</p>
     	{% endif %}
 
-    	{% for elem in orders %}
+    	{% for elem in orders|reverse %}
        	{% if elem.id  in active[:4] %}
             	{% if not elem.cancelled %}
                 	<p>Order Number: {{elem.id}}</p>
