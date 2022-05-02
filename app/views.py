@@ -259,10 +259,10 @@ def logout():
 def dashboard():
     if not session.get("email"):
         return redirect("/login")
-    elif session.get("admin") != 0:
+    if "admin" in session and session.get("admin") != 0:
         return redirect("/admin")
-    elif session.get("staff") != 0:
-        return redirect("staff")
+    if "staff" in session and session.get("staff") != 0:
+        return redirect("/staff")
     else:
         
         user = models.User.query.filter_by(email = session["email"]).first()
@@ -595,7 +595,8 @@ def remove_available(location):
 
 def processBooking(Hours,LocationID,Email):
     # admin redirected to admin dashboard
-    if session.get('admin') != 0:
+    UserID = None
+    if "admin" in session and session.get("admin") != 0:
         return redirect("/admin")
     """
     param[0] = locationID
@@ -608,8 +609,10 @@ def processBooking(Hours,LocationID,Email):
         return redirect(url_for('dashboard'))
     scooter_to_remove.in_use = True
     db.session.commit()
-    user = models.User.query.filter_by(email=session['email']).first()
-    username = user.username
+    if session.get("email"):
+        user = models.User.query.filter_by(email=session['email']).first()
+        username = user.username
+        UserID = user.id
     # hours_added = datetime.timedelta(hours = int(param[2]))
     hours1 = int(Hours)
     price = models.Price.query.filter_by(id=hours1).first().price
@@ -622,11 +625,15 @@ def processBooking(Hours,LocationID,Email):
     orders = models.Booking.query.all()
     hours = 0
     for order in orders:
-        if order.date >= week and order.UserID == user.id:
-            hours += order.numHours
-
-    if user.discount == True or hours >= 8:
-        price = price * 4/5
+        if session.get("email"):
+            if order.date >= week and order.UserID == user.id:
+                hours += order.numHours
+        else:
+            if order.date >= week:
+                hours += order.numHours
+    if session.get("email"):
+        if user.discount == True or hours >= 8:
+            price = price * 4/5
 
     h = 1
     if hours1 == 2:
@@ -636,7 +643,7 @@ def processBooking(Hours,LocationID,Email):
     elif hours1 == 4:
         h = 24 * 7
     expiry = datetime.now() + timedelta(hours=h)
-    booking = models.Booking(ScooterID=scooter_to_remove.id, UserID=user.id,
+    booking = models.Booking(ScooterID=scooter_to_remove.id, UserID=UserID,
                              numHours=h, date=datetime.today(), price=price, expiry=expiry, option=Hours ,email = Email)
     db.session.add(booking)
     db.session.commit()
@@ -717,7 +724,7 @@ def payment():
                 db.session.add(card_obj)
                 db.session.commit()
             #flash("Transaction confirmed!")
-            processBooking(arr,location,currentUser.email)
+            processBooking(arr,location,session["email"])
             return redirect(url_for('dashboard'))
             #return redirect("/remove_available/"+str(location)+'$' + str(arr))
         else:
@@ -737,7 +744,8 @@ def guest_payment():
         if form.validate_on_submit():
             location = int(location)
             #flash("Transaction confirmed!")
-            return redirect("/remove_available/"+str(location)+"$" + str(arr))
+            processBooking(arr,location,form.email.data)
+            return redirect("/")
         else:
             flash("Card payment not accepted")
             return render_template("Payment/Guest_Payment.html", form=form, location = location, arr=arr)

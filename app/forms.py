@@ -20,7 +20,7 @@ class Report(FlaskForm):
 
 
 class Registration(FlaskForm):
-        username = StringField("Enter username", validators=[DataRequired(), Length(max=60)], render_kw={"placeholder": "First Name","style" : "width: 135px; font-size: 13px; font-family: Halyard Display; font-style: normal; font-weight: normal;"})
+        username = StringField("Enter username", validators=[DataRequired(), Length(max=60)], render_kw={"placeholder": "Full Name","style" : "width: 135px; font-size: 13px; font-family: Halyard Display; font-style: normal; font-weight: normal;"})
         email = StringField("Enter email", validators=[DataRequired(), Length(max=60), Email()], render_kw={"placeholder": "Email", "style" : "width: 292px; font-size: 13px; font-family: Halyard Display; font-style: normal; font-weight: normal;"})
         password_1 = PasswordField("Enter password", validators=[DataRequired(), Length(min=8,max=60)], render_kw={"placeholder": "Password", "style" : "width: 292px; font-size: 13px; font-family: Halyard Display; font-style: normal; font-weight: normal;"})
         password_2 = PasswordField("Confirm password", validators=[DataRequired(), Length(min=8,max=60), EqualTo("password_1", message="Passwords must match!")], render_kw={"placeholder": "Confirm Password","style" : "width: 292px; font-size: 13px; font-family: Halyard Display; font-style: normal; font-weight: normal;"})

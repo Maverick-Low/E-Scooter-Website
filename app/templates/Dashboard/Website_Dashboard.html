@@ -59,14 +59,15 @@
         	<p>You have no active orders</p>
     	{% endif %}
 
-    	{% for elem in orders %}
-       	 {% if elem.id  in active %}
+    	{% for elem in orders|reverse %}
+       	{% if elem.id  in active[:4] %}
             	{% if not elem.cancelled %}
                 	<p>Order Number: {{elem.id}}</p>
                 	<p>Hours: {{elem.numHours}}</p>
                 	<p>Price: £{{elem.price}}</p>
                 	<p>Date: {{elem.date.day}}-{{elem.date.month}}-{{elem.date.year}} {{elem.date.hour}}:{{elem.date.minute}}</p>
                 	<p>Expiry Date: {{elem.expiry.day}}-{{elem.expiry.month}}-{{elem.expiry.year}} {{elem.expiry.hour}}:{{elem.expiry.minute}}</p>
+					<p>Scooter ID: {{elem.ScooterID}}</p>
 					<button type="Cancel Order" class="btn-primary"  onclick="window.location.href='/cancel_booking/{{elem.id}}'">Cancel Booking</button>
                 	<script>
                     function revealButtons(){
@@ -104,19 +105,22 @@
 			<span>Order History</span>
 		</div>
 		<div id="Order_Number_3">
-			{% for elem in orders|reverse %}
+			{% set x = 0 %}
+			{% for elem in orders[:4]|reverse %}
         		{% if elem.id not in active or elem.cancelled %}
-				{% if loop.index <= 2 %}
-            		<p>Order Number: {{elem.id}}</p>
-            		<p>Hours: {{elem.numHours}}</p>
-            		<p>Price: £{{elem.price}}</p>
-            		<p>Date: {{elem.date.day}}-{{elem.date.month}}-{{elem.date.year}} {{elem.date.hour}}:{{elem.date.minute}}</p>
-            		<p>Expiry Date: {{elem.expiry.day}}-{{elem.expiry.month}}-{{elem.expiry.year}} {{elem.expiry.hour}}:{{elem.expiry.minute}}</p>
-            		{% if elem.cancelled %}
-            		<p style="font-weight: normal">Cancelled Order</p>
-            		{% endif %}
-            		<br> </br>
-				{% endif %}
+				{% set x = x+1 %}
+					{% if x <= 2 %}
+						<p>Order Number: {{elem.id}}</p>
+						<p>Hours: {{elem.numHours}}</p>
+						<p>Price: £{{elem.price}}</p>
+						<p>Date: {{elem.date.day}}-{{elem.date.month}}-{{elem.date.year}} {{elem.date.hour}}:{{elem.date.minute}}</p>
+						<p>Expiry Date: {{elem.expiry.day}}-{{elem.expiry.month}}-{{elem.expiry.year}} {{elem.expiry.hour}}:{{elem.expiry.minute}}</p>
+						<p>Scooter ID: {{elem.ScooterID}}</p>
+						{% if elem.cancelled %}
+							<p style="font-weight: normal">Cancelled Order</p>
+						{% endif %}
+						<br> </br>
+					{% endif %}
         		{% endif %}
     		{% endfor %} 
 		</div>
