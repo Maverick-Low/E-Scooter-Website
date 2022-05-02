@@ -576,7 +576,7 @@ def remove_available(location):
 
     # email = "team38escooter@gmail.com"
     # passw = "" # details in discord - need to add to be able to send emails
-    # reciever = session["emal"]
+    # reciever = session["email"]
     # port = 465
     # message = ("Hi " + str(username) +", thanks for booking with us. Here are the details of your order:\nPrice: "+ str(param[1]) + "\nDuration: ' + str(param[2]) + '\nDate: ' + str(datetime.today().strftime("%d/%m/%Y, %H:%M")) + ' \nExpiry: ' + str(expiry.strftime("%d/%m/%Y, %H:%M")))
 
@@ -657,7 +657,7 @@ def processBooking(Hours,LocationID,Email):
 
     # email = 'team38escooter@gmail.com'
     # passw = '' # details in discord - need to add to be able to send emails
-    # reciever = session['emal']
+    # reciever = session['email']
     # port = 465
     # message = ('Hi ' + str(username) +', thanks for booking with us. Here are the details of your order:\nPrice: '+ str(param[1]) + '\nDuration: ' + str(param[2]) + '\nDate: ' + str(datetime.today().strftime("%d/%m/%Y, %H:%M")) + ' \nExpiry: ' + str(expiry.strftime("%d/%m/%Y, %H:%M")))
 
