@@ -822,7 +822,7 @@ def extend_booking(bookingID, duration):
     return redirect(url_for("dashboard"))
 
 
-@app.route("/add_pricing")
+@app.route("/add_pricing", methods=["GET", "POST"])
 def add_pricing():
     price1 = models.Price(time="1 hour", price=10)
     price2 = models.Price(time="4 hour's", price=10)
