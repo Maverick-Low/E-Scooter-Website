@@ -214,7 +214,7 @@ def register():
             session["staff"] = False
             db.session.add(user_obj)
             db.session.commit()
-            return render_template("Dashboard/Website_Dashboard.html")
+            return redirect("/dashboard")
         else:
             flash("Failed to submit registration form!")
             return render_template("Signup/Website_Sign_up___1.html", form=form)
@@ -233,7 +233,7 @@ def report():
             db.session.add(report_obj)
             db.session.commit()
             flash("Report has been successfully sent!")
-            return render_template("Dashboard/Website_Dashboard.html")
+            return redirect("/dashboard")
         else:
             flash("Failed to submit report form!")
             return render_template("Reports/Website_Report.html", form=form)
