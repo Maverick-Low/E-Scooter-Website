@@ -659,7 +659,7 @@ def processBooking(Hours,LocationID,Email):
     passw = "@PASSword12" # details in discord - need to add to be able to send emails
     reciever = Email
     port = 465
-    message = ("Hi " + str(username) +", thanks for booking with us. Here are the details of your order:\nPrice: "+ str(price) + "\nDuration: " + str(h) + "\nDate: " + str(datetime.today().strftime("%d/%m/%Y, %H:%M")) + " \nExpiry: " + str(expiry.strftime("%d/%m/%Y, %H:%M")))
+    message = ("Hi, thanks for booking with us. Here are the details of your order:\nPrice: £"+ str(price) + "\nDuration: " + str(h) + "hr\nDate: " + str(datetime.today().strftime("%d/%m/%Y, %H:%M")) + " \nExpiry: " + str(expiry.strftime("%d/%m/%Y, %H:%M")))
 
     msg = MIMEText(message)
     msg["Subject"] = "Thanks for ordering with EScooter"
