@@ -130,8 +130,6 @@ class Guest_Payment(FlaskForm):
             checksum += sum(int(x) for x in str(d*2))
         return checksum % 10
 
-    time_options = [(1, "1 hour - £5"), (4, "4 hours - £20"), (24 ,"1 day - £100") , (168, "1 week - £600")]
-    hire_period = SelectField("Select hire period",choices = time_options)
     email = StringField("Enter email", validators=[DataRequired(), Length(max=60), Email()])
     #card details
     name = StringField("Enter name", validators=[DataRequired(message = "Enter your name please"), Length(max=60)])

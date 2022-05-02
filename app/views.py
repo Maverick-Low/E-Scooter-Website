@@ -199,21 +199,16 @@ def register():
 
     elif request.method == "POST":
         if form.validate_on_submit():
-            print("validated")
             hashed_password = bcrypt.generate_password_hash(form.password_1.data).decode("utf-8")
             user_obj = models.User(username=form.username.data, email=form.email.data, password=hashed_password, admin=False)
             #check wether account is a student account
             #if it is then apply a discount
             email = str(form.email.data)
-            print(email)
             emailLength = int(len(email))
-            print(emailLength)
             # check if user is a senior
             user_age = int(form.age.data)
-            print(user_age)
             if form.email.data[int(emailLength - 6): int(emailLength)] == ".ac.uk" or user_age >= 65:
                 user_obj.discount = True
-            print("success")
             session["email"] = form.email.data
             session["admin"] = False
             session["staff"] = False
@@ -221,7 +216,6 @@ def register():
             db.session.commit()
             return render_template("Dashboard/Website_Dashboard.html")
         else:
-            print("not validated")
             flash("Failed to submit registration form!")
             return render_template("Signup/Website_Sign_up___1.html", form=form)
 
@@ -599,7 +593,7 @@ def remove_available(location):
     flash(f'Scooter has been successfuly hired')
     return redirect(url_for('dashboard'))
 
-def processBooking(Hours,LocationID):
+def processBooking(Hours,LocationID,Email):
     # admin redirected to admin dashboard
     if session.get('admin') != 0:
         return redirect("/admin")
@@ -635,16 +629,15 @@ def processBooking(Hours,LocationID):
         price = price * 4/5
 
     h = 1
-    if Hours == 2:
+    if hours1 == 2:
         h = 4
-    elif Hours == 3:
+    elif hours1 == 3:
         h = 24
-    elif Hours == 4:
+    elif hours1 == 4:
         h = 24 * 7
-
-    expiry = datetime.now() + timedelta(hours=int(Hours))
+    expiry = datetime.now() + timedelta(hours=h)
     booking = models.Booking(ScooterID=scooter_to_remove.id, UserID=user.id,
-                             numHours=h, date=datetime.today(), price=price, expiry=expiry, option=Hours ,email = session['email'])
+                             numHours=h, date=datetime.today(), price=price, expiry=expiry, option=Hours ,email = Email)
     db.session.add(booking)
     db.session.commit()
     # Sending confirmation email
@@ -724,7 +717,7 @@ def payment():
                 db.session.add(card_obj)
                 db.session.commit()
             #flash("Transaction confirmed!")
-            processBooking(arr,location)
+            processBooking(arr,location,currentUser.email)
             return redirect(url_for('dashboard'))
             #return redirect("/remove_available/"+str(location)+'$' + str(arr))
         else:
@@ -902,12 +895,10 @@ def staff_booking():
         return render_template("staff_booking.html", form=form,count=count,prices=prices)
     elif request.method == "POST":
         if form.validate_on_submit():
-            print("I have validated")
-            processBooking(form.hours.data,form.location.data)
+            processBooking(form.hours.data,form.location.data,form.email.data)
             flash("Transaction confirmed!")
             return redirect("/staff")
         else:
-            print("I have not validated")
             flash("Card payment not accepted")
             return redirect("/staff/booking")
 

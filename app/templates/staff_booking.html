@@ -39,7 +39,7 @@
 					}
 				}
 				document.addEventListener("click", getOption);
-				function location_submit() {
+				function locationSubmit() {
 					document.getElementById("location").value = selElmnt.selectedIndex;
 				}
 				</script>
@@ -132,7 +132,7 @@
 				  {{ form.country}}
 				</fieldset>
 
-				{{ form.submit (class = "btn btn-primary", onclick="hoursSubmit()")  }}
+				{{ form.submit (class = "btn btn-primary", onclick="hoursSubmit(); locationSubmit();")  }}
 		
 			  </form>
 			</div>
