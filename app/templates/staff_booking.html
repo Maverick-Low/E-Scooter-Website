@@ -4,6 +4,11 @@
 <head>
     <title>StaffBooking</title>
 </head>
+<style>
+	#paynow{
+		display:none;
+	}	
+</style>
 <body>
     <h1 style="color:rgba(68,73,79,1);">Create a booking</h1>
 	<svg class="Line_7" viewBox="0 0 1110 2" preserveAspectRatio="none">
@@ -33,9 +38,11 @@
 					output = (count[(selElmnt.selectedIndex)-1]);
 					if (output > 1){
 						document.querySelector('.output').textContent = output;
+						document.getElementById("paynow").style.display = "block";
 					}
 					else{
 						document.querySelector('.output').textContent = "No";
+						document.getElementById("paynow").style.display = "none";
 					}
 				}
 				document.addEventListener("click", getOption);
@@ -132,8 +139,8 @@
 				  {{ form.country}}
 				</fieldset>
 
-				{{ form.submit (class = "btn btn-primary", onclick="hoursSubmit(); locationSubmit();")  }}
-		
+			  	<button type="submit" id="paynow" class="btn btn-primary" onclick="hoursSubmit(); locationSubmit();" style="color: white">Confirm Booking</button>
+
 			  </form>
 			</div>
 		  </div>
